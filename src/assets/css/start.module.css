@@ -1,0 +1,47 @@
+.p{
+    display: flex;
+    align-items: center;
+    animation: fromLeft 2s forwards ;
+}
+.p::after{
+display: inline-block;
+content: '';
+width: 4px;
+height: 200px;
+background-color: black;
+}
+
+.img{
+    animation: fromRight 2s forwards ;
+}
+.con{
+    animation: removeCon 1s forwards 4s;
+}
+
+@keyframes removeCon{
+    to{
+        opacity: 0;
+    }
+
+}
+
+@keyframes fromRight{
+    from{
+        opacity: 0;
+        transform: translateX(300px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes fromLeft{
+    from{
+        opacity: 0;
+        transform: translateX(-300px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
