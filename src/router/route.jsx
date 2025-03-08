@@ -1,5 +1,5 @@
 import { createBrowserRouter,Outlet } from "react-router";
-import Navbar from "../components/general/Navbar";
+import NavBar from "../components/general/NavBar";
 import Login from "../app/Auth/Login";
 import Register from "../app/Auth/Register";
 
@@ -8,7 +8,7 @@ const route = createBrowserRouter([
         path:'/National_Diabetes_Program/',
         element: (
             <>
-              <Navbar />
+              <NavBar />
               <Outlet />
             </>
           ),

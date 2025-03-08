@@ -16,7 +16,7 @@ const Start = () => {
                     </p>
                 </Col>
                 <Col style={{paddingInline:0,margin:0,textAlign:'justify'}}> 
-                    <Image className={modules.img} src={img} width={200}/>
+                    <Image className={modules.img} src={img} width='200px'/>
                 </Col>
             </Row>
             
