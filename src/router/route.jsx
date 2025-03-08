@@ -5,7 +5,7 @@ import Register from "../app/Auth/Register";
 
 const route = createBrowserRouter([
     {
-        path:'/National_Diabites_Program/',
+        path:'/National_Diabetes_Program/',
         element: (
             <>
               <Navbar />
