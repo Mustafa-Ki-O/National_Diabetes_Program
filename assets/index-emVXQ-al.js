@@ -67,7 +67,7 @@ Please change the parent <Route path="${Q}"> to <Route path="${Q==="/"?"*":`${Q}
  * LICENSE.md file in the root directory of this source tree.
  *
  * @license MIT
- */function Zg(i){return U.createElement(ug,{flushSync:Vg.flushSync,...i})}const Kg="/National_Diabites_Program/assets/diabetes-DAzmpJV8.jpg";var Mf={exports:{}};/*!
+ */function Zg(i){return U.createElement(ug,{flushSync:Vg.flushSync,...i})}const Kg="/National_Diabetes_Program/assets/diabetes-DAzmpJV8.jpg";var Mf={exports:{}};/*!
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see
 	http://jedwatson.github.io/classnames
