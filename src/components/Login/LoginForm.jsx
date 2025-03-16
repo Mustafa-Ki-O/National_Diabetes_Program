@@ -35,7 +35,7 @@ const LoginForm = () => {
         loginFormData.append(key, values[key]);
       });
       setIsSubmitted(true);
-      navigate('/home/');
+      navigate('/National_Diabetes_Program/home/');
     //   login(loginFormData);
 
       const validated = form.validate();
@@ -97,7 +97,7 @@ const LoginForm = () => {
               variant="outline"
               color="#8E8E8E"
               mt="sm"
-              onClick={() => navigate(`/register/`)}
+              onClick={() => navigate(`/National_Diabetes_Program/register/`)}
             >
               انشاء حساب
             </Button>
