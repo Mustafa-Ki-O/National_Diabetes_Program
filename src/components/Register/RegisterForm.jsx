@@ -81,14 +81,14 @@ const RegisterForm = () => {
 
   return (
     <>
-      <Container w='100%' fluid >
-      <form
-      onSubmit={form.onSubmit(handleSubmit)}
-      style={{ width: "100%", marginTop: 20 }}
+      <Container w='100%' fluid  >
+      <form style={{ width: "100%" }}
+      onSubmit={form.onSubmit(handleSubmit)} 
     >
-      <Grid gutter="lg" justify="center" mt={20} mb={20} align="center"  dir="rtl" >
+      <Grid gutter="lg" justify="center" mt={20} mb={20} align="center"  dir="rtl"  >
         <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
           <TextInput
+            size="md"
             radius={10}
             placeholder="أدخل الاسم الكامل *"
             // rightSection={<img src={person} width="20px" />}
@@ -98,6 +98,7 @@ const RegisterForm = () => {
         </GridCol>
         <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
           <TextInput
+            size="md"
             radius={10}
             placeholder="أدخل البريد الإلكتروني *"
             // rightSection={<img src={message} width="20px" />}
@@ -107,6 +108,7 @@ const RegisterForm = () => {
         </GridCol>
         <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
           <TextInput
+            size="md"
             radius={10}
             placeholder="أدخل رقم الهاتف *"
             // rightSection={<img src={phone} width="20px" />}
@@ -116,6 +118,7 @@ const RegisterForm = () => {
         </GridCol>
         <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
           <PasswordInput
+            size="md"
             radius={10}
             placeholder="أدخل كلمة المرور *"
             key={form.key("password")}
@@ -124,6 +127,7 @@ const RegisterForm = () => {
         </GridCol>
         <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
           <TextInput
+            size="md"
             radius={10}
             placeholder="أدخل المحافظة*"
             // rightSection={<img src={message} width="20px" />}
@@ -133,6 +137,7 @@ const RegisterForm = () => {
         </GridCol>
         <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
           <TextInput
+            size="md"
             radius={10}
             placeholder="أدخل العمر *"
             // rightSection={<img src={message} width="20px" />}
@@ -157,7 +162,7 @@ const RegisterForm = () => {
       />
     </GridCol>
       </Grid>
-       <Flex visibleFrom="md" w='60%' gap='1.25rem' justify='center' m="auto" mt={10}>
+       <Flex visibleFrom="md" w='60%' gap='1.25rem' justify='center' m="auto" my={15}>
        <Button fullWidth radius={10}  size="md"  variant="outline" color="#8E8E8E" onClick={handleLog}>
           تسجيل الدخول
         </Button>
@@ -165,15 +170,15 @@ const RegisterForm = () => {
           انشاء حساب
         </Button>
     </Flex>
-    <Grid hiddenFrom="md" gutter={10}>
-    <GridCol span={12}>
-    <Button fullWidth radius={10}  size="md"  variant="outline" color="#8E8E8E" onClick={handleLog}>
-          تسجيل الدخول
-        </Button>
-    </GridCol>
+    <Grid hiddenFrom="md" gutter={15} my={15}>
     <GridCol span={12}>
     <Button fullWidth radius={10}  size="md" type="submit" variant="filled" color="#37A9EF">
           انشاء حساب
+        </Button>
+    </GridCol>
+    <GridCol span={12}>
+    <Button fullWidth radius={10}  size="md"  variant="outline" color="#8E8E8E" onClick={handleLog}>
+          تسجيل الدخول
         </Button>
     </GridCol>
  </Grid>

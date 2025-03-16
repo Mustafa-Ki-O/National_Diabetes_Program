@@ -9,12 +9,12 @@ const [active,setActive] = useState(false);
 useEffect(()=>{
   setTimeout(()=>{
     setActive(true);
-  },1000);
+  },500);
 },[active])
 
     return(
     <>
-    <Stack style={{opacity:active?'1':'0' ,transition:'all 0.5s'}}>
+    <Stack style={{opacity:active?'1':'0' ,transition:'all 0.3s'}}>
       <Flex  justify='center' align='center' gap={5}>
          <Box>
            <Title size='xl' c='black' style={{ display: 'block', textAlign: 'center' }}>
