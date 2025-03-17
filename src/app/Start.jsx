@@ -18,7 +18,7 @@ const Start = () => {
                          للسكري
                        </Title>
                      </Box>
-                     <Image className={modules.img} src={img} ta='justify' w={120} h='auto' p={0} m={0}  />
+                     <Image className={modules.img} alt="diabetes-Logo" src={img} ta='justify' w={120} h='auto' p={0} m={0}  />
                   </Flex>
         </Container>
         

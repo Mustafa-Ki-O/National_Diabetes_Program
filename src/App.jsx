@@ -17,7 +17,7 @@ function App() {
       clearTimeout(timeoutId);
     };
   }, []);
-
+  console.log('hi')
   return showStartPage ? <Start /> :(
     <>
                 <Circle

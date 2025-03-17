@@ -13,7 +13,7 @@ const Logo = () => {
                          للسكري
                        </Title>
                      </Box>
-                     <Image src={img} h='auto' w={50}  />
+                     <Image src={img} h='auto' w={50} alt="diabetes-Logo" />
                   </Flex>
         </>
     )
