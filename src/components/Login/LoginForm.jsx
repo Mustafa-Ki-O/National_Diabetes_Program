@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol} from "@mantine/core";
+import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
@@ -90,7 +90,7 @@ const LoginForm = () => {
               "اعادة تعيين كلمة المرور"
             </Link>
           </Flex> */}
-          <Flex  gap="1.25rem" w="100%" justify="space-around">
+          <Flex visibleFrom="md"  gap="1.25rem" w="100%" justify="space-between" mb={10}>
             <Button
               size="md"
               radius={10}
@@ -112,32 +112,38 @@ const LoginForm = () => {
               تسجيل الدخول
             </Button>
           </Flex>
-          {/* <Grid hiddenFrom="md" gutter={0}>
+{/* for mobiles screens */}
+          <Grid hiddenFrom="md" gutter={0} mb={10}>
             <GridCol span={12}>
               <Button
                 fullWidth
+                size="md"
                 radius={10}
                 variant="filled"
-                color="#b21222"
+                color="#37A9EF"
                 type="submit"
                 mt="sm"
               >
-                {t("تسجيل الدخول")}
+                تسجيل الدخول
               </Button>
             </GridCol>
             <GridCol span={12}>
               <Button
+                size="md"
                 fullWidth
                 radius={10}
                 variant="outline"
-                color="#b21222"
+                color="#8e8e8e"
                 mt="sm"
-                onClick={() => navigate(`/Bug_Bounty_Syria/`)}
+                onClick={() => navigate(`/National_Diabetes_Program/register/`)}
               >
-                {t("انشاء حساب")}
+                انشاء حساب
               </Button>
             </GridCol>
-          </Grid> */}
+          </Grid>
+          {/* ---- */}
+          
+          
         </form>
       </Container>
     </>

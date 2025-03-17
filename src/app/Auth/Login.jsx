@@ -1,7 +1,7 @@
-import { Title,Flex, Image, Stack,Box } from "@mantine/core"
 import LoginForm from "../../components/Login/LoginForm"
-import img from '../../assets/images/diabetes.jpg'
+import { Stack,Title} from "@mantine/core";
 import { useEffect ,useState} from "react"
+import Logo from "../../components/general/Logo";
 const Login = () => {
 
 const [active,setActive] = useState(false);
@@ -15,19 +15,8 @@ useEffect(()=>{
     return(
     <>
     <Stack style={{opacity:active?'1':'0' ,transition:'all 0.3s'}}>
-      <Flex  justify='center' align='center' gap={5}>
-         <Box>
-           <Title size='xl' c='black' style={{ display: 'block', textAlign: 'center' }}>
-             البرنامج
-             <br />
-             الوطني
-             <br />
-             للسكري
-           </Title>
-         </Box>
-         <Image src={img} h='auto' w={50}  />
-      </Flex>
-        <Stack p={30} m='auto'  w='auto' bd='2px solid #37A9EF' style={{borderRadius:20}}>
+    <Logo/>
+        <Stack p={{base:'10px' ,md:'30px'}} m='auto'  w={{ base: "90%", md: "auto" }} bd='2px solid #37A9EF' style={{borderRadius:20}}>
             <Title size='xl' c='#37A9EF'>تسجيل الدخول</Title>
             <LoginForm/>
         </Stack>

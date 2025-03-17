@@ -16,11 +16,14 @@ const RegisterForm = () => {
 //   const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
 
   const schema = yup.object().shape({
-    name: yup.string().test(
-      'name',
-      ("يجب ان يكون الاسم خال من الارقام ويحتوي عللا محرفين على الاقل"),
-      val => /^[a-zA-Z]{2,}$/.test(val)
-    ),
+    name: yup
+            .string()
+            .required('الاسم مطلوب')
+            .test(
+              'name',
+              'يجب أن يكون الاسم خالٍ من الأرقام ويحتوي على 2 محارف على الأقل',
+              (val) => /^[\u0600-\u06FFA-Za-z]{2,}$/.test(val)
+            ),
     email: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
     phone: yup
     .string()
@@ -182,6 +185,11 @@ const RegisterForm = () => {
         </Button>
     </GridCol>
  </Grid>
+ <Flex justify='end' mt={15}>
+          <Anchor onClick={() => navigate(`/National_Diabetes_Program/registerAdmin/`)} inherit fw={700} td='underline' >
+                        انشاء حساب كمركز ؟
+          </Anchor>
+  </Flex>
 </form>
 </Container>
     </>

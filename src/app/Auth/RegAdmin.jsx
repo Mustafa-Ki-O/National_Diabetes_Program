@@ -1,8 +1,8 @@
-import RegisterForm from "../../components/Register/RegisterForm";
-import { Stack,Title } from "@mantine/core";
+import { Stack,Title} from "@mantine/core";
 import { useEffect ,useState} from "react"
 import Logo from "../../components/general/Logo";
-const Register = () => {
+import RegAdminForm from "../../components/RegAdmin/RegAdminForm";
+const RegAdmin = () => {
 
     const [active,setActive] = useState(false);
     
@@ -16,11 +16,11 @@ const Register = () => {
         <>
         <Stack style={{opacity:active?'1':'0' ,transition:'all 0.3s'}}>
            <Logo/>
-            <Stack p={{base:'10px' ,md:'30px'}} m='auto' w={{ base: "90%", md: "60%" }} bd='2px solid #37A9EF' style={{borderRadius:20}}>
-                <Title size='xl' mt={10} c='#37A9EF'>انشاء حساب</Title>
-                <RegisterForm/>
+            <Stack p={{base:'10px' ,md:'30px'}} m='auto' w={{ base: "90%", md: "40%" }} bd='2px solid #37A9EF' style={{borderRadius:20}}>
+                <Title size='xl' mt={10} c='#37A9EF'> انشاء حساب مركز</Title>
+                <RegAdminForm/>
             </Stack>
             </Stack>
         </>)
 }
-export default Register
+export default RegAdmin;
