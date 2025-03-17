@@ -53,7 +53,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <Container w='100%' fluid >
+      <Container w='100%' fluid s>
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmite)} >
           <Grid gutter="sm" justify="center" mt={20} mb={20} align="center"  dir="rtl"  >
             <GridCol span={12}>

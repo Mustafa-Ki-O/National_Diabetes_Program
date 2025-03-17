@@ -9,7 +9,7 @@ const Start = () => {
         <Container fluid w='100%'>
             <Flex  justify='center' align='center' gap={10}>
                      <Box className={modules.p} > 
-                       <Title c='black'  style={{ display: 'block', textAlign: 'center' ,fontSize:40}}>
+                       <Title c='black'  style={{ display: 'block', textAlign: 'center' ,fontSize:40,fontWeight:600}}>
                          البرنامج
                          <br />
                          الوطني

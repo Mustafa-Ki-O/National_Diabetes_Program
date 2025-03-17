@@ -4,6 +4,7 @@
   padding: 0rem;
   text-align: center;
   position: relative;
+  z-index: 3;
 }
 .mantine-Button-root{
   transition: all 0.6s;

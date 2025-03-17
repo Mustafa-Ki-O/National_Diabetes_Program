@@ -6,7 +6,7 @@
 .p::after{
 display: inline-block;
 content: '';
-width: 4px;
+width: 3px;
 height: 200px;
 background-color: black;
 margin-left: 14px;

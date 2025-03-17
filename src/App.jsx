@@ -20,7 +20,7 @@ function App() {
 
   return showStartPage ? <Start /> :(
     <>
-    <Circle
+                <Circle
                      w={2}
                      color1='#37A9EF'
                      color2='#fff'
@@ -30,19 +30,19 @@ function App() {
                      translateX={0}
                      translateY={0}
                      className="first"
-                     duration='3s'
+                     duration='4s'
                  />
                  <Circle
-                     w={1}
+                     w={1.5}
                      color1='#37A9EF'
-                     color2='#fff'
+                     color2='#37A9EF'
                      degree='45deg'
                      top='92%'
                      right='7%'
-                     translateX={0}
+                     translateX={2}
                      translateY={0}
                      className="second"
-                     duration='1s'
+                     duration='4s'
                  />
                  <Circle
                      w={1}
@@ -51,10 +51,10 @@ function App() {
                      degree='145deg'
                      top='12%'
                      right='89%'
-                     translateX={0}
+                     translateX={2}
                      translateY={4}
                      className="third"
-                     duration='3s'
+                     duration='4s'
                  />
                  <Circle
                      w={3}
@@ -62,11 +62,35 @@ function App() {
                      color2='#fff'
                      degree='105deg'
                      top='80%'
-                     right='90%'
+                     right='50%'
                      translateX={3}
-                     translateY={-2}
+                     translateY={-5}
                      className="fourth"
                      duration='4s'
+                 />
+                 <Circle
+                     w={3}
+                     color1='#37A9EF'
+                     color2='#fff'
+                     degree='145deg'
+                     top='82%'
+                     right='89%'
+                     translateX={4}
+                     translateY={-2}
+                     className="five"
+                     duration='6s'
+                 />
+                                <Circle
+                     w={2}
+                     color1='#37A9EF'
+                     color2='#20A9EF'
+                     degree='165deg'
+                     top='30%'
+                     right='60%'
+                     translateX={-3}
+                     translateY={-1}
+                     className="six"
+                     duration='5s'
                  />
     <RouterProvider router={route} /></>
   
