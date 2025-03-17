@@ -2,6 +2,7 @@ import img from '../assets/images/diabetes.jpg'
 import modules from '../assets/css/start.module.css'
 import { Image } from '@mantine/core'
 import { Container,Flex,Box,Title } from '@mantine/core'
+
 const Start = () => {
 
     return(

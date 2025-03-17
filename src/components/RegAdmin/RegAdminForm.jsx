@@ -4,6 +4,9 @@ import { useForm, yupResolver } from "@mantine/form";
 import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import * as yup from "yup";
+import person from "../../assets/vectors/Vector1.png";
+import message from "../../assets/vectors/Vector2.png";
+import code from '../../assets/vectors/Vector5.png'
 const RegAdminForm = () =>{
     const [isSubmitted, setIsSubmitted] = useState(false);
     //   const { login, isLoading } = useLogin();
@@ -90,7 +93,7 @@ const RegAdminForm = () =>{
                 size="md"
                 radius={10}
                 placeholder="ادخل اسم المركز الصحي *"
-                // rightSection={<img src={person} width="20px" />}
+                rightSection={<img src={person} width="20px" />}
                 key={form.key("name")}
                 {...form.getInputProps("name")}
               />
@@ -100,7 +103,7 @@ const RegAdminForm = () =>{
                 size="md"
                 radius={10}
                 placeholder="أدخل البريد الإلكتروني *"
-                // rightSection={<img src={message} width="20px" />}
+                rightSection={<img src={message} width="20px" />}
                 key={form.key("email")}
                 {...form.getInputProps("email")}
               />
@@ -119,7 +122,7 @@ const RegAdminForm = () =>{
                 size="md"
                 radius={10}
                 placeholder="أدخل الرمز السري*"
-                // rightSection={<img src={message} width="20px" />}
+                rightSection={<img src={code} width="20px" />}
                 key={form.key("secretCode")}
                 {...form.getInputProps("secretCode")}
               />
