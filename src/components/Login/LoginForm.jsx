@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { IconAt } from "@tabler/icons-react";
+// import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import * as yup from "yup";
+import useLogin from "../../useMutation/useLogin";
 // import { useTranslation } from "react-i18next";
 // import useLogin from "../../components/useMutation/researcher/useLogin";
 
@@ -16,10 +17,10 @@ const schema = yup.object().shape({
 
 const LoginForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-//   const { login, isLoading } = useLogin();
+  const { login, isLoading } = useLogin();
 //   const { t } = useTranslation();
   const navigate = useNavigate();
-  const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
+  // const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
 
   const form = useForm({
     mode: "uncontrolled",
@@ -35,8 +36,8 @@ const LoginForm = () => {
         loginFormData.append(key, values[key]);
       });
       setIsSubmitted(true);
-      navigate('/National_Diabetes_Program/home/');
-    //   login(loginFormData);
+      // navigate('/National_Diabetes_Program/home/');
+      login(loginFormData);
 
       const validated = form.validate();
 
@@ -64,7 +65,7 @@ const LoginForm = () => {
                 placeholder="أدخل البريد الالكتروني"
                 key={form.key("email")}
                 {...form.getInputProps("email")}
-                rightSection={icon}
+                // rightSection={icon}
               />
             </GridCol>
             <GridCol span={12}>

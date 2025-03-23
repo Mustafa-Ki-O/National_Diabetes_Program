@@ -1,21 +1,24 @@
 import { Link, useNavigate } from "react-router-dom";
 import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Checkbox,Anchor} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
-import { IconAt } from "@tabler/icons-react";
+// import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import * as yup from "yup";
 import person from "../../assets/vectors/Vector1.png";
 import message from "../../assets/vectors/Vector2.png";
 import code from '../../assets/vectors/Vector5.png'
+import useRegAdmin from "../../useMutation/Admin/useRegAdmin";
+
+
 const RegAdminForm = () =>{
     const [isSubmitted, setIsSubmitted] = useState(false);
-    //   const { login, isLoading } = useLogin();
+      const { register, isLoading } = useRegAdmin();
     //   const { t } = useTranslation();
       const navigate = useNavigate();
     //   const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
     
       const schema = yup.object().shape({
-        name: yup
+        centerName: yup
         .string()
         .required('الاسم مطلوب')
         .test(
@@ -23,16 +26,16 @@ const RegAdminForm = () =>{
           'يجب أن يكون الاسم خالٍ من الأرقام ويحتوي على 4 محارف على الأقل',
           (val) => /^[\u0600-\u06FFA-Za-z\s]{4,}$/.test(val)
         ),
-        email: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
-        password: yup
+        centerEmail: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
+        centerPassword: yup
           .string()
           .min(8, "يجب ان تحوي كلمة المرور على 8 محارف كحد أدنى"),
-          secretCode: yup
+          centerKey: yup
           .string()
           .required('الرمز السري مطلوب')
           .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8}$/,
-            'يجب أن يحتوي الرمز السري على خليط من الأرقام والمحارف ويجب أن يكون طوله 8'
+            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d%&@!$*]{25}$/,
+            'يجب أن يحتوي الرمز السري على خليط من الأرقام والمحارف والرموز الخاصة ويجب أن يكون طوله 25'
           )
         });
     
@@ -40,10 +43,11 @@ const RegAdminForm = () =>{
         mode: "uncontrolled",
         validateInputOnChange: true,
         initialValues: {
-          name:'',
-          email:'',
-          password:'',
-          secretCode:'',
+          centerName:'',
+          centerPassword:'',
+          centerEmail:'',
+          centerKey:'',
+          // %Y4&F4@VAW&T2QLYD44M8Z1Y%
         },
         validate: yupResolver(schema),
       });
@@ -59,8 +63,8 @@ const RegAdminForm = () =>{
             //   }
           });
           setIsSubmitted(true)
-          navigate('/National_Diabetes_Program/')
-        //   register(newFormData);
+          // navigate('/National_Diabetes_Program/')
+          register(newFormData);
           
         }
     
@@ -94,8 +98,8 @@ const RegAdminForm = () =>{
                 radius={10}
                 placeholder="ادخل اسم المركز الصحي *"
                 rightSection={<img src={person} width="20px" />}
-                key={form.key("name")}
-                {...form.getInputProps("name")}
+                key={form.key("centerName")}
+                {...form.getInputProps("centerName")}
               />
             </GridCol>
             <GridCol span={12}>
@@ -104,8 +108,8 @@ const RegAdminForm = () =>{
                 radius={10}
                 placeholder="أدخل البريد الإلكتروني *"
                 rightSection={<img src={message} width="20px" />}
-                key={form.key("email")}
-                {...form.getInputProps("email")}
+                key={form.key("centerEmail")}
+                {...form.getInputProps("centerEmail")}
               />
             </GridCol>
             <GridCol span={12}>
@@ -113,8 +117,8 @@ const RegAdminForm = () =>{
                 size="md"
                 radius={10}
                 placeholder="أدخل كلمة المرور *"
-                key={form.key("password")}
-                {...form.getInputProps("password")}
+                key={form.key("centerPassword")}
+                {...form.getInputProps("centerPassword")}
               />
             </GridCol>
             <GridCol span={12}>
@@ -123,8 +127,8 @@ const RegAdminForm = () =>{
                 radius={10}
                 placeholder="أدخل الرمز السري*"
                 rightSection={<img src={code} width="20px" />}
-                key={form.key("secretCode")}
-                {...form.getInputProps("secretCode")}
+                key={form.key("centerKey")}
+                {...form.getInputProps("centerKey")}
               />
             </GridCol>
           </Grid>
