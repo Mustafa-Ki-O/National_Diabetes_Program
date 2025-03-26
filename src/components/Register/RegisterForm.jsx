@@ -32,7 +32,9 @@ const RegisterForm = () => {
         'يجب أن يكون الاسم خالٍ من الأرقام ويحتوي على 2 محارف على الأقل',
         (val) => /^[\u0600-\u06FFA-Za-z\s]{2,}$/.test(val)
       ),
-    
+      id_number: yup
+  .string()
+  .matches(/^\d{11}$/, 'الرقم الوطني يجب أن يحوي 11 رقم'),
     email: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
     phone: yup
     .string()
@@ -50,6 +52,7 @@ const RegisterForm = () => {
     mode: "uncontrolled",
     validateInputOnChange: true,
     initialValues: {
+      id_number:'',
       fullname: '',
       email: '',
       age:null,
@@ -91,6 +94,16 @@ const RegisterForm = () => {
       <Container w='100%' fluid>
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
           <Grid gutter="lg" justify="center" mt={20} mb={20} align="center" dir="rtl">
+          <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+              <TextInput
+                size="md"
+                radius={10}
+                placeholder="أدخل رقم الهوية الوطني *"
+                // rightSection={<img src={person} width="20px" />}
+                key={form.key("id_number")}
+                {...form.getInputProps("id_number")}
+              />
+            </GridCol>
             <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
               <TextInput
                 size="md"
