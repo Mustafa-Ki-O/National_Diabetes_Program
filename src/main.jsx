@@ -7,12 +7,15 @@ import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
 import { Notifications } from '@mantine/notifications';
+// import { BrowserRouter } from 'react-router';
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
   <MantineProvider>
     <Notifications />
+    {/* <BrowserRouter> */}
       <App />
+      {/* </BrowserRouter> */}
   </MantineProvider>
   </QueryClientProvider>,
 )

@@ -1,18 +1,18 @@
 import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
-import FetchAllPatientInfo from "../../api/Admin/FetchAllPatientInfo";
+import FetchPatients from "../../api/Admin/FetchPatients";
 import { useNavigate } from "react-router-dom";
 
-const useFetchPatientInfo = (setPatient) => {
+const useFetchPatients = (setPatients) => {
   const navigate = useNavigate();
-  const { mutate: fetchInfo, isLoading: isLoadingFetch} = useMutation({
-    mutationFn: (id) => FetchAllPatientInfo(id).then((res)=>{
-      setPatient(res)
+  const { mutate: fetchPatients, isLoading :isLoadingFetch} = useMutation({
+    mutationFn: () => FetchPatients().then((res)=>{
+      setPatients(res);
     }),
     onSuccess: () => {
         console.log("تم بنجاح");
         notifications.show({
-          title: 'تم جلب المعلومات',
+          title: 'تم جلب المرضى المسجلين',
           autoClose: 3000,
         });
     // toast.success("تم انشاء الحساب بنجاح");
@@ -33,6 +33,6 @@ const useFetchPatientInfo = (setPatient) => {
       });
     },
   });
-  return { fetchInfo, isLoadingFetch };
+  return { fetchPatients,isLoadingFetch};
 };
-export default useFetchPatientInfo;
+export default useFetchPatients;

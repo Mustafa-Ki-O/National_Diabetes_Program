@@ -15,8 +15,9 @@ const schema = yup.object().shape({
   email: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
 });
 
-const LoginForm = () => {
+const LoginForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+
   const { login, isLoading } = useLogin();
 //   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -46,11 +47,11 @@ const LoginForm = () => {
       }
     }
   };
-//   useEffect(() => {
-//     if (isSubmitted) {
-//       setProgress(isLoading);
-//     }
-//   }, [isLoading]);
+  useEffect(() => {
+    if (isSubmitted) {
+      setProgress(isLoading);
+    }
+  }, [isLoading]);
 
   return (
     <>
