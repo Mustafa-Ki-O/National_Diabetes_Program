@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const useDeletePatient = () => {
 //   const navigate = useNavigate();
-  const { mutate: deletePatient, isLoading: isLoading } = useMutation({
+  const { mutate: deletePatient, isPending } = useMutation({
     mutationFn: (id) => DeletePatient(id),
     onSuccess: () => {
         console.log("تم بنجاح");
         notifications.show({
           title: 'تم حذف الحساب',
           autoClose: 3000,
-
         });
     },
     onError: (err) => {
@@ -25,6 +24,6 @@ const useDeletePatient = () => {
       });
     },
   });
-  return { deletePatient, isLoading };
+  return { deletePatient, isPending };
 };
 export default useDeletePatient;

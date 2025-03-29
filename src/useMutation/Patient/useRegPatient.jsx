@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const useRegPatient = () => {
   const navigate = useNavigate();
-  const { mutate: register, isLoading: isLoading } = useMutation({
+  const { mutate: register, isPending } = useMutation({
     mutationFn: (formData) => PostPatient(formData),
     onSuccess: () => {
         console.log("تم بنجاح");
@@ -28,6 +28,6 @@ const useRegPatient = () => {
       });
     },
   });
-  return { register, isLoading };
+  return { register, isPending };
 };
 export default useRegPatient;

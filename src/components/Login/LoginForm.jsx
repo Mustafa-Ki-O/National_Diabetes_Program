@@ -18,7 +18,7 @@ const schema = yup.object().shape({
 const LoginForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { login, isLoading } = useLogin();
+  const { login, isPending } = useLogin();
 //   const { t } = useTranslation();
   const navigate = useNavigate();
   // const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
@@ -49,9 +49,9 @@ const LoginForm = ({setProgress}) => {
   };
   useEffect(() => {
     if (isSubmitted) {
-      setProgress(isLoading);
+      setProgress(isPending);
     }
-  }, [isLoading]);
+  }, [isPending]);
 
   return (
     <>

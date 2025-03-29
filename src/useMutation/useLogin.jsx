@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const { mutate: login, isLoading: isLoading } = useMutation({
+  const { mutate: login,  isPending } = useMutation({
     mutationFn: (formData) => SignIn(formData),
     onSuccess: () => {
         console.log("تم بنجاح");
@@ -28,6 +28,6 @@ const useLogin = () => {
       });
     },
   });
-  return { login, isLoading };
+  return { login, isPending };
 };
 export default useLogin;

@@ -27,7 +27,7 @@ const useUpdatePatientInfo = (setPatient) => {
 
   return {
     updatePatient: mutation.mutate,
-    isLoading: mutation.isLoading
+    isPending: mutation.isPending
   };
 };
 

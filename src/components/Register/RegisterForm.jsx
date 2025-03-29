@@ -10,11 +10,11 @@ import useRegPatient from '../../useMutation/Patient/useRegPatient';
 import useFetchCenters from '../../useMutation/Patient/useFetchCenters';
 import phone from "../../assets/vectors/Vector3.png";
 import calendar from "../../assets/vectors/calendar.png";
-const RegisterForm = () => {
+const RegisterForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const { register, isLoading } = useRegPatient();
+  const { register, isPending } = useRegPatient();
   const [centerNames, setCenterNames] = useState([]);
-  const { fetchCenters, isLoading: isCentersLoading } = useFetchCenters(); // Pass setCenterNames here
+  const { fetchCenters, isPending: isCentersLoading } = useFetchCenters(); // Pass setCenterNames here
   const navigate = useNavigate();
 
   // Fetch centers when the component mounts
@@ -85,6 +85,13 @@ const RegisterForm = () => {
     form.reset();
   };
 
+  useEffect(() => {
+    if (isSubmitted) {
+      console.log('loading :',isPending)
+      setProgress(isPending ); 
+    }
+  }, [isPending]);
+
   const handleLog = () => {
     navigate('/National_Diabetes_Program/');
   };
@@ -93,7 +100,7 @@ const RegisterForm = () => {
     <>
       <Container w='100%' fluid>
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
-          <Grid gutter="lg" justify="center" mt={20} mb={20} align="center" dir="rtl">
+          <Grid gutter="md" justify="center" mt={20} mb={20} align="center" dir="rtl">
           <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
               <TextInput
                 size="md"

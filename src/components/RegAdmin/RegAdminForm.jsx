@@ -10,9 +10,9 @@ import code from '../../assets/vectors/Vector5.png'
 import useRegAdmin from "../../useMutation/Admin/useRegAdmin";
 
 
-const RegAdminForm = () =>{
+const RegAdminForm = ({setProgress}) =>{
     const [isSubmitted, setIsSubmitted] = useState(false);
-      const { register, isLoading } = useRegAdmin();
+      const { register, isPending } = useRegAdmin();
     //   const { t } = useTranslation();
       const navigate = useNavigate();
     //   const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
@@ -63,7 +63,6 @@ const RegAdminForm = () =>{
             //   }
           });
           setIsSubmitted(true)
-          // navigate('/National_Diabetes_Program/')
           register(newFormData);
           
         }
@@ -79,11 +78,11 @@ const RegAdminForm = () =>{
       const handleLog = () => {
         navigate('/National_Diabetes_Program/')
       }
-    //   useEffect(()=>{
-    //     if(isSubmitted){
-    //     setProgress(isLoading)
-    //     }
-    //   },[isLoading])
+      useEffect(()=>{
+        if(isSubmitted){
+        setProgress(isPending)
+        }
+      },[isPending])
     
       return (
         <>

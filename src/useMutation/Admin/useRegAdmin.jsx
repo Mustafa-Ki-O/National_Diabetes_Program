@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const useRegAdmin = () => {
   const navigate = useNavigate();
-  const { mutate: register, isLoading: isLoading } = useMutation({
+  const { mutate: register, isPending: isPending } = useMutation({
     mutationFn: (formData) => PostAdmin(formData),
     onSuccess: () => {
         console.log("تم بنجاح");
@@ -27,6 +27,6 @@ const useRegAdmin = () => {
       });
     },
   });
-  return { register, isLoading };
+  return { register, isPending };
 };
 export default useRegAdmin;

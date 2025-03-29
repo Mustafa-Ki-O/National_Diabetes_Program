@@ -5,7 +5,7 @@ import { useEffect,useState } from "react";
 const PatientsCards = ({setProgress}) => {
 
   const [patients, setPatients] = useState([]);
-  const {fetchPatients,isLoading} = useFetchPatients(setPatients);
+  const {fetchPatients,isPending} = useFetchPatients(setPatients);
 
   // const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -14,12 +14,12 @@ const PatientsCards = ({setProgress}) => {
   },[]);
 
   useEffect(() => {
-      setProgress(isLoading);
-  }, [isLoading]);
+      setProgress(isPending);
+  }, [isPending]);
   
     return(
         <>
-        <Container fluid w="100%" p={40} pt={5}>
+        <Container fluid w="100%" p={20} pt={5}>
         <Text size="lg" fw={800} c="#000" mb={20}>
            المرضى
         </Text>
@@ -28,6 +28,7 @@ const PatientsCards = ({setProgress}) => {
             patients.map((patient, index) => (
               <Grid.Col span={{ lg: 3, md: 4, sm: 6, xs: 12 }} key={index}>
                 <PatientCard
+                  setProgress = {setProgress}
                   setPatients={setPatients}
                   verefication = {patient.isCompleted}
                   id={patient.id}

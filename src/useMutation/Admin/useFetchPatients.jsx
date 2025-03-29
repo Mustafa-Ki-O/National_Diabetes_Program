@@ -5,16 +5,17 @@ import { useNavigate } from "react-router-dom";
 
 const useFetchPatients = (setPatients) => {
   const navigate = useNavigate();
-  const { mutate: fetchPatients, isLoading :isLoadingFetch} = useMutation({
+  const { mutate: fetchPatients, isPending :isPendingFetch} = useMutation({
     mutationFn: () => FetchPatients().then((res)=>{
       setPatients(res);
     }),
     onSuccess: () => {
         console.log("تم بنجاح");
-        notifications.show({
-          title: 'تم جلب المرضى المسجلين',
-          autoClose: 3000,
-        });
+        // notifications.show({
+        //   title: 'تم جلب المرضى المسجلين',
+        //   autoClose: 3000,
+        // });
+        
     // toast.success("تم انشاء الحساب بنجاح");
     // notifications.show({
     //       title: 'تم انشاء الحساب بنجاح',
@@ -33,6 +34,6 @@ const useFetchPatients = (setPatients) => {
       });
     },
   });
-  return { fetchPatients,isLoadingFetch};
+  return { fetchPatients,isPendingFetch};
 };
 export default useFetchPatients;
