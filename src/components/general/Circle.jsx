@@ -33,7 +33,7 @@ const Circle = ({ w, color1, color2, top,duration, right, translateX, translateY
                     position: absolute;
                     top: ${top};
                     right: ${right};
-                    z-index:0;
+                    z-index:-1;
                     animation: animate-${className} ${duration} ease-in-out infinite backwards;
                 }
                 `}
