@@ -5,6 +5,7 @@
   text-align: center;
   position: relative;
   z-index: 3;
+
 }
 .mantine-Button-root{
   transition: all 0.6s;
@@ -15,17 +16,17 @@
 *:focus {
   outline: none;
 }
-.mantine-Button-root:hover {
+/* .mantine-Button-root:hover {
   border-color: #37A9EF !important;
   transform: scale(1.05);
   transition: all 0.4s;
-}
+} */
 
 .mantine-Card-root{
   transition: all 0.4s;
 }
 .mantine-Card-root:hover{
-  transform: scale(1.05);
+  box-shadow: 0 6px 7px #8e8e8e;
   transition: all 0.4s;
 }
 

@@ -5,6 +5,7 @@ import Register from "../app/Auth/Register";
 import Home from "../app/Home";
 import RegAdmin from "../app/Auth/RegAdmin";
 import PatientInfo from "../app/Admin/PatientInfo";
+import Statistics from "../app/Admin/Statistics";
 const route = createBrowserRouter([
     {
         path:'/National_Diabetes_Program/',
@@ -34,6 +35,10 @@ const route = createBrowserRouter([
             {
               path:'patientInfo/:id',
               element:<PatientInfo/>
+            },
+            {
+              path:'statistics',
+              element:<Statistics/>
             }
           ]
     }

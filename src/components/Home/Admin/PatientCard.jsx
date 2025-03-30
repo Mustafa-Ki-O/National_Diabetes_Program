@@ -1,7 +1,9 @@
-import { Card, Text, Button, Group, Stack, Flex, Title } from "@mantine/core";
+import { Card, Text, Button, Group, Stack, Flex, Title ,Image} from "@mantine/core";
 import { Tooltip } from "@mantine/core";
 // import star from "../../assets/vectors/star.png";
 // import { useTranslation } from "react-i18next";
+import deleteIcon from '../../../assets/vectors/delete.png'
+import updateIcon from '../../../assets/vectors/update.png'
 import { useNavigate } from "react-router-dom";
 import DeletePatientModal from "./DeletePatientModal";
 // import useDeletePatient from "../../../useMutation/Admin/useDeletePatient";
@@ -42,16 +44,17 @@ const navigate = useNavigate();
     setPatients={setPatients}/>
 
     <Card
+      
       padding="lg"
       radius="lg"
       bg="#f9f9fa"
       withBorder
-      style={{ boxShadow: "1px 1px 3px 0px #000" }}
+      style={{ border:'2px solid #8e8e8e' }}
     >
       <Tooltip  label={verefication ? 'تم التحقق' : 'غير محقق'} >
           <div style={{width:25,height:25,borderRadius:'50%',backgroundColor:verefication?'#37a8ef':'rgb(223, 47, 25)',position:'absolute',top:3,left:3}}></div>
       </Tooltip>
-      <Stack mih={250} justify="space-evenly" mt={20}>    
+      <Stack mih={340} justify="space-between" mt={20}>    
         <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000'>{id_number}</Text>
           <Title size='md'>الرقم الوطني</Title>
@@ -74,28 +77,31 @@ const navigate = useNavigate();
           <Title size='md' >نوع السكري</Title>
         </Flex> 
         ):(<></>) }
-        <Stack align="flex-end" gap={8}>
+        <Flex dir="rtl" gap={8} justify="end" align="end">
         <Button
           color="#37a8ef"
-          variant="outline"
+          variant="filled"
           fullWidth
           radius="md"
           fw={800}
           onClick={() => navigate(`/National_Diabetes_Program/patientInfo/${id}`)}
         >
+          
           تعديل
+          <Image  src={updateIcon} mr={15} w={20}/>
         </Button>
         <Button
           color="rgb(223, 47, 25)"
-          variant="outline"
+          variant="light"
           fullWidth
           radius="md"
           fw={800}
           onClick={open}
         >
           حذف
+          <Image  src={deleteIcon} mr={15} w={20}/>
         </Button>
-      </Stack>
+      </Flex>
       </Stack>
     </Card>
     </>

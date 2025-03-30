@@ -13,7 +13,7 @@ const Home = () => {
 
         <>
         {progress && <Progress/>}
-        <Container fluid p={0}>
+        <Container fluid  >
          {user?.role === 'center' ?(
             <>
             <PatientsCards setProgress={setProgress}/>

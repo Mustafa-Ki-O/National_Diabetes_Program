@@ -3,10 +3,11 @@ import { useForm, yupResolver } from "@mantine/form";
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
 import * as yup from 'yup';
+import info from '../../assets/css/info.module.css'
 import { Switch } from '@mantine/core';
 import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
 import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
-import backWards from '../../assets/vectors/backwards.png'
+import backWards from '../../assets/vectors/forward.png'
 import { useNavigate } from "react-router"
 
 const Patient = ({ id , setProgress}) => {
@@ -171,12 +172,19 @@ const Patient = ({ id , setProgress}) => {
 
 
   return (
-    <Container w='100%' fluid py={30}>
-      <div style={{position:'absolute',top:2,right:30,padding:5,borderRadius:'50%',border:'1px solid #37a8ef',direction:'ltr'}}>
-        <Image  src={backWards} w={20} onClick={()=>navigate('/National_Diabetes_Program/home')}/>
-      </div>
+    <Container w='100%' fluid >
+      {/* <div style={{position:'absolute',top:2,right:30,padding:5,borderRadius:'50%',border:'1px solid #37a8ef',direction:'ltr'}}>
+        
+      </div> */}
       <form style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
-        <Grid gutter="sm" justify="center" mt={80} mb={20} align="center" dir="rtl">
+        <Grid gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
+        <Grid.Col justify='end' span={12 } mb={40}  h={20}>
+          <Flex align='center' gap={10}  onClick={()=>navigate('/National_Diabetes_Program/home')} style={{cursor:'pointer'}}>  
+            <Image className={info.back} style={{borderRadius:'50%',border:'1px solid #37a8ef'}} src={backWards} w={20} />
+            <Text mb={6}> رجوع</Text>
+          </Flex>
+        
+          </Grid.Col>
           {/* المعلومات الأساسية */}
           <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
             <TextInput
@@ -583,7 +591,7 @@ const Patient = ({ id , setProgress}) => {
         <Grid  my={15}>
           <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
           <Button 
-            // fullWidth 
+            fullWidth 
             radius={10} 
             size="md" 
             type="submit" 

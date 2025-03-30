@@ -18,9 +18,13 @@ const PatientInfo = () => {
     return(
         <>
         {progress &&  <Progress />}
-        <Container fluid w='100%'>
+        {id ? (
+        <Container fluid w='100%' px={{ base: 0, md: 30 }}>
            <Patient id={id} setProgress={setProgress}/>
         </Container>
+        ):(
+          <div>لم تحدد المريض !</div>
+        )}
         </>
     )
 }
