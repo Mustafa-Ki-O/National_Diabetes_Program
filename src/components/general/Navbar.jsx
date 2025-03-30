@@ -60,7 +60,7 @@ const NavBar = () => {
                     </Flex>
                 </AppShell.Navbar>
             </AppShell>
-        <Drawer size={window.innerWidth / 2}  opened={openedDrawer} onClose={close} style={{position:'absolute',left:0}}  overlayProps={{ backgroundOpacity: 0.2, blur: 15 ,opacity:700}}>
+        <Drawer size={window.innerWidth / 1.6}  opened={openedDrawer} onClose={close} style={{position:'absolute',left:0}}  overlayProps={{ backgroundOpacity: 0.2, blur: 15 }}>
            <Stack >
                     <Text c='#37a8ef' size="xl"  ta='right'
                     onClick={() => handleButtonClick('home')}
