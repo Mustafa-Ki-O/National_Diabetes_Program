@@ -1,22 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
-import PostPatient from '../../api/Patient/PostPatient'
 import { useNavigate } from "react-router-dom";
+import PostCode from "../../api/Patient/PostCode";
 
-const useRegPatient = () => {
+const usePostCode = () => {
   const navigate = useNavigate();
-  const { mutate: register, isPending } = useMutation({
-    mutationFn: (newFormData) => PostPatient(newFormData),
+  const { mutate: postCode, isPending } = useMutation({
+    mutationFn: (patientInfo) => PostCode(patientInfo),
     onSuccess: () => {
         console.log("تم بنجاح");
-        
-    //   toast.success("تم انشاء الحساب بنجاح");
-    //   notifications.show({
-    //   title: 'تم انشاء الحساب بنجاح',
-    //   autoClose: 4000,
-    //   color: 'blue',
-    // })
-      navigate("/National_Diabetes_Program/verifyEmail/");
+      notifications.show({
+      title: 'تم التحقق بنجاح',
+      autoClose: 3000,
+      color: 'blue',
+    })
+      navigate("/National_Diabetes_Program/");
     },
     onError: (err) => {
       console.log("ERROR", err);
@@ -28,6 +26,6 @@ const useRegPatient = () => {
       });
     },
   });
-  return { register, isPending };
+  return { postCode, isPending };
 };
-export default useRegPatient;
+export default usePostCode;

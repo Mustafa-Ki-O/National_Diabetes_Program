@@ -55,7 +55,7 @@ const LoginForm = ({setProgress}) => {
 
   return (
     <>
-      <Container w='100%' fluid s>
+      <Container w='100%' fluid >
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmite)} >
           <Grid gutter="sm" justify="center" mt={20} mb={20} align="center"  dir="rtl"  >
             <GridCol span={12}>

@@ -1,0 +1,39 @@
+/* Base input styles */
+.verification-input {
+    padding-left: 4.5rem;
+    letter-spacing: 1rem;
+    font-family: monospace;
+    font-size: 1.5rem;
+    direction: ltr;
+    position: relative;
+    caret-color: transparent;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  /* Input wrapper - needed for cursor positioning */
+  .verification-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+  
+  /* Custom cursor - shown when input isn't full */
+  .verification-cursor {
+    position: absolute;
+    bottom: 5px;
+    width: 12px;
+    height: 2px;
+    background-color: #000;
+    animation: blink 1s step-end infinite;
+    display: none; /* Hidden by default */
+  }
+  
+  /* Blink animation */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }

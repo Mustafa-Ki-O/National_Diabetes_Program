@@ -39,8 +39,9 @@ const NavBar = () => {
     return (
         <>
         {(location.pathname !== '/National_Diabetes_Program/' 
-        && location.pathname !== '/National_Diabetes_Program/register'
-        && location.pathname !== '/National_Diabetes_Program/registerAdmin') ?(
+        && location.pathname !== '/National_Diabetes_Program/register/'
+        && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
+        && location.pathname !== '/National_Diabetes_Program/verifyEmail/') ?(
             <>
             
 

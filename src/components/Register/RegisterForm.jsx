@@ -67,14 +67,18 @@ const RegisterForm = ({setProgress}) => {
   const handleSubmit = () => {
     if (form.isValid) {
       const values = form.getValues();
-      console.log(values);
+      
       const newFormData = new FormData();
       Object.keys(values).forEach((key) => {
-        if (key !== 'termsOfService') {
-          newFormData.append(key, values[key]);
+        if (values.termsOfService === true) {
+          newFormData.append(key,values[key]);
+          console.log(newFormData)
         }
       });
       setIsSubmitted(true);
+      console.log(newFormData)
+      localStorage.setItem('patientEmail',JSON.stringify(values.email));
+      // navigate('/National_Diabetes_Program/verifyEmail/')
       register(newFormData);
     }
 
