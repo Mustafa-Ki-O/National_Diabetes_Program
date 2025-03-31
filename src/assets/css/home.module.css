@@ -1,0 +1,9 @@
+.search{
+    transition: all 1s;
+ }
+.grid:hover{
+    .search{
+        transform: scale(1.2);
+        transition: all 1s;
+     }
+}

@@ -48,7 +48,7 @@ const NavBar = () => {
         <AppShell navbar={{ width: '100%'}}  mb='25vw' hiddenFrom="md">
             
                 <AppShell.Navbar
-                    bg='#fff'
+                    bg='#F9FAFC'
                     h='auto'
                     px='lg'
                     py='xs'
@@ -72,7 +72,7 @@ const NavBar = () => {
         </Drawer>
             <AppShell navbar={{ width: '100%'}}  mb='9.75vw' visibleFrom="md">
                 <AppShell.Navbar
-                    bg='#fff'
+                    bg='#F9FAFC'
                     h='auto'
                     // px='1vw'
                     py='1vw'

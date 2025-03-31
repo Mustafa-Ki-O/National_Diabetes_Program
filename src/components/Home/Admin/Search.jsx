@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { TextInput, Container, Center } from '@mantine/core';
+import { TextInput, Container, Center, Grid } from '@mantine/core';
 
 const Search = ({ patients, setSearchedPatients }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,18 +27,16 @@ const Search = ({ patients, setSearchedPatients }) => {
   }, [searchTerm, patients]);
 
   return (
-    <Center>
+      
       <TextInput
-        w={{base:'90%',md:500}}
-        radius={15}
+        // w={{base:'90%'}}
+        radius={10}
         size="md"
         dir='rtl'
         value={searchTerm}
         onChange={handleSearch}
         placeholder="ابحث عن مرضى (الرقم الوطني ,الاسم)"
-        style={{border:'2px solid #37a8ef',borderRadius:18}}
       />
-    </Center>
   );
 };
 

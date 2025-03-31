@@ -24,7 +24,7 @@ const VerficationForm = ({ setProgress }) => {
 
   const { postCode, isPending } = usePostCode();
   const navigate = useNavigate();
-
+  const [isFocused, setIsFocused] = useState(false);
   const form = useForm({
     mode: "uncontrolled",
     validateInputOnChange: false,
@@ -122,11 +122,15 @@ const VerficationForm = ({ setProgress }) => {
       <Container w='100%' fluid>
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmite)}>
           <Grid gutter="sm" justify="center" mt={20} mb={20} align="center">
-            <GridCol span={12} align='center'>
+            <GridCol span={12} align='center' >
               <TextInput
+                ta='center'
                 ref={inputRef}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
                 size="md"
-                variant="unstyled"
+                p={0}
+                variant= 'unstyled'
                 w='fit-content'
                 radius={10}
                 mt="sm"
@@ -137,14 +141,17 @@ const VerficationForm = ({ setProgress }) => {
                 inputMode="numeric"
                 styles={{
                   input: {
-                    borderBottom:'1px solid #37a8ef',
-                    paddingLeft:'1.7vw',
+                    cursor:'pointer',
+                    padding:'0px',
+                    border:isFocused ? '1px solid #37a8ef':'',
+                    transition: 'all 0.3s',
                     letterSpacing: '1rem',
                     fontFamily: 'monospace',
-                    fontSize: '1rem', // Increased font size for better visibility
+                    fontSize: '1rem', 
                     direction: 'ltr',
                     caretColor: 'transparent',
                     textAlign: 'center',
+                    textIndent: '0.8rem',
                   }}}
               />
               {form.errors.code && (

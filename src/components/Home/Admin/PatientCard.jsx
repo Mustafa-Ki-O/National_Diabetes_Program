@@ -26,14 +26,14 @@ const navigate = useNavigate();
     id={id}
     setProgress={setProgress}
     setPatients={setPatients}/>
-<Tooltip  label={verefication ? 'تم التحقق' : 'غير محقق'} >
+   <Tooltip  label={verefication ? 'تم التحقق' : 'غير محقق'} >
     <Card 
       padding="lg"
-      radius="lg"
-      bg="#fefefb"
+      radius="md"
+      bg="#fff"
       withBorder
       style={{ 
-        borderTop: `4px solid ${verefication ? '#37a8ef' : '#8e8e8e'}`
+        borderTop: `4px solid ${verefication ? '#37a8ef' : '#8e8e8e'}`,cursor:'pointer'
       }}
     >  
       <Stack mih={270} justify="space-between">    
