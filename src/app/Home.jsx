@@ -27,6 +27,35 @@ const Home = () => {
     setProgress(isPending);
 }, [isPending]);
 
+const getMostCommonSugarType = () => {
+  if (patients.length === 0) return null;
+
+  // 1. تصفية المرضى المكتملين فقط
+  const completedPatients = patients.filter(patient => patient.isCompleted);
+
+  if (completedPatients.length === 0) return 'لم يتم التحقق من المرضى !';
+
+  // 2. حساب التكرارات للمرضى المكتملين
+  const sugarCounts = completedPatients.reduce((acc, patient) => {
+    const type = patient.sugarType; 
+    if (type) { // التأكد من وجود قيمة
+      acc[type] = (acc[type] || 0) + 1;
+    }
+    return acc;
+  }, {});
+
+  // 3. العثور على النوع الأكثر تكراراً
+  const mostCommon = Object.entries(sugarCounts).reduce(
+    (max, [type, count]) => count > max.count ? { type, count } : max,
+    { type: '', count: 0 }
+  );
+
+  return mostCommon.type || 'لم يتم تحديد نوع';
+};
+
+const mostCommonSugarType = getMostCommonSugarType();
+
+console.log(mostCommonSugarType)
 const num = patients.length -1;
     return (
 
@@ -36,8 +65,8 @@ const num = patients.length -1;
          {user?.role === 'center' ?(
             <>
             {patients.length !==0 ? (
-            <Grid justify="end"  gutter={40} px={20} mx={3}>  
-            <Grid.Col  span={{ lg: 2, md: 2, sm: 6, xs: 12 }} align='end'>
+            <Grid justify="end"  gutter={40}  px={20} mx={3}>  
+            <Grid.Col  bg={{base:'#fff',md:'transparent'}} span={{ lg: 2, md: 2, sm: 6, xs: 6 }} style={{borderRadius:10}}  align='end'>
                 <Title size='xl' mb={20}>
                   عدد المرضى
                 </Title>
@@ -45,12 +74,12 @@ const num = patients.length -1;
                 {num > 10 ? 'مريض' : 'مرضى'} {  num} 
                 </Text>
             </Grid.Col>
-            <Grid.Col span={{ lg: 4, md: 4, sm: 12, xs: 12 }} align='end' mr={70}>
+            <Grid.Col bg={{base:'#fff',md:'transparent'}} style={{borderRadius:10}} span={{ lg: 4, md: 4, sm: 12, xs: 6 }} align='end' mr={{base:0,md:70}}>
             <Title size='xl' mb={20}>
                 السكري الأكثر شيوعا
             </Title>
                 <Text size="md" >
-                { num > 10 ? 'مريض' : 'مرضى'} {  num} 
+                {mostCommonSugarType || 'لا توجد بيانات'}
                 </Text>
             </Grid.Col>
             <Grid.Col className={home.grid} align='end' span={{ lg: 4, md: 4, sm: 12, xs: 12 }}>

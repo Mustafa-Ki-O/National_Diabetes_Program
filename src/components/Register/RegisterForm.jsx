@@ -230,11 +230,15 @@ const RegisterForm = ({setProgress}) => {
           <Grid hiddenFrom="md" gutter={15} my={15}>
             <GridCol span={12}>
               <Button fullWidth radius={10} size="md" type="submit" variant="filled" color="#37A9EF">
-                انشاء حساب
+              {isPending ? (
+    <Loader color="white" size="sm" type="dots" />
+  ) : (
+    'انشاء حساب'
+  )}
               </Button>
             </GridCol>
             <GridCol span={12}>
-              <Button fullWidth radius={10} size="md" variant="outline" color="#8E8E8E" onClick={handleLog}>
+              <Button  fullWidth radius={10} size="md" variant="outline" color="#8E8E8E" onClick={handleLog}>
                 تسجيل الدخول
               </Button>
             </GridCol>

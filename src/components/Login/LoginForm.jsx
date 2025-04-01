@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor} from "@mantine/core";
+import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor,Loader} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 // import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
@@ -104,6 +104,7 @@ const LoginForm = ({setProgress}) => {
               انشاء حساب
             </Button>
             <Button
+              
               size="md"
               radius={10}
               variant="filled"
@@ -111,7 +112,7 @@ const LoginForm = ({setProgress}) => {
               type="submit"
               mt="sm"
             >
-              تسجيل الدخول
+تسجيل الدخول
             </Button>
           </Flex>
 {/* for mobiles screens */}
@@ -126,7 +127,11 @@ const LoginForm = ({setProgress}) => {
                 type="submit"
                 mt="sm"
               >
-                تسجيل الدخول
+                 {isPending ? (
+    <Loader color="white" size="sm" type="dots" />
+  ) : (
+    'تسجيل الدخول'
+  )}
               </Button>
             </GridCol>
             <GridCol span={12}>
