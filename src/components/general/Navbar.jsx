@@ -1,7 +1,7 @@
 import { AppShell, Burger, Flex, Image, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
-import logo from '../../assets/images/LOGO.png';
+import logo from '../../assets/images/logo.svg';
 import { useMantineTheme } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
 import { Drawer, Button } from '@mantine/core';

@@ -10,7 +10,7 @@ const Start = () => {
         <Container fluid w='100%'>
             <Flex  justify='center' align='center' gap={20}>
                      <Box className={modules.p} > 
-                       <Title c='black'  style={{ display: 'block', textAlign: 'center' ,fontSize:40,fontWeight:600}}>
+                       <Title c='black' fz={{base:32,md:44}} ta='center' fw={600}>
                          البرنامج
                          <br />
                          الوطني
@@ -21,7 +21,7 @@ const Start = () => {
                      <Image
                         bg='#F9FAFC'
                         className={modules.img}
-                        miw={180}
+                        miw={{base:120 ,md:180}}
                         alt="diabetes-Logo" 
                         src={img} 
                     />

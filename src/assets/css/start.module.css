@@ -7,33 +7,25 @@
 display: inline-block;
 content: '';
 width: 3px;
-height: 200px;
+height: 190px;
 background-color: black;
 margin-left: 14px;
 }
+
 
 .img{
     /* width: 300px !important; */
     animation: fromRight 2s forwards ;
 }
 
-@media (max-width: 768px) {
-    .p {
-      /* Adjust the size or layout for mobile */
-      font-size: 12px; /* Example: Reduce font size */
-    }
-  
+@media (max-width: 1024px) {
+
     .p::after {
       /* Adjust the pseudo-element for mobile */
-      height: 180px; /* Example: Reduce height */
+      height: 130px; /* Example: Reduce height */
     }
   
-    .img {
-      /* Adjust the image size for mobile */
-      width: 100%; /* Make the image responsive */
-      max-width: 200px; /* Limit the maximum width */
-      height: auto; /* Maintain aspect ratio */
-    }
+
   }
 
 .con{

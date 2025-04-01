@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const useFetchPatients = (setPatients) => {
   const navigate = useNavigate();
-  const { mutate: fetchPatients, isPending :isPendingFetch} = useMutation({
+  const { mutate: fetchPatients, isPending} = useMutation({
     mutationFn: () => FetchPatients().then((res)=>{
       setPatients(res);
     }),
@@ -34,6 +34,6 @@ const useFetchPatients = (setPatients) => {
       });
     },
   });
-  return { fetchPatients,isPendingFetch};
+  return { fetchPatients,isPending};
 };
 export default useFetchPatients;

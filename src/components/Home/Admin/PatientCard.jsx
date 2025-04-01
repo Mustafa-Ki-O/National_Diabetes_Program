@@ -36,7 +36,7 @@ const navigate = useNavigate();
         borderTop: `4px solid ${verefication ? '#37a8ef' : '#8e8e8e'}`,cursor:'pointer'
       }}
     >  
-      <Stack mih={270} justify="space-between">    
+      <Stack mih={200} justify="space-between">    
         <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000'>{id_number}</Text>
           <Title size='md'>الرقم الوطني</Title>
@@ -45,10 +45,10 @@ const navigate = useNavigate();
           <Text size="md" c='#000'>{name}</Text>
           <Title size='md'>الاسم</Title>
         </Flex>
-        <Flex align='center' gap={10} justify='end'>
+        {/* <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000' >{email}</Text>
           <Title size='md' >الايميل</Title>
-        </Flex> 
+        </Flex>  */}
         <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000' >{age}</Text>
           <Title size='md' >العمر</Title>

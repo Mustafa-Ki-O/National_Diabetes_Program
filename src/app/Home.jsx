@@ -18,7 +18,7 @@ const Home = () => {
   const [searchedPatients,setSearchedPatients] = useState([])
 
   // const [isSubmitted, setIsSubmitted] = useState(false);
-
+ 
   useEffect(()=>{
     fetchPatients()
   },[]);
@@ -32,9 +32,10 @@ const num = patients.length -1;
 
         <>
         {progress && <Progress/>}
-        <Container  fluid  pb={30}>
+        <Container  fluid  pb={30} mih='100vh'>
          {user?.role === 'center' ?(
             <>
+            {patients.length !==0 ? (
             <Grid justify="end"  gutter={40} px={20} mx={3}>  
             <Grid.Col  span={{ lg: 2, md: 2, sm: 6, xs: 12 }} align='end'>
                 <Title size='xl' mb={20}>
@@ -64,6 +65,7 @@ const num = patients.length -1;
             </Grid.Col>
             
             </Grid>
+            ):(<></>)}
              {/* <Text size="lg" fw={700} mb={10}>
                هناك ما يزيد عن {num} {num > 10 ? 'مريض' : 'مرضى'} ,يمكنك البحث هنا
              </Text> */}
