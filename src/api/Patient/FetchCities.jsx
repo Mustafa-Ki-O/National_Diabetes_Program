@@ -2,9 +2,9 @@ import axiosInstance from "../axiosService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const FetchCenters = (value) => {
+const FetchCities = () => {
   return new Promise((resolve, reject) => {
-    axiosInstance.get(`${API_URL}/getCenters/${value}`)
+    axiosInstance.get(`${API_URL}/getCities`)
       .then(response => {
         resolve(response.data); // Ensure this matches the API response structure
       })
@@ -14,4 +14,4 @@ const FetchCenters = (value) => {
   });
 };
 
-export default FetchCenters;
+export default FetchCities;

@@ -1,10 +1,10 @@
 import { useMutation } from "@tanstack/react-query";
 import FetchCenters from "../../api/Patient/FetchCenters";
 
-const useFetchCenters = () => {
-  const { mutate: fetchCenters, isPending } = useMutation({
-    mutationFn: (setCenterNames) => 
-      FetchCenters().then(res => {
+const useFetchCenters = (setCenterNames) => {
+  const { mutate: fetchCenters, isPending :isPendingCenters} = useMutation({
+    mutationFn: (value) => 
+      FetchCenters(value).then(res => {
         const centerNames = res.map(element => element.centerName);
         setCenterNames(centerNames);
       }),
@@ -17,7 +17,7 @@ const useFetchCenters = () => {
     },
   });
 
-  return { fetchCenters, isPending };
+  return { fetchCenters, isPendingCenters };
 };
 
 export default useFetchCenters;

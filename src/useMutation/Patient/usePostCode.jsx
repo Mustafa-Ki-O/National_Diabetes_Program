@@ -14,6 +14,7 @@ const usePostCode = () => {
       autoClose: 3000,
       color: 'blue',
     })
+      localStorage.clear();
       navigate("/National_Diabetes_Program/");
     },
     onError: (err) => {

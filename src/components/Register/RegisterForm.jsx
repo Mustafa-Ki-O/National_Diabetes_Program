@@ -10,18 +10,18 @@ import useRegPatient from '../../useMutation/Patient/useRegPatient';
 import useFetchCenters from '../../useMutation/Patient/useFetchCenters';
 import phone from "../../assets/vectors/Vector3.png";
 import calendar from "../../assets/vectors/calendar.png";
+import useFetchCities from "../../useMutation/Patient/useFetchCities";
+
 const RegisterForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, isPending } = useRegPatient();
   const [centerNames, setCenterNames] = useState([]);
-  const { fetchCenters, isPending: isCentersLoading } = useFetchCenters(); // Pass setCenterNames here
+  const [citiesNames,setCitiesNames] = useState([])
+  const {fetchCities,isPendingCities} = useFetchCities(setCitiesNames)
+  const { fetchCenters, isPendingCenters } = useFetchCenters(setCenterNames); // Pass setCenterNames here
   const navigate = useNavigate();
-
+ const [city,setCity] = useState();
   // Fetch centers when the component mounts
-  useEffect(() => {
-    fetchCenters(setCenterNames)
-  }, []);
-
 
   const schema = yup.object().shape({
     fullname: yup
@@ -43,7 +43,7 @@ const RegisterForm = ({setProgress}) => {
       .string()
       .min(8, "يجب ان تحوي كلمة المرور على 8 محارف كحد أدنى"),
       age: yup.date().required('تاريخ الميلاد مطلوب'),
-      centerCity:yup.string().required('اختر المحافظة'),
+      city:yup.string().required('اختر المحافظة'),
     center_name: yup.string().required('اختر المركز'),
     termsOfService: yup.bool()
       .oneOf([true], "يجب الموافقة على الشروط"),
@@ -60,16 +60,31 @@ const RegisterForm = ({setProgress}) => {
       phone:'',
       password:'',
       center_name: '',
-      centerCity:'',
+      city:'',
       termsOfService: ''
     },
     validate: yupResolver(schema),
   });
 
+  
+  useEffect(()=>{
+    fetchCities(setCitiesNames)
+  },[])
+
+  const handleChangeCity = (value) => {
+    form.getInputProps("city").onChange(value);
+
+    setCenterNames([]);
+    form.setValues('center_name', null);
+
+    setCity(value);
+    
+    fetchCenters(value);
+  }
   const handleSubmit = () => {
     if (form.isValid) {
       const values = form.getValues();
-      
+      console.log(values)
       const newFormData = new FormData();
       Object.keys(values).forEach((key) => {
         if (values.termsOfService === true) {
@@ -80,7 +95,6 @@ const RegisterForm = ({setProgress}) => {
       setIsSubmitted(true);
       console.log(newFormData)
       localStorage.setItem('patientEmail',JSON.stringify(values.email));
-      // navigate('/National_Diabetes_Program/verifyEmail/')
       register(newFormData);
     }
 
@@ -92,11 +106,8 @@ const RegisterForm = ({setProgress}) => {
   };
 
   useEffect(() => {
-    if (isSubmitted) {
-      console.log('loading :',isPending)
-      setProgress(isPending ); 
-    }
-  }, [isPending]);
+      setProgress(isPending ||isPendingCities); 
+  }, [isPending||isPendingCities]);
 
   const handleLog = () => {
     navigate('/National_Diabetes_Program/');
@@ -111,8 +122,7 @@ const RegisterForm = ({setProgress}) => {
               <TextInput
                 size="md"
                 radius={10}
-                placeholder="أدخل رقم الهوية الوطني *"
-                // rightSection={<img src={person} width="20px" />}
+                placeholder="أدخل رقم الهوية الوطني *"  
                 key={form.key("id_number")}
                 {...form.getInputProps("id_number")}
               />
@@ -157,15 +167,18 @@ const RegisterForm = ({setProgress}) => {
               />
             </GridCol>
             <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
-                <Select
-                  size="md"
-                  radius={10}
-                  placeholder='اختر المحافظة *'
-                  // data={cities}
-                  key={form.key("centerCity")}
-                  {...form.getInputProps("centerCity")}
-                  // disabled={isCentersLoading}
-                />
+            <Select
+                 size="md"
+                 radius={10}
+                 placeholder='اختر المحافظة *'
+                 data={citiesNames} 
+                 
+                 value={city} 
+                 onChange={handleChangeCity}
+                 key={form.key("city")}    
+                 disabled={isPendingCities}
+                //  {...form.getInputProps("city")}
+               />
             </GridCol>
             <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
               <Select 
@@ -175,12 +188,11 @@ const RegisterForm = ({setProgress}) => {
                 data={centerNames?.map(center => ({ value: center, label: center })) || []}
                 key={form.key("center_name")}
                 {...form.getInputProps("center_name")}
-                disabled={isCentersLoading}
+                disabled={isPendingCenters}
               />
             </GridCol>
             <GridCol justify='flex-end' span={{ lg: 6, xs: 12, sm: 12, md: 12 }} >
               <DatePickerInput
-              
                  size="md"
                  radius={10}
                  placeholder="اختر تاريخ الميلاد *"
