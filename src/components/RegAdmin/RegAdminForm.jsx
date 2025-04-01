@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Checkbox,Anchor} from "@mantine/core";
+import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Checkbox,Anchor,Select} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 // import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
@@ -13,10 +13,27 @@ import useRegAdmin from "../../useMutation/Admin/useRegAdmin";
 const RegAdminForm = ({setProgress}) =>{
     const [isSubmitted, setIsSubmitted] = useState(false);
       const { register, isPending } = useRegAdmin();
-    //   const { t } = useTranslation();
       const navigate = useNavigate();
-    //   const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
-    
+      const names =[
+        { value: "دمشق", label: "دمشق" },
+        { value: "حلب", label: "حلب" },
+        { value:  "حمص", label: "حمص" },
+        { value:  "حماة", label: "حماة" },
+        { value: "اللاذقية", label: "اللاذقية" },
+        { value:"دير الزور" , label: "دير الزور" },
+        { value: "الحسكة" , label: "الحسكة" },
+        { value: "الرقة" , label: "الرقة" },
+        { value: "إدلب" , label: "إدلب" },
+        { value: "درعا", label: "درعا" },
+        { value: "السويداء", label: "السويداء" },
+        { value: "طرطوس", label: "طرطوس" },
+        { value: "القنيطرة", label: "القنيطرة" },
+        { value: "ريف دمشق", label: "ريف دمشق" }
+      ]
+      const [cities,setCities] = useState([]);
+      useEffect(()=>{
+      setCities(names)
+      },[])
       const schema = yup.object().shape({
         centerName: yup
         .string()
@@ -26,6 +43,7 @@ const RegAdminForm = ({setProgress}) =>{
           'يجب أن يكون الاسم خالٍ من الأرقام ويحتوي على 4 محارف على الأقل',
           (val) => /^[\u0600-\u06FFA-Za-z\s]{4,}$/.test(val)
         ),
+        centerCity:yup.string().required("يجب تحديد محافظة"),
         centerEmail: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
         centerPassword: yup
           .string()
@@ -44,6 +62,7 @@ const RegAdminForm = ({setProgress}) =>{
         validateInputOnChange: true,
         initialValues: {
           centerName:'',
+          centerCity:'',
           centerPassword:'',
           centerEmail:'',
           centerKey:'',
@@ -51,6 +70,7 @@ const RegAdminForm = ({setProgress}) =>{
         },
         validate: yupResolver(schema),
       });
+
     
       const handleSubmit = () => {
         if (form.isValid) {
@@ -100,6 +120,17 @@ const RegAdminForm = ({setProgress}) =>{
                 key={form.key("centerName")}
                 {...form.getInputProps("centerName")}
               />
+            </GridCol>
+             <GridCol span={12}>
+                <Select
+                  size="md"
+                  radius={10}
+                  placeholder='اختر المحافظة *'
+                  data={cities}
+                  key={form.key("centerCity")}
+                  {...form.getInputProps("centerCity")}
+                  // disabled={isCentersLoading}
+                />
             </GridCol>
             <GridCol span={12}>
               <TextInput

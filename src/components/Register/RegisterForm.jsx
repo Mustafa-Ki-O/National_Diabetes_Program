@@ -43,7 +43,8 @@ const RegisterForm = ({setProgress}) => {
       .string()
       .min(8, "يجب ان تحوي كلمة المرور على 8 محارف كحد أدنى"),
       age: yup.date().required('تاريخ الميلاد مطلوب'),
-    center_name: yup.string().required('المنطقة مطلوبة'),
+      centerCity:yup.string().required('اختر المحافظة'),
+    center_name: yup.string().required('اختر المركز'),
     termsOfService: yup.bool()
       .oneOf([true], "يجب الموافقة على الشروط"),
   });
@@ -59,6 +60,7 @@ const RegisterForm = ({setProgress}) => {
       phone:'',
       password:'',
       center_name: '',
+      centerCity:'',
       termsOfService: ''
     },
     validate: yupResolver(schema),
@@ -104,7 +106,7 @@ const RegisterForm = ({setProgress}) => {
     <>
       <Container w='100%' fluid>
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
-          <Grid gutter="md" justify="center" mt={20} mb={20} align="center" dir="rtl">
+          <Grid gutter="sm" justify="start" mt={20} mb={20} align="center" dir="rtl">
           <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
               <TextInput
                 size="md"
@@ -155,8 +157,18 @@ const RegisterForm = ({setProgress}) => {
               />
             </GridCol>
             <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
-              <Select
-                
+                <Select
+                  size="md"
+                  radius={10}
+                  placeholder='اختر المحافظة *'
+                  // data={cities}
+                  key={form.key("centerCity")}
+                  {...form.getInputProps("centerCity")}
+                  // disabled={isCentersLoading}
+                />
+            </GridCol>
+            <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+              <Select 
                 size="md"
                 radius={10}
                 placeholder="اختر المركز *"
@@ -166,8 +178,9 @@ const RegisterForm = ({setProgress}) => {
                 disabled={isCentersLoading}
               />
             </GridCol>
-            <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+            <GridCol justify='flex-end' span={{ lg: 6, xs: 12, sm: 12, md: 12 }} >
               <DatePickerInput
+              
                  size="md"
                  radius={10}
                  placeholder="اختر تاريخ الميلاد *"

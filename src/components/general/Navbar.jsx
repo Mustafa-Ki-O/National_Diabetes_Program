@@ -1,7 +1,7 @@
 import { AppShell, Burger, Flex, Image, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
-import logo from '../../assets/images/diabetes.jpg'
+import logo from '../../assets/images/LOGO.png';
 import { useMantineTheme } from "@mantine/core";
 import { useDisclosure } from '@mantine/hooks';
 import { Drawer, Button } from '@mantine/core';
@@ -56,7 +56,7 @@ const NavBar = () => {
                         boxShadow: "0px 1px 1px  #0000006"
                     }}>
                     <Flex justify='space-between' align="center">
-                        <Image src={logo}  w='6.4vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+                        <Image src={logo}  w='9vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                         <Burger color='#37a8ef' lineSize={3} size="md" opened={openBurger} onClick={handleBurger} />
                     </Flex>
                 </AppShell.Navbar>
@@ -80,7 +80,7 @@ const NavBar = () => {
                         boxShadow: "0 1px 1px #00000060"
                     }}>
                     <Flex justify='space-between' align="center" px={70} >
-                           <Image src={logo}  w='2.4vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+                           <Image src={logo}  w='4vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                         <Flex gap='4.125vw' >     
                                 <Text className={`${nav.button} ${activeButton === 'statistics' ? nav.active : ''}`} 
                                 onClick={() => handleButtonClick('statistics')} c="#37a8ef" fz={18}>الاحصائيات</Text>

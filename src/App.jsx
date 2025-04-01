@@ -1,6 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import './App.css'
-import Start from './app/start'
+import Start from "./app/Start";
 import { useState ,useEffect} from 'react'
 import route from './router/route'
 import Circle from "./components/general/Circle";

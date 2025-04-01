@@ -6,7 +6,9 @@
   /* box-sizing: border-box !important; */
   /* padding-inline:0 !important; */
 }
-
+body{
+  background-color: #F9FAFC !important;
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
