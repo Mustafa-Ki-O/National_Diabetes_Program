@@ -3,13 +3,14 @@
     position: relative;
     z-index: 1;
     transition: left 0.3s ease, width 0.3s ease;
+    
 }
 
-a:hover {
-    filter: drop-shadow(0 1px 3px #e6f5f7);
+.button:hover {
+    text-shadow: 0 2px 3px #9bd8e4;
 }
 
-.active::after {
+/* .active::after {
     content: "";
     position: absolute;
     bottom: -2vw;
@@ -22,7 +23,7 @@ a:hover {
     background-color: #37a8ef; 
     transform: translateX(-50%);
     transition: left 0.3s ease, width 1s ease; 
-}
+} */
 .activeDrawer{
     position: relative;
     z-index: 1;

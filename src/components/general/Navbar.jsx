@@ -7,6 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { Drawer, Button } from '@mantine/core';
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router";
+import profile from '../../assets/vectors/profile.svg'
 const NavBar = () => {
     const location = useLocation();
     const theme= useMantineTheme();
@@ -56,7 +57,7 @@ const NavBar = () => {
                         boxShadow: "0px 1px 1px  #0000006"
                     }}>
                     <Flex justify='space-between' align="center">
-                        <Image src={logo}  w='9vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+                        <Image src={profile}  w='9vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                         <Burger color='#37a8ef' lineSize={3} size="md" opened={openBurger} onClick={handleBurger} />
                     </Flex>
                 </AppShell.Navbar>
@@ -80,13 +81,15 @@ const NavBar = () => {
                         boxShadow: "0 1px 1px #00000060"
                     }}>
                     <Flex justify='space-between' align="center" px={70} >
-                           <Image src={logo}  w='4vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
-                        <Flex gap='4.125vw' >     
+                           <Image style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} src={profile}  w='3vw' onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/>
+                        <Flex mt={5} gap='4.125vw' justify='end' align='center'>     
                                 <Text className={`${nav.button} ${activeButton === 'statistics' ? nav.active : ''}`} 
-                                onClick={() => handleButtonClick('statistics')} c="#37a8ef" fz={18}>الاحصائيات</Text>
+                                onClick={() => handleButtonClick('statistics')} c="#37a8ef" fz={18} style={{cursor:'pointer'}}>الاحصائيات</Text>
                                  <Text className={`${nav.button} ${activeButton === 'home' ? nav.active : ''}`}
-                                onClick={() => handleButtonClick('home')} c="#37a8ef" fz={18}>الصفحة الرئيسية</Text>
+                                onClick={() => handleButtonClick('home')} c="#37a8ef" fz={18} style={{cursor:'pointer'}} mr={50}>الصفحة الرئيسية</Text>
+                               <Image ml={30} src={logo}  w='4vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                         </Flex>
+                        
                     </Flex>
                 </AppShell.Navbar>
             </AppShell>

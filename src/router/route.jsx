@@ -7,6 +7,7 @@ import RegAdmin from "../app/Auth/RegAdmin";
 import PatientInfo from "../app/Admin/PatientInfo";
 import Statistics from "../app/Admin/Statistics";
 import VerficationEmail from "../app/Auth/VerficationEmail";
+import Profile from "../app/Admin/Profile";
 const route = createBrowserRouter([
     {
         path:'/National_Diabetes_Program/',
@@ -44,6 +45,10 @@ const route = createBrowserRouter([
             {
               path:'verifyEmail',
               element:<VerficationEmail/>
+            },
+            {
+              path:'centerProfile',
+              element:<Profile/>
             }
           ]
     }
