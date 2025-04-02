@@ -30,12 +30,19 @@ const Search = ({ patients, setSearchedPatients }) => {
       
       <TextInput
         // w={{base:'90%'}}
+        w='100%'
         radius={10}
         size="md"
         dir='rtl'
         value={searchTerm}
         onChange={handleSearch}
-        placeholder="ابحث عن مرضى (الرقم الوطني ,الاسم)"
+        placeholder=" الاسم او الرقم الوطني"
+        style={{
+          input:{
+            width:'95%',
+            justifyContent:'flex-end'
+          },
+        }}
       />
   );
 };

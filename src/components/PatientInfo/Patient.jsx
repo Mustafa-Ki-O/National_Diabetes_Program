@@ -388,10 +388,10 @@ const Patient = ({ id , setProgress}) => {
               label="نوع السكري"
               placeholder="نوع السكري"
               data={[
-                { value: 'type1', label: 'النوع الأول' },
-                { value: 'type2', label: 'النوع الثاني' },
-                { value: 'gestational', label: 'سكري الحمل' },
-                { value: 'other', label: 'أخرى' }
+                { value: 'النوع الأول', label: 'النوع الأول' },
+                { value: 'النوع الثاني', label: 'النوع الثاني' },
+                { value: 'سكري الحمل', label: 'سكري الحمل' },
+                { value: 'نوع أخر', label: 'أخرى' }
               ]}
               key={form.key("sugarType")}
               {...form.getInputProps("sugarType")}

@@ -32,9 +32,7 @@ const navigate = useNavigate();
       radius="md"
       bg="#fff"
       withBorder
-      style={{ 
-        borderTop: `4px solid ${verefication ? '#37a8ef' : '#8e8e8e'}`,cursor:'pointer'
-      }}
+      bd='none'
     >  
       <Stack mih={200} justify="space-between">    
         <Flex align='center' gap={10} justify='end'>

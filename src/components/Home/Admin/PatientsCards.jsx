@@ -6,9 +6,9 @@ const PatientsCards = ({setProgress,patients,setPatients}) => {
 
     return(
         <>
-        <Container fluid w="100%" mt={30} pt={5}>
+        <Container fluid w="100%" mt={30} pt={5} >
 
-        <Grid justify="center" gutter={15}>
+        <Grid justify="center" gutter={15} >
           {patients.length !== 0 ? (
             patients.map((patient, index) => (
               <Grid.Col span={{ lg: 3, md: 4, sm: 6, xs: 12 }} key={index}>

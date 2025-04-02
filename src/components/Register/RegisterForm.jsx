@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { DatePickerInput } from '@mantine/dates';
 import { useNavigate } from "react-router-dom";
-import { TextInput, Button, PasswordInput, Container, Flex, Grid, GridCol, Checkbox, Anchor, Select } from "@mantine/core";
+import { TextInput, Button, PasswordInput, Container, Flex, Grid, GridCol, Checkbox, Anchor, Select ,Loader} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import * as yup from "yup";
 import person from "../../assets/vectors/Vector1.png";
