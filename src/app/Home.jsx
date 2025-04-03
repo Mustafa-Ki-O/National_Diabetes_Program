@@ -14,6 +14,7 @@ const Home = () => {
   const [progress, setProgress] = useState(false);
   
   const [patients, setPatients] = useState([]);
+  const [active,setActive] = useState(false);
   const {fetchPatients,isPending} = useFetchPatients(setPatients);
   const [searchedPatients,setSearchedPatients] = useState([])
   const [ sugarType,setSugarType] = useState()
@@ -28,6 +29,12 @@ const Home = () => {
   useEffect(() => {
     setProgress(isPending);
 }, [isPending]);
+
+useEffect(()=>{
+  setTimeout(()=>{
+    setActive(!isPending);
+  },600);
+},[isPending])
 
 const handleChangeAge = (value) =>{
   setOrderAge(value)
@@ -97,7 +104,7 @@ const num = patients.length -1;
 
         <>
         {progress && <Progress/>}
-        <Container  fluid  pb={30} mih='100vh'>
+        <Container  fluid  pb={30} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
          {user?.role === 'center' ?(
             <>
             {patients.length !==0 ? (
@@ -192,7 +199,7 @@ const num = patients.length -1;
                هناك ما يزيد عن {num} {num > 10 ? 'مريض' : 'مرضى'} ,يمكنك البحث هنا
              </Text> */}
             
-            <PatientsCards setPatients={setPatients}  patients={searchedPatients} setProgress={setProgress}/>
+            <PatientsCards  setPatients={setPatients}  patients={searchedPatients} setProgress={setProgress}/>
             </>
          ):(
             <>
