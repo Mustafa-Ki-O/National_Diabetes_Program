@@ -4,7 +4,7 @@ import { useForm, yupResolver } from "@mantine/form";
 // import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import * as yup from "yup";
-import person from "../../assets/vectors/Vector1.png";
+import person from "../../assets/vectors/person.svg";
 import message from "../../assets/vectors/Vector2.png";
 import code from '../../assets/vectors/Vector5.png'
 import useRegAdmin from "../../useMutation/Admin/useRegAdmin";

@@ -18,11 +18,6 @@ const Patient = ({ id , setProgress}) => {
   const {fetchInfo, isPending: isPendingFetch} = useFetchPatientInfo(setPatient);
   const { updatePatient, isPending } =useUpdatePatientInfo(setPatient);
   
-  // useEffect(() => {
-  //   console.log('Current loading state:', isPending);
-  //   console.log('Current loadingF state:', isPendingFetch);
-  // }, [isPending,isPendingFetch]);
-
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const schema = yup.object().shape({
@@ -51,8 +46,7 @@ const Patient = ({ id , setProgress}) => {
 
   useEffect(()=>{
     setProgress(isPendingFetch)
-    console.log('progress fetch',isPendingFetch)
-  },[])
+  },[isPendingFetch])
 
   const form = useForm({
     mode: "uncontrolled",

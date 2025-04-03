@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { TextInput, Button, PasswordInput, Container, Flex, Grid, GridCol, Checkbox, Anchor, Select ,Loader} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import * as yup from "yup";
-import person from "../../assets/vectors/Vector1.png";
+import person from "../../assets/vectors/person.svg";
 import message from "../../assets/vectors/Vector2.png";
 import useRegPatient from '../../useMutation/Patient/useRegPatient';
 import useFetchCenters from '../../useMutation/Patient/useFetchCenters';

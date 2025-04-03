@@ -11,7 +11,7 @@ const PatientsCards = ({setProgress,patients,setPatients}) => {
         <Grid justify="center" gutter={15} >
           {patients.length !== 0 ? (
             patients.map((patient, index) => (
-              <Grid.Col span={{ lg: 3, md: 4, sm: 6, xs: 12 }} key={index}>
+              <Grid.Col span={{ lg: 4, md: 4, sm: 6, xs: 12 }} key={index}>
                 <PatientCard
                   setProgress = {setProgress}
                   setPatients={setPatients}

@@ -104,12 +104,13 @@ const num = patients.length -1;
 
         <>
         {progress && <Progress/>}
-        <Container  fluid  pb={30} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
+        {/* mr={{base:'0',sm:'20%'}} */}
+        <Container p={{base:0,md:'lg'}}    fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
          {user?.role === 'center' ?(
             <>
             {patients.length !==0 ? (
-            <Grid justify="end"  gutter={40}  px={20} mx={3}>  
-            <Grid.Col  bg={{base:'#fff',md:'transparent'}} span={{ lg: 3, md: 4, sm: 12, xs: 6 }} style={{borderRadius:10}}  align='end'>
+            <Grid justify="end"  gutter={20} gap={20} px={'lg'}  >  
+            <Grid.Col mx={10} bg={{base:'#fff',md:'transparent'}} span={{ lg: 3, md: 3, sm: 6, xs: 12 }} style={{borderRadius:10}}  align='end'>
                 <Title size='xl' mb={20}>
                   عدد المرضى
                 </Title>
@@ -118,7 +119,7 @@ const num = patients.length -1;
                 </Text>
             </Grid.Col>
             
-            <Grid.Col bg={{base:'#fff',md:'transparent'}} style={{borderRadius:10}} span={{ lg: 3, md: 4, sm: 12, xs: 6 }} align='end' mr={{base:0,lg:180}}>
+            <Grid.Col mx={10} bg={{base:'#fff',md:'transparent'}} style={{borderRadius:10}} span={{ lg: 3, md: 3, sm: 6, xs: 12 }} align='end' mr={{base:0,md:50}}>
             <Title size='xl' mb={20}>
                 السكري الأكثر شيوعا
             </Title>
@@ -127,7 +128,7 @@ const num = patients.length -1;
                 </Text>
             </Grid.Col>
             
-            <Grid.Col className={home.grid} align='end' span={{ lg: 4, md: 4, sm: 12, xs: 12 }}>
+            <Grid.Col className={home.grid} align='end' span={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
               <Flex justify='end' gap={10}>
               <Image src={search} mb={10} w={30} className={home.search}/>
                  <Text size="lg" fw={700} mb={10}  >

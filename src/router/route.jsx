@@ -8,13 +8,17 @@ import PatientInfo from "../app/Admin/PatientInfo";
 import Statistics from "../app/Admin/Statistics";
 import VerficationEmail from "../app/Auth/VerficationEmail";
 import Profile from "../app/Admin/Profile";
+import { Container } from "@mantine/core";
 const route = createBrowserRouter([
     {
         path:'/National_Diabetes_Program/',
         element: (
             <>
+            <Container fluid mr={{base:'0',sm:'18%'}} p={0}>
               <NavBar />
               <Outlet />
+            </Container>
+              
             </>
           ),
           children: [
