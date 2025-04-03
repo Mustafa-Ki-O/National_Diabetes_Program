@@ -78,7 +78,7 @@ const NavBar = () => {
                     // px='1vw'
                     py='1vw'
                     style={{
-                        boxShadow: "0 1px 1px #00000060"
+                        boxShadow: "0 1px 1px #00000010"
                     }}>
                     <Flex justify='space-between' align="center" px={70} >
                            <Image style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} src={profile}  w='3vw' onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/>
