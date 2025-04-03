@@ -57,7 +57,7 @@ const NavBar = () => {
                         boxShadow: "0px 1px 1px  #0000006"
                     }}>
                     <Flex justify='space-between' align="center">
-                        <Image src={profile}  w='9vw' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+                        <Image src={profile}  style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} w='9vw' onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/>
                         <Burger color='#37a8ef' lineSize={3} size="md" opened={openBurger} onClick={handleBurger} />
                     </Flex>
                 </AppShell.Navbar>
