@@ -171,8 +171,7 @@ const RegisterForm = ({setProgress}) => {
                  size="md"
                  radius={10}
                  placeholder='اختر المحافظة *'
-                 data={citiesNames} 
-                 
+                 data={citiesNames}   
                  value={city} 
                  onChange={handleChangeCity}
                  key={form.key("city")}    

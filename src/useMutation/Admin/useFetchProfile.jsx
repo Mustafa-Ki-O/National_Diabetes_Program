@@ -5,7 +5,7 @@ import FetchProfile from "../../api/Admin/FetchProfile";
 
 const useFetchProfile = (setProfile) => {
   const { mutate: fetchProfile, isPending} = useMutation({
-    mutationFn: () => FetchProfile().then((res)=>{
+    mutationFn: (id) => FetchProfile(id).then((res)=>{
       setProfile(res);
     }),
     onSuccess: () => {

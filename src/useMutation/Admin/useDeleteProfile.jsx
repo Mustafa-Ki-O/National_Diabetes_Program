@@ -7,7 +7,7 @@ import DeleteProfile from "../../api/Admin/DeleteProfile";
 const useDeleteProfile = () => {
   const navigate = useNavigate();
   const { mutate: deleteProfile, isPending } = useMutation({
-    mutationFn: () => DeleteProfile(),
+    mutationFn: (formData) => DeleteProfile(formData),
     onSuccess: () => {
         console.log("تم بنجاح");
         notifications.show({

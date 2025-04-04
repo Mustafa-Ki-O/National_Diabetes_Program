@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 const UpdateProfile = (profileData) => {
   return new Promise((resolve, reject) => {
-    axiosInstance.patch(`${API_URL}/`,profileData)
+    axiosInstance.patch(`${API_URL}/updateCenterProfile`,profileData)
       .then(response => {
         resolve(response.data);
         // localStorage.setItem("adminData", JSON.stringify(response.data));
