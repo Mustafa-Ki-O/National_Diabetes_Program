@@ -10,6 +10,7 @@ const DeletePatientModal = ({id,opened,setProgress,setPatients,close}) => {
     const handleDel = () =>{
         setSubmited(true);
         deletePatient(id);
+        close();
         fetchPatients();
       }
 

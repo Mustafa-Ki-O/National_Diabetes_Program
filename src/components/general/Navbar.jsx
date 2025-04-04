@@ -21,6 +21,7 @@ const NavBar = () => {
     const handleButtonClick = (button) => {
         setActiveButton(button);
         navigate(`/National_Diabetes_Program/${button}`)
+        toggle();
     };
 
     const handleBurger = () => {
@@ -33,11 +34,6 @@ const NavBar = () => {
         }
     }, [openBurger]);
 
-    // useEffect(()=>{
-    //     if(!openedDrawer){
-    //       setOpenBurger(openedDrawer);
-    //     }
-    // },[ openedDrawer])
 
     return (
         <>
@@ -57,16 +53,18 @@ const NavBar = () => {
              padding="md"
             >
             <AppShell.Header dir="ltr">
-            <Flex h="100%" px="0.2rem" justify='space-between' align={'center'}>
-                <Group align="center" gap={40}>
-                <Image ml={30} src={logo} style={{cursor:'pointer'}} w='2.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+            <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
+                <Group align="center" gap={30}>
+                <Image ml={3}  src={logo} style={{cursor:'pointer'}} w='2.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                 <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/>
         </Group>  
         <Burger
+        lineSize={2}
           opened={opened}
           onClick={toggle}
           hiddenFrom="sm"
-          size="sm"
+          size="md"
+        //   className={nav.burger}
         />    
        </Flex>
       </AppShell.Header>
@@ -79,16 +77,12 @@ const NavBar = () => {
                     الرئيسية
                     <Image src={home} w={27} h={25} ml={5}/>
                     </Text>
-         
-        {/* </Flex> */}
-                
                 <Text c='#37a8ef' fz={22} dir="ltr"  display={'flex'} 
                 onClick={() => handleButtonClick('statistics')}  ta='right' className={`${activeButton === 'statistics' ? nav.activeDrawer : ''}`} 
                 style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
                     الاحصائيات
                     <Image src={statistics} w={20} h={20} ml={5}/>
                     </Text>
-           
            </Stack>
       </AppShell.Navbar>
     </AppShell>    

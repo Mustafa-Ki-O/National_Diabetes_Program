@@ -9,18 +9,36 @@ import Statistics from "../app/Admin/Statistics";
 import VerficationEmail from "../app/Auth/VerficationEmail";
 import Profile from "../app/Admin/Profile";
 import { Container } from "@mantine/core";
+import { useLocation } from "react-router";
+
+
+const MainLayout = () => {
+  const location = useLocation();
+  
+  return (
+    <>
+      {location.pathname !== '/National_Diabetes_Program/' 
+        && location.pathname !== '/National_Diabetes_Program/register/'
+        && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
+        && location.pathname !== '/National_Diabetes_Program/verifyEmail/'  ? (
+        <Container fluid mr={{base:'0',sm:'18%'}} p={0}>
+          <NavBar />
+          <Outlet />
+        </Container>
+      ) : (
+        <>
+          <NavBar />
+          <Outlet />
+        </>
+      )}
+    </>
+  );
+}
+
 const route = createBrowserRouter([
     {
         path:'/National_Diabetes_Program/',
-        element: (
-            <>
-            <Container fluid mr={{base:'0',sm:'18%'}} p={0}>
-              <NavBar />
-              <Outlet />
-            </Container>
-              
-            </>
-          ),
+        element: <MainLayout />,
           children: [
             {
               path:'',

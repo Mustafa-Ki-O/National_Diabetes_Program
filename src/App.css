@@ -17,6 +17,9 @@
 *:focus {
   outline: none;
 }
+.m_d4fb9cad, .m_d4fb9cad::before, .m_d4fb9cad::after {
+  border-radius: 50px !important;
+}
 /* .mantine-Button-root:hover {
   border-color: #37A9EF !important;
   transform: scale(1.05);
