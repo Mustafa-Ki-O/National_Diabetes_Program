@@ -5,6 +5,7 @@ import * as yup from "yup";
 import useFetchCities from "../../../useMutation/Patient/useFetchCities";
 import useFetchCenters from "../../../useMutation/Patient/useFetchCenters";
 import useDeleteProfile from "../../../useMutation/Admin/useDeleteProfile";
+import { notifications } from "@mantine/notifications";
 
   const schema = yup.object().shape({
     city:yup.string().required('اختر المحافظة'),
@@ -48,18 +49,22 @@ const form = useForm({
         if (form.isValid) {
           const { centerNameReassignPatients, city } = form.getValues();
           
-          // console.log("Submitting:", {
-          //   centerToDelete: centerName,
-          //   reassignTo: centerNameReassignPatients,
-          //   city
-          // });
-          
           const formData = {
             centerName,
             centerNameReassignPatients
           };
-      
+         if( id !== 2){
           deleteProfile(formData);
+         } else{
+          notifications.show({
+            title:'ممنوع يا غالي',
+            position: 'top-center',
+            message:'اعمل غير حساب وجرب فيه يا عيني 💋',
+            autoClose:10000,
+            color:'red'
+          })
+         }
+          
           
           // form.reset({
           //   city: '',

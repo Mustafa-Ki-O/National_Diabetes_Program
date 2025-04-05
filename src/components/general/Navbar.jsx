@@ -8,7 +8,7 @@ import { Drawer, Button } from '@mantine/core';
 import { Navigate, useNavigate } from "react-router";
 import { useLocation } from "react-router";
 import profile from '../../assets/vectors/admin.svg'
-import statistics from '../../assets/vectors/chart.png'
+import statistics from '../../assets/vectors/Chart.svg'
 import home from '../../assets/vectors/home.svg'
 const NavBar = () => {
     const location = useLocation();
@@ -71,17 +71,17 @@ const NavBar = () => {
       <AppShell.Navbar py="md" pr='md' w={{base:'60%',sm:'20%'}}>
       <Stack gap={'lg'} mt={20} >
         {/* <Flex gap={10} justify={'space-between'}> */}
-        <Text dir="ltr"  display={'flex'}  c='#37a8ef' fz={22} ta='right'
+        <Text  dir="ltr"  display={'flex'}  c='#37a8ef' fz={22} ta='right'
                 onClick={() => handleButtonClick('home')}
-                className={`${activeButton === 'home' ? nav.activeDrawer : ''}`} style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+                className={`${nav.texts} ${activeButton === 'home' ? nav.activeDrawer : ''}`} style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
                     الرئيسية
-                    <Image src={home} w={27} h={25} ml={5}/>
+                    <Image className={nav.img} src={home} w={27} h={25} ml={5}/>
                     </Text>
                 <Text c='#37a8ef' fz={22} dir="ltr"  display={'flex'} 
-                onClick={() => handleButtonClick('statistics')}  ta='right' className={`${activeButton === 'statistics' ? nav.activeDrawer : ''}`} 
+                onClick={() => handleButtonClick('statistics')}  ta='right' className={` ${nav.texts} ${activeButton === 'statistics' ? nav.activeDrawer : ''}`} 
                 style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
                     الاحصائيات
-                    <Image src={statistics} w={20} h={20} ml={5}/>
+                    <Image  className={nav.img} src={statistics} w={25} h={25} ml={5}/>
                     </Text>
            </Stack>
       </AppShell.Navbar>

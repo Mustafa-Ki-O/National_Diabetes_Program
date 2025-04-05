@@ -2,13 +2,17 @@ import { useState ,useEffect} from "react";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm ,yupResolver } from "@mantine/form";
 import * as yup from "yup";
+import { notifications } from "@mantine/notifications";
 import DeleteProfileModal from "./DeleteProfileModal";
 import profileLogo from '../../../assets/vectors/admin.svg'
-import { Grid, Skeleton, TextInput,Image, Select,Button } from "@mantine/core";
+import logout from '../../../assets/vectors/Logout.svg'
+
+import { Grid, Skeleton, TextInput,Image, Select,Button, Tooltip } from "@mantine/core";
 import useUpdateProfile from "../../../useMutation/Admin/useUpdateProfile";
+import { useNavigate } from "react-router";
 
 const CenterProfile = ({profile,setProfile,setProgress}) => {
-  
+  const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
   const {updateProfile,isPending} = useUpdateProfile(setProfile)
   const [isFormChanged, setIsFormChanged] = useState(false);
@@ -104,6 +108,17 @@ const CenterProfile = ({profile,setProfile,setProgress}) => {
             setProgress(isPending ); 
             
         }, [isPending]);
+
+        const handleLogOut = ()=>{
+          navigate('/National_Diabetes_Program/')
+          localStorage.clear();
+          notifications.show({
+                    title: 'تم تسجيل الخروج بنجاح',
+                    autoClose: 3000,
+                    color:'#00ff0050'
+                  });
+        }
+
 return(
 <>
 <DeleteProfileModal 
@@ -114,7 +129,11 @@ return(
     setProgress={setProgress}
 />
 <form style={{ width: "100%" }} onChange={()=>setIsFormChanged(true)} onSubmit={form.onSubmit(handleSubmit)}>
-    <Grid gutter={10} justify="center" align="center" w={{base:'100%',sm:'60%'}} m={'auto'} >    
+    <Grid gutter={10} justify="center" align="center" w={{base:'100%',sm:'60%'}} m={'auto'} pos={'relative'} > 
+      <Tooltip label='تسجيل الخروج'>
+        <Image src={logout} w={30} pos={'absolute'} left={1} top={2} onClick={handleLogOut} style={{cursor:'pointer'}}/> 
+      </Tooltip>
+        
     <Grid.Col span={12}>
     <Image m={'auto'} mb={20} src={profileLogo} w={100} style={{cursor:'pointer',border:'1px solid #00000080',borderRadius:'50%'}} p={5}/>
     </Grid.Col>
