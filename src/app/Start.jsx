@@ -1,4 +1,4 @@
-import img from '../assets/images/logo.svg'
+import img from '../assets/images/ribbon.svg'
 import modules from '../assets/css/start.module.css'
 import { Image } from '@mantine/core'
 import { Container,Flex,Box,Title } from '@mantine/core'
@@ -21,7 +21,7 @@ const Start = () => {
                      <Image
                         bg='#F9FAFC'
                         className={modules.img}
-                        miw={{base:120 ,md:180}}
+                        miw={{base:80 ,md:130}}
                         alt="diabetes-Logo" 
                         src={img} 
                     />

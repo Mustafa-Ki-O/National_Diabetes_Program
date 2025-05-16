@@ -7,7 +7,7 @@ import useFetchPatients from "../useMutation/Admin/useFetchPatients";
 import Search from "../components/Home/Admin/search";
 import search from'../assets/vectors/search.png'
 import home from '../assets/css/home.module.css'
-const Home = () => {
+const PatientMangement = () => {
   
   const userData = localStorage.getItem('user');
   const user = useMemo(() => userData ? JSON.parse(userData) : null, [userData]);
@@ -18,9 +18,7 @@ const Home = () => {
   const {fetchPatients,isPending} = useFetchPatients(setPatients);
   const [searchedPatients,setSearchedPatients] = useState([])
   const [ sugarType,setSugarType] = useState()
-  const [orderAge,setOrderAge] = useState()
   const [orderNames,setOrderNames] = useState()
-  // const [isSubmitted, setIsSubmitted] = useState(false);
  
   useEffect(()=>{
     fetchPatients()
@@ -36,9 +34,6 @@ useEffect(()=>{
   },600);
 },[isPending])
 
-const handleChangeAge = (value) =>{
-  setOrderAge(value)
-}
 
 const handleChangeType = (value) =>{
   if(value!==null && value !==undefined){
@@ -73,61 +68,16 @@ const handleChangeName = (value) =>{
   }
 }
 
-const getMostCommonSugarType = () => {
-  if (patients.length === 0) return null;
-
-  const completedPatients = patients.filter(patient => patient.isCompleted);
-
-  if (completedPatients.length === 0) return 'لم يتم التحقق من المرضى !';
-
-  const sugarCounts = completedPatients.reduce((acc, patient) => {
-    const type = patient.sugarType; 
-    if (type) { 
-      acc[type] = (acc[type] || 0) + 1;
-    }
-    return acc;
-  }, {});
-
-  const mostCommon = Object.entries(sugarCounts).reduce(
-    (max, [type, count]) => count > max.count ? { type, count } : max,
-    { type: '', count: 0 }
-  );
-
-  return mostCommon.type || 'لم يتم تحديد نوع';
-};
-
-const mostCommonSugarType = getMostCommonSugarType();
-
-console.log(mostCommonSugarType)
-const num = patients.length -1;
     return (
 
         <>
         {progress && <Progress/>}
-        {/* mr={{base:'0',sm:'20%'}} */}
         <Container p={{base:0,md:'lg'}}    fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
          {user?.role === 'center' ?(
             <>
             {patients.length !==0 ? (
             <Grid justify="end"  gutter={20} gap={20} px={'lg'}  >  
-            <Grid.Col mx={10} bg={{base:'#fff',md:'transparent'}} span={{ lg: 3, md: 3, sm: 6, xs: 12 }} style={{borderRadius:10}}  align='end'>
-                <Title size='xl' mb={20}>
-                  عدد المرضى
-                </Title>
-                <Text size="md">
-                {num > 10 ? 'مريض' : 'مرضى'} {  num} 
-                </Text>
-            </Grid.Col>
-            
-            <Grid.Col mx={10} bg={{base:'#fff',md:'transparent'}} style={{borderRadius:10}} span={{ lg: 3, md: 3, sm: 6, xs: 12 }} align='end' mr={{base:0,md:50}}>
-            <Title size='xl' mb={20}>
-                السكري الأكثر شيوعا
-            </Title>
-                <Text size="md" >
-                {mostCommonSugarType || 'لا توجد بيانات'}
-                </Text>
-            </Grid.Col>
-            
+   
             <Grid.Col className={home.grid} align='end' span={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
               <Flex justify='end' gap={10}>
               <Image src={search} mb={10} w={30} className={home.search}/>
@@ -142,19 +92,7 @@ const num = patients.length -1;
               </Popover.Target>
                <Popover.Dropdown>
                  <Stack gap={20}>
-                  {/* <Flex justify='end' align='center' gap={20}>
-                   <Select 
-                   w='45%'
-                   placeholder='أكبر/أصغر'
-                   data={[{value:'older',label:'الأكبر سناً'},{value:'newer',label:'الاصغر سناً'}]}
-                   onChange={handleChangeAge}
-                   value={orderAge ?orderAge : null}
-                   allowDeselect
-                   variant="unstyled"
-                   comboboxProps={{  transitionProps: { transition: 'pop', duration: 200 } ,dropdownPadding:10,shadow:'sm'}}
-                   />
-                   <Text size="sm">العمر</Text>
-                  </Flex> */}
+               
                   <Flex  justify='end' align='center'>
                     <Select
                     w='50%'
@@ -196,9 +134,6 @@ const num = patients.length -1;
             
             </Grid>
             ):(<></>)}
-             {/* <Text size="lg" fw={700} mb={10}>
-               هناك ما يزيد عن {num} {num > 10 ? 'مريض' : 'مرضى'} ,يمكنك البحث هنا
-             </Text> */}
             
             <PatientsCards  setPatients={setPatients}  patients={searchedPatients} setProgress={setProgress}/>
             </>
@@ -212,4 +147,4 @@ const num = patients.length -1;
         </>
     )
 }
-export default Home;
+export default PatientMangement;

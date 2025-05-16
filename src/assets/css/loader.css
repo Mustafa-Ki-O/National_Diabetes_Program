@@ -16,11 +16,11 @@ body{
     }
     
 .loader {
-    width: 100px;
+    width: 85px;
     height: 40px;
     --g: radial-gradient(farthest-side,#0000 calc(95% - 3px),#37a8ef calc(100% - 3px) 98%,#0000 101%) no-repeat;
     background: var(--g), var(--g), var(--g);
-    background-size: 30px 30px;
+    background-size: 25px 25px;
     animation: l9 1s infinite alternate;
   }
   @keyframes l9 {

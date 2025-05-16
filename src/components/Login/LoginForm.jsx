@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor,Loader} from "@mantine/core";
+import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor,Loader, Text} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 // import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
@@ -57,8 +57,8 @@ const LoginForm = ({setProgress}) => {
     <>
       <Container w='100%' fluid >
         <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmite)} >
-          <Grid gutter="sm" justify="center" mt={20} mb={20} align="center"  dir="rtl"  >
-            <GridCol span={12}>
+          <Grid gutter="sm" justify="center" mt={10} mb={20} align="center"  dir="rtl"  >
+            <Grid.Col span={12}>
               <TextInput
                 size="md"
                 radius={10}
@@ -68,8 +68,8 @@ const LoginForm = ({setProgress}) => {
                 {...form.getInputProps("email")}
                 // rightSection={icon}
               />
-            </GridCol>
-            <GridCol span={12}>
+            </Grid.Col>
+            <Grid.Col span={12}>
               <PasswordInput
                 size="md"
                 radius={10}
@@ -78,33 +78,10 @@ const LoginForm = ({setProgress}) => {
                 key={form.key("password")}
                 {...form.getInputProps("password")}
               />
-            </GridCol>
-          </Grid>
-          {/* <Flex justify="flex-end" my={10}>
-            <Link
-              to="/Bug_Bounty_Syria/resetpassword"
-              style={{
-                textDecoration: "underline",
-                color: "black",
-                fontSize: "13px",
-              }}
-            >
-              "اعادة تعيين كلمة المرور"
-            </Link>
-          </Flex> */}
-          <Flex visibleFrom="md"  gap="1.25rem" w="100%" justify="space-between" mb={10}>
-            <Button
-              size="md"
-              radius={10}
-              variant="outline"
-              color="#8E8E8E"
-              mt="sm"
-              onClick={() => navigate(`/National_Diabetes_Program/register/`)}
-            >
-              انشاء حساب
-            </Button>
-            <Button
-              
+            </Grid.Col>
+            <Grid.Col span={12} mt={10}>
+              <Button
+              fullWidth
               size="md"
               radius={10}
               variant="filled"
@@ -112,45 +89,18 @@ const LoginForm = ({setProgress}) => {
               type="submit"
               mt="sm"
             >
-تسجيل الدخول
+               تسجيل الدخول
             </Button>
-          </Flex>
-{/* for mobiles screens */}
-          <Grid hiddenFrom="md" gutter={0} mb={10}>
-            <GridCol span={12}>
-              <Button
-                fullWidth
-                size="md"
-                radius={10}
-                variant="filled"
-                color="#37A9EF"
-                type="submit"
-                mt="sm"
-              >
-                 {isPending ? (
-    <Loader color="white" size="sm" type="dots" />
-  ) : (
-    'تسجيل الدخول'
-  )}
-              </Button>
-            </GridCol>
-            <GridCol span={12}>
-              <Button
-                size="md"
-                fullWidth
-                radius={10}
-                variant="outline"
-                color="#8e8e8e"
-                mt="sm"
-                onClick={() => navigate(`/National_Diabetes_Program/register/`)}
-              >
-                انشاء حساب
-              </Button>
-            </GridCol>
+            </Grid.Col>
+            <Grid.Col mt={20} span={12} >
+              <Text size="md" ta={'center'}> لاتملك حساب ؟ 
+                <Anchor  inherit fw={700} td='underline' mx={10} onClick={() => navigate(`/National_Diabetes_Program/register/`)}>
+                  إنشاء حساب جديد
+                </Anchor>
+              </Text>
+            </Grid.Col>
           </Grid>
-          {/* ---- */}
-          
-          
+ 
         </form>
       </Container>
     </>

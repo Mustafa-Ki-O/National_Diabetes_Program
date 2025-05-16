@@ -2,7 +2,7 @@ import { createBrowserRouter,Outlet } from "react-router";
 import NavBar from "../components/general/NavBar";
 import Login from "../app/Auth/Login";
 import Register from "../app/Auth/Register";
-import Home from "../app/Home";
+import PatientMangement from "../app/PatientMangement";
 import RegAdmin from "../app/Auth/RegAdmin";
 import PatientInfo from "../app/Admin/PatientInfo";
 import Statistics from "../app/Admin/Statistics";
@@ -10,6 +10,9 @@ import VerficationEmail from "../app/Auth/VerficationEmail";
 import Profile from "../app/Admin/Profile";
 import { Container } from "@mantine/core";
 import { useLocation } from "react-router";
+import CareCenter from "../app/Admin/CareCenter";
+import Home from "../app/Admin/Home";
+import MedicinesMangemet from "../app/Admin/MedicinesMangemet";
 
 
 const MainLayout = () => {
@@ -65,12 +68,24 @@ const route = createBrowserRouter([
               element:<Statistics/>
             },
             {
+              path:'care',
+              element:<CareCenter/>
+            },
+            {
               path:'verifyEmail',
               element:<VerficationEmail/>
             },
             {
               path:'centerProfile',
               element:<Profile/>
+            },
+            {
+              path:'patientMangement',
+              element:<PatientMangement/>
+            },
+            {
+              path:'medicinesMangemet',
+              element:<MedicinesMangemet/>
             }
           ]
     }

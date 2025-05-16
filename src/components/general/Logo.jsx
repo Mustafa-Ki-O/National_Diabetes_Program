@@ -1,5 +1,5 @@
 import { Flex,Box,Image,Title } from "@mantine/core"
-import img from '../../assets/images/logo.svg';
+import img from '../../assets/images/ribbon.svg';
 
 
 const Logo = () => {
@@ -15,7 +15,7 @@ const Logo = () => {
                          للسكري
                        </Title>
                      </Box>
-                     <Image bg='#F9FAFC' src={img} h='auto'  w={80} alt="diabetes-Logo" />
+                     <Image bg='#F9FAFC' src={img} h='auto'  miw={50} alt="diabetes-Logo" />
                   </Flex>
         </>
     )

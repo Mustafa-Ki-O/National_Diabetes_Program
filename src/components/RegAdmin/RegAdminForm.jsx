@@ -155,6 +155,7 @@ const RegAdminForm = ({setProgress}) =>{
               <TextInput
                 size="md"
                 radius={10}
+                label='%Y4&F4@VAW&T2QLYD44M8Z1Y%'
                 placeholder="أدخل الرمز السري*"
                 rightSection={<img src={code} width="20px" />}
                 key={form.key("centerKey")}
