@@ -1,4 +1,4 @@
-import { AppShell, Burger, Flex,Group, Image, Stack, Text } from "@mantine/core";
+import { AppShell, Box, Burger, Flex,Group, Image, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
 import logo from '../../assets/images/NDBLogo.svg';
@@ -14,6 +14,7 @@ import heart from '../../assets/vectors/heart.svg'
 import logout from '../../assets/vectors/Logout1.svg'
 import patMang from '../../assets/vectors/Treat.svg'
 import drugs from '../../assets/vectors/Drugs.svg'
+import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
 const NavBar = () => {
@@ -84,7 +85,7 @@ const NavBar = () => {
        </Flex>
       </AppShell.Header>
       <AppShell.Navbar bg={'#F9FAFC'} py="md" pr='0px' w={{base:'60%',sm:'20%'}}>
-      <Stack gap={'sm'} mt={20} px={5} >
+      <Stack gap={'sm'} mt={20} px={5}  >
         {/* <Flex gap={10} justify={'space-between'}> */}
                <Text  p={10} dir="ltr"  display={'flex'}  c='#121212'  fz={16} fw={600} ta='right'
                     onClick={() => handleButtonClick('home')}
@@ -117,12 +118,21 @@ const NavBar = () => {
                    برامج الرعاية
                     <Image  className={nav.img} src={heart} w={25} h={25} ml={5} />
                 </Text>
+                <Stack p={0} mt={'50%'}>
+                    <div style={{width:'100%',height:2,backgroundColor:'#00000030'}}></div>
+                <Text p={10} c='#121212' fz={16} fw={600}  dir="ltr"  display={'flex'} 
+                onClick={() => handleButtonClick('centerProfile')}  ta='right' className={` ${nav.hovered}  ${activeButton === 'centerProfile' ? nav.activeDrawer : ''}`} 
+                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+                    إعدادات الحساب
+                    <Image  className={nav.img} src={settings} w={25} h={25} ml={5} />
+                </Text>
                  <Text p={10} c='#121212' fz={16} fw={600}  dir="ltr"  display={'flex'} 
                 onClick={() => handleButtonClick('logOut')}  ta='right' className={` ${nav.hovered}  ${activeButton === 'logOut' ? nav.activeDrawer : ''}`} 
                 style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
                    تسجيل الخروج
                     <Image  className={nav.img} src={logout} w={25} h={25} ml={5} />
                 </Text>
+                </Stack>
            </Stack>
       </AppShell.Navbar>
     </AppShell>    

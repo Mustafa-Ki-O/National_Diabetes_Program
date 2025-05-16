@@ -6,17 +6,18 @@ import { notifications } from "@mantine/notifications";
 import DeleteProfileModal from "./DeleteProfileModal";
 import profileLogo from '../../../assets/vectors/admin.svg'
 import logout from '../../../assets/vectors/Logout.svg'
-
-import { Grid, Skeleton, TextInput,Image, Select,Button, Tooltip } from "@mantine/core";
+import nav from '../../../assets/css/nav.module.css';
+import { Grid, Skeleton, TextInput,Image, Select,Button, Tooltip,Text, Flex } from "@mantine/core";
 import useUpdateProfile from "../../../useMutation/Admin/useUpdateProfile";
 import { useNavigate } from "react-router";
+import LogOutModal from "./LogOutModal";
 
 const CenterProfile = ({profile,setProfile,setProgress}) => {
   const navigate = useNavigate();
   const [opened, { open, close }] = useDisclosure(false);
   const {updateProfile,isPending} = useUpdateProfile(setProfile)
   const [isFormChanged, setIsFormChanged] = useState(false);
-        
+  const [openedModal, { open:openLogout, close:closeLogout }] = useDisclosure(false);
   
   const names =[
           { value: "دمشق", label: "دمشق" },
@@ -121,6 +122,7 @@ const CenterProfile = ({profile,setProfile,setProgress}) => {
 
 return(
 <>
+<LogOutModal opened={openedModal} close={closeLogout}/>
 <DeleteProfileModal 
     opened={opened} 
     close={close}
@@ -129,40 +131,24 @@ return(
     setProgress={setProgress}
 />
 <form style={{ width: "100%" }} onChange={()=>setIsFormChanged(true)} onSubmit={form.onSubmit(handleSubmit)}>
-    <Grid gutter={10} justify="center" align="center" w={{base:'100%',sm:'60%'}} m={'auto'} pos={'relative'} > 
-      <Tooltip label='تسجيل الخروج'>
+    <Grid gutter={40} justify="center" align="center" w={{base:'100%',sm:'90%'}} m={'auto'} pos={'relative'} > 
+      {/* <Tooltip label='تسجيل الخروج'>
         <Image src={logout} w={30} pos={'absolute'} left={1} top={2} onClick={handleLogOut} style={{cursor:'pointer'}}/> 
-      </Tooltip>
-        
-    <Grid.Col span={12}>
-    <Image m={'auto'} mb={20} src={profileLogo} w={100} style={{cursor:'pointer',border:'1px solid #00000080',borderRadius:'50%'}} p={5}/>
-    </Grid.Col>
-    <Grid.Col span={12} >
+      </Tooltip> */}
+  <Grid.Col span={12}>
+    <Text  ta={'right'} p={5} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+      معلومات عن الحساب
+    </Text>
+  </Grid.Col>
+      <Grid.Col span={{base:12,sm:6}}   >
       <TextInput 
-      dir="rtl"
-      label="اسم المركز"
-      variant="filled"
-      placeholder="اسم المركز"
-      size="md"
-      radius={10}
-      key={form.key("centerName")}
-      {...form.getInputProps("centerName")}
-      styles={{
-        label: {
-          textAlign: 'right',
-          marginBottom:5,
-          width: '98%',
-        }
-      }}
-      />
-      </Grid.Col>
-      <Grid.Col span={12} >
-      <TextInput 
+      h={'auto'}
       dir="rtl"
       label="ايميل المركز"
-      variant="filled"
+      variant="unstyled"
       placeholder="ايميل المركز"
-      size="md"
+      size="28px"
+        fw={600}
       radius={10}
       key={form.key("centerEmail")}
       {...form.getInputProps("centerEmail")}
@@ -170,18 +156,43 @@ return(
         label: {
           textAlign: 'right',
           marginBottom:5,
-          width: '98%',
+           width: '100%',
+           fontSize:'18px'
         }
       }}
       />
     </Grid.Col>
-    <Grid.Col span={12} >
+    <Grid.Col span={{base:12,sm:6}} pr={{base:0,sm:30}} >
+      <TextInput 
+      h={'auto'}
+      dir="rtl"
+      label="اسم المركز"
+      variant="unstyled"
+      placeholder="اسم المركز"
+      size="28px"
+      radius={10}
+      fw={600}
+      key={form.key("centerName")}
+      {...form.getInputProps("centerName")}
+      styles={{
+        label: {
+          textAlign: 'right',
+          marginBottom:5,
+          width: '100%',
+          fontSize:'18px'
+        }
+      }}
+      />
+      </Grid.Col>
+
+    <Grid.Col span={{base:12,sm:12}}   pr={{base:0,sm:30}} >
       <Select
-      // dir="rtl"
+      h={'auto'}
       label="موقع المركز"
-      variant="filled"
+      variant="unstyled"
       placeholder="موقع المركز"
-      size="md"
+      size="28px"
+        fw={600}
       data={cities}
       onSelect={()=>setIsFormChanged(true)}
       radius={10}
@@ -191,45 +202,17 @@ return(
         label: {
           textAlign: 'right',
           marginBottom:5,
-          width: '98%',
+           width: '100%',
+           fontSize:'18px'
         },
       }}
       />
+             
+              
     </Grid.Col>
-    <Grid.Col span={12} mb={15}>
-      <TextInput
-      dir="rtl"
-      disabled
-      label="عدد المرضى"
-      variant="filled"
-      size="md"
-      radius={10}
-      key={form.key("patientNumber")}
-      {...form.getInputProps("patientNumber")}
-      styles={{
-        label: {
-          textAlign: 'right',
-          marginBottom:5,
-          width: '98%',
-        },
-      }}
-      />
-    </Grid.Col>
-    <Grid.Col span={6}>
-              <Button 
-                fullWidth 
-                radius={10} 
-                size="md" 
-                onClick={open}
-                variant="light" 
-                color="rgb(223, 47, 25)"
-              >
-                حذف الحساب
-              </Button>
-              </Grid.Col>
-    <Grid.Col span={6}>
-              <Button 
-                fullWidth 
+<Flex w={'95%'} justify={'start'}>
+  <Button 
+  miw={200}
                 radius={10} 
                 size="md" 
                 type="submit" 
@@ -239,8 +222,95 @@ return(
                 disabled={!isFormChanged||isPending}
               >
                 {isPending ? 'جاري الحفظ...' : 'حفظ التعديلات'}
-              </Button>
-              </Grid.Col>
+          </Button>
+</Flex>
+
+    <Grid.Col span={12}>
+      <Text  ta={'right'} p={5} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+        معلومات احصائية
+      </Text>
+    </Grid.Col>
+    <Grid.Col span={6} mb={15}  >
+      <TextInput
+      h={'auto'}
+      dir="rtl"
+      readOnly
+      label=" عدد المرضى المسجلين"
+      variant="unstyled"
+      size="28px"
+        fw={600}
+      radius={10}
+      key={form.key("patientNumber")}
+      {...form.getInputProps("patientNumber")}
+      styles={{
+        label: {
+          textAlign: 'right',
+          marginBottom:5,
+          width: '100%',
+          fontSize:'18px'
+        },
+      }}
+      />
+    </Grid.Col>
+      <Grid.Col span={6} mb={15 } pr={{base:0,sm:30}}>
+      <TextInput
+      h={'auto'}
+      dir="rtl"
+      readOnly
+      label="عدد المرضى المسجلين لهذا الشهر"
+      variant="unstyled"
+      size="28px"
+        fw={600}
+      radius={10}
+      key={form.key("patientNumber")}
+      {...form.getInputProps("patientNumber")}
+      styles={{
+        label: {
+          textAlign: 'right',
+          marginBottom:5,
+          width: '100%',
+          fontSize:'18px'
+        },
+      }}
+      />
+    </Grid.Col>
+       <Grid.Col span={12} mb={15} pr={{base:0,sm:30}}>
+      <TextInput
+      h={'auto'}
+      dir="rtl"
+      readOnly
+      label="عدد الجرعات المتوفرة"
+      variant="unstyled"
+      size="28px"
+        fw={600}
+      radius={10}
+      key={form.key("patientNumber")}
+      {...form.getInputProps("patientNumber")}
+      styles={{
+        label: {
+          textAlign: 'right',
+          marginBottom:5,
+          width: '100%',
+          fontSize:'18px'
+        },
+      }}
+      />
+    </Grid.Col>
+      <Grid.Col span={12}>
+      <Text  ta={'right'} p={5} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+        ادارة الحساب
+      </Text>
+    </Grid.Col>
+    <Grid.Col  span={12} mb={15} pr={{base:0,sm:20}}>
+      <Text className={nav.hovered} mb={20} p={10} ta={'end'} onClick={open} fz={18} style={{cursor:'pointer'}}>
+              حذف الحساب
+      </Text>
+        <Text className={nav.hovered} ta={'end'} p={10} onClick={openLogout} fz={18} style={{cursor:'pointer'}}>
+              تسجيل الخروج
+         </Text>
+    </Grid.Col>
+
+
 
     </Grid>
     </form>
