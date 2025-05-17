@@ -72,13 +72,13 @@ const handleChangeName = (value) =>{
 
         <>
         {progress && <Progress/>}
-        <Container p={{base:0,md:'lg'}}    fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
+        <Container p={{base:0,md:'lg'}} fluid  pb={60} mih='85vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
          {user?.role === 'center' ?(
             <>
             {patients.length !==0 ? (
             <Grid justify="end"  gutter={20} gap={20} px={'lg'}  >  
    
-            <Grid.Col className={home.grid} align='end' span={{ lg: 5, md: 5, sm: 12, xs: 12 }}>
+            <Grid.Col className={home.grid} align='end' span={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
               <Flex justify='end' gap={10}>
               <Image src={search} mb={10} w={30} className={home.search}/>
                  <Text size="lg" fw={700} mb={10}  >
@@ -93,7 +93,7 @@ const handleChangeName = (value) =>{
                <Popover.Dropdown>
                  <Stack gap={20}>
                
-                  <Flex  justify='end' align='center'>
+                  <Flex gap={20}  justify='space-between' align='center'>
                     <Select
                     w='50%'
                     placeholder="حدد النوع"
@@ -108,7 +108,7 @@ const handleChangeName = (value) =>{
                    />
                    <Text size="sm">نوع السكري</Text>
                   </Flex>
-                  <Flex  justify='end' align='center'>
+                  <Flex gap={20} justify='space-between' align='center'>
                   <Select
                    w='50%'
                    placeholder="تنازلي/تصاعدي"

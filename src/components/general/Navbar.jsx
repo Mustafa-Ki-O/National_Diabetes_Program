@@ -85,56 +85,64 @@ const NavBar = () => {
        </Flex>
       </AppShell.Header>
       <AppShell.Navbar bg={'#F9FAFC'} py="md" pr='0px' w={{base:'60%',sm:'20%'}}>
-      <Stack gap={'sm'} mt={20} px={5}  >
-        {/* <Flex gap={10} justify={'space-between'}> */}
-               <Text  p={10} dir="ltr"  display={'flex'}  c='#121212'  fz={16} fw={600} ta='right'
-                    onClick={() => handleButtonClick('home')}
-                     className={` ${nav.hovered}  ${activeButton === 'home' ? nav.activeDrawer : ''}`} style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                           الرئيسية
-                    <Image className={nav.img} src={home} w={27} h={25} ml={5} />
-                </Text>
-                <Text p={10} c='#121212' fz={16} fw={600}  dir="ltr"  display={'flex'} 
-                onClick={() => handleButtonClick('patientMangement')}  ta='right' className={` ${nav.hovered}   ${activeButton === 'patientMangement' ? nav.activeDrawer : ''}`} 
-                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                   ادارة المرضى
-                    <Image  className={nav.img} src={patMang} w={25} h={25} ml={5} />
-                </Text>
-                
-                 <Text p={10} c='#121212'  dir="ltr"  fz={16} fw={600}  display={'flex'} 
-                onClick={() => handleButtonClick('medicinesMangemet')}  ta='right' className={` ${nav.hovered}   ${activeButton === 'medicinesMangemet' ? nav.activeDrawer : ''}`} 
-                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                    إدارة الأدوية
-                    <Image  className={nav.img} src={drugs} w={25} h={25} ml={5} />
-                </Text>
-                <Text p={10} c='#121212'  dir="ltr"  fz={16} fw={600}  display={'flex'} 
-                onClick={() => handleButtonClick('statistics')}  ta='right' className={` ${nav.hovered}   ${activeButton === 'statistics' ? nav.activeDrawer : ''}`} 
-                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                    الاحصائيات
-                    <Image  className={nav.img} src={statistics} w={25} h={25} ml={5} />
-                </Text>
-                <Text p={10} c='#121212' fz={16} fw={600}  dir="ltr"  display={'flex'} 
-                onClick={() => handleButtonClick('care')}  ta='right' className={` ${nav.hovered}   ${activeButton === 'care' ? nav.activeDrawer : ''}`} 
-                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                   برامج الرعاية
-                    <Image  className={nav.img} src={heart} w={25} h={25} ml={5} />
-                </Text>
-                <Stack p={0} mt={'50%'}>
-                    <div style={{width:'100%',height:2,backgroundColor:'#00000030'}}></div>
-                <Text p={10} c='#121212' fz={16} fw={600}  dir="ltr"  display={'flex'} 
-                onClick={() => handleButtonClick('centerProfile')}  ta='right' className={` ${nav.hovered}  ${activeButton === 'centerProfile' ? nav.activeDrawer : ''}`} 
-                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                    إعدادات الحساب
-                    <Image  className={nav.img} src={settings} w={25} h={25} ml={5} />
-                </Text>
-                 <Text p={10} c='#121212' fz={16} fw={600}  dir="ltr"  display={'flex'} 
-                onClick={() => handleButtonClick('logOut')}  ta='right' className={` ${nav.hovered}  ${activeButton === 'logOut' ? nav.activeDrawer : ''}`} 
-                style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-                   تسجيل الخروج
-                    <Image  className={nav.img} src={logout} w={25} h={25} ml={5} />
-                </Text>
-                </Stack>
-           </Stack>
-      </AppShell.Navbar>
+  <Stack gap={'sm'} px={5} h={'100%'} style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+    <Box mt={'1.5rem'} display={'flex'}  style={{flexDirection:'column',gap:10}}>
+      <Text p={10} dir="ltr" display={'flex'} c='#121212' fz={16} fw={600} ta='right'
+        onClick={() => handleButtonClick('home')}
+        className={` ${nav.hovered}  ${activeButton === 'home' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        الرئيسية
+        <Image className={nav.img} src={home} w={27} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('patientMangement')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'patientMangement' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        ادارة المرضى
+        <Image className={nav.img} src={patMang} w={25} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
+        onClick={() => handleButtonClick('medicinesMangemet')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'medicinesMangemet' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        إدارة الأدوية
+        <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
+        onClick={() => handleButtonClick('statistics')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'statistics' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        الاحصائيات
+        <Image className={nav.img} src={statistics} w={25} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('care')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'care' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        برامج الرعاية
+        <Image className={nav.img} src={heart} w={25} h={25} ml={5} />
+      </Text>
+    </Box>
+
+    <Box display={'flex'}  style={{flexDirection:'column',gap:10}}>
+      <div style={{width:'100%',height:2,backgroundColor:'#00000030'}}></div>
+      <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('centerProfile')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'centerProfile' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        إعدادات الحساب
+        <Image className={nav.img} src={settings} w={25} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('logOut')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'logOut' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        تسجيل الخروج
+        <Image className={nav.img} src={logout} w={25} h={25} ml={5} />
+      </Text>
+    </Box>
+  </Stack>
+</AppShell.Navbar>
     </AppShell>    
     </>
         ):(

@@ -130,19 +130,15 @@ return(
     id={profile.centerId}
     setProgress={setProgress}
 />
-<form style={{ width: "100%" }} onChange={()=>setIsFormChanged(true)} onSubmit={form.onSubmit(handleSubmit)}>
-    <Grid gutter={40} justify="center" align="center" w={{base:'100%',sm:'90%'}} m={'auto'} pos={'relative'} > 
-      {/* <Tooltip label='تسجيل الخروج'>
-        <Image src={logout} w={30} pos={'absolute'} left={1} top={2} onClick={handleLogOut} style={{cursor:'pointer'}}/> 
-      </Tooltip> */}
-  <Grid.Col span={12}>
-    <Text  ta={'right'} p={5} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+<form  onChange={()=>setIsFormChanged(true)} onSubmit={form.onSubmit(handleSubmit)}>
+    <Grid py={30} gutter={40} justify="flex-end" align="center" w={{base:'95%',sm:'90%'}} m={'auto'} pos={'relative'} > 
+  <Grid.Col span={12} p={10}>
+    <Text  ta={'right'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
       معلومات عن الحساب
     </Text>
   </Grid.Col>
       <Grid.Col span={{base:12,sm:6}}   >
       <TextInput 
-      h={'auto'}
       dir="rtl"
       label="ايميل المركز"
       variant="unstyled"
@@ -158,13 +154,14 @@ return(
           marginBottom:5,
            width: '100%',
            fontSize:'18px'
-        }
+        },
+        
       }}
+      style={{height:'auto !important'}}
       />
     </Grid.Col>
     <Grid.Col span={{base:12,sm:6}} pr={{base:0,sm:30}} >
       <TextInput 
-      h={'auto'}
       dir="rtl"
       label="اسم المركز"
       variant="unstyled"
@@ -182,12 +179,13 @@ return(
           fontSize:'18px'
         }
       }}
+      style={{minHeight:'2rem !important'}}
       />
       </Grid.Col>
 
-    <Grid.Col span={{base:12,sm:12}}   pr={{base:0,sm:30}} >
+    <Grid.Col span={{base:6,sm:6}}   pr={{base:0,sm:30}} >
       <Select
-      h={'auto'}
+      
       label="موقع المركز"
       variant="unstyled"
       placeholder="موقع المركز"
@@ -210,7 +208,7 @@ return(
              
               
     </Grid.Col>
-<Flex w={'95%'} justify={'start'}>
+<Flex w={'100%'} justify={'start'} ml={{base:'md',sm:'lg'}} mb={10} >
   <Button 
   miw={200}
                 radius={10} 
@@ -225,8 +223,8 @@ return(
           </Button>
 </Flex>
 
-    <Grid.Col span={12}>
-      <Text  ta={'right'} p={5} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+    <Grid.Col span={12} p={10}>
+      <Text  ta={'right'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
         معلومات احصائية
       </Text>
     </Grid.Col>
@@ -296,8 +294,8 @@ return(
       }}
       />
     </Grid.Col>
-      <Grid.Col span={12}>
-      <Text  ta={'right'} p={5} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+      <Grid.Col span={12} p={10}>
+      <Text  ta={'right'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
         ادارة الحساب
       </Text>
     </Grid.Col>

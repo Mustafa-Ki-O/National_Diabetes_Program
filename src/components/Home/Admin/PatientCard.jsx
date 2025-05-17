@@ -1,6 +1,6 @@
 import { Card, Text, Button, Group, Stack, Flex, Title ,Image} from "@mantine/core";
 import { Tooltip } from "@mantine/core";
-import deleteIcon from '../../../assets/vectors/delete.png'
+import deleteIcon from '../../../assets/vectors/delete.svg'
 import updateIcon from '../../../assets/vectors/update.png'
 import { useNavigate } from "react-router-dom";
 import DeletePatientModal from "./DeletePatientModal";
@@ -43,10 +43,6 @@ const navigate = useNavigate();
           <Text size="md" c='#000'>{name}</Text>
           <Title size='md'>الاسم</Title>
         </Flex>
-        {/* <Flex align='center' gap={10} justify='end'>
-          <Text size="md" c='#000' >{email}</Text>
-          <Title size='md' >الايميل</Title>
-        </Flex>  */}
         <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000' >{age}</Text>
           <Title size='md' >العمر</Title>
@@ -67,19 +63,18 @@ const navigate = useNavigate();
           onClick={() => navigate(`/National_Diabetes_Program/patientInfo/${id}`)}
         >
           
-          تعديل
+         سجل المراجعات
           <Image  src={updateIcon} mr={15} w={20}/>
         </Button>
         <Button
-          color="rgb(223, 47, 25)"
+          w={80}
+          color="#1e1e1e"
           variant="light"
-          fullWidth
           radius="md"
           fw={800}
           onClick={open}
         >
-          حذف
-          <Image  src={deleteIcon} mr={15} w={20}/>
+          <Image  src={deleteIcon}  w={20} />
         </Button>
       </Flex>
       </Stack>
