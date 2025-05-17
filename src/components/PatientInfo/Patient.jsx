@@ -1,4 +1,4 @@
-import { Container, Grid, Text, Flex, Anchor, Button,  TextInput, Select, Image, Checkbox, NumberInput } from "@mantine/core";
+import { Container, Grid, Text, Flex, Title, Button,  TextInput, Select, Image, Checkbox, NumberInput } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
@@ -171,6 +171,9 @@ const Patient = ({ id , setProgress}) => {
         
       </div> */}
       <form style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
+        <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+            {patient.fullName}
+         </Title>
         <Grid gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
         <Grid.Col justify='end' span={12 } mb={40}  h={20}>
           <Flex align='center' gap={10}  onClick={()=>navigate('/National_Diabetes_Program/home')} style={{cursor:'pointer'}}>  

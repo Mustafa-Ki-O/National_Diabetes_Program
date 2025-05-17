@@ -1,6 +1,7 @@
 import { Card, Text, Button, Group, Stack, Flex, Title ,Image} from "@mantine/core";
 import { Tooltip } from "@mantine/core";
 import deleteIcon from '../../../assets/vectors/delete.svg'
+import accountIcon from '../../../assets/vectors/account.svg'
 import updateIcon from '../../../assets/vectors/update.png'
 import { useNavigate } from "react-router-dom";
 import DeletePatientModal from "./DeletePatientModal";
@@ -32,27 +33,29 @@ const navigate = useNavigate();
       radius="md"
       bg="#fff"
       withBorder
-      bd='none'
+       style={{cursor:'pointer'}}
     >  
-      <Stack mih={200} justify="space-between">    
+      <Stack mih={200} justify="space-between">  
+          <Flex align='center' gap={10} justify='end'>
+          <Title size="md" c='#000'>{name}</Title>
+          {/* <Title size='md'>الاسم</Title> */}
+          <Image src={accountIcon} w={'3rem'} />
+        </Flex>  
         <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000'>{id_number}</Text>
           <Title size='md'>الرقم الوطني</Title>
         </Flex>
-        <Flex align='center' gap={10} justify='end'>
-          <Text size="md" c='#000'>{name}</Text>
-          <Title size='md'>الاسم</Title>
-        </Flex>
+
         <Flex align='center' gap={10} justify='end'>
           <Text size="md" c='#000' >{age}</Text>
           <Title size='md' >العمر</Title>
         </Flex> 
-        {sugarType !== null ?(
+        {/* {sugarType !== null ?( */}
         <Flex align='center' gap={10} justify='end'>
-          <Text size="md" c='#000' >{sugarType}</Text>
+          <Text size="md" c='#000' >{sugarType==null ? '-' : sugarType}</Text>
           <Title size='md' >نوع السكري</Title>
         </Flex> 
-        ):(<></>) }
+        {/* ):(<></>) } */}
         <Flex dir="rtl" gap={8} justify="end" align="end">
         <Button
           color="#37a8ef"

@@ -7,7 +7,7 @@ import DeleteProfileModal from "./DeleteProfileModal";
 import profileLogo from '../../../assets/vectors/admin.svg'
 import logout from '../../../assets/vectors/Logout.svg'
 import nav from '../../../assets/css/nav.module.css';
-import { Grid, Skeleton, TextInput,Image, Select,Button, Tooltip,Text, Flex } from "@mantine/core";
+import { Grid, Skeleton, TextInput,Image, Select,Button, Title,Text, Flex } from "@mantine/core";
 import useUpdateProfile from "../../../useMutation/Admin/useUpdateProfile";
 import { useNavigate } from "react-router";
 import LogOutModal from "./LogOutModal";
@@ -131,7 +131,10 @@ return(
     setProgress={setProgress}
 />
 <form  onChange={()=>setIsFormChanged(true)} onSubmit={form.onSubmit(handleSubmit)}>
-    <Grid py={30} gutter={40} justify="flex-end" align="center" w={{base:'95%',sm:'90%'}} m={'auto'} pos={'relative'} > 
+    <Grid py={30} gutter={40} justify="flex-end" align="center" w={{base:'95%',sm:'94%'}} m={'auto'} pos={'relative'} > 
+  <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+                اعدادات الحساب
+   </Title>
   <Grid.Col span={12} p={10}>
     <Text  ta={'right'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
       معلومات عن الحساب

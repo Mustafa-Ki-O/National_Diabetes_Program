@@ -1,4 +1,4 @@
-import { Container } from "@mantine/core"
+import { Container,Title } from "@mantine/core"
 import { useState,useEffect } from "react";
 import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
 import Diagrams from "../../components/Home/Admin/Diagrams";
@@ -29,6 +29,9 @@ useEffect(()=>{
         <>
          {progress && <Progress/>}
         <Container style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}  fluid p={20}>
+            <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+                          الاحصائيات
+                        </Title>
            <Diagrams patients={patients}/>
         </Container>
         </>

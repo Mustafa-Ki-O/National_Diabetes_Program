@@ -55,7 +55,11 @@ const num = patients.length ;
         <>
         {progress && <Progress/>}
                 <Container p={{base:0,md:'lg'}}  fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
+                 <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+                     الرئيسية
+                   </Title>
                {patients.length !==0 ? (
+                
                   <Grid justify="end"  gutter={50}  px={'lg'}  >  
                   <Grid.Col mx={10} span={12}   align='end'>
                       <Title size='xl' mb={20}>

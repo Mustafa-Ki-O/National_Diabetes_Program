@@ -62,7 +62,7 @@ const handleChangeName = (value) =>{
     })
     
     setSearchedPatients(sortedPatients);
-  }else{
+  } else{
     setSearchedPatients(patients)
     setOrderNames('')
   }
@@ -75,24 +75,26 @@ const handleChangeName = (value) =>{
         <Container p={{base:0,md:'lg'}} fluid  pb={60} mih='85vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
          {user?.role === 'center' ?(
             <>
+            <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+              إدارة المرضى
+            </Title>
             {patients.length !==0 ? (
             <Grid justify="end"  gutter={20} gap={20} px={'lg'}  >  
    
-            <Grid.Col className={home.grid} align='end' span={{ lg: 7, md: 7, sm: 12, xs: 12 }}>
-              <Flex justify='end' gap={10}>
+            <Grid.Col className={home.grid} align='end' span={{ lg: 12, md: 12, sm: 12, xs: 12 }}>
+              <Flex  justify='end' gap={10}>
               <Image src={search} mb={10} w={30} className={home.search}/>
                  <Text size="lg" fw={700} mb={10}  >
                     ابحث عن مريض 
                 </Text>  
               </Flex>
-              <Flex gap={3}>
+              <Flex gap={3} justify={'space-between'}>
               <Popover width={'fit-content'} position="bottom"  withArrow shadow="md">
               <Popover.Target>
-              <Button radius={10} size="md" miw={80}  variant="light" c='#37A9EF'>فرز</Button>
+              <Button radius={10} size="md" miw={{base:80,sm:'15rem'}}  variant="light" c='#37A9EF' ml={'1rem'}>فرز المرضى حسب</Button>
               </Popover.Target>
                <Popover.Dropdown>
                  <Stack gap={20}>
-               
                   <Flex gap={20}  justify='space-between' align='center'>
                     <Select
                     w='50%'
