@@ -13,30 +13,58 @@ import { useLocation } from "react-router";
 import CareCenter from "../app/Admin/CareCenter";
 import Home from "../app/Admin/Home";
 import MedicinesMangemet from "../app/Admin/MedicinesMangemet";
-
+import { useState,useEffect} from "react";
+import Start from "../app/Start";
+import useVerifyToken from "../useMutation/useVerifyToken";
 
 const MainLayout = () => {
   const location = useLocation();
-  
+  const { verify, isPending } = useVerifyToken();
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const token = user?.token;
+    if (token) {
+      verify(token);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMinTimeElapsed(true);
+    }, 3000); 
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isPending || !minTimeElapsed) {
+    return <Start />;
+  }
+
+  // 4. عرض العناصر الأساسية
+  const noContainerRoutes = [
+    '/National_Diabetes_Program/',
+    '/National_Diabetes_Program/register/',
+    '/National_Diabetes_Program/registerAdmin/',
+    '/National_Diabetes_Program/verifyEmail/'
+  ];
+
+  const isNoContainer = noContainerRoutes.includes(location.pathname);
+
   return (
     <>
-      {location.pathname !== '/National_Diabetes_Program/' 
-        && location.pathname !== '/National_Diabetes_Program/register/'
-        && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
-        && location.pathname !== '/National_Diabetes_Program/verifyEmail/'  ? (
-        <Container fluid mr={{base:'0',sm:'18%'}} p={0}>
-          <NavBar />
+      <NavBar />
+      {isNoContainer ? (
+        <Outlet />
+      ) : (
+        <Container fluid mr={{ base: '0', sm: '18%' }} p={0}>
           <Outlet />
         </Container>
-      ) : (
-        <>
-          <NavBar />
-          <Outlet />
-        </>
       )}
     </>
   );
-}
+};
 
 const route = createBrowserRouter([
     {

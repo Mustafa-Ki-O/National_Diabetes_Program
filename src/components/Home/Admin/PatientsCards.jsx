@@ -1,8 +1,16 @@
 import { Container,Grid,Text} from "@mantine/core"
 import PatientCard from "./PatientCard"
-import useFetchPatients from "../../../useMutation/Admin/useFetchPatients";
-import { useEffect,useState } from "react";
+import { addPatient } from "../../../redux/action"
+import { useDispatch } from "react-redux"
+import { useEffect } from "react"
 const PatientsCards = ({setProgress,patients,setPatients}) => {
+const dispatch = useDispatch();
+
+// useEffect(()=>{
+//   patients.forEach((patient) => {
+//     dispatch(addPatient(patient))
+//   })
+// },[patients])
 
     return(
         <>

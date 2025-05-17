@@ -4,6 +4,7 @@ import { useParams } from "react-router"
 import Patient from "../../components/PatientInfo/Patient";
 import { Container } from "@mantine/core";
 import Progress from "../../components/general/Progress";
+
 const PatientInfo = () => {
 
     const {id} = useParams();

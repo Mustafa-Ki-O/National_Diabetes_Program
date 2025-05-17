@@ -4,21 +4,25 @@ import Start from "./app/Start";
 import { useState ,useEffect} from 'react'
 import route from './router/route'
 import Circle from "./components/general/Circle";
+// import useVerifyToken from "./useMutation/useVerifyToken";
+// import { BrowserRouter } from "react-router-dom";
 function App() {
  
-  const [showStartPage, setShowStartPage] = useState(true);
+  // const [showStartPage, setShowStartPage] = useState(true);
+  // const { verify, isPending } = useVerifyToken();
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setShowStartPage(false);
-    }, 5500); 
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   const token = user?.token;
+  //   if (token) verify(token);
+  // }, []);
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, []);
+  // useEffect(() => {
+  //   setShowStartPage(isPending);
+  // }, [isPending]);
+
   console.log('hi')
-  return showStartPage ? <Start /> :(
+  return (
     <>
                 <Circle
                      w={2}

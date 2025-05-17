@@ -9,10 +9,12 @@ import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
 import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
 import backWards from '../../assets/vectors/forward.png'
 import { useNavigate } from "react-router"
-
+import { useSelector } from "react-redux";
 const Patient = ({ id , setProgress}) => {
 
-
+  const patients = useSelector(state => state.patients.patients);
+  console.log(patients)
+  const [storedPatient,setStoredPatient] = useState(null)
   const navigate=useNavigate();
   const [patient, setPatient] = useState({});
   const {fetchInfo, isPending: isPendingFetch} = useFetchPatientInfo(setPatient);
@@ -83,9 +85,19 @@ const Patient = ({ id , setProgress}) => {
   //   console.log(patient)
   // },[patient])
 
-  useEffect(()=>{
+useEffect(() => {
     fetchInfo(id);
-  },[id])
+    
+    const foundPatient = patients.find(patient => patient.id === id);
+    console.log(foundPatient)
+    if (foundPatient) {
+      setStoredPatient(foundPatient);
+      console.log(storedPatient)
+    } else {
+      console.warn(`Patient with id ${id} not found`);
+      setStoredPatient(null);
+    }
+  }, [id, patients]); 
 
   useEffect(() => {
     if (patient) {
@@ -172,7 +184,7 @@ const Patient = ({ id , setProgress}) => {
       </div> */}
       <form style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
         <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
-            {patient.fullName}
+            {storedPatient?.fullname}
          </Title>
         <Grid gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
         <Grid.Col justify='end' span={12 } mb={40}  h={20}>
