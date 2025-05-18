@@ -1,16 +1,23 @@
 import { Container,Grid,Text} from "@mantine/core"
 import PatientCard from "./PatientCard"
 import { addPatient } from "../../../redux/action"
-import { useDispatch } from "react-redux"
+import { useDispatch ,useSelector} from "react-redux"
 import { useEffect } from "react"
 const PatientsCards = ({setProgress,patients,setPatients}) => {
 const dispatch = useDispatch();
+const existingPatients = useSelector((state) => state.patients.patients);
 
-// useEffect(()=>{
-//   patients.forEach((patient) => {
-//     dispatch(addPatient(patient))
-//   })
-// },[patients])
+useEffect(()=>{
+  patients.forEach((patient) => {
+    const isPatientExist = existingPatients.some(
+      (existingPatient) => existingPatient.id == patient.id
+    )
+    if(!isPatientExist){
+       dispatch(addPatient(patient)) 
+    }
+    
+  })
+}, [patients,existingPatients,dispatch])
 
     return(
         <>

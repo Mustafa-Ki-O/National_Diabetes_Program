@@ -1,4 +1,4 @@
-import { Container, Grid, Text, Flex, Title, Button,  TextInput, Select, Image, Checkbox, NumberInput } from "@mantine/core";
+import { Container, Grid, Text, Flex, Title, Button,  TextInput, Select, Image, Checkbox, NumberInput, Group } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
@@ -8,8 +8,10 @@ import { Switch } from '@mantine/core';
 import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
 import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
 import backWards from '../../assets/vectors/forward.png'
+import accountIcon from '../../assets/vectors/account.svg'
 import { useNavigate } from "react-router"
 import { useSelector } from "react-redux";
+import dayjs from "dayjs";
 const Patient = ({ id , setProgress}) => {
 
   const patients = useSelector(state => state.patients.patients);
@@ -19,7 +21,7 @@ const Patient = ({ id , setProgress}) => {
   const [patient, setPatient] = useState({});
   const {fetchInfo, isPending: isPendingFetch} = useFetchPatientInfo(setPatient);
   const { updatePatient, isPending } =useUpdatePatientInfo(setPatient);
-  
+ 
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const schema = yup.object().shape({
@@ -80,15 +82,9 @@ const Patient = ({ id , setProgress}) => {
     validate: yupResolver(schema),
   });
 
-  // useEffect(()=>{
-  //   setPatient(info)
-  //   console.log(patient)
-  // },[patient])
-
 useEffect(() => {
-    fetchInfo(id);
-    
-    const foundPatient = patients.find(patient => patient.id === id);
+    fetchInfo(id); 
+    const foundPatient = patients.find(patient => patient.id.toString() === id.toString());
     console.log(foundPatient)
     if (foundPatient) {
       setStoredPatient(foundPatient);
@@ -99,6 +95,8 @@ useEffect(() => {
     }
   }, [id, patients]); 
 
+  console.log(patient)
+  console.log(storedPatient)
   useEffect(() => {
     if (patient) {
       form.setValues({
@@ -175,17 +173,143 @@ useEffect(() => {
   }, [isPending,isPendingFetch]);
 
 
-
-
   return (
     <Container w='100%' fluid >
-      {/* <div style={{position:'absolute',top:2,right:30,padding:5,borderRadius:'50%',border:'1px solid #37a8ef',direction:'ltr'}}>
-        
-      </div> */}
-      <form style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
-        <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
-            {storedPatient?.fullname}
+      <Grid gutter={40}  px={'lg'} mb={'3rem'} >
+        <Grid.Col span={12}>
+
+          <Flex align='center' gap={10} justify='end'>
+             <Title size="2rem" >{storedPatient?.fullname}</Title>
+            <Image src={accountIcon} w={'5rem'} /> 
+         </Flex>  
+        </Grid.Col>
+         <Grid.Col  span={12} mt={'md'}>
+          <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             الرقم الوطني
+          </Text>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            {storedPatient?.id_number}
          </Title>
+        </Grid.Col>
+         <Grid.Col  span={12} >
+          <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             تاريخ الميلاد
+          </Text>
+          <Flex justify={'end'} gap={'2.5rem'} px={'lg'} align={'center'}>
+            <Group  p={0} m={0}>
+             <Text  size={'1.5rem'} c={'#00000060'}>
+            { `${new Date().getFullYear() - new Date(storedPatient?.age).getFullYear()}` >= 10 ? 'سنة' : 'سنوات' }
+            </Text>
+             <Text size={'1.5rem'} c={'#00000060'}>
+              {new Date().getFullYear() - new Date(storedPatient?.age).getFullYear()}  
+             </Text>
+            </Group> 
+            <Title size={'1.8rem'} ta={'end'} >
+            {storedPatient?.age}
+         </Title>
+          </Flex>
+        </Grid.Col>
+          <Grid.Col  span={12} mt={'md'}>
+          <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             تاريخ التسجيل
+          </Text>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            {storedPatient?.regDate ? storedPatient?.regDate : 'DD-MM-YYYY' }
+         </Title>
+        </Grid.Col>
+          <Grid.Col  span={{base:12,sm:6}} >
+          <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             الفحص السريري
+          </Text>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            { `مكتمل في ${storedPatient?.firstVisitDate ? storedPatient?.firstVisitDate : 'DD-MM-YYYY  تاريخ اول مراجعة'}` }
+         </Title>
+        </Grid.Col>
+        <Grid.Col  span={{base:12,sm:6}} >
+          <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             نوع السكري
+          </Text>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            {storedPatient?.sugarType ? storedPatient?.sugarType : 'غير محدد' }
+         </Title>
+        </Grid.Col>
+          <Grid.Col span={12} p={10} my={'lg'}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+              المراجعات
+            </Text>
+          </Grid.Col>
+           <Grid.Col  span={12} >
+            <Flex justify={'space-between'} my={'md'} py={30}  bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
+          <Group ml={10}>
+            <Button radius={20} size="md" variant="light" color="red">
+              حذف المراجعة
+            </Button>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            DD-MM-YYYY
+          </Title>
+          </Group>
+          <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            المراجعة الأولى (الفحص السريري)
+          </Title>
+          
+          
+            </Flex>
+            <Flex justify={'space-between'} my={'md'} py={30} bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
+          
+<Group ml={10}>
+            <Button radius={20} size="md" variant="light" color="red">
+              حذف المراجعة
+            </Button>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            DD-MM-YYYY
+          </Title>
+          </Group>
+          <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            المراجعة الثانية
+         </Title>
+            </Flex>
+         <Flex justify={'space-between'} my={'md'} py={30} bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
+          <Group ml={10}>
+            <Button radius={20} size="md" variant="light" color="red">
+              حذف المراجعة
+            </Button>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            DD-MM-YYYY
+          </Title>
+          </Group>
+        <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            المراجعة الثالثة
+         </Title>
+         </Flex>
+        </Grid.Col>
+         <Grid.Col  span={12}  >
+          <Button radius={20} size="xl" variant="filled" color={'#8e8e8e'} style={{alignSelf:'end'}}>
+            اضافة مراجعة 
+          </Button>
+         </Grid.Col>
+         <Grid.Col span={12} p={10} my={'lg'}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+              معلومات التواصل
+            </Text>
+          </Grid.Col>
+           <Grid.Col  span={12} >
+          <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             الايميل
+          </Text>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            {storedPatient?.email}
+         </Title>
+        </Grid.Col>
+        <Grid.Col  span={12} mb={50}>
+         <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
+             رقم الهاتف
+          </Text>
+         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
+            {storedPatient?.phone}
+         </Title>
+        </Grid.Col>
+      </Grid>
+      <form style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
         <Grid gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
         <Grid.Col justify='end' span={12 } mb={40}  h={20}>
           <Flex align='center' gap={10}  onClick={()=>navigate('/National_Diabetes_Program/home')} style={{cursor:'pointer'}}>  

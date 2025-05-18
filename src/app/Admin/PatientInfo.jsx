@@ -11,10 +11,6 @@ const PatientInfo = () => {
     
     const [progress,setProgress] = useState(false);
 
-    useEffect(()=>{
-      console.log(progress)
-    },[progress])
-
 
     return(
         <>
