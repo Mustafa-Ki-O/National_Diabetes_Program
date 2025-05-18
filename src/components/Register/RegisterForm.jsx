@@ -11,7 +11,7 @@ import useFetchCenters from '../../useMutation/Patient/useFetchCenters';
 import phone from "../../assets/vectors/Vector3.png";
 import calendar from "../../assets/vectors/calendar.png";
 import useFetchCities from "../../useMutation/Patient/useFetchCities";
-
+import dayjs from "dayjs";
 const RegisterForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, isPending } = useRegPatient();
@@ -83,17 +83,21 @@ const RegisterForm = ({setProgress}) => {
   }
   const handleSubmit = () => {
     if (form.isValid) {
-      const values = form.getValues();
+        const values = form.getValues();
+        if (values.age) {
+        values.age = dayjs(values.age).format('DD-MM-YYYY')
+        console.log(values.age)
+      }
       console.log(values)
       const newFormData = new FormData();
       Object.keys(values).forEach((key) => {
         if (values.termsOfService === true) {
           newFormData.append(key,values[key]);
-          console.log(newFormData)
+          // console.log(newFormData)
         }
       });
       setIsSubmitted(true);
-      console.log(newFormData)
+      // console.log(newFormData)
       localStorage.setItem('patientEmail',JSON.stringify(values.email));
       register(newFormData);
     }
