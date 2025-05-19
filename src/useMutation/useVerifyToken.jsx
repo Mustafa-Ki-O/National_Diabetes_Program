@@ -8,15 +8,28 @@ const useVerifyToken = () => {
   const navigate = useNavigate();
   const { mutate: verify,  isPending } = useMutation({
     mutationFn: (token) => VerifyToken(token),
-    onSuccess: () => {
-        console.log("تم بنجاح");
-        // notifications.show({
-        //   title: 'تم تسجيل الدخول',
-        //   autoClose: 4000,
-        //   color: 'blue',
-        // })    
-      navigate("/National_Diabetes_Program/home/");
-    },
+onSuccess: () => {
+    const no = notifications.show({
+      title: 'جاري تسجيل الدخول',
+      autoClose: false,
+      radius: 'md',
+      color: 'blue',
+      loading: true,
+      withCloseButton: false,
+    });
+
+   setTimeout(() => {
+    notifications.update({
+      id: no,
+      title: 'تم تسجيل الدخول',
+      autoClose: 2000,
+      radius: 'md',
+      color: 'green',
+      loading: false,
+    });
+  }, 2000);
+    navigate("/National_Diabetes_Program/home/");
+  }, 
     onError: (err) => {
       console.log("ERROR", err);
       notifications.show({

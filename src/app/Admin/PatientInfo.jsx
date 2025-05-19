@@ -4,13 +4,15 @@ import { useParams } from "react-router"
 import Patient from "../../components/PatientInfo/Patient";
 import { Container } from "@mantine/core";
 import Progress from "../../components/general/Progress";
+import UpScroll from "../../components/general/UpScroll";
 
 const PatientInfo = () => {
-
+    UpScroll()
+    
     const {id} = useParams();
     
     const [progress,setProgress] = useState(false);
-
+    
 
     return(
         <>

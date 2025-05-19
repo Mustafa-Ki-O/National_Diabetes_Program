@@ -16,6 +16,7 @@ import MedicinesMangemet from "../app/Admin/MedicinesMangemet";
 import { useState,useEffect} from "react";
 import Start from "../app/Start";
 import useVerifyToken from "../useMutation/useVerifyToken";
+import { notifications } from "@mantine/notifications";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -28,7 +29,10 @@ const MainLayout = () => {
     if (token) {
       verify(token);
     }
+
   }, []);
+
+  
 
   useEffect(() => {
     const timer = setTimeout(() => {

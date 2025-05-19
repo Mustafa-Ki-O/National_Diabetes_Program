@@ -9,6 +9,8 @@ import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
 import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
 import backWards from '../../assets/vectors/forward.png'
 import accountIcon from '../../assets/vectors/account.svg'
+import removeIcon from '../../assets/vectors/Remove.svg'
+import addIcon from '../../assets/vectors/Add.svg'
 import { useNavigate } from "react-router"
 import { useSelector } from "react-redux";
 import dayjs from "dayjs";
@@ -238,56 +240,32 @@ useEffect(() => {
               المراجعات
             </Text>
           </Grid.Col>
+ 
            <Grid.Col  span={12} >
+             {storedPatient?.review.map((r,index)=>(
             <Flex justify={'space-between'} my={'md'} py={30}  bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
-          <Group ml={10}>
-            <Button radius={20} size="md" variant="light" color="red">
-              حذف المراجعة
+          <Group ml={20}>
+            <Button radius={20} size="سة" variant="light" color="red">
+              <Image src={removeIcon} w={25} />
             </Button>
          <Title size={'1.8rem'} ta={'end'} px={'lg'}>
-            DD-MM-YYYY
+            {r.create_At}
           </Title>
           </Group>
           <Title size={'1.8rem'} ta={'end'} px={'lg'}>
-            المراجعة الأولى (الفحص السريري)
+            {r.id == 1 ? '(المراجعة 1  (الفحص السريري' :`  ${r.id} المراجعة ` }
           </Title>
-          
-          
             </Flex>
-            <Flex justify={'space-between'} my={'md'} py={30} bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
-          
-<Group ml={10}>
-            <Button radius={20} size="md" variant="light" color="red">
-              حذف المراجعة
-            </Button>
-         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
-            DD-MM-YYYY
-          </Title>
-          </Group>
-          <Title size={'1.8rem'} ta={'end'} px={'lg'}>
-            المراجعة الثانية
-         </Title>
-            </Flex>
-         <Flex justify={'space-between'} my={'md'} py={30} bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
-          <Group ml={10}>
-            <Button radius={20} size="md" variant="light" color="red">
-              حذف المراجعة
-            </Button>
-         <Title size={'1.8rem'} ta={'end'} px={'lg'}>
-            DD-MM-YYYY
-          </Title>
-          </Group>
-        <Title size={'1.8rem'} ta={'end'} px={'lg'}>
-            المراجعة الثالثة
-         </Title>
-         </Flex>
-        </Grid.Col>
-         <Grid.Col  span={12}  >
-          <Button radius={20} size="xl" variant="filled" color={'#8e8e8e'} style={{alignSelf:'end'}}>
-            اضافة مراجعة 
+          ))}
+            
+        </Grid.Col> 
+         <Grid.Col  span={12} >
+          <Button radius={10} size="md" variant="filled" color={'#37A9EF'} style={{alignSelf:'end'}}>
+            اضافة مراجعة
+             <Image src={addIcon} w={25}  mx={10}/>
           </Button>
          </Grid.Col>
-         <Grid.Col span={12} p={10} my={'lg'}>
+         <Grid.Col span={12} p={10} my={'sm'}>
             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
               معلومات التواصل
             </Text>
@@ -309,8 +287,8 @@ useEffect(() => {
          </Title>
         </Grid.Col>
       </Grid>
-      <form style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
-        <Grid gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
+      <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
+        <Grid display={'none'} gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
         <Grid.Col justify='end' span={12 } mb={40}  h={20}>
           <Flex align='center' gap={10}  onClick={()=>navigate('/National_Diabetes_Program/home')} style={{cursor:'pointer'}}>  
             <Image className={info.back} style={{borderRadius:'50%',border:'1px solid #37a8ef'}} src={backWards} w={20} />
@@ -721,7 +699,7 @@ useEffect(() => {
           </Grid.Col>
         </Grid>
         
-        <Grid  my={15}>
+        <Grid display={'none'} my={15}>
           <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
           <Button 
             fullWidth 

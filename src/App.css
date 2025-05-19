@@ -7,15 +7,19 @@
   z-index: 3;
   background-color: #F9FAFC;
 }
-
+.mantine-focus-auto .mantine-active{
+  outline: none !important;
+}
 .mantine-Button-root{
   transition: all 0.6s;
 }
+
 .mantine-Button-root:focus {
-  outline: none;
+  outline: none !important;
 }
+
 *:focus {
-  outline: none;
+  outline: none !important;
 }
 .m_d4fb9cad, .m_d4fb9cad::before, .m_d4fb9cad::after {
   border-radius: 50px !important;
