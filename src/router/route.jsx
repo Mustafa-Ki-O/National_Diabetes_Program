@@ -17,6 +17,7 @@ import { useState,useEffect} from "react";
 import Start from "../app/Start";
 import useVerifyToken from "../useMutation/useVerifyToken";
 import { notifications } from "@mantine/notifications";
+import AddReview from "../app/Admin/AddReview";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -32,8 +33,6 @@ const MainLayout = () => {
 
   }, []);
 
-  
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setMinTimeElapsed(true);
@@ -46,7 +45,7 @@ const MainLayout = () => {
     return <Start />;
   }
 
-  // 4. عرض العناصر الأساسية
+
   const noContainerRoutes = [
     '/National_Diabetes_Program/',
     '/National_Diabetes_Program/register/',
@@ -93,7 +92,12 @@ const route = createBrowserRouter([
             },
             {
               path:'patientInfo/:id',
-              element:<PatientInfo/>
+              element:<PatientInfo/>,
+
+            },
+            {
+             path: 'patientInfo/:id/add-review',
+             element: <AddReview />,
             },
             {
               path:'statistics',

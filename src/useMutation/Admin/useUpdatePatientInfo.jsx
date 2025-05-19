@@ -6,7 +6,7 @@ const useUpdatePatientInfo = (setPatient) => {
   const mutation = useMutation({
     mutationFn: async (patientData) => {
       const response = await UpdatePatientInfo(patientData);
-      return response; // Make sure this returns the data
+      return response; 
     },
     onSuccess: (res) => {
       setPatient(res);

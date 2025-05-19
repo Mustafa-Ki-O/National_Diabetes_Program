@@ -11,11 +11,17 @@ import backWards from '../../assets/vectors/forward.png'
 import accountIcon from '../../assets/vectors/account.svg'
 import removeIcon from '../../assets/vectors/Remove.svg'
 import addIcon from '../../assets/vectors/Add.svg'
-import { useNavigate } from "react-router"
+import { useNavigate, Outlet} from "react-router"
 import { useSelector } from "react-redux";
+import { useDisclosure } from "@mantine/hooks";
 import dayjs from "dayjs";
-const Patient = ({ id , setProgress}) => {
+import DeleteReviewModal from "./DeleteReviewModal";
+import AddReviewModal from "./AddReviewModal";
 
+
+const Patient = ({ id , setProgress}) => {
+  const [opened, { open, close }] = useDisclosure(false);
+  const [openedAdd, { open:openAdd, close:closeAdd }] = useDisclosure(false);
   const patients = useSelector(state => state.patients.patients);
   console.log(patients)
   const [storedPatient,setStoredPatient] = useState(null)
@@ -23,7 +29,7 @@ const Patient = ({ id , setProgress}) => {
   const [patient, setPatient] = useState({});
   const {fetchInfo, isPending: isPendingFetch} = useFetchPatientInfo(setPatient);
   const { updatePatient, isPending } =useUpdatePatientInfo(setPatient);
- 
+  const [deleteId,setDeleteId] = useState()
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const schema = yup.object().shape({
@@ -177,13 +183,15 @@ useEffect(() => {
 
   return (
     <Container w='100%' fluid >
-      <Grid gutter={40}  px={'lg'} mb={'3rem'} >
+      <DeleteReviewModal id={deleteId} opened={opened} close={close}/>
+      <AddReviewModal name={storedPatient?.fullname} patientId={id} opened={openedAdd} close={closeAdd} />
+      <Grid gutter={40}  px={{base:0,sm:'lg'}} mb={'3rem'} >
         <Grid.Col span={12}>
 
           <Flex align='center' gap={10} justify='end'>
              <Title size="2rem" >{storedPatient?.fullname}</Title>
             <Image src={accountIcon} w={'5rem'} /> 
-         </Flex>  
+         </Flex> 
         </Grid.Col>
          <Grid.Col  span={12} mt={'md'}>
           <Text size={'1.1rem'}  ta={'end'} mb={'md'}>
@@ -243,9 +251,9 @@ useEffect(() => {
  
            <Grid.Col  span={12} >
              {storedPatient?.review.map((r,index)=>(
-            <Flex justify={'space-between'} my={'md'} py={30}  bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
+            <Flex key={index} justify={'space-between'} my={'md'} py={30}  bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
           <Group ml={20}>
-            <Button radius={20} size="سة" variant="light" color="red">
+            <Button radius={20} size="سة" variant="light" color="red" onClick={open}>
               <Image src={removeIcon} w={25} />
             </Button>
          <Title size={'1.8rem'} ta={'end'} px={'lg'}>
@@ -259,10 +267,10 @@ useEffect(() => {
           ))}
             
         </Grid.Col> 
-         <Grid.Col  span={12} >
-          <Button radius={10} size="md" variant="filled" color={'#37A9EF'} style={{alignSelf:'end'}}>
-            اضافة مراجعة
-             <Image src={addIcon} w={25}  mx={10}/>
+         <Grid.Col  span={12} ta={'end'}>
+          <Button radius={10} size="md" variant="filled" color={'#37A9EF'} style={{alignSelf:'end'}} onClick={openAdd}>
+             <Image src={addIcon} w={25}  mr={10}/>
+                        اضافة مراجعة
           </Button>
          </Grid.Col>
          <Grid.Col span={12} p={10} my={'sm'}>
@@ -287,435 +295,7 @@ useEffect(() => {
          </Title>
         </Grid.Col>
       </Grid>
-      <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
-        <Grid display={'none'} gutter="sm" justify="center" mb={20} align="center" dir="rtl" p={0}>
-        <Grid.Col justify='end' span={12 } mb={40}  h={20}>
-          <Flex align='center' gap={10}  onClick={()=>navigate('/National_Diabetes_Program/home')} style={{cursor:'pointer'}}>  
-            <Image className={info.back} style={{borderRadius:'50%',border:'1px solid #37a8ef'}} src={backWards} w={20} />
-            <Text mb={6}> رجوع</Text>
-          </Flex>
-        
-          </Grid.Col>
-          {/* المعلومات الأساسية */}
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              label="رقم الهوية الوطني"
-              size="md"
-              disabled
-              radius={10}
-              placeholder="رقم الهوية الوطني"
-              key={form.key("id_number")}
-              {...form.getInputProps("id_number")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              size="md"
-              label="الاسم الكامل"
-              disabled
-              radius={10}
-              placeholder="الاسم الكامل"
-              key={form.key("fullName")}
-              {...form.getInputProps("fullName")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              disabled
-              size="md"
-              radius={10}
-              label="البريد الإلكتروني"
-              key={form.key("email")}
-              {...form.getInputProps("email")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-            disabled
-              size="md"
-              radius={10}
-              label="رقم الهاتف"
-              key={form.key("phone")}
-              {...form.getInputProps("phone")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <DatePickerInput
-              size="md"
-              radius={10}
-              disabled
-              label="تاريخ الميلاد"
-              valueFormat="DD/MM/YYYY"
-              key={form.key("date")}
-              {...form.getInputProps("date")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <Select
-              withAsterisk
-              size="md"
-              radius={10}
-              label="الجنس"
-              placeholder="الجنس"
-              data={[
-                { value: 'male', label: 'ذكر' },
-                { value: 'female', label: 'أنثى' }
-              ]}
-              key={form.key("gender")}
-              {...form.getInputProps("gender")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-            withAsterisk
-              size="md"
-              radius={10}
-              label='العنوان'
-              placeholder="العنوان"
-              key={form.key("address_patient")}
-              {...form.getInputProps("address_patient")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-
-          {/* المعلومات الطبية */}
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              withAsterisk
-              size="md"
-              radius={10}
-            //   value={bloodSugar}
-              label='سكر الدم'
-              placeholder="سكر الدم (mg/dL)"
-              key={form.key("bloodSugar")}
-              {...form.getInputProps("bloodSugar")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label='الوزن'
-              placeholder="الوزن (kg)"
-              key={form.key("weight")}
-              {...form.getInputProps("weight")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="الطول"
-              placeholder="الطول (cm)"
-              key={form.key("length_patient")}
-              {...form.getInputProps("length_patient")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <Select
-              size="md"
-              radius={10}
-              withAsterisk
-              label="نوع السكري"
-              placeholder="نوع السكري"
-              data={[
-                { value: 'النوع الأول', label: 'النوع الأول' },
-                { value: 'النوع الثاني', label: 'النوع الثاني' },
-                { value: 'سكري الحمل', label: 'سكري الحمل' },
-                { value: 'نوع أخر', label: 'أخرى' }
-              ]}
-              key={form.key("sugarType")}
-              {...form.getInputProps("sugarType")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="الهيموجلوبين (%)"
-              placeholder="الهيموجلوبين (%)"
-              key={form.key("hemoglobin")}
-              {...form.getInputProps("hemoglobin")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="ضغط الدم (mmHg)"
-              placeholder="ضغط الدم (mmHg)"
-              key={form.key("bloodPressure")}
-              {...form.getInputProps("bloodPressure")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="نوع الدواء"
-              placeholder="نوع الدواء"
-              key={form.key("typeOfMedicine")}
-              {...form.getInputProps("typeOfMedicine")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <TextInput
-              size="md"
-              radius={10}
-            withAsterisk
-              label="الكوليسترول"
-              placeholder="الكوليسترول (mg/dL)"
-              key={form.key("cholesterol")}
-              {...form.getInputProps("cholesterol")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="الدهون"
-              placeholder="الدهون (mg/dL)"
-              key={form.key("grease")}
-              {...form.getInputProps("grease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <TextInput
-              size="md"
-              radius={10}
-              
-             withAsterisk
-              label="حمض البوليك"
-              placeholder="حمض البوليك (mg/dL)"
-              key={form.key("urineAcid")}
-              {...form.getInputProps("urineAcid")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              size="md"
-              radius={10}
-            withAsterisk
-              label="امراض اخرى"
-              placeholder="أمراض أخرى"
-              key={form.key("otherDisease")}
-              {...form.getInputProps("otherDisease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="التاريخ العائلي للمرض"
-              placeholder='التاريخ العائلي للمرض'
-              key={form.key("historyOfFamilyDisease")}
-              {...form.getInputProps("historyOfFamilyDisease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="تاريخ اكتشاف المرض"
-              placeholder='تاريخ اكتشاف المرض'
-              key={form.key("diseaseDetection")}
-              {...form.getInputProps("diseaseDetection")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-            <Switch
-              size="md"
-            //   value={isCompleted}
-              label="اكتمال الملف الطبي"
-              key={form.key("isCompleted")}
-              {...form.getInputProps('isCompleted', { type: 'checkbox' })}
-              labelPosition="right"
-            />
-          </Grid.Col>
-        </Grid>
-        
-        <Grid display={'none'} my={15}>
-          <Grid.Col span={{ lg: 4, xs: 12, sm: 12, md: 4 }}>
-          <Button 
-            fullWidth 
-            radius={10} 
-            size="md" 
-            type="submit" 
-            variant="filled" 
-            color="#37A9EF"
-            loading={isPending}
-            disabled={isPending}
-          >
-            {isPending ? 'جاري الحفظ...' : 'حفظ التعديلات'}
-          </Button>
-          </Grid.Col>
-        </Grid>
-      </form>
+     
     </Container>
   );
 }
