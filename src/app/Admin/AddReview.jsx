@@ -8,10 +8,15 @@ import * as yup from 'yup';
 import { Switch } from '@mantine/core';
 import { useSelector } from "react-redux";
 import backWards from '../../assets/vectors/forward.png'
+import { useParams } from "react-router";
+import dayjs from "dayjs";
 // import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
 // import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
 
 const AddReview = () =>{
+  const patients = useSelector(store => store.patients.patients)
+  const {id} = useParams()
+  const [storedPatient,setStoredPatient] = useState(null)
 
   const [treatments, setTreatments] = useState([]);
   const [insulinType, setInsulinType] = useState('');
@@ -22,17 +27,29 @@ const AddReview = () =>{
 
 
   const [hasEyeDisease, setHasEyeDisease] = useState(false);
-const [selectedEyeDisease, setSelectedEyeDisease] = useState('');
-const [isRelatedToDiabetes, setIsRelatedToDiabetes] = useState('');
+  const [selectedEyeDisease, setSelectedEyeDisease] = useState('');
+  const [isRelatedToDiabetes, setIsRelatedToDiabetes] = useState('');
+  
+  
+  const [hasHeartDisease, setHasHeartDisease] = useState(false);
+  const [heartDisease, setHeartDisease] = useState('');
+  const [heartRelatedToDiabetes, setHeartRelatedToDiabetes] = useState('');
+  
+  const [hasNeuroDisease, setHasNeuroDisease] = useState(false);
+  const [neuroDisease, setNeuroDisease] = useState('');
+  const [neuroRelatedToDiabetes, setNeuroRelatedToDiabetes] = useState('');
+  
 
 
-const [hasHeartDisease, setHasHeartDisease] = useState(false);
-const [heartDisease, setHeartDisease] = useState('');
-const [heartRelatedToDiabetes, setHeartRelatedToDiabetes] = useState('');
+const [hasUrinaryDisease, setHasUrinaryDisease] = useState(false);
+const [selectedUrinaryDisease, setSelectedUrinaryDisease] = useState('');
+const [isUrinaryRelatedToDiabetes, setIsUrinaryRelatedToDiabetes] = useState('');
 
-const [hasNeuroDisease, setHasNeuroDisease] = useState(false);
-const [neuroDisease, setNeuroDisease] = useState('');
-const [neuroRelatedToDiabetes, setNeuroRelatedToDiabetes] = useState('');
+
+const [hasBoneDisease, setHasBoneDisease] = useState(false);
+const [selectedBoneDisease, setSelectedBoneDisease] = useState('');
+const [isBoneRelatedToDiabetes, setIsBoneRelatedToDiabetes] = useState('');
+
 
   const insulinDrugOptions = [
   { value: "mixtard", label: "ميكستارد" },
@@ -50,6 +67,19 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   if (!unitsPerBox || !dailyDose) return null;
   return Math.floor(unitsPerBox / dailyDose);
 };
+
+useEffect(() => {
+    // fetchInfo(id); 
+    const foundPatient = patients.find(patient => patient.id.toString() === id.toString());
+    console.log(foundPatient)
+    if (foundPatient) {
+      setStoredPatient(foundPatient);
+      console.log(storedPatient)
+    } else {
+      console.warn(`Patient with id ${id} not found`);
+      setStoredPatient(null);
+    }
+  }, [id, patients]); 
 
 // const [opened, { open, close }] = useDisclosure(false);
   // const patients = useSelector(state => state.patients.patients);
@@ -211,26 +241,29 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
         <>
  <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
         <Grid  px={{base:'0',sm:'md'}} mx={{base:5,sm:40}}  gutter="md" justify="start" mb={20} align="end" dir="rtl" p={0}>
-        <Grid.Col justify='end' span={12 } mb={40}  h={20}>    
-          </Grid.Col>
-          {/* المعلومات الأساسية */}
-           <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-            withAsterisk
-              size="md"
-              radius={10}
-              label='العنوان'
-              placeholder="العنوان"
-              key={form.key("address_patient")}
-              {...form.getInputProps("address_patient")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
+          <Grid.Col span={{ base:12,sm:12 }} p={10} my={'lg'}>
+            <Flex align={'center'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}} justify={'space-between'}>
+              <Title  size="1.8rem" >
+              إضافة مراجعة
+            </Title>
+            <Text size="1.4rem" fw={'bold'}>
+             {dayjs(new Date).format('DD-MM-YYYY')}
+            </Text>
+            </Flex>
+            
+          </Grid.Col>       
+           <Grid.Col span={{ base:12,sm:6 }} mx={10}>
+             <TextInput 
+               readOnly
+               dir="rtl"
+               variant="unstyled"
+               size="32px"
+               fw={600}
+               radius={10}
+               value={storedPatient?.fullname}
+
+              //  style={{height:'auto !important'}}
+               />
           </Grid.Col>
         <Grid.Col span={12} p={10} my={'lg'}>
             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
@@ -239,8 +272,10 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
           </Grid.Col>            
            <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="md"
+              size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
               label='الوزن'
               placeholder="الوزن (kg)"
@@ -251,14 +286,17 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                   fontSize:'18px'
                 }
               }}
             />
           </Grid.Col>
-<Grid.Col span={{ base:12,sm:6 }}>
+         <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="md"
+              size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
               label="الطول"
               placeholder="الطول (cm)"
@@ -269,6 +307,7 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                  fontSize:'18px'
                 }
               }}
             />
@@ -276,8 +315,10 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
           
           <Grid.Col span={{ base:12,sm:6 }}>
             <Select
-              size="md"
+              size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
               label="نوع السكري"
               placeholder="نوع السكري"
@@ -294,77 +335,18 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                  fontSize:'18px'
                 }
               }}
             />
           </Grid.Col>
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size="md"
-              radius={10}
-            withAsterisk
-              label="امراض اخرى"
-              placeholder="أمراض أخرى"
-              key={form.key("otherDisease")}
-              {...form.getInputProps("otherDisease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="التاريخ العائلي للمرض"
-              placeholder='التاريخ العائلي للمرض'
-              key={form.key("historyOfFamilyDisease")}
-              {...form.getInputProps("historyOfFamilyDisease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size="md"
-              radius={10}
-              withAsterisk
-              label="تاريخ اكتشاف المرض"
-              placeholder='تاريخ اكتشاف المرض'
-              key={form.key("diseaseDetection")}
-              {...form.getInputProps("diseaseDetection")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
-          </Grid.Col>
-         {/* معلومات طبية */}
-         <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
-              معلومات طبية
-            </Text>
-          </Grid.Col>   
-        <Grid.Col span={{ base:12,sm:6 }}>
+           <Grid.Col span={{ base:12,sm:6 }}>
             <Select
-              withAsterisk
-              size="md"
+              size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
               label="الجنس"
               placeholder="الجنس"
               data={[
@@ -378,14 +360,90 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                  fontSize:'18px'
                 }
               }}
             />
-          </Grid.Col>        
+          </Grid.Col> 
+          <Grid.Col span={{ base:12,sm:6 }}>
+            <TextInput
+              size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
+              label="امراض اخرى"
+              placeholder="أمراض أخرى"
+              key={form.key("otherDisease")}
+              {...form.getInputProps("otherDisease")}
+              styles={{
+                label: {
+                  textAlign: 'right',
+                  marginBottom:5,
+                  width: '98%',
+                  fontSize:'18px'
+                }
+              }}
+            />
+          </Grid.Col>
+          
+          <Grid.Col span={{ base:12,sm:6 }}>
+            <TextInput
+              size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
+              label="التاريخ العائلي للمرض"
+              placeholder='التاريخ العائلي للمرض'
+              key={form.key("historyOfFamilyDisease")}
+              {...form.getInputProps("historyOfFamilyDisease")}
+              styles={{
+                label: {
+                  textAlign: 'right',
+                  marginBottom:5,
+                  width: '98%',
+                  fontSize:'18px'
+                }
+              }}
+            />
+          </Grid.Col>
+          
+          <Grid.Col span={{ base:12,sm:6 }}>
+            <TextInput
+              size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
+              label="تاريخ اكتشاف المرض"
+              placeholder='تاريخ اكتشاف المرض'
+              key={form.key("diseaseDetection")}
+              {...form.getInputProps("diseaseDetection")}
+              styles={{
+                label: {
+                  textAlign: 'right',
+                  marginBottom:5,
+                  width: '98%',
+                  fontSize:'18px'
+                }
+              }}
+            />
+          </Grid.Col>
+
+         {/* معلومات طبية */}
+         <Grid.Col span={12} p={10} my={'lg'}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+              معلومات طبية
+            </Text>
+          </Grid.Col>   
+              
           <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="md"
+               size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
               label="الهيموجلوبين (%)"
               placeholder="الهيموجلوبين (%)"
@@ -403,8 +461,10 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
            
                     <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="md"
+              size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
               label="الدهون"
               placeholder="الدهون (mg/dL)"
@@ -422,9 +482,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
           
           <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="md"
-              radius={10}   
-             withAsterisk
+              size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
               label="حمض البوليك"
               placeholder="حمض البوليك (mg/dL)"
               key={form.key("urineAcid")}
@@ -442,8 +504,10 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
           <Grid.Col span={{ base:12,sm:6 }}>
             <TextInput
-              size="md"
+              size="24px"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
               label="ضغط الدم (mmHg)"
               placeholder="ضغط الدم (mmHg)"
@@ -460,9 +524,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
           </Grid.Col>
           <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="md"
+              size="24px"
               radius={10}
-            withAsterisk
+              variant="unstyled"
+              fw={600}
+              withAsterisk
               label="الكوليسترول"
               placeholder="الكوليسترول (mg/dL)"
               key={form.key("cholesterol")}
@@ -479,9 +545,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
           <Grid.Col span={{ base: 12, sm: 6 }}>
             
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+    size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الكوليسترول منخفض الكثافة (LDL)"
     placeholder="LDL (mg/dL)"
     key={form.key("ldl")}
@@ -494,9 +562,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+     size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الكوليسترول مرتفع الكثافة (HDL)"
     placeholder="HDL (mg/dL)"
     key={form.key("hdl")}
@@ -509,9 +579,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+    size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الكرياتينين"
     placeholder="الكرياتينين (mg/dL)"
     key={form.key("creatinine")}
@@ -524,9 +596,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+    size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الغلوكوز في الحالة الطبيعية"
     placeholder="الغلوكوز صيامي (mg/dL)"
     key={form.key("fastingGlucose")}
@@ -539,9 +613,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+    size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الغلوكوز بعد الوجبة"
     placeholder="الغلوكوز بعد الأكل (mg/dL)"
     key={form.key("postMealGlucose")}
@@ -554,9 +630,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+        size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الشحوم الثلاثية"
     placeholder="الشحوم الثلاثية (mg/dL)"
     key={form.key("triglycerides")}
@@ -569,9 +647,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="md"
-    radius={10}
-    withAsterisk
+        size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="الخضاب الغلوكوزي (HbA1c)"
     placeholder="HbA1c (%)"
     key={form.key("hba1c")}
@@ -592,6 +672,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
           <Grid.Col span={12}>
   <MultiSelect
+      size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
     label="نوع العلاج"
     placeholder="اختر نوع العلاج"
     data={[
@@ -611,6 +696,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   <>
     <Grid.Col span={6}>
       <Select
+          size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="نوع الإنسولين"
         placeholder="اختر النوع"
         data={[
@@ -620,19 +710,24 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
         ]}
         value={insulinType}
         onChange={setInsulinType}
-        styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5,width:'100%' } }}
       />
     </Grid.Col>
 
     <Grid.Col span={6}>
       <MultiSelect
+          size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="اسماء الأدوية"
         placeholder="اختر الأدوية"
         data={insulinDrugOptions}
         value={insulinDrugs}
         onChange={setInsulinDrugs}
         searchable
-        styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  } }}
       />
     </Grid.Col>
 
@@ -640,6 +735,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
       <React.Fragment key={drug}>
         <Grid.Col span={6}>
           <TextInput
+              size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
             label={`عدد الوحدات في ${drug}`}
             type="number"
             onChange={(e) =>
@@ -651,11 +751,16 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  } }}
           />
         </Grid.Col>
         <Grid.Col span={6}>
           <TextInput
+              size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
             label={`الكمية اليومية لـ ${drug}`}
             type="number"
             onChange={(e) =>
@@ -667,14 +772,17 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  } }}
           />
-          <Text size="sm" mt={5} style={{ textAlign: 'right' }}>
+          </Grid.Col>
+          <Grid.Col span={12}>
+             <Text size="sm" mt={5} style={{ textAlign: 'center' }}>
             {insulinInfo[drug]?.unitsPerBox && insulinInfo[drug]?.dailyDose
-              ? `يكفي لمدة ${calculateDuration(insulinInfo[drug].unitsPerBox, insulinInfo[drug].dailyDose)} يوم`
+              ? `يكفي الدواء لمدة ${calculateDuration(insulinInfo[drug].unitsPerBox, insulinInfo[drug].dailyDose)} يوم`
               : ''}
           </Text>
-        </Grid.Col>
+          </Grid.Col>
+
       </React.Fragment>
     ))}
   </>
@@ -683,13 +791,18 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   <>
     <Grid.Col span={12}>
       <MultiSelect
+      size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="اسماء الأدوية"
         placeholder="اختر الأدوية"
         data={oralDrugOptions}
         value={oralDrugs}
         onChange={setOralDrugs}
         searchable
-        styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' } }}
       />
     </Grid.Col>
 
@@ -697,6 +810,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
       <React.Fragment key={drug}>
         <Grid.Col span={6}>
           <TextInput
+          size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
             label={`عدد الحبات في ${drug}`}
             type="number"
             onChange={(e) =>
@@ -708,11 +826,16 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' } }}
           />
         </Grid.Col>
         <Grid.Col span={6}>
           <TextInput
+          size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
             label={`الكمية اليومية لـ ${drug}`}
             type="number"
             onChange={(e) =>
@@ -724,9 +847,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' } }}
           />
-          <Text size="sm" mt={5} style={{ textAlign: 'right' }}>
+          </Grid.Col>
+          <Grid.Col span={12}>
+          <Text size="sm" mt={5} style={{ textAlign: 'center' }}>
             {oralInfo[drug]?.unitsPerBox && oralInfo[drug]?.dailyDose
               ? `يكفي لمدة ${calculateDuration(oralInfo[drug].unitsPerBox, oralInfo[drug].dailyDose)} يوم`
               : ''}
@@ -742,13 +867,17 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
               العيادة العينية
             </Text>
           </Grid.Col> 
-         <Grid.Col span={{ base: 12, sm: 6 }}>
-  <Checkbox
+         <Grid.Col span={{ base: 12, sm: 12 }}>
+   <Switch
+    size="md"
+    color="rgba(53, 180, 189, 1)"
+    labelPosition="left"
+  
     label="هل يوجد مرض في العين؟"
     checked={hasEyeDisease}
     onChange={(event) => setHasEyeDisease(event.currentTarget.checked)}
     styles={{
-      label: { textAlign: 'right', width: '98%' },
+      label: { textAlign: 'right', width: '100%' },
     }}
   />
 </Grid.Col>
@@ -757,6 +886,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
+       size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="اختر المرض العيني"
         placeholder="اختر مرضاً"
         data={['اعتلال الشبكية السكري', 'الزرق (الغلوكوما)', 'إعتام عدسة العين', 'جفاف العين', 'أخرى']}
@@ -773,6 +907,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
     {selectedEyeDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
+         size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
           label="أدخل اسم المرض العيني"
           placeholder="المرض العيني"
           styles={{
@@ -791,15 +930,17 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
           label: { textAlign: 'right', marginBottom: 5, width: '98%' },
         }}
       >
-        <Radio value="نعم" label="نعم" />
+        <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
       </Radio.Group>
     </Grid.Col>
 
     <Grid.Col span={{ base: 12 }}>
       <Textarea
-        size="md"
-        radius={10}
+         size="md"
+              radius={10}
+              variant="unstyled"
+              fw={600}
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة العينية"
         autosize
@@ -817,12 +958,15 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   </Text>
 </Grid.Col>
 
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <Checkbox
+<Grid.Col span={{ base: 12, sm: 12}}>
+   <Switch
+    size="md"
+    color="rgba(53, 180, 189, 1)"
+    labelPosition="left"
     label="هل يوجد مرض قلبي؟"
     checked={hasHeartDisease}
     onChange={(e) => setHasHeartDisease(e.currentTarget.checked)}
-    styles={{ label: { textAlign: 'right', width: '98%' } }}
+    styles={{ label: { textAlign: 'right', width: '100%' } }}
   />
 </Grid.Col>
 
@@ -830,6 +974,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
+       size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="اختر المرض القلبي"
         placeholder="اختر مرضاً"
         data={['قصور القلب', 'ارتفاع الضغط الرئوي', 'أمراض الشرايين التاجية', 'عدم انتظام ضربات القلب', 'أخرى']}
@@ -844,6 +993,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
     {heartDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
+         size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
           label="أدخل اسم المرض القلبي"
           placeholder="المرض القلبي"
           styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
@@ -853,12 +1007,13 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
 
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Radio.Group
+      
         value={heartRelatedToDiabetes}
         onChange={setHeartRelatedToDiabetes}
         label="هل يوجد علاقة بين المرض القلبي والسكري؟"
         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
       >
-        <Radio value="نعم" label="نعم" />
+        <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
       </Radio.Group>
     </Grid.Col>
@@ -866,7 +1021,10 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
     <Grid.Col span={{ base: 12 }}>
       <Textarea
         size="md"
-        radius={10}
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة القلبية"
         autosize
@@ -883,12 +1041,15 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   </Text>
 </Grid.Col>
 
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <Checkbox
+<Grid.Col span={{ base: 12, sm: 12 }}>
+  <Switch
+    size="md"
+    color="rgba(53, 180, 189, 1)"
+    labelPosition="left"
     label="هل يوجد مرض عصبي؟"
     checked={hasNeuroDisease}
     onChange={(e) => setHasNeuroDisease(e.currentTarget.checked)}
-    styles={{ label: { textAlign: 'right', width: '98%' } }}
+    styles={{ label: { textAlign: 'right', width: '100%' } }}
   />
 </Grid.Col>
 
@@ -896,6 +1057,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
+       size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="اختر المرض العصبي"
         placeholder="اختر مرضاً"
         data={['الاعتلال العصبي السكري', 'الصرع', 'السكتة الدماغية', 'التصلب اللويحي', 'أخرى']}
@@ -910,6 +1076,11 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
     {neuroDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
+         size="24px"
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
           label="أدخل اسم المرض العصبي"
           placeholder="المرض العصبي"
           styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
@@ -924,7 +1095,7 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
         label="هل يوجد علاقة بين المرض العصبي والسكري؟"
         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
       >
-        <Radio value="نعم" label="نعم" />
+        <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
       </Radio.Group>
     </Grid.Col>
@@ -932,7 +1103,10 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
     <Grid.Col span={{ base: 12 }}>
       <Textarea
         size="md"
-        radius={10}
+              radius={10}
+              variant="unstyled"
+              fw={600}
+              withAsterisk
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة العصبية"
         autosize
@@ -942,27 +1116,187 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
     </Grid.Col>
   </>
 )}
+<Grid.Col span={12} p={10} my={'lg'}>
+  <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{ borderRadius: 10 }}>
+    العيادة البولية
+  </Text>
+</Grid.Col>
+
+<Grid.Col span={{ base: 12, sm: 12 }}>
+  <Switch
+    size="md"
+    color="rgba(53, 180, 189, 1)"
+    labelPosition="left"
+    label="هل يوجد مرض بولي؟"
+    checked={hasUrinaryDisease}
+    onChange={(event) => setHasUrinaryDisease(event.currentTarget.checked)}
+    styles={{ label: { textAlign: 'right', width: '100%' } }}
+  />
+</Grid.Col>
+
+{hasUrinaryDisease && (
+  <>
+    <Grid.Col span={{ base: 12, sm: 6 }}>
+      <Select
+        size="24px"
+        radius={10}
+        variant="unstyled"
+        fw={600}
+        withAsterisk
+        label="اختر المرض البولي"
+        placeholder="اختر مرضاً"
+        data={['التهاب المسالك البولية', 'حصى الكلى', 'سلس البول', 'تضخم البروستات', 'أخرى']}
+        value={selectedUrinaryDisease}
+        onChange={setSelectedUrinaryDisease}
+        searchable
+        clearable
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      />
+    </Grid.Col>
+
+    {selectedUrinaryDisease === 'أخرى' && (
+      <Grid.Col span={{ base: 12, sm: 6 }}>
+        <TextInput
+          size="24px"
+          radius={10}
+          variant="unstyled"
+          fw={600}
+          withAsterisk
+          label="أدخل اسم المرض البولي"
+          placeholder="المرض البولي"
+          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        />
+      </Grid.Col>
+    )}
+
+    <Grid.Col span={{ base: 12, sm: 6 }}>
+      <Radio.Group
+        value={isUrinaryRelatedToDiabetes}
+        onChange={setIsUrinaryRelatedToDiabetes}
+        label="هل يوجد علاقة بين المرض البولي والسكري؟"
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      >
+        <Radio mb={5} value="نعم" label="نعم" />
+        <Radio value="لا" label="لا" />
+      </Radio.Group>
+    </Grid.Col>
+
+    <Grid.Col span={{ base: 12 }}>
+      <Textarea
+        size="md"
+        radius={10}
+        variant="unstyled"
+        fw={600}
+        label="ملاحظات"
+        placeholder="أدخل أي ملاحظات متعلقة بالحالة البولية"
+        autosize
+        minRows={3}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      />
+    </Grid.Col>
+  </>
+)}
+<Grid.Col span={12} p={10} my={'lg'}>
+  <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{ borderRadius: 10 }}>
+    العيادة العظمية
+  </Text>
+</Grid.Col>
+
+<Grid.Col span={{ base: 12, sm: 12 }}>
+  <Switch
+    size="md"
+    color="rgba(53, 180, 189, 1)"
+    labelPosition="left"
+    label="هل يوجد مرض عظمي؟"
+    checked={hasBoneDisease}
+    onChange={(event) => setHasBoneDisease(event.currentTarget.checked)}
+    styles={{ label: { textAlign: 'right', width: '100%' } }}
+  />
+</Grid.Col>
+
+{hasBoneDisease && (
+  <>
+    <Grid.Col span={{ base: 12, sm: 6 }}>
+      <Select
+        size="24px"
+        radius={10}
+        variant="unstyled"
+        fw={600}
+        withAsterisk
+        label="اختر المرض العظمي"
+        placeholder="اختر مرضاً"
+        data={['هشاشة العظام', 'التهاب المفاصل', 'الانزلاق الغضروفي', 'كسر أو إصابة سابقة', 'أخرى']}
+        value={selectedBoneDisease}
+        onChange={setSelectedBoneDisease}
+        searchable
+        clearable
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      />
+    </Grid.Col>
+
+    {selectedBoneDisease === 'أخرى' && (
+      <Grid.Col span={{ base: 12, sm: 6 }}>
+        <TextInput
+          size="24px"
+          radius={10}
+          variant="unstyled"
+          fw={600}
+          withAsterisk
+          label="أدخل اسم المرض العظمي"
+          placeholder="المرض العظمي"
+          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        />
+      </Grid.Col>
+    )}
+
+    <Grid.Col span={{ base: 12, sm: 6 }}>
+      <Radio.Group
+        value={isBoneRelatedToDiabetes}
+        onChange={setIsBoneRelatedToDiabetes}
+        label="هل يوجد علاقة بين المرض العظمي والسكري؟"
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      >
+        <Radio mb={5} value="نعم" label="نعم" />
+        <Radio value="لا" label="لا" />
+      </Radio.Group>
+    </Grid.Col>
+
+    <Grid.Col span={{ base: 12 }}>
+      <Textarea
+        size="md"
+        radius={10}
+        variant="unstyled"
+        fw={600}
+        label="ملاحظات"
+        placeholder="أدخل أي ملاحظات متعلقة بالحالة العظمية"
+        autosize
+        minRows={3}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      />
+    </Grid.Col>
+  </>
+)}
+
           <Grid.Col span={12} p={10} my={'lg'}>
             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
               عيادات أخرى
             </Text>
           </Grid.Col> 
           <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size="lg"
+            <Textarea
+        size="md"
               radius={10}
+              variant="unstyled"
+              fw={600}
               withAsterisk
-              label="ملاحظات"
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                }
-              }}
-            />
+        label="ملاحظات"
+        placeholder="أدخل أي ملاحظات متعلقة "
+        autosize
+        minRows={3}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+      />
           </Grid.Col>
-          <Grid.Col span={{ base:12,sm:12 }}>
+          {/* <Grid.Col span={{ base:12,sm:12 }}>
             <Switch
               size="md"
               label="اكتمال الملف الطبي"
@@ -970,8 +1304,8 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
               {...form.getInputProps('isCompleted', { type: 'checkbox' })}
               labelPosition="right"
             />
-          </Grid.Col>
-          <Grid.Col ta={'start'} span={{ base:12,sm:6 }}>
+          </Grid.Col> */}
+          <Grid.Col mt={20} ta={'start'} span={{ base:12,sm:6 }}>
           <Button 
             fullWidth 
             radius={10} 
@@ -982,7 +1316,7 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
             // loading={isPending}
             // disabled={isPending}
           >
-          حسنا
+          حفظ المراجعة
           </Button>
           </Grid.Col>
         </Grid>

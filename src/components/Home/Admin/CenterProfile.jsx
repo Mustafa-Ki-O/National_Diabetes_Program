@@ -147,7 +147,7 @@ return(
       variant="unstyled"
       placeholder="ايميل المركز"
       size="28px"
-        fw={600}
+      fw={600}
       radius={10}
       key={form.key("centerEmail")}
       {...form.getInputProps("centerEmail")}
