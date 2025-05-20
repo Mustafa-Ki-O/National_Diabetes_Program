@@ -1,114 +1,59 @@
 import { useNavigate } from "react-router-dom";
-import { TextInput, Button, Container, Flex, Grid, GridCol } from "@mantine/core";
+import { TextInput, Button, Container, Flex, Grid, GridCol, Box ,Text} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import { useState, useEffect, useRef } from "react";
 import * as yup from "yup";
 import usePostCode from "../../../useMutation/Patient/usePostCode";
 
 const schema = yup.object().shape({
-  code: yup
-    .string()
-    .matches(/^\d{6}$/, "يجب ادخال 6 أرقام")
-    .required("حقل مطلوب"),
+  code: yup.string().matches(/^\d{6}$/, "يجب ادخال 6 أرقام").required("حقل مطلوب"),
 });
 
 const VerficationForm = ({ setProgress }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [patientEmail, setPatientEmail] = useState('');
-  const inputRef = useRef(null);
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState(Array(6).fill(''));
+  const inputsRef = useRef([]);
+
+  const navigate = useNavigate();
+  const { postCode, isPending } = usePostCode();
 
   useEffect(() => {
-    setPatientEmail(JSON.parse(localStorage.getItem('patientEmail')));
+    const storedEmail = JSON.parse(localStorage.getItem('patientEmail'));
+    if (storedEmail) setPatientEmail(storedEmail);
   }, []);
 
-  const { postCode, isPending } = usePostCode();
-  const navigate = useNavigate();
-  const [isFocused, setIsFocused] = useState(false);
   const form = useForm({
-    mode: "uncontrolled",
-    validateInputOnChange: false,
     initialValues: { code: "" },
     validate: yupResolver(schema),
   });
 
-  const handleCodeChange = (e) => {
-    const input = e.target.value.replace(/\D/g, '');
-    const newCode = input.slice(0, 6);
-    
-    // عند الحذف (Backspace)
-    if (newCode.length < code.length) {
-
-      const updatedCode = code.slice(0, -1);
-      setCode(updatedCode);
-      form.setFieldValue('code', updatedCode);
-      return;
-    }
-    
-
+  const handleChange = (value, index) => {
+    if (!/^[0-9a-zA-Z]?$/.test(value)) return;
+    const newCode = [...code];
+    newCode[index] = value;
     setCode(newCode);
-    form.setFieldValue('code', newCode);
-  };
-  
-  const getDisplayValue = () => {
-    let display = '';
-    for (let i = 0; i < 6; i++) {
-      display += i < code.length ? code[i] : '#';
-    }
-    return display;
-  };
-  
-  const handleKeyDown = (e) => {
 
-    if (['ArrowLeft', 'ArrowRight', 'Home', 'End', 'Delete'].includes(e.key)) {
-      e.preventDefault();
+    if (value && index < 5) {
+      inputsRef.current[index + 1]?.focus();
     }
-    
-    if (!/\d/.test(e.key) && e.key !== 'Backspace') {
-      e.preventDefault();
-    }
-    
-    if (window.getSelection().toString().length > 0) {
-      e.preventDefault();
-    }
-    
 
-    setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.setSelectionRange(code.length, code.length);
-      }
-    }, 0);
+    form.setFieldValue("code", newCode.join(""));
   };
-  
-  const handleMouseUp = (e) => {
-    e.preventDefault();
-    if (inputRef.current) {
-      inputRef.current.setSelectionRange(code.length, code.length);
+
+  const handleKeyDown = (event, index) => {
+    if (event.key === "Backspace" && !code[index] && index > 0) {
+      inputsRef.current[index - 1]?.focus();
     }
   };
-  
-  useEffect(() => {
-    const input = inputRef.current;
-    if (input) {
-      input.addEventListener('mouseup', handleMouseUp);
-      input.addEventListener('select', handleMouseUp);
-      return () => {
-        input.removeEventListener('mouseup', handleMouseUp);
-        input.removeEventListener('select', handleMouseUp);
-      };
-    }
-  }, [code]);
 
-  const handleSubmite = (values) => {
-    if (form.isValid) {
-      const patientInfo = new FormData();
-      patientInfo.append('email', patientEmail);
-      Object.keys(values).forEach((key) => {
-        patientInfo.append(key, values[key]);
-      });
-      setIsSubmitted(true);
-      postCode(patientInfo);
-    }
+  const handleSubmit = (values) => {
+    const patientInfo = new FormData();
+    patientInfo.append('email', patientEmail);
+    patientInfo.append('code', code.join(""));
+
+    setIsSubmitted(true);
+    postCode(patientInfo);
   };
 
   useEffect(() => {
@@ -118,61 +63,43 @@ const VerficationForm = ({ setProgress }) => {
   }, [isPending]);
 
   return (
-    <>
-      <Container w='100%' fluid>
-        <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmite)}>
-          <Grid gutter="sm" justify="center" mt={20} mb={20} align="center">
-            <GridCol span={12} align='center' >
-              <TextInput
-                ta='center'
-                ref={inputRef}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                size="md"
-                p={0}
-                variant= 'unstyled'
-                w='fit-content'
-                radius={10}
-                mt="sm"
-                placeholder='######'
-                value={getDisplayValue()}
-                onChange={handleCodeChange}
-                onKeyDown={handleKeyDown}
-                inputMode="numeric"
-                styles={{
-                  input: {
-                    cursor:'pointer',
-                    padding:'0px',
-                    border:isFocused ? '1px solid #37a8ef':'',
-                    transition: 'all 0.3s',
-                    letterSpacing: '1rem',
-                    fontFamily: 'monospace',
-                    fontSize: '1rem', 
-                    direction: 'ltr',
-                    caretColor: 'transparent',
-                    textAlign: 'center',
-                    textIndent: '0.8rem',
-                  }}}
-              />
-              {form.errors.code && (
-                <div style={{ color: 'red', textAlign: 'center', marginTop: '0.5rem' }}>
-                  {form.errors.code}
-                </div>
-              )}
-            </GridCol>
-          </Grid>
-          <Flex visibleFrom="md" gap="1.25rem" w="100%" justify="space-between" mb={10}>
-            <Button
-              fullWidth
-              size="md"
-              radius={10}
-              variant="outline"
-              color="#8E8E8E"
-              mt="sm"
-              onClick={() => navigate(`/National_Diabetes_Program/register/`)}
-            >
-              تراجع
-            </Button>
+    <Container w="100%" fluid>
+      <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
+        {/* <Grid justify="center" mt={30} mb={30}>
+          <GridCol span={12}> */}
+            <Flex justify="center" gap="sm" my={30}>
+              {code.map((char, index) => (
+                <TextInput
+                  key={index}
+                  value={char}
+                  maxLength={1}
+                  onChange={(e) => handleChange(e.target.value, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  inputMode="numeric"
+                  ref={(el) => (inputsRef.current[index] = el)}
+                  styles={{
+                    input: {
+                      width: 40,
+                      height: 40,
+                      textAlign: "center",
+                      fontSize: "1.3rem",
+                      border: '2px solid #16aabb',
+                      borderRadius: 8,
+                    },
+                  }}
+                />
+              ))}
+            </Flex>
+            {form.errors.code && (
+              <Box mt={10} style={{ color: 'red', textAlign: 'center' }}>
+                {form.errors.code}
+              </Box>
+            )}
+          {/* </GridCol>
+        </Grid> */}
+
+        <Grid gutter={20} mb={10}>
+          <GridCol span={12}>
             <Button
               fullWidth
               size="md"
@@ -180,44 +107,25 @@ const VerficationForm = ({ setProgress }) => {
               variant="filled"
               color="#37A9EF"
               type="submit"
-              mt="sm"
               loading={isPending}
             >
               تأكيد
             </Button>
-          </Flex>
-          <Grid hiddenFrom="md" gutter={0} mb={10}>
-            <GridCol span={12}>
-              <Button
-                fullWidth
-                size="md"
-                radius={10}
-                variant="filled"
-                color="#37A9EF"
-                type="submit"
-                mt="sm"
-                loading={isPending}
-              >
-                تأكيد
-              </Button>
-            </GridCol>
-            <GridCol span={12}>
-              <Button
-                size="md"
-                fullWidth
-                radius={10}
-                variant="outline"
-                color="#8e8e8e"
-                mt="sm"
-                onClick={() => navigate(`/National_Diabetes_Program/register/`)}
-              >
-                تراجع
-              </Button>
-            </GridCol>
-          </Grid>
-        </form>
-      </Container>
-    </>
-  )
-}
+          </GridCol>
+          <GridCol span={12}>
+            <Text
+              radius={10}
+              fz={'1rem'}
+              c={'#8e8e8e'}
+              onClick={() => navigate(`/National_Diabetes_Program/register/`)}
+            >
+              تراجع
+            </Text>
+          </GridCol>
+        </Grid>
+      </form>
+    </Container>
+  );
+};
+
 export default VerficationForm;
