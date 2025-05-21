@@ -242,8 +242,8 @@ useEffect(() => {
  <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
         <Grid  px={{base:'0',sm:'md'}} mx={{base:5,sm:40}}  gutter="md" justify="start" mb={20} align="end" dir="rtl" p={0}>
           <Grid.Col span={{ base:12,sm:12 }} p={10} my={'lg'}>
-            <Flex align={'center'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}} justify={'space-between'}>
-              <Title  size="1.8rem" >
+            <Flex align={'center'} p={10} c={'#555555'} bg={'#8e8e8e30'} style={{borderRadius:10}} justify={'space-between'}>
+              <Title  size="1.8rem"  >
               إضافة مراجعة
             </Title>
             <Text size="1.4rem" fw={'bold'}>
