@@ -4,9 +4,15 @@ const Videos = () => {
   return (
     <Grid mt={30} gutter={20}>
         <Grid.Col ta={'right'}  span={12}>
-            <Button miw={'10rem'} radius={'md'} variant='filled' color={'blue'} size='md'>
+            <Flex mb={20}  dir='ltr' w={'100%'} justify={'space-between'} align={'center'}>
+                 <Button miw={'8rem'} radius="md" variant="light" color="blue" size="md">
+               فرز
+            </Button>
+          <Button miw={'8rem'} radius={'md'} variant='filled' color={'blue'} size='md'>
                 رفع فيديو
             </Button>
+            </Flex>
+            
         </Grid.Col>
       {[1, 2, 3, 4].map((item) => (
         <Grid.Col key={item} span={{ base: 12, sm: 6 }}>

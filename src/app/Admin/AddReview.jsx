@@ -1398,3 +1398,152 @@ useEffect(() => {
     )
 }
 export default AddReview
+// import React, { useState } from 'react';
+// import {
+//   Stepper,
+//   Button,
+//   Group,
+//   TextInput,
+//   Select,
+//   MultiSelect,
+//   Grid,
+//   NumberInput,
+//   Text,
+// } from '@mantine/core';
+
+// const AddReview = () => {
+//   const [activeStep, setActiveStep] = useState(0);
+
+//   const [formData, setFormData] = useState({
+//     patientName: '',
+//     weight: '',
+//     height: '',
+//     bmi: '',
+//     discoveryDate: '',
+//     familyHistory: '',
+//     complications: [],
+//     treatmentType: '',
+//     insulinType: '',
+//     insulinDrugs: [],
+//     insulinInfo: {},
+//     oralDrugs: [],
+//     oralInfo: {},
+//   });
+
+//   const nextStep = () => setActiveStep((current) => (current < 2 ? current + 1 : current));
+//   const prevStep = () => setActiveStep((current) => (current > 0 ? current - 1 : current));
+
+//   const handleChange = (field, value) => {
+//     setFormData({ ...formData, [field]: value });
+//   };
+
+//   const generalInfoStep = (
+//     <Grid dir="rtl">
+//       <Grid.Col span={6}>
+//         <TextInput label="اسم المريض" value={formData.patientName} onChange={(e) => handleChange('patientName', e.target.value)} />
+//       </Grid.Col>
+//       <Grid.Col span={6}>
+//         <NumberInput label="الوزن (كغ)" value={formData.weight} onChange={(val) => handleChange('weight', val)} />
+//       </Grid.Col>
+//       <Grid.Col span={6}>
+//         <NumberInput label="الطول (سم)" value={formData.height} onChange={(val) => handleChange('height', val)} />
+//       </Grid.Col>
+//     </Grid>
+//   );
+
+//   const medicalInfoStep = (
+//     <Grid dir="rtl">
+//       <Grid.Col span={6}>
+//         <TextInput label="تاريخ الاكتشاف" value={formData.discoveryDate} onChange={(e) => handleChange('discoveryDate', e.target.value)} />
+//       </Grid.Col>
+//       <Grid.Col span={6}>
+//         <Select
+//           label="تاريخ عائلي للسكري"
+//           data={["نعم", "لا"]}
+//           value={formData.familyHistory}
+//           onChange={(val) => handleChange('familyHistory', val)}
+//         />
+//       </Grid.Col>
+//       <Grid.Col span={12}>
+//         <MultiSelect
+//           label="مضاعفات السكري"
+//           data={["اعتلال شبكية", "اعتلال أعصاب", "فشل كلوي"]}
+//           value={formData.complications}
+//           onChange={(val) => handleChange('complications', val)}
+//         />
+//       </Grid.Col>
+//     </Grid>
+//   );
+
+//   const drugInfoStep = (
+//     <Grid dir="rtl">
+//       <Grid.Col span={12}>
+//         <Select
+//           label="نوع العلاج"
+//           data={["انسولين", "حبوب"]}
+//           value={formData.treatmentType}
+//           onChange={(val) => handleChange('treatmentType', val)}
+//         />
+//       </Grid.Col>
+//       {formData.treatmentType === 'انسولين' && (
+//         <>
+//           <Grid.Col span={6}>
+//             <Select
+//               label="نوع الإنسولين"
+//               data={["بطيء", "سريع"]}
+//               value={formData.insulinType}
+//               onChange={(val) => handleChange('insulinType', val)}
+//             />
+//           </Grid.Col>
+//           <Grid.Col span={12}>
+//             <MultiSelect
+//               label="أسماء أدوية الإنسولين"
+//               data={["نوفورابيد", "لانتوس"]}
+//               value={formData.insulinDrugs}
+//               onChange={(val) => handleChange('insulinDrugs', val)}
+//             />
+//           </Grid.Col>
+//         </>
+//       )}
+//       {formData.treatmentType === 'حبوب' && (
+//         <Grid.Col span={12}>
+//           <MultiSelect
+//             label="أسماء الأدوية الفموية"
+//             data={["ميتافورمين", "جليكلازيد"]}
+//             value={formData.oralDrugs}
+//             onChange={(val) => handleChange('oralDrugs', val)}
+//           />
+//         </Grid.Col>
+//       )}
+//     </Grid>
+//   );
+
+//   return (
+//     <>
+//       <Stepper active={activeStep} onStepClick={setActiveStep} breakpoint="sm" dir="rtl">
+//         <Stepper.Step label="الخطوة 1" description="معلومات عامة">
+//           {generalInfoStep}
+//         </Stepper.Step>
+//         <Stepper.Step label="الخطوة 2" description="معلومات طبية">
+//           {medicalInfoStep}
+//         </Stepper.Step>
+//         <Stepper.Step label="الخطوة 3" description="الدواء">
+//           {drugInfoStep}
+//         </Stepper.Step>
+//       </Stepper>
+
+//       <Group position="center" mt="xl">
+//         <Button variant="default" onClick={prevStep} disabled={activeStep === 0}>
+//           السابق
+//         </Button>
+//         {activeStep < 2 ? (
+//           <Button onClick={nextStep}>التالي</Button>
+//         ) : (
+//           <Button onClick={() => console.log(formData)}>إرسال</Button>
+//         )}
+//       </Group>
+//     </>
+//   );
+// };
+
+// export default AddReview;
