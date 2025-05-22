@@ -76,13 +76,25 @@ const handleChangeName = (value) =>{
          {user?.role === 'center' ?(
             <>
             {/* <Group w={'100%'} p={0}> */}
-            <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+          
+           
+            {patients.length !==0 ? (
+            <Grid dir justify="end" mr={{base:0,sm:'20%'}}  gutter={20} gap={20} pos="fixed" top={{base:'7%',sm:'9%'}} left={0} right={0}
+  style={{
+    background: '#F9FAFC',
+    zIndex: 10,
+    paddingBottom: '1rem',
+    // backdropFilter: 'blur(8px)', 
+    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+    borderBottom: '1px solid rgba(0, 0, 0, 0.05)' // يعطي حد خفيف أنيق
+  }}>  
+              <Grid.Col span={12}>
+               <Title mt={20} size={'2rem'} ta={'end'} px={'lg'} mb={'1rem'} >
               إدارة المرضى
             </Title>
-            {patients.length !==0 ? (
-            <Grid dir justify="end"  gutter={20} gap={20} px={'lg'} >  
+             </Grid.Col>
               <Grid.Col visibleFrom="sm" style={{alignSelf:'end',justifyItems:'end'}} span={{base:12,sm:5}}>
-              <Flex gap={3} justify={'space-between'}>
+              <Flex  gap={3} justify={'space-between'}>
               <Popover width={'fit-content'} position="bottom"  withArrow shadow="md">
               <Popover.Target>
               <Button radius={10} size="md" fullWidth variant="light" c='#37A9EF' >فرز المرضى حسب</Button>
@@ -128,9 +140,9 @@ const handleChangeName = (value) =>{
              
             </Grid.Col>
              <Grid.Col className={home.grid} align='end' span={{ base:12,sm:7 }}>
-              <Stack>
-               <Flex  justify='end' gap={30}>
-                <Flex hiddenFrom="sm" gap={3} justify={'space-between'}>
+              <Stack px={'lg'} >
+               <Flex   justify='end' gap={30}>
+                <Flex  hiddenFrom="sm" gap={3} justify={'space-between'}>
               <Popover width={'fit-content'} position="bottom"  withArrow shadow="md">
               <Popover.Target>
               <Button radius={10} size="md" miw={'7rem'} variant="light" c='#37A9EF' >فرز</Button>
@@ -172,7 +184,7 @@ const handleChangeName = (value) =>{
              </Popover>
              
               </Flex>
-                <Group m={0} p={0}>
+                <Group m={0} >
 <Image src={search} mb={10} w={30} className={home.search}/>
                  <Text size="lg" fw={700} mb={10}  >
                     ابحث عن مريض 
@@ -187,7 +199,25 @@ const handleChangeName = (value) =>{
             
             </Grid>
             
+            
             ):(<></>)}
+            <Container
+            fluid
+            mr={{base:0,sm:'20%'}}
+            pos={'fixed'}
+            top={{base:'32%',sm:'41%'}}
+            right={0}
+            h={{base:'1.5rem',sm:'1.2rem'}}
+  style={{
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    // border:'1px solid #000',
+    backdropFilter: 'blur(4px)', 
+    // pointerEvents: 'none'
+  }}
+></Container>
+            <Container h={'24vh'} />
             {/* </Group> */}
             <PatientsCards  setPatients={setPatients}  patients={searchedPatients} setProgress={setProgress}/>
             </>

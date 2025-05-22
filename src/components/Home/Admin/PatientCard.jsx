@@ -28,7 +28,7 @@ const navigate = useNavigate();
     id={id}
     setProgress={setProgress}
     setPatients={setPatients}/>
-   <Tooltip  label={verefication ? 'تم التحقق' : 'غير محقق'} >
+   {/* <Tooltip zIndex={3}  label={verefication ? 'تم التحقق' : 'غير محقق'} > */}
     <Card 
       padding="lg"
       radius="md"
@@ -84,7 +84,7 @@ const navigate = useNavigate();
       </Flex>
       </Stack>
     </Card>
-    </Tooltip>
+    {/* </Tooltip> */}
     </>
   );
 };

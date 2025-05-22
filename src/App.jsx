@@ -74,7 +74,7 @@ function App() {
                      color1='#37A9EF'
                      color2='#20A9EF'
                      degree='165deg'
-                     top='30%'
+                     top='20%'
                      right='60%'
                      translateX={-3}
                      translateY={-1}
