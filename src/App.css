@@ -7,16 +7,25 @@
   z-index: 3;
   background-color: #F9FAFC;
 }
-.mantine-focus-auto .mantine-active{
+
+.mantine-Button-root:focus,
+.mantine-Button-root:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.mantine-Button-root:hover {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.mantine-Button-root:focus {
   outline: none !important;
 }
 .mantine-Button-root{
   transition: all 0.6s;
 }
 
-.mantine-Button-root:focus {
-  outline: none !important;
-}
+
 
 *:focus {
   outline: none !important;

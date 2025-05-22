@@ -13,6 +13,16 @@
 body{
   background-color: #F9FAFC !important;
 }
+.mantine-Button-root:focus,
+.mantine-Button-root:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.mantine-Button-root:hover {
+  outline: none !important;
+  box-shadow: none !important;
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

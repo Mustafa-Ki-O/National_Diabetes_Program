@@ -21,7 +21,7 @@ useEffect(()=>{
 
     return(
         <>
-        <Container fluid w="100%" mt={30} pt={5} >
+        <Container fluid w="100%" mt={{base:30,sm:45}} pt={5} >
 
         <Grid justify="center" gutter={15} >
           {patients.length !== 0 ? (

@@ -1,22 +1,30 @@
-import { Container, Grid, Text, Flex, Title, Button,  TextInput, MultiSelect, Select, Textarea,  Radio, Checkbox, NumberInput, Group } from "@mantine/core";
+import { Container, Grid, Text, Flex, Title, Button,  TextInput, MultiSelect, Select, Textarea,  Radio, Checkbox, NumberInput, Group, useStyles } from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import React from "react";
 import { DatePickerInput } from "@mantine/dates";
 import { useEffect, useState } from "react";
 import * as yup from 'yup';
-// import info from '../../assets/css/info.module.css'
+import '../../assets/css/addReview.css'
 import { Switch } from '@mantine/core';
 import { useSelector } from "react-redux";
 import backWards from '../../assets/vectors/forward.png'
 import { useParams } from "react-router";
 import dayjs from "dayjs";
+import { DatePicker } from "@mantine/dates";
+import UpScroll from "../../components/general/UpScroll";
 // import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
 // import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
 
 const AddReview = () =>{
+  UpScroll()
   const patients = useSelector(store => store.patients.patients)
   const {id} = useParams()
   const [storedPatient,setStoredPatient] = useState(null)
+
+  const[history,setHistory] = useState([])
+
+  
+  const [diabetesDetection, setDiabetesDetection] = useState();
 
   const [treatments, setTreatments] = useState([]);
   const [insulinType, setInsulinType] = useState('');
@@ -241,18 +249,12 @@ useEffect(() => {
         <>
  <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
         <Grid  px={{base:'0',sm:'md'}} mx={{base:5,sm:40}}  gutter="md" justify="start" mb={20} align="end" dir="rtl" p={0}>
-          <Grid.Col span={{ base:12,sm:12 }} p={10} my={'lg'}>
-            <Flex align={'center'} p={10} c={'#555555'} bg={'#8e8e8e30'} style={{borderRadius:10}} justify={'space-between'}>
-              <Title  size="1.8rem"  >
+          <Grid.Col span={{ base:12,sm:12 }} p={10} my={'lg'}>     
+              <Title ta={'right'} size="1.8rem"  >
               إضافة مراجعة
             </Title>
-            <Text size="1.4rem" fw={'bold'}>
-             {dayjs(new Date).format('DD-MM-YYYY')}
-            </Text>
-            </Flex>
-            
           </Grid.Col>       
-           <Grid.Col span={{ base:12,sm:6 }} mx={10}>
+           <Grid.Col span={{ base:12,sm:12 }} mx={10}>
              <TextInput 
                readOnly
                dir="rtl"
@@ -265,14 +267,19 @@ useEffect(() => {
               //  style={{height:'auto !important'}}
                />
           </Grid.Col>
+          <Grid.Col span={12} ta={'start'} mt={20} mx={10}>
+           <Text size="1.8rem" fw={600}>
+             {dayjs(new Date).format('DD-MM-YYYY')}
+            </Text>
+          </Grid.Col>
         <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
               معلومات عامة
             </Text>
           </Grid.Col>            
            <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="24px"
+              size='xl'
               radius={10}
               variant="unstyled"
               fw={600}
@@ -293,7 +300,7 @@ useEffect(() => {
           </Grid.Col>
          <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="24px"
+              size='xl'
               radius={10}
               variant="unstyled"
               fw={600}
@@ -315,7 +322,8 @@ useEffect(() => {
           
           <Grid.Col span={{ base:12,sm:6 }}>
             <Select
-              size="24px"
+              size='xl'
+              w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -330,19 +338,21 @@ useEffect(() => {
               ]}
               key={form.key("sugarType")}
               {...form.getInputProps("sugarType")}
+             
               styles={{
                 label: {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
                   fontSize:'18px'
-                }
+                },
               }}
             />
           </Grid.Col>
            <Grid.Col span={{ base:12,sm:6 }}>
             <Select
-              size="24px"
+             size='xl'
+              w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -365,9 +375,64 @@ useEffect(() => {
               }}
             />
           </Grid.Col> 
-          <Grid.Col span={{ base:12,sm:6 }}>
+          
+           <Grid.Col span={{ base: 12, sm: 6 }}>
+             <MultiSelect
+               size="xl"
+               w={'70%'}
+               radius={10}
+               variant="unstyled"
+               fw={600}
+               withAsterisk
+               label="التاريخ العائلي للمرض"
+               placeholder="اختر واحدًا أو أكثر"
+               data={[
+                 { value: 'father', label: 'الأب' },
+                 { value: 'mother', label: 'الأم' },
+                 { value: 'grandParents', label: 'الأجداد' },
+               ]}
+               value={history}
+               onChange={setHistory}
+              //  key={form.key("historyOfFamilyDisease")}
+              //  {...form.getInputProps("historyOfFamilyDisease")}
+               styles={{
+                 label: {
+                   textAlign: 'right',
+                   marginBottom: 5,
+                   width: '98%',
+                   fontSize: '18px'
+                 }
+               }}
+               searchable
+               clearable
+             />
+           </Grid.Col>
+
+          
+          <Grid.Col span={{ base: 12, sm: 6 }}>
+  <DatePickerInput
+    size="xl"
+    radius={10}
+    variant="unstyled"
+    fw={600}
+    withAsterisk
+    label="تاريخ اكتشاف المرض"
+    placeholder="اختر التاريخ"
+    value={diabetesDetection}
+    onChange={setDiabetesDetection}
+    styles={{
+      label: {
+        textAlign: 'right',
+        marginBottom: 5,
+        width: '98%',
+        fontSize: '18px'
+      }
+    }}
+  />
+</Grid.Col>
+<Grid.Col span={{ base:12,sm:6 }}>
             <TextInput
-              size="24px"
+              size='xl'
               radius={10}
               variant="unstyled"
               fw={600}
@@ -387,60 +452,16 @@ useEffect(() => {
             />
           </Grid.Col>
           
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size="24px"
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="التاريخ العائلي للمرض"
-              placeholder='التاريخ العائلي للمرض'
-              key={form.key("historyOfFamilyDisease")}
-              {...form.getInputProps("historyOfFamilyDisease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size="24px"
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="تاريخ اكتشاف المرض"
-              placeholder='تاريخ اكتشاف المرض'
-              key={form.key("diseaseDetection")}
-              {...form.getInputProps("diseaseDetection")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-
          {/* معلومات طبية */}
          <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
               معلومات طبية
             </Text>
           </Grid.Col>   
               
           <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-               size="24px"
+               size='xl'
               radius={10}
               variant="unstyled"
               fw={600}
@@ -454,6 +475,7 @@ useEffect(() => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                   fontSize:'18px'
                 }
               }}
             />
@@ -461,7 +483,8 @@ useEffect(() => {
            
                     <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="24px"
+              size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -475,6 +498,7 @@ useEffect(() => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                   fontSize:'18px'
                 }
               }}
             />
@@ -482,7 +506,8 @@ useEffect(() => {
           
           <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="24px"
+             size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -496,6 +521,7 @@ useEffect(() => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                   fontSize:'18px'
                 }
               }}
             />
@@ -504,7 +530,8 @@ useEffect(() => {
 
           <Grid.Col span={{ base:12,sm:6 }}>
             <TextInput
-              size="24px"
+              size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -518,13 +545,15 @@ useEffect(() => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                   fontSize:'18px'
                 }
               }}
             />
           </Grid.Col>
           <Grid.Col span={{ base:12,sm:6 }}>
           <TextInput
-              size="24px"
+              size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -538,6 +567,7 @@ useEffect(() => {
                   textAlign: 'right',
                   marginBottom:5,
                   width: '98%',
+                   fontSize:'18px'
                 }
               }}
             />
@@ -545,7 +575,8 @@ useEffect(() => {
           <Grid.Col span={{ base: 12, sm: 6 }}>
             
   <TextInput
-    size="24px"
+    size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -555,14 +586,15 @@ useEffect(() => {
     key={form.key("ldl")}
     {...form.getInputProps("ldl")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-     size="24px"
+     size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -572,14 +604,15 @@ useEffect(() => {
     key={form.key("hdl")}
     {...form.getInputProps("hdl")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="24px"
+    size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -589,14 +622,15 @@ useEffect(() => {
     key={form.key("creatinine")}
     {...form.getInputProps("creatinine")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="24px"
+    size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -606,14 +640,15 @@ useEffect(() => {
     key={form.key("fastingGlucose")}
     {...form.getInputProps("fastingGlucose")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-    size="24px"
+    size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -623,14 +658,15 @@ useEffect(() => {
     key={form.key("postMealGlucose")}
     {...form.getInputProps("postMealGlucose")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-        size="24px"
+        size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -640,14 +676,15 @@ useEffect(() => {
     key={form.key("triglycerides")}
     {...form.getInputProps("triglycerides")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
 
 <Grid.Col span={{ base: 12, sm: 6 }}>
   <TextInput
-        size="24px"
+        size='xl'
+              // w={'60%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -657,7 +694,7 @@ useEffect(() => {
     key={form.key("hba1c")}
     {...form.getInputProps("hba1c")}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
     }}
   />
 </Grid.Col>
@@ -665,16 +702,17 @@ useEffect(() => {
 
 
           <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
               الدواء
             </Text>
           </Grid.Col> 
 
-          <Grid.Col span={12}>
+          <Grid.Col span={{base:12,sm:6}}>
   <MultiSelect
-      size="24px"
+      size='xl'
+              w={'60%'}
               radius={10}
-              variant="unstyled"
+              variant="filled"
               fw={600}
               withAsterisk
     label="نوع العلاج"
@@ -686,7 +724,7 @@ useEffect(() => {
     value={treatments}
     onChange={setTreatments}
     styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' }
+      label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' }
     }}
   />
 </Grid.Col>
@@ -694,9 +732,10 @@ useEffect(() => {
 {/* أنسولين */}
 {treatments.includes('insulin') && (
   <>
-    <Grid.Col span={6}>
+    <Grid.Col span={{base:12,sm:6}}>
       <Select
-          size="24px"
+          size='xl'
+              w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -710,13 +749,14 @@ useEffect(() => {
         ]}
         value={insulinType}
         onChange={setInsulinType}
-        styles={{ label: { textAlign: 'right', marginBottom: 5,width:'100%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5,width:'100%', fontSize:'18px' } }}
       />
     </Grid.Col>
 
-    <Grid.Col span={6}>
+    <Grid.Col span={{base:12,sm:6}}>
       <MultiSelect
-          size="24px"
+          size='xl'
+              w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -727,15 +767,16 @@ useEffect(() => {
         value={insulinDrugs}
         onChange={setInsulinDrugs}
         searchable
-        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  , fontSize:'18px'} }}
       />
     </Grid.Col>
 
     {insulinDrugs.map((drug) => (
       <React.Fragment key={drug}>
-        <Grid.Col span={6}>
+        <Grid.Col span={{base:12,sm:6}}>
           <TextInput
-              size="24px"
+              size='xl'
+              // w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -751,12 +792,13 @@ useEffect(() => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  , fontSize:'18px'} }}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{base:12,sm:6}}>
           <TextInput
-              size="24px"
+              size='xl'
+              // w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -772,11 +814,11 @@ useEffect(() => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%', fontSize:'18px'  } }}
           />
           </Grid.Col>
-          <Grid.Col span={12}>
-             <Text size="sm" mt={5} style={{ textAlign: 'center' }}>
+          <Grid.Col span={{base:12,sm:12}}>
+             <Text size="sm" mt={5} style={{ textAlign: 'center' ,opacity:1,transition:'opacity 1s'}}>
             {insulinInfo[drug]?.unitsPerBox && insulinInfo[drug]?.dailyDose
               ? `يكفي الدواء لمدة ${calculateDuration(insulinInfo[drug].unitsPerBox, insulinInfo[drug].dailyDose)} يوم`
               : ''}
@@ -789,9 +831,10 @@ useEffect(() => {
 )}
 {treatments.includes('oral') && (
   <>
-    <Grid.Col span={12}>
+    <Grid.Col span={{base:12,sm:6}}>
       <MultiSelect
-      size="24px"
+              size='xl'
+              w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -802,15 +845,16 @@ useEffect(() => {
         value={oralDrugs}
         onChange={setOralDrugs}
         searchable
-        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
       />
     </Grid.Col>
 
     {oralDrugs.map((drug) => (
       <React.Fragment key={drug}>
-        <Grid.Col span={6}>
+        <Grid.Col span={{base:12,sm:6}}>
           <TextInput
-          size="24px"
+         size='xl'
+              // w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -826,12 +870,13 @@ useEffect(() => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
           />
         </Grid.Col>
-        <Grid.Col span={6}>
+        <Grid.Col span={{base:12,sm:6}}>
           <TextInput
-          size="24px"
+          size='xl'
+              // w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -847,11 +892,11 @@ useEffect(() => {
                 }
               })
             }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' } }}
+            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
           />
           </Grid.Col>
-          <Grid.Col span={12}>
-          <Text size="sm" mt={5} style={{ textAlign: 'center' }}>
+          <Grid.Col span={{base:12,sm:12}}>
+          <Text size="sm" mt={5} style={{ textAlign: 'center' ,opacity:1,transition:'opacity 1s'}}>
             {oralInfo[drug]?.unitsPerBox && oralInfo[drug]?.dailyDose
               ? `يكفي لمدة ${calculateDuration(oralInfo[drug].unitsPerBox, oralInfo[drug].dailyDose)} يوم`
               : ''}
@@ -863,7 +908,7 @@ useEffect(() => {
 )}
 
              <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
               العيادة العينية
             </Text>
           </Grid.Col> 
@@ -872,12 +917,13 @@ useEffect(() => {
     size="md"
     color="rgba(53, 180, 189, 1)"
     labelPosition="left"
-  
+    mr={5}
+    mb={15}
     label="هل يوجد مرض في العين؟"
     checked={hasEyeDisease}
     onChange={(event) => setHasEyeDisease(event.currentTarget.checked)}
     styles={{
-      label: { textAlign: 'right', width: '100%' },
+      label: { textAlign: 'right', width: '100%' , fontSize:'18px'},
     }}
   />
 </Grid.Col>
@@ -886,7 +932,8 @@ useEffect(() => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
-       size="24px"
+       size='xl'
+              w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -899,7 +946,7 @@ useEffect(() => {
         searchable
         clearable
         styles={{
-          label: { textAlign: 'right', marginBottom: 5, width: '98%' },
+          label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'},
         }}
       />
     </Grid.Col>
@@ -907,7 +954,8 @@ useEffect(() => {
     {selectedEyeDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
-         size="24px"
+         size='xl'
+              // w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -915,7 +963,7 @@ useEffect(() => {
           label="أدخل اسم المرض العيني"
           placeholder="المرض العيني"
           styles={{
-            label: { textAlign: 'right', marginBottom: 5, width: '98%' },
+            label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'},
           }}
         />
       </Grid.Col>
@@ -927,7 +975,7 @@ useEffect(() => {
         onChange={setIsRelatedToDiabetes}
         label="هل يوجد علاقة بين المرض العيني والسكري؟"
         styles={{
-          label: { textAlign: 'right', marginBottom: 5, width: '98%' },
+          label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'},
         }}
       >
         <Radio mb={5} value="نعم" label="نعم" />
@@ -937,23 +985,25 @@ useEffect(() => {
 
     <Grid.Col span={{ base: 12 }}>
       <Textarea
-         size="md"
+         size='xl'
+              // w={'70%'}
+              
               radius={10}
-              variant="unstyled"
+              variant="filled"
               fw={600}
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة العينية"
         autosize
         minRows={3}
         styles={{
-          label: { textAlign: 'right', marginBottom: 5, width: '98%' },
+          label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' },
         }}
       />
     </Grid.Col>
     </>
 )}
         <Grid.Col span={12} p={10} my={'lg'}>
-  <Text ta="right" size="1.8rem" p={10} bg="#8e8e8e50" style={{ borderRadius: 10 }}>
+  <Text ta="right" size="1.8rem" p={10} bg="#8e8e8e30" style={{ borderRadius: 10 }}>
     العيادة القلبية
   </Text>
 </Grid.Col>
@@ -961,12 +1011,14 @@ useEffect(() => {
 <Grid.Col span={{ base: 12, sm: 12}}>
    <Switch
     size="md"
+    mr={5}
+    mb={15}
     color="rgba(53, 180, 189, 1)"
     labelPosition="left"
     label="هل يوجد مرض قلبي؟"
     checked={hasHeartDisease}
     onChange={(e) => setHasHeartDisease(e.currentTarget.checked)}
-    styles={{ label: { textAlign: 'right', width: '100%' } }}
+    styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
   />
 </Grid.Col>
 
@@ -974,7 +1026,8 @@ useEffect(() => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
-       size="24px"
+       size="xl"
+       w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -986,21 +1039,22 @@ useEffect(() => {
         onChange={setHeartDisease}
         searchable
         clearable
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
       />
     </Grid.Col>
 
     {heartDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
-         size="24px"
+         size="xl"
+      //  w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
               withAsterisk
           label="أدخل اسم المرض القلبي"
           placeholder="المرض القلبي"
-          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
         />
       </Grid.Col>
     )}
@@ -1011,7 +1065,7 @@ useEffect(() => {
         value={heartRelatedToDiabetes}
         onChange={setHeartRelatedToDiabetes}
         label="هل يوجد علاقة بين المرض القلبي والسكري؟"
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       >
         <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
@@ -1020,23 +1074,24 @@ useEffect(() => {
 
     <Grid.Col span={{ base: 12 }}>
       <Textarea
-        size="md"
+        size="xl"
+      //  w={'70%'}
               radius={10}
-              variant="unstyled"
+              variant="filled"
               fw={600}
               withAsterisk
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة القلبية"
         autosize
         minRows={3}
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
     </Grid.Col>
   </>
 )}
 
 <Grid.Col span={12} p={10} my={'lg'}>
-  <Text ta="right" size="1.8rem" p={10} bg="#8e8e8e50" style={{ borderRadius: 10 }}>
+  <Text ta="right" size="1.8rem" p={10} bg="#8e8e8e30" style={{ borderRadius: 10 }}>
     العيادة العصبية
   </Text>
 </Grid.Col>
@@ -1044,12 +1099,14 @@ useEffect(() => {
 <Grid.Col span={{ base: 12, sm: 12 }}>
   <Switch
     size="md"
+    mr={5}
+    mb={15}
     color="rgba(53, 180, 189, 1)"
     labelPosition="left"
     label="هل يوجد مرض عصبي؟"
     checked={hasNeuroDisease}
     onChange={(e) => setHasNeuroDisease(e.currentTarget.checked)}
-    styles={{ label: { textAlign: 'right', width: '100%' } }}
+    styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
   />
 </Grid.Col>
 
@@ -1057,7 +1114,8 @@ useEffect(() => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
-       size="24px"
+       size="xl"
+       w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
@@ -1069,21 +1127,22 @@ useEffect(() => {
         onChange={setNeuroDisease}
         searchable
         clearable
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
     </Grid.Col>
 
     {neuroDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
-         size="24px"
+         size="xl"
+      //  w={'70%'}
               radius={10}
               variant="unstyled"
               fw={600}
               withAsterisk
           label="أدخل اسم المرض العصبي"
           placeholder="المرض العصبي"
-          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
         />
       </Grid.Col>
     )}
@@ -1093,7 +1152,7 @@ useEffect(() => {
         value={neuroRelatedToDiabetes}
         onChange={setNeuroRelatedToDiabetes}
         label="هل يوجد علاقة بين المرض العصبي والسكري؟"
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
       >
         <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
@@ -1102,22 +1161,23 @@ useEffect(() => {
 
     <Grid.Col span={{ base: 12 }}>
       <Textarea
-        size="md"
+        size="xl"
+      //  w={'70%'}
               radius={10}
-              variant="unstyled"
+              variant="filled"
               fw={600}
               withAsterisk
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة العصبية"
         autosize
         minRows={3}
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
     </Grid.Col>
   </>
 )}
 <Grid.Col span={12} p={10} my={'lg'}>
-  <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{ borderRadius: 10 }}>
+  <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{ borderRadius: 10 }}>
     العيادة البولية
   </Text>
 </Grid.Col>
@@ -1125,12 +1185,14 @@ useEffect(() => {
 <Grid.Col span={{ base: 12, sm: 12 }}>
   <Switch
     size="md"
+    mr={5}
+    mb={10}
     color="rgba(53, 180, 189, 1)"
     labelPosition="left"
     label="هل يوجد مرض بولي؟"
     checked={hasUrinaryDisease}
     onChange={(event) => setHasUrinaryDisease(event.currentTarget.checked)}
-    styles={{ label: { textAlign: 'right', width: '100%' } }}
+    styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
   />
 </Grid.Col>
 
@@ -1138,7 +1200,8 @@ useEffect(() => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
-        size="24px"
+        size="xl"
+        w={'70%'}
         radius={10}
         variant="unstyled"
         fw={600}
@@ -1150,21 +1213,22 @@ useEffect(() => {
         onChange={setSelectedUrinaryDisease}
         searchable
         clearable
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
       />
     </Grid.Col>
 
     {selectedUrinaryDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
-          size="24px"
+          size="xl"
+        // w={'70%'}
           radius={10}
           variant="unstyled"
           fw={600}
           withAsterisk
           label="أدخل اسم المرض البولي"
           placeholder="المرض البولي"
-          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
         />
       </Grid.Col>
     )}
@@ -1174,7 +1238,7 @@ useEffect(() => {
         value={isUrinaryRelatedToDiabetes}
         onChange={setIsUrinaryRelatedToDiabetes}
         label="هل يوجد علاقة بين المرض البولي والسكري؟"
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       >
         <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
@@ -1183,21 +1247,22 @@ useEffect(() => {
 
     <Grid.Col span={{ base: 12 }}>
       <Textarea
-        size="md"
+        size="xl"
+        // w={'70%'}
         radius={10}
-        variant="unstyled"
+        variant="filed"
         fw={600}
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة البولية"
         autosize
         minRows={3}
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
     </Grid.Col>
   </>
 )}
 <Grid.Col span={12} p={10} my={'lg'}>
-  <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{ borderRadius: 10 }}>
+  <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{ borderRadius: 10 }}>
     العيادة العظمية
   </Text>
 </Grid.Col>
@@ -1205,12 +1270,14 @@ useEffect(() => {
 <Grid.Col span={{ base: 12, sm: 12 }}>
   <Switch
     size="md"
+    mb={10}
+    mr={5}
     color="rgba(53, 180, 189, 1)"
     labelPosition="left"
     label="هل يوجد مرض عظمي؟"
     checked={hasBoneDisease}
     onChange={(event) => setHasBoneDisease(event.currentTarget.checked)}
-    styles={{ label: { textAlign: 'right', width: '100%' } }}
+    styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
   />
 </Grid.Col>
 
@@ -1218,7 +1285,8 @@ useEffect(() => {
   <>
     <Grid.Col span={{ base: 12, sm: 6 }}>
       <Select
-        size="24px"
+        size="xl"
+        w={'70%'}
         radius={10}
         variant="unstyled"
         fw={600}
@@ -1230,21 +1298,22 @@ useEffect(() => {
         onChange={setSelectedBoneDisease}
         searchable
         clearable
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
     </Grid.Col>
 
     {selectedBoneDisease === 'أخرى' && (
       <Grid.Col span={{ base: 12, sm: 6 }}>
         <TextInput
-          size="24px"
+          size="xl"
+        // w={'70%'}
           radius={10}
           variant="unstyled"
           fw={600}
           withAsterisk
           label="أدخل اسم المرض العظمي"
           placeholder="المرض العظمي"
-          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+          styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
         />
       </Grid.Col>
     )}
@@ -1254,7 +1323,7 @@ useEffect(() => {
         value={isBoneRelatedToDiabetes}
         onChange={setIsBoneRelatedToDiabetes}
         label="هل يوجد علاقة بين المرض العظمي والسكري؟"
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       >
         <Radio mb={5} value="نعم" label="نعم" />
         <Radio value="لا" label="لا" />
@@ -1263,37 +1332,39 @@ useEffect(() => {
 
     <Grid.Col span={{ base: 12 }}>
       <Textarea
-        size="md"
+        size="xl"
+        // w={'70%'}
         radius={10}
-        variant="unstyled"
+        variant="filled"
         fw={600}
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة بالحالة العظمية"
         autosize
         minRows={3}
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
     </Grid.Col>
   </>
 )}
 
           <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
+            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
               عيادات أخرى
             </Text>
           </Grid.Col> 
-          <Grid.Col span={{ base:12,sm:6 }}>
+          <Grid.Col span={{ base:12,sm:12 }}>
             <Textarea
-        size="md"
+              size="xl"
+        // w={'70%'}
               radius={10}
-              variant="unstyled"
+              variant="filled"
               fw={600}
               withAsterisk
         label="ملاحظات"
         placeholder="أدخل أي ملاحظات متعلقة "
         autosize
         minRows={3}
-        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' } }}
+        styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
       />
           </Grid.Col>
           {/* <Grid.Col span={{ base:12,sm:12 }}>
@@ -1305,10 +1376,10 @@ useEffect(() => {
               labelPosition="right"
             />
           </Grid.Col> */}
-          <Grid.Col mt={20} ta={'start'} span={{ base:12,sm:6 }}>
+          <Grid.Col my={20} mb={'5rem'} ta={'right'} span={{ base:12,sm:12 }}>
           <Button 
-            fullWidth 
             radius={10} 
+            miw={'12rem'}
             size="md" 
             type="submit" 
             variant="filled" 
