@@ -42,7 +42,7 @@ const Documents = () => {
   return (
     <>
     <Stack align="start" >
-        <Flex b={20} w={'100%'} justify={'space-between'} align={'center'} >
+        <Flex  w={'100%'} justify={'space-between'} align={'center'} >
         <Button miw={'8rem'} radius="md" variant="filled" color="blue" size="md">
         رفع مقال
       </Button>

@@ -25,7 +25,7 @@ UpScroll()
     return(
         <>
         <Container  fluid style={{opacity:active?'1':'0' ,transition:'all 0.7s'}} p={20}>
-            <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
+            <Title bg={'#f9f9f9'} size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                           برامج الرعاية الصحية
             </Title>
             <MultiTabs/>

@@ -5,8 +5,8 @@ import Videos from './Videos';
 
 const MultiTabs =() => {
   return (
-    <Tabs p={20} dir='rtl' defaultValue="doc" >
-      <Tabs.List>
+    <Tabs p={20} dir='rtl' defaultValue="doc">
+      <Tabs.List pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}} bg={'#f9f9f9'} >
         <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="doc" >
           المقالات
         </Tabs.Tab>
@@ -18,7 +18,7 @@ const MultiTabs =() => {
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel mt={'xl'} value="doc">
+      <Tabs.Panel mt={'xl'} value="doc" >
         <Documents/>
       </Tabs.Panel>
 
