@@ -250,7 +250,7 @@ useEffect(() => {
           </Grid.Col>
  
            <Grid.Col  span={12} >
-             {storedPatient?.review.map((r,index)=>(
+             {storedPatient?.reviews?.map((r,index)=>(
             <Flex key={index} justify={'space-between'} my={'md'} py={30}  bg={'#fff'} bd={'1px solid #00000040'} style={{borderRadius:20,cursor:'pointer'}}>
           <Group ml={20}>
             <Button radius={20} size="سة" variant="light" color="red" onClick={open}>
@@ -299,7 +299,5 @@ useEffect(() => {
     </Container>
   );
 }
-// ارجاع مصفوفة المعلومات المعدلة في الريسبونس
-// تاريخ اكتشاف المرض
-// 
+
 export default Patient;

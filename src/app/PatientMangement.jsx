@@ -77,21 +77,19 @@ const handleChangeName = (value) =>{
             <>
             {/* <Group w={'100%'} p={0}> */}
           
-           
-            {patients.length !==0 ? (
-            <Grid dir justify="end" mr={{base:0,sm:'20%'}}  gutter={20} gap={20} pos="fixed" top={{base:'7%',sm:'9%'}} left={0} right={0}
-  style={{
-    background: '#F9FAFC',
-    zIndex: 10,
-    paddingBottom: '1rem',
-    // backdropFilter: 'blur(8px)', 
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    borderBottom: '1px solid rgba(0, 0, 0, 0.05)' // يعطي حد خفيف أنيق
-  }}>  
-              <Grid.Col span={12}>
-               <Title mt={20} size={'2rem'} ta={'end'} px={'lg'} mb={'1rem'} >
+            <Title size={'2rem'} ta={'end'} px={'lg'} mb={'1rem'} >
               إدارة المرضى
             </Title>
+            {patients.length !==0 ? (
+            <Grid dir justify="end"  gutter={20} gap={20} pos={'sticky'} top={{base:-10,sm:0}}
+                style={{
+                  zIndex:10,
+                  background: '#F9FAFC',
+                  paddingBottom:20,
+                  borderBottom: '2px solid #00000010' // يعطي حد خفيف أنيق
+                }}>  
+              <Grid.Col span={12}>
+              
              </Grid.Col>
               <Grid.Col visibleFrom="sm" style={{alignSelf:'end',justifyItems:'end'}} span={{base:12,sm:5}}>
               <Flex  gap={3} justify={'space-between'}>
@@ -100,7 +98,7 @@ const handleChangeName = (value) =>{
               <Button radius={10} size="md" fullWidth variant="light" c='#37A9EF' >فرز المرضى حسب</Button>
               </Popover.Target>
                <Popover.Dropdown>
-                 <Stack gap={20}>
+                 <Stack gap={20}  >
                   <Flex gap={20}  justify='space-between' align='center'>
                     <Select
                     w='50%'
@@ -148,7 +146,7 @@ const handleChangeName = (value) =>{
               <Button radius={10} size="md" miw={'7rem'} variant="light" c='#37A9EF' >فرز</Button>
               </Popover.Target>
                <Popover.Dropdown>
-                 <Stack gap={20}>
+                 <Stack gap={10}>
                   <Flex gap={20}  justify='space-between' align='center'>
                     <Select
                     w='50%'
@@ -185,8 +183,8 @@ const handleChangeName = (value) =>{
              
               </Flex>
                 <Group m={0} >
-<Image src={search} mb={10} w={30} className={home.search}/>
-                 <Text size="lg" fw={700} mb={10}  >
+<Image src={search} w={30} className={home.search}/>
+                 <Text size="lg" fw={700}  >
                     ابحث عن مريض 
                 </Text>  
                 </Group>
@@ -201,23 +199,8 @@ const handleChangeName = (value) =>{
             
             
             ):(<></>)}
-            <Container
-            fluid
-            mr={{base:0,sm:'20%'}}
-            pos={'fixed'}
-            top={{base:'32%',sm:'41%'}}
-            right={0}
-            h={{base:'1.5rem',sm:'1.2rem'}}
-  style={{
-    left: 0,
-    right: 0,
-    zIndex: 10,
-    // border:'1px solid #000',
-    backdropFilter: 'blur(4px)', 
-    // pointerEvents: 'none'
-  }}
-></Container>
-            <Container h={'24vh'} />
+
+            {/* <Container h={'24vh'} /> */}
             {/* </Group> */}
             <PatientsCards  setPatients={setPatients}  patients={searchedPatients} setProgress={setProgress}/>
             </>

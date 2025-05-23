@@ -19,7 +19,7 @@ const ArticleCard = ({ title, center, content, date }) => (
       </Grid.Col>
 
       <Grid.Col span={12}>
-        <Spoiler maxHeight={90} dir="ltr" showLabel="عرض المزيد" hideLabel="عرض أقل">
+        <Spoiler maxHeight={60} dir="ltr" showLabel="عرض المزيد" hideLabel="عرض أقل">
           <Text size="lg" style={{ lineHeight: 1.6 }}>
             {content}
           </Text>
