@@ -112,7 +112,7 @@ const form = useForm({
             قم أولا بتحديد المركز الذي سيتولى الاشراف
           </Text>
            <Grid>
-                       <Grid.Col span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+                       <Grid.Col span={12}>
                        <Select
                             size="md"
                             radius={10}
@@ -125,7 +125,7 @@ const form = useForm({
                             // {...form.getInputProps("city")}
                           />
                        </Grid.Col>
-                       <Grid.Col span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+                       <Grid.Col span={12}>
                          <Select 
                            size="md"
                            radius={10}
@@ -138,10 +138,10 @@ const form = useForm({
                 </Grid.Col>
            </Grid>
           <Flex gap={30} mt={30} w='100%' justify='space-between'>
-           <Button size="md" radius={10} fullWidth variant="filled" color="#37a8ef" type="submit">
+           <Button size="md" radius={10} fullWidth variant="filled" color="#E53935" type="submit">
              حذف
            </Button>
-           <Button size="md" radius={10} fullWidth variant="outline" color="#37a8ef" onClick={close}>
+           <Button size="md" radius={10} fullWidth variant="outline" color="#E53935" onClick={close}>
               تراجع
            </Button>
           </Flex>

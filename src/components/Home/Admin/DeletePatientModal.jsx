@@ -41,10 +41,10 @@ const DeletePatientModal = ({id,opened,setProgress,setPatients,close}) => {
             هل انت متأكد من ازالة كافة المعلومات المتعلقة بالمريض ؟
           </Text>
           <Flex gap={30} mt={30} w='100%' justify='space-between'>
-           <Button size="md" radius={10} fullWidth variant="filled" color="#37a8ef" onClick={handleDel}>
+           <Button size="md" radius={10} fullWidth variant="filled" color="#E53935" onClick={handleDel}>
              حذف
            </Button>
-           <Button size="md" radius={10} fullWidth variant="outline" color="#37a8ef" onClick={close}>
+           <Button size="md" radius={10} fullWidth variant="outline" color="#E53935" onClick={close}>
               تراجع
            </Button>
           </Flex>

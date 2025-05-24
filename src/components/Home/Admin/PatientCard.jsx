@@ -66,14 +66,13 @@ const navigate = useNavigate();
           radius="md"
           fw={800}
           onClick={() => navigate(`/National_Diabetes_Program/patientInfo/${id}`)}
-        >
-          
+        >   
          سجل المراجعات
           <Image  src={updateIcon} mr={15} w={20}/>
         </Button>
         <Button
           w={80}
-          color="#1e1e1e"
+          color="#E53935"
           variant="light"
           radius="md"
           fw={800}
