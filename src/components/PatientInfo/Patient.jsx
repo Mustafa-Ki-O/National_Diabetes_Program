@@ -58,6 +58,9 @@ useEffect(() => {
     setProgress(isPending)
   },[isPending])
   
+  const currentYear = new Date().getFullYear();
+const birthYear = storedPatient?.age ? new Date(storedPatient.age).getFullYear() : null;
+const age = birthYear ? currentYear - birthYear : "غير معروف";
 
   return (
     <Container w='100%' fluid >
@@ -86,10 +89,10 @@ useEffect(() => {
           <Flex justify={'end'} gap={'2.5rem'} px={'lg'} align={'center'}>
             <Group  p={0} m={0}>
              <Text  size={'1.5rem'} c={'#00000060'}>
-            { `${new Date().getFullYear() - new Date(storedPatient?.age).getFullYear()}` >= 10 ? 'سنة' : 'سنوات' }
+            { `${age}` >= 10 ? 'سنة' : 'سنوات' }
             </Text>
              <Text size={'1.5rem'} c={'#00000060'}>
-              {new Date().getFullYear() - new Date(storedPatient?.age).getFullYear()}  
+              {age}  
              </Text>
             </Group> 
             <Title size={'1.8rem'} ta={'end'} >

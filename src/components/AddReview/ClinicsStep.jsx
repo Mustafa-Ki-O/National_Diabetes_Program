@@ -5,6 +5,7 @@ import { useState } from "react";
 import UpScroll from "../general/UpScroll";
 
 const ClinicsStep =() =>{
+  UpScroll()
  const { control, watch, formState: { errors } } = useFormContext();
 const [otherClinics,setOtherClinics] = useState(false)
 
@@ -18,7 +19,7 @@ const ClinicSection = ({
   relationKey,
   commentsKey,
 }) => {
-  UpScroll()
+  
   const { control, watch, formState: { errors } } = useFormContext();
 
   const hasDisease = watch(hasKey);
