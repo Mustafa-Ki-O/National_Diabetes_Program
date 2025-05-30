@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-                <Circle
+                {/* <Circle
                      w={2}
                      color1='#37A9EF'
                      color2='#fff'
@@ -80,7 +80,7 @@ function App() {
                      translateY={-1}
                      className="six"
                      duration='5s'
-                   />
+                   /> */}
     <RouterProvider router={route} /></>
   
 ) ;

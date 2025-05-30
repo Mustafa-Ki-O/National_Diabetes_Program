@@ -2,9 +2,9 @@ import axiosInstance from "../axiosService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const DeleteReview = (id) => {
+const FetchPatientReview = (rid) => {
   return new Promise((resolve, reject) => {
-    axiosInstance.delete(`${API_URL}/reviewdelete/${id}`)
+    axiosInstance.get(`${API_URL}/getRevieweData/${rid}`)
       .then(response => {
         resolve(response.data); 
       })
@@ -14,4 +14,4 @@ const DeleteReview = (id) => {
   });
 };
 
-export default DeleteReview;
+export default FetchPatientReview;

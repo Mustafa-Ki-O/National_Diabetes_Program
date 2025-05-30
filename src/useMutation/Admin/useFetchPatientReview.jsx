@@ -1,21 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
+import FetchPatientReview from "../../api/Admin/FetchPatientReview";
 import { useNavigate } from "react-router-dom";
-import PostReview from "../../api/Admin/PostReview";
 
-const useAddReview = (patientId) => {
-  console.log(patientId)
+const useFetchPatientReview = (setReview) => {
   const navigate = useNavigate();
-  const { mutate: addReview, isPending } = useMutation({
-    mutationFn: (formData) => PostReview(formData),
+  const { mutate: fetchReview, isPending} = useMutation({
+    mutationFn: (rid) => FetchPatientReview(rid).then((res)=>{
+      setReview(res);
+    }),
     onSuccess: () => {
         console.log("تم بنجاح");
-        notifications.show({
-          title: 'تم رفع المراجعة بنجاح',
-          autoClose: 3000,
-        });
-         navigate(`/National_Diabetes_Program/patientInfo/${patientId}/`)
-        // localStorage.clear()
     },
     onError: (err) => {
       console.log("ERROR", err);
@@ -27,6 +22,6 @@ const useAddReview = (patientId) => {
       });
     },
   });
-  return { addReview, isPending };
+  return { fetchReview,isPending};
 };
-export default useAddReview
+export default useFetchPatientReview;

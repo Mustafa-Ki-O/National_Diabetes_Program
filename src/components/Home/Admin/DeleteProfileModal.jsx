@@ -120,7 +120,7 @@ const form = useForm({
                             data={citiesNames}   
                             value={city} 
                             onChange={handleChangeCity}
-                            key={form.key("city")}    
+                            key={form.key("city")} 
                             disabled={isPendingCities}
                             // {...form.getInputProps("city")}
                           />

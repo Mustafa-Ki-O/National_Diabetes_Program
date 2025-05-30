@@ -21,9 +21,9 @@ useEffect(()=>{
 
     return(
         <>
-        <Container fluid w="100%" mt={{base:10,sm:15}} pt={5} >
+        <Container fluid w="100%" mt={{base:10,sm:15}} pt={5} pr={{base:0,sm:30}} >
 
-        <Grid justify="center" gutter={15} >
+        <Grid justify="center" gutter={25} >
           {patients.length !== 0 ? (
             patients.map((patient, index) => (
               <Grid.Col span={{ lg: 4, md: 4, sm: 6, xs: 12 }} key={index}>

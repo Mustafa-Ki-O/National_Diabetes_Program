@@ -18,6 +18,7 @@ import Start from "../app/Start";
 import useVerifyToken from "../useMutation/useVerifyToken";
 import { notifications } from "@mantine/notifications";
 import AddReview from "../app/Admin/AddReview";
+import PatientReview from "../app/Admin/PatientReview";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -98,6 +99,10 @@ const route = createBrowserRouter([
             {
              path: 'patientInfo/:id/add-review',
              element: <AddReview />,
+            },
+            {
+             path: 'patientInfo/:id/patient-review/:rid',
+             element: <PatientReview/>,
             },
             {
               path:'statistics',

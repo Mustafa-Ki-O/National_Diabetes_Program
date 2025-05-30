@@ -1,4 +1,4 @@
-import { Card, Text, Button, Group, Stack, Flex, Title ,Image} from "@mantine/core";
+import { Card, Text, Button, Group, Stack, Flex, Title ,Image ,Indicator} from "@mantine/core";
 import { Tooltip } from "@mantine/core";
 import deleteIcon from '../../../assets/vectors/delete.svg'
 import accountIcon from '../../../assets/vectors/account.svg'
@@ -29,6 +29,7 @@ const navigate = useNavigate();
     setProgress={setProgress}
     setPatients={setPatients}/>
    {/* <Tooltip zIndex={3}  label={verefication ? 'تم التحقق' : 'غير محقق'} > */}
+   <Indicator zIndex={8} size={18} withBorder processing={!verefication?true:false}>
     <Card 
       padding="lg"
       radius="md"
@@ -38,24 +39,24 @@ const navigate = useNavigate();
     >  
       <Stack  mih={200} justify="space-between" >  
           <Flex pos={'relative'}  align='center' gap={10} justify='end'>
-          <Title size="md" c='#000' className={card.line}>{name}</Title>
+          <Title size="lg"  c='#000' className={card.line}>{name}</Title>
           {/* <Title size='md'>الاسم</Title> */}
           <Image src={accountIcon} w={'3rem'} />
           
         </Flex>  
         <Flex mt={5} align='center' gap={10} justify='end'>
-          <Text size="md" c='#000'>{id_number}</Text>
-          <Title size='md'>الرقم الوطني</Title>
+          <Text size="lg" c='#000'>{id_number}</Text>
+          <Title size='lg'>الرقم الوطني</Title>
         </Flex>
 
         <Flex align='center' gap={10} justify='end'>
-          <Text size="md" c='#000' >{age}</Text>
-          <Title size='md' >العمر</Title>
+          <Text size="lg"  c='#000' >{age}</Text>
+          <Title size="lg"  >العمر</Title>
         </Flex> 
         {/* {sugarType !== null ?( */}
         <Flex align='center' gap={10} justify='end'>
-          <Text size="md" c='#000' >{sugarType==null ? '-' : sugarType}</Text>
-          <Title size='md' >نوع السكري</Title>
+          <Text size="lg" c='#000' >{sugarType==null ? '-' : sugarType}</Text>
+          <Title size="lg"  >نوع السكري</Title>
         </Flex> 
         {/* ):(<></>) } */}
         <Flex dir="rtl" gap={8} justify="end" align="end">
@@ -63,6 +64,7 @@ const navigate = useNavigate();
           color="#37a8ef"
           variant="filled"
           fullWidth
+          size="md"
           radius="md"
           fw={800}
           onClick={() => navigate(`/National_Diabetes_Program/patientInfo/${id}`)}
@@ -72,8 +74,9 @@ const navigate = useNavigate();
         </Button>
         <Button
           w={80}
-          color="#E53935"
+          color="#Ee3935"
           variant="light"
+          size="md"
           radius="md"
           fw={800}
           onClick={open}
@@ -83,6 +86,7 @@ const navigate = useNavigate();
       </Flex>
       </Stack>
     </Card>
+    </Indicator>
     {/* </Tooltip> */}
     </>
   );

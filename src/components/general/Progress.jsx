@@ -1,6 +1,7 @@
 import { Container } from '@mantine/core';
 import '../../assets/css/loader.css'
 import { useLocation } from 'react-router';
+import { Loader } from '@mantine/core';
 const Progress = () => {
 
   const location = useLocation()
@@ -10,7 +11,8 @@ const Progress = () => {
         && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
         && location.pathname !== '/National_Diabetes_Program/verifyEmail/' ? '80%' :'100%' }} fluid className="overlay">
          <Container >
-           <div className="loader"></div>
+           {/* <div className="loader"></div> */}
+            <Loader color="blue" size="lg" type="dots" />
          </Container>
       </Container>
     )

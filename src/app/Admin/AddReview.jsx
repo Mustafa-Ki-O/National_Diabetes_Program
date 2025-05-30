@@ -1,1466 +1,175 @@
-// import { Container, Grid, Text, Flex, Title, Button,  TextInput, MultiSelect, Select, Textarea,  Radio, Checkbox, NumberInput, Group, useStyles } from "@mantine/core";
-// import { useForm, yupResolver } from "@mantine/form";
-// import React from "react";
-// import { DatePickerInput } from "@mantine/dates";
-// import { useEffect, useState } from "react";
-// import * as yup from 'yup';
-// import '../../assets/css/addReview.css'
-// import { Switch } from '@mantine/core';
-// import { useSelector } from "react-redux";
-// import backWards from '../../assets/vectors/forward.png'
-// import { useParams } from "react-router";
-// import dayjs from "dayjs";
-// import useAddReview from "../../useMutation/Admin/useAddReview";
-// import UpScroll from "../../components/general/UpScroll";
-// // import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
-// // import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
 
-// const AddReview = () =>{
-//   UpScroll()
-//   const patients = useSelector(store => store.patients.patients)
-//   const {id} = useParams()
-//   const {addReview,isPending} = useAddReview(id);
-//   const [storedPatient,setStoredPatient] = useState(null)
-
-//   const[history,setHistory] = useState([])
-
-  
-//   const [diabetesDetection, setDiabetesDetection] = useState();
-
-//   const [treatments, setTreatments] = useState([]);
-//   const [insulinType, setInsulinType] = useState('');
-//   const [insulinDrugs, setInsulinDrugs] = useState([]);
-//   const [oralDrugs, setOralDrugs] = useState([]);
-//   const [insulinInfo, setInsulinInfo] = useState({});
-//   const [oralInfo, setOralInfo] = useState({});
-
-
-//   const [hasEyeDisease, setHasEyeDisease] = useState(false);
-//   const [selectedEyeDisease, setSelectedEyeDisease] = useState('');
-//   const [isRelatedToDiabetes, setIsRelatedToDiabetes] = useState('');
-  
-  
-//   const [hasHeartDisease, setHasHeartDisease] = useState(false);
-//   const [heartDisease, setHeartDisease] = useState('');
-//   const [heartRelatedToDiabetes, setHeartRelatedToDiabetes] = useState('');
-  
-//   const [hasNeuroDisease, setHasNeuroDisease] = useState(false);
-//   const [neuroDisease, setNeuroDisease] = useState('');
-//   const [neuroRelatedToDiabetes, setNeuroRelatedToDiabetes] = useState('');
-  
-
-
-// const [hasUrinaryDisease, setHasUrinaryDisease] = useState(false);
-// const [selectedUrinaryDisease, setSelectedUrinaryDisease] = useState('');
-// const [isUrinaryRelatedToDiabetes, setIsUrinaryRelatedToDiabetes] = useState('');
-
-
-// const [hasBoneDisease, setHasBoneDisease] = useState(false);
-// const [selectedBoneDisease, setSelectedBoneDisease] = useState('');
-// const [isBoneRelatedToDiabetes, setIsBoneRelatedToDiabetes] = useState('');
-
-
-//   const insulinDrugOptions = [
-//   { value: "mixtard", label: "ميكستارد" },
-//   { value: "lantus", label: "لانتوس" },
-//   { value: "novorapid", label: "نوفورابيد" },
-// ];
-
-// const oralDrugOptions = [
-//   { value: "metformin", label: "ميتفورمين" },
-//   { value: "glibenclamide", label: "غليبينكلاميد" },
-//   { value: "gliclazide", label: "غليكلازيد" },
-// ];
-
-// const calculateDuration = (unitsPerBox, dailyDose) => {
-//   if (!unitsPerBox || !dailyDose) return null;
-//   return Math.floor(unitsPerBox / dailyDose);
-// };
-
-// useEffect(() => {
-//     // fetchInfo(id); 
-//     const foundPatient = patients.find(patient => patient.id.toString() === id.toString());
-//     console.log(foundPatient)
-//     if (foundPatient) {
-//       setStoredPatient(foundPatient);
-//       console.log(storedPatient)
-//     } else {
-//       console.warn(`Patient with id ${id} not found`);
-//       setStoredPatient(null);
-//     }
-//   }, [id, patients]); 
-
-
-//  const schema = yup.object().shape({
-//     bloodSugar: yup.string().required('مستوى السكر في الدم مطلوب'),
-//     gender: yup.string().required('الجنس مطلوب'),
-//     address_patient: yup.string().required('العنوان مطلوب'),
-//     weight: yup.string().required('الوزن مطلوب'),
-//     length_patient: yup.string().required('الطول مطلوب'),
-//     sugarType: yup.string().required('نوع السكري مطلوب'),
-//     hemoglobin: yup.string().required('الهيموجلوبين مطلوب'),
-//     bloodPressure: yup.string().required('ضغط الدم مطلوب'),
-//     typeOfMedicine: yup.string().required('نوع الدواء مطلوب'),
-//     cholesterol: yup.string().required('الكوليسترول مطلوب'),
-//     grease: yup.string().required('الدهون مطلوب'),
-//     urineAcid: yup.string().required('حمض البوليك مطلوب'),
-//     otherDisease: yup.string().required('الأمراض الأخرى مطلوبة'),
-//     diseaseDetection: yup.string().required('تاريخ اكتشاف المرض مطلوب'),
-//     historyOfFamilyDisease: yup.string().required('تاريخ أمراض العائلة مطلوب'),
-//     isCompleted: yup.boolean().required('حالة الإكمال مطلوبة'),
-    
-//     // Additional fields from the images
-//     normal_glucose: yup.string(),
-//     Glucose_after_meal: yup.string(),
-//     triple_grease: yup.string(),
-//     hbaic: yup.string(),
-//     idl: yup.string(),
-//     hdl: yup.string(),
-//     creatine: yup.string(),
-    
-//     // Diseases fields
-//     has_a_eye_disease: yup.boolean(),
-//     in_kind_disease: yup.string(),
-//     relationship_eyes_with_diabetes: yup.boolean(),
-//     comments_eyes_clinic: yup.string(),
-    
-//     has_a_heart_disease: yup.boolean(),
-//     heart_disease: yup.string(),
-//     relationship_heart_with_diabetes: yup.boolean(),
-//     comments_heart_clinic: yup.string(),
-    
-//     has_a_nerve_disease: yup.boolean(),
-//     nerve_disease: yup.string(),
-//     relationship_nerve_with_diabetes: yup.boolean(),
-//     comments_nerve_clinic: yup.string(),
-    
-//     has_a_bone_disease: yup.boolean(),
-//     bone_disease: yup.string(),
-//     relationship_bone_with_diabetes: yup.boolean(),
-//     comments_bone_clinic: yup.string(),
-    
-//     has_a_urinary_disease: yup.boolean(),
-//     urinary_disease: yup.string(),
-//     relationship_urinary_with_diabetes: yup.boolean(),
-//     comments_urinary_clinic: yup.string(),
-//   });
-  
-//   // Form initialization
-//   const form = useForm({
-//     mode: "uncontrolled",
-//     validateInputOnChange: true,
-//     initialValues: {
-//       id: parseInt(id) || '',
-//       bloodSugar: '',
-//       gender: '',
-//       address_patient: '',
-//       weight: '',
-//       length_patient: '',
-//       sugarType: '',
-//       hemoglobin: '',
-//       bloodPressure: '',
-//       typeOfMedicine: '',
-//       cholesterol: '',
-//       grease: '',
-//       urineAcid: '',
-//       otherDisease: '',
-//       diseaseDetection: '',
-//       historyOfFamilyDisease: '',
-//       isCompleted: false,
-      
-//       // Additional fields
-//       normal_glucose: '',
-//       Glucose_after_meal: '',
-//       triple_grease: '',
-//       hbaic: '',
-//       idl: '',
-//       hdl: '',
-//       creatine: '',
-      
-//       // Diseases fields
-//       has_a_eye_disease: false,
-//       in_kind_disease: '',
-//       relationship_eyes_with_diabetes: false,
-//       comments_eyes_clinic: '',
-      
-//       has_a_heart_disease: false,
-//       heart_disease: '',
-//       relationship_heart_with_diabetes: false,
-//       comments_heart_clinic: '',
-      
-//       has_a_nerve_disease: false,
-//       nerve_disease: '',
-//       relationship_nerve_with_diabetes: false,
-//       comments_nerve_clinic: '',
-      
-//       has_a_bone_disease: false,
-//       bone_disease: '',
-//       relationship_bone_with_diabetes: false,
-//       comments_bone_clinic: '',
-      
-//       has_a_urinary_disease: false,
-//       urinary_disease: '',
-//       relationship_urinary_with_diabetes: false,
-//       comments_urinary_clinic: '',
-//     },
-//     validate: yupResolver(schema),
-//   });
-
-//   const handleSubmit = (values) => {
-//     if (form.isValid) {
-//       const patientData = {
-//         ...values,
-//         // Include all the fields from the form
-//         treatments: treatments,
-//         insulinType: insulinType,
-//         insulinDrugs: insulinDrugs,
-//         oralDrugs: oralDrugs,
-//         insulinInfo: insulinInfo,
-//         oralInfo: oralInfo,
-        
-//         // Diseases information
-//         eyeDisease: {
-//           hasEyeDisease,
-//           selectedEyeDisease,
-//           isRelatedToDiabetes,
-//         },
-//         heartDisease: {
-//           hasHeartDisease,
-//           heartDisease,
-//           heartRelatedToDiabetes,
-//         },
-//         neuroDisease: {
-//           hasNeuroDisease,
-//           neuroDisease,
-//           neuroRelatedToDiabetes,
-//         },
-//         urinaryDisease: {
-//           hasUrinaryDisease,
-//           selectedUrinaryDisease,
-//           isUrinaryRelatedToDiabetes,
-//         },
-//         boneDisease: {
-//           hasBoneDisease,
-//           selectedBoneDisease,
-//           isBoneRelatedToDiabetes,
-//         },
-//       };
-//       addReview(patientData)
-//     };
-//     const validated = form.validate();
-
-//     if (validated) {
-//       validated.errors;
-//     }
-//     form.reset();
-//   };
-
-//   // useEffect(() => {
-//   //   if (isSubmitted) {
-//   //     console.log('loading :',isPending)
-//   //     setProgress(isPending || isPendingFetch ); 
-//   //   }
-//   // }, [isPending,isPendingFetch]);
-
-//     return(
-//         <>
-//  <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
-//         <Grid display={'none'} px={{base:'0',sm:'md'}} mx={{base:5,sm:40}}  gutter="md" justify="start" mb={20} align="end" dir="rtl" p={0}>
-//           <Grid.Col span={{ base:12,sm:12 }} p={10} my={'lg'}>     
-//               <Title ta={'right'} size="1.8rem"  >
-//               إضافة مراجعة
-//             </Title>
-//           </Grid.Col>       
-//            <Grid.Col span={{ base:12,sm:12 }} mx={10}>
-//              <TextInput 
-//                readOnly
-//                dir="rtl"
-//                variant="unstyled"
-//                size="32px"
-//                fw={600}
-//                radius={10}
-//                value={storedPatient?.fullname}
-//                />
-//           </Grid.Col>
-//           <Grid.Col span={12} ta={'start'} mt={20} mx={10}>
-//            <Text size="1.8rem" fw={600}>
-//              {dayjs(new Date).format('DD-MM-YYYY')}
-//             </Text>
-//           </Grid.Col>
-//         <Grid.Col span={12} p={10} my={'lg'}>
-//             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-//               معلومات عامة
-//             </Text>
-//           </Grid.Col>            
-//            <Grid.Col span={{ base:12,sm:6 }}>
-//           <TextInput
-//               size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label='الوزن'
-//               placeholder="الوزن (kg)"
-//               key={form.key("weight")}
-//               {...form.getInputProps("weight")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                    fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-//          <Grid.Col span={{ base:12,sm:6 }}>
-//           <TextInput
-//               size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="الطول"
-//               placeholder="الطول (cm)"
-//               key={form.key("length_patient")}
-//               {...form.getInputProps("length_patient")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                   fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-          
-//           <Grid.Col span={{ base:12,sm:6 }}>
-//             <Select
-//               size='xl'
-//               w={'60%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="نوع السكري"
-//               placeholder="نوع السكري"
-//               data={[
-//                 { value: 'النوع الأول', label: 'النوع الأول' },
-//                 { value: 'النوع الثاني', label: 'النوع الثاني' },
-//                 { value: 'سكري الحمل', label: 'سكري الحمل' },
-//                 { value: 'نوع أخر', label: 'أخرى' }
-//               ]}
-//               key={form.key("sugarType")}
-//               {...form.getInputProps("sugarType")}
-             
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                   fontSize:'18px'
-//                 },
-//               }}
-//             />
-//           </Grid.Col>
-//            <Grid.Col span={{ base:12,sm:6 }}>
-//             <Select
-//              size='xl'
-//               w={'60%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="الجنس"
-//               placeholder="الجنس"
-//               data={[
-//                 { value: 'male', label: 'ذكر' },
-//                 { value: 'female', label: 'أنثى' }
-//               ]}
-//               key={form.key("gender")}
-//               {...form.getInputProps("gender")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                   fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col> 
-          
-//            <Grid.Col span={{ base: 12, sm: 6 }}>
-//              <MultiSelect
-//                size="xl"
-//                w={'70%'}
-//                radius={10}
-//                variant="unstyled"
-//                fw={600}
-//                withAsterisk
-//                label="التاريخ العائلي للمرض"
-//                placeholder="اختر واحدًا أو أكثر"
-//                data={[
-//                  { value: 'father', label: 'الأب' },
-//                  { value: 'mother', label: 'الأم' },
-//                  { value: 'grandParents', label: 'الأجداد' },
-//                ]} 
-//                key={form.key("historyOfFamilyDisease")}
-//                {...form.getInputProps("historyOfFamilyDisease")}
-//                styles={{
-//                  label: {
-//                    textAlign: 'right',
-//                    marginBottom: 5,
-//                    width: '98%',
-//                    fontSize: '18px'
-//                  }
-//                }}
-//                searchable
-//                clearable
-//              />
-//            </Grid.Col>
-
-          
-//           <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <DatePickerInput
-//     size="xl"
-//     radius={10}
-//     variant="unstyled"
-//     fw={600}
-//     withAsterisk
-//     label="تاريخ اكتشاف المرض"
-//     placeholder="اختر التاريخ"
-//               key={form.key("historyOfdiseaseDetection")}
-//                {...form.getInputProps("historyOfdiseaseDetection")}
-//     styles={{
-//       label: {
-//         textAlign: 'right',
-//         marginBottom: 5,
-//         width: '98%',
-//         fontSize: '18px'
-//       }
-//     }}
-//   />
-// </Grid.Col>
-// <Grid.Col span={{ base:12,sm:6 }}>
-//             <TextInput
-//               size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="امراض اخرى"
-//               placeholder="أمراض أخرى"
-//               key={form.key("otherDisease")}
-//               {...form.getInputProps("otherDisease")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                   fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-          
-//          {/* معلومات طبية */}
-//          <Grid.Col span={12} p={10} my={'lg'}>
-//             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-//               معلومات طبية
-//             </Text>
-//           </Grid.Col>   
-              
-//           <Grid.Col span={{ base:12,sm:6 }}>
-//           <TextInput
-//                size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="الهيموجلوبين (%)"
-//               placeholder="الهيموجلوبين (%)"
-//               key={form.key("hemoglobin")}
-//               {...form.getInputProps("hemoglobin")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                    fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-//          <Grid.Col span={{ base:12,sm:6 }}>
-//           <TextInput
-//               size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="الدهون"
-//               placeholder="الدهون (mg/dL)"
-//               key={form.key("grease")}
-//               {...form.getInputProps("grease")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                    fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-          
-//           <Grid.Col span={{ base:12,sm:6 }}>
-//           <TextInput
-//              size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="حمض البوليك"
-//               placeholder="حمض البوليك (mg/dL)"
-//               key={form.key("urineAcid")}
-//               {...form.getInputProps("urineAcid")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                    fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-//           <Grid.Col span={{ base:12,sm:6 }}>
-//             <TextInput
-//               size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="ضغط الدم (mmHg)"
-//               placeholder="ضغط الدم (mmHg)"
-//               key={form.key("bloodPressure")}
-//               {...form.getInputProps("bloodPressure")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                   fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-//           <Grid.Col span={{ base:12,sm:6 }}>
-//           <TextInput
-//               size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//               label="الكوليسترول"
-//               placeholder="الكوليسترول (mg/dL)"
-//               key={form.key("cholesterol")}
-//               {...form.getInputProps("cholesterol")}
-//               styles={{
-//                 label: {
-//                   textAlign: 'right',
-//                   marginBottom:5,
-//                   width: '98%',
-//                    fontSize:'18px'
-//                 }
-//               }}
-//             />
-//           </Grid.Col>
-//           <Grid.Col span={{ base: 12, sm: 6 }}>    
-//   <TextInput
-//     size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الكوليسترول منخفض الكثافة (LDL)"
-//     placeholder="LDL (mg/dL)"
-//     key={form.key("ldl")}
-//     {...form.getInputProps("ldl")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <TextInput
-//      size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الكوليسترول مرتفع الكثافة (HDL)"
-//     placeholder="HDL (mg/dL)"
-//     key={form.key("hdl")}
-//     {...form.getInputProps("hdl")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-// <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <TextInput
-//     size='xl'
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الكرياتينين"
-//     placeholder="الكرياتينين (mg/dL)"
-//     key={form.key("creatine")}
-//     {...form.getInputProps("creatine")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-// <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <TextInput
-//     size='xl'
-//               // w={'60%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الغلوكوز في الحالة الطبيعية"
-//     placeholder="الغلوكوز صيامي (mg/dL)"
-//     key={form.key("normal_glocose")}
-//     {...form.getInputProps("normal_glocose")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <TextInput
-//     size='xl'
-//               // w={'60%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الغلوكوز بعد الوجبة"
-//     placeholder="الغلوكوز بعد الأكل (mg/dL)"
-//     key={form.key("Glocose_after_Meal")}
-//     {...form.getInputProps("Glocose_after_Meal")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <TextInput
-//         size='xl'
-//               // w={'60%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الشحوم الثلاثية"
-//     placeholder="الشحوم الثلاثية (mg/dL)"
-//     key={form.key("triple_grease")}
-//     {...form.getInputProps("triple_grease")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 6 }}>
-//   <TextInput
-//         size='xl'
-//               // w={'60%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//     label="الخضاب الغلوكوزي (HbA1c)"
-//     placeholder="HbA1c (%)"
-//     key={form.key("hba1c")}
-//     {...form.getInputProps("hba1c")}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-//     }}
-//   />
-// </Grid.Col>
-
-//           <Grid.Col span={12} p={10} my={'lg'}>
-//             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-//               الدواء
-//             </Text>
-//           </Grid.Col> 
-
-//           <Grid.Col span={{base:12,sm:6}}>
-//   <MultiSelect
-//       size='xl'
-//               w={'60%'}
-//               radius={10}
-//               variant="filled"
-//               fw={600}
-//               withAsterisk
-//     label="نوع العلاج"
-//     placeholder="اختر نوع العلاج"
-//     data={[
-//       { value: 'insulin', label: 'أنسولين' },
-//       { value: 'oral', label: 'خافضات فموية' }
-//     ]}
-//     value={treatments}
-//     onChange={setTreatments}
-//     styles={{
-//       label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' }
-//     }}
-//   />
-// </Grid.Col>
-// {/* أنسولين */}
-// {treatments.includes('insulin') && (
-//   <>
-//     <Grid.Col span={{base:12,sm:6}}>
-//       <Select
-//           size='xl'
-//               w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//         label="نوع الإنسولين"
-//         placeholder="اختر النوع"
-//         data={[
-//           { value: 'mixed', label: 'مختلط' },
-//           { value: 'slow', label: 'بطيء' },
-//           { value: 'fast', label: 'سريع' },
-//         ]}
-//         value={insulinType}
-//         onChange={setInsulinType}
-//         styles={{ label: { textAlign: 'right', marginBottom: 5,width:'100%', fontSize:'18px' } }}
-//       />
-//     </Grid.Col>
-
-//     <Grid.Col span={{base:12,sm:6}}>
-//       <MultiSelect
-//           size='xl'
-//               w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//         label="اسماء الأدوية"
-//         placeholder="اختر الأدوية"
-//         data={insulinDrugOptions}
-//         value={insulinDrugs}
-//         onChange={setInsulinDrugs}
-//         searchable
-//         styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-
-//     {insulinDrugs.map((drug) => (
-//       <React.Fragment key={drug}>
-//         <Grid.Col span={{base:12,sm:6}}>
-//           <TextInput
-//               size='xl'
-//               // w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//             label={`عدد الوحدات في ${drug}`}
-//             type="number"
-//             onChange={(e) =>
-//               setInsulinInfo({
-//                 ...insulinInfo,
-//                 [drug]: {
-//                   ...insulinInfo[drug],
-//                   unitsPerBox: Number(e.target.value),
-//                 }
-//               })
-//             }
-//             styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  , fontSize:'18px'} }}
-//           />
-//         </Grid.Col>
-//         <Grid.Col span={{base:12,sm:6}}>
-//           <TextInput
-//               size='xl'
-//               // w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//             label={`الكمية اليومية لـ ${drug}`}
-//             type="number"
-//             onChange={(e) =>
-//               setInsulinInfo({
-//                 ...insulinInfo,
-//                 [drug]: {
-//                   ...insulinInfo[drug],
-//                   dailyDose: Number(e.target.value),
-//                 }
-//               })
-//             }
-//             styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%', fontSize:'18px'  } }}
-//           />
-//           </Grid.Col>
-//           <Grid.Col span={{base:12,sm:12}}>
-//              <Text size="sm" mt={5} style={{ textAlign: 'center' ,opacity:1,transition:'opacity 1s'}}>
-//             {insulinInfo[drug]?.unitsPerBox && insulinInfo[drug]?.dailyDose
-//               ? `يكفي الدواء لمدة ${calculateDuration(insulinInfo[drug].unitsPerBox, insulinInfo[drug].dailyDose)} يوم`
-//               : ''}
-//           </Text>
-//           </Grid.Col>
-
-//       </React.Fragment>
-//     ))}
-//   </>
-// )}
-// {treatments.includes('oral') && (
-//   <>
-//     <Grid.Col span={{base:12,sm:6}}>
-//       <MultiSelect
-//               size='xl'
-//               w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//         label="اسماء الأدوية"
-//         placeholder="اختر الأدوية"
-//         data={oralDrugOptions}
-//         value={oralDrugs}
-//         onChange={setOralDrugs}
-//         searchable
-//         styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-
-//     {oralDrugs.map((drug) => (
-//       <React.Fragment key={drug}>
-//         <Grid.Col span={{base:12,sm:6}}>
-//           <TextInput
-//          size='xl'
-//               // w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//             label={`عدد الحبات في ${drug}`}
-//             type="number"
-//             onChange={(e) =>
-//               setOralInfo({
-//                 ...oralInfo,
-//                 [drug]: {
-//                   ...oralInfo[drug],
-//                   unitsPerBox: Number(e.target.value),
-//                 }
-//               })
-//             }
-//             styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
-//           />
-//         </Grid.Col>
-//         <Grid.Col span={{base:12,sm:6}}>
-//           <TextInput
-//           size='xl'
-//               // w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//             label={`الكمية اليومية لـ ${drug}`}
-//             type="number"
-//             onChange={(e) =>
-//               setOralInfo({
-//                 ...oralInfo,
-//                 [drug]: {
-//                   ...oralInfo[drug],
-//                   dailyDose: Number(e.target.value),
-//                 }
-//               })
-//             }
-//             styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
-//           />
-//           </Grid.Col>
-//           <Grid.Col span={{base:12,sm:12}}>
-//           <Text size="sm" mt={5} style={{ textAlign: 'center' ,opacity:1,transition:'opacity 1s'}}>
-//             {oralInfo[drug]?.unitsPerBox && oralInfo[drug]?.dailyDose
-//               ? `يكفي لمدة ${calculateDuration(oralInfo[drug].unitsPerBox, oralInfo[drug].dailyDose)} يوم`
-//               : ''}
-//           </Text>
-//         </Grid.Col>
-//       </React.Fragment>
-//     ))}
-//   </>
-// )}
-
-//              <Grid.Col span={12} p={10} my={'lg'}>
-//             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-//               العيادة العينية
-//             </Text>
-//           </Grid.Col> 
-//          <Grid.Col span={{ base: 12, sm: 12 }}>
-//    <Switch
-//     size="md"
-//     color="rgba(53, 180, 189, 1)"
-//     labelPosition="left"
-//     mr={5}
-//     mb={15}
-//     label="هل يوجد مرض في العين؟"
-//     checked={hasEyeDisease}
-//     key={form.key("has_a_eye_disease")}
-//     {...form.getInputProps("has_a_eye_disease")}
-//     styles={{
-//       label: { textAlign: 'right', width: '100%' , fontSize:'18px'},
-//     }}
-//   />
-// </Grid.Col>
-
-// {hasEyeDisease && (
-//   <>
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Select
-//        size='xl'
-//               w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//         label="اختر المرض العيني"
-//         placeholder="اختر مرضاً"
-//         data={['اعتلال الشبكية السكري', 'الزرق (الغلوكوما)', 'إعتام عدسة العين', 'جفاف العين', 'أخرى']}
-//         value={selectedEyeDisease}
-//         onChange={setSelectedEyeDisease}
-//         key={form.key("in_kind_disease")}
-//          {...form.getInputProps("in_kind_disease")}
-//         searchable
-//         clearable
-//         styles={{
-//           label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'},
-//         }}
-//       />
-//     </Grid.Col>
-
-//     {selectedEyeDisease === 'أخرى' && (
-//       <Grid.Col span={{ base: 12, sm: 6 }}>
-//         <TextInput
-//          size='xl'
-//               // w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//           label="أدخل اسم المرض العيني"
-//           placeholder="المرض العيني"
-//           styles={{
-//             label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'},
-//           }}
-//         />
-//       </Grid.Col>
-//     )}
-
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Radio.Group
-//         value={isRelatedToDiabetes}
-//         onChange={setIsRelatedToDiabetes}
-//         label="هل يوجد علاقة بين المرض العيني والسكري؟"
-//         styles={{
-//           label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'},
-//         }}
-//       >
-//         <Radio mb={5} value="نعم" label="نعم" />
-//         <Radio value="لا" label="لا" />
-//       </Radio.Group>
-//     </Grid.Col>
-
-//     <Grid.Col span={{ base: 12 }}>
-//       <Textarea
-//          size='xl'
-//               // w={'70%'}
-              
-//               radius={10}
-//               variant="filled"
-//               fw={600}
-//         label="ملاحظات"
-//         placeholder="أدخل أي ملاحظات متعلقة بالحالة العينية"
-//         autosize
-//         minRows={3}
-//         styles={{
-//           label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' },
-//         }}
-//       />
-//     </Grid.Col>
-//     </>
-// )}
-//         <Grid.Col span={12} p={10} my={'lg'}>
-//   <Text ta="right" size="1.8rem" p={10} bg="#8e8e8e30" style={{ borderRadius: 10 }}>
-//     العيادة القلبية
-//   </Text>
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 12}}>
-//    <Switch
-//     size="md"
-//     mr={5}
-//     mb={15}
-//     color="rgba(53, 180, 189, 1)"
-//     labelPosition="left"
-//     label="هل يوجد مرض قلبي؟"
-//     checked={hasHeartDisease}
-//     onChange={(e) => setHasHeartDisease(e.currentTarget.checked)}
-//     styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
-//   />
-// </Grid.Col>
-
-// {hasHeartDisease && (
-//   <>
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Select
-//        size="xl"
-//        w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//         label="اختر المرض القلبي"
-//         placeholder="اختر مرضاً"
-//         data={['قصور القلب', 'ارتفاع الضغط الرئوي', 'أمراض الشرايين التاجية', 'عدم انتظام ضربات القلب', 'أخرى']}
-//         value={heartDisease}
-//         onChange={setHeartDisease}
-//         searchable
-//         clearable
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
-//       />
-//     </Grid.Col>
-
-//     {heartDisease === 'أخرى' && (
-//       <Grid.Col span={{ base: 12, sm: 6 }}>
-//         <TextInput
-//          size="xl"
-//       //  w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//           label="أدخل اسم المرض القلبي"
-//           placeholder="المرض القلبي"
-//           styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//         />
-//       </Grid.Col>
-//     )}
-
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Radio.Group
-      
-//         value={heartRelatedToDiabetes}
-//         onChange={setHeartRelatedToDiabetes}
-//         label="هل يوجد علاقة بين المرض القلبي والسكري؟"
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       >
-//         <Radio mb={5} value="نعم" label="نعم" />
-//         <Radio value="لا" label="لا" />
-//       </Radio.Group>
-//     </Grid.Col>
-
-//     <Grid.Col span={{ base: 12 }}>
-//       <Textarea
-//         size="xl"
-//       //  w={'70%'}
-//               radius={10}
-//               variant="filled"
-//               fw={600}
-//               withAsterisk
-//         label="ملاحظات"
-//         placeholder="أدخل أي ملاحظات متعلقة بالحالة القلبية"
-//         autosize
-//         minRows={3}
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-//   </>
-// )}
-
-// <Grid.Col span={12} p={10} my={'lg'}>
-//   <Text ta="right" size="1.8rem" p={10} bg="#8e8e8e30" style={{ borderRadius: 10 }}>
-//     العيادة العصبية
-//   </Text>
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 12 }}>
-//   <Switch
-//     size="md"
-//     mr={5}
-//     mb={15}
-//     color="rgba(53, 180, 189, 1)"
-//     labelPosition="left"
-//     label="هل يوجد مرض عصبي؟"
-//     checked={hasNeuroDisease}
-//     onChange={(e) => setHasNeuroDisease(e.currentTarget.checked)}
-//     styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
-//   />
-// </Grid.Col>
-
-// {hasNeuroDisease && (
-//   <>
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Select
-//        size="xl"
-//        w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//         label="اختر المرض العصبي"
-//         placeholder="اختر مرضاً"
-//         data={['الاعتلال العصبي السكري', 'الصرع', 'السكتة الدماغية', 'التصلب اللويحي', 'أخرى']}
-//         value={neuroDisease}
-//         onChange={setNeuroDisease}
-//         searchable
-//         clearable
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-
-//     {neuroDisease === 'أخرى' && (
-//       <Grid.Col span={{ base: 12, sm: 6 }}>
-//         <TextInput
-//          size="xl"
-//       //  w={'70%'}
-//               radius={10}
-//               variant="unstyled"
-//               fw={600}
-//               withAsterisk
-//           label="أدخل اسم المرض العصبي"
-//           placeholder="المرض العصبي"
-//           styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
-//         />
-//       </Grid.Col>
-//     )}
-
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Radio.Group
-//         value={neuroRelatedToDiabetes}
-//         onChange={setNeuroRelatedToDiabetes}
-//         label="هل يوجد علاقة بين المرض العصبي والسكري؟"
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
-//       >
-//         <Radio mb={5} value="نعم" label="نعم" />
-//         <Radio value="لا" label="لا" />
-//       </Radio.Group>
-//     </Grid.Col>
-
-//     <Grid.Col span={{ base: 12 }}>
-//       <Textarea
-//         size="xl"
-//       //  w={'70%'}
-//               radius={10}
-//               variant="filled"
-//               fw={600}
-//               withAsterisk
-//         label="ملاحظات"
-//         placeholder="أدخل أي ملاحظات متعلقة بالحالة العصبية"
-//         autosize
-//         minRows={3}
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-//   </>
-// )}
-// <Grid.Col span={12} p={10} my={'lg'}>
-//   <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{ borderRadius: 10 }}>
-//     العيادة البولية
-//   </Text>
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 12 }}>
-//   <Switch
-//     size="md"
-//     mr={5}
-//     mb={10}
-//     color="rgba(53, 180, 189, 1)"
-//     labelPosition="left"
-//     label="هل يوجد مرض بولي؟"
-//     checked={hasUrinaryDisease}
-//     onChange={(event) => setHasUrinaryDisease(event.currentTarget.checked)}
-//     styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
-//   />
-// </Grid.Col>
-
-// {hasUrinaryDisease && (
-//   <>
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Select
-//         size="xl"
-//         w={'70%'}
-//         radius={10}
-//         variant="unstyled"
-//         fw={600}
-//         withAsterisk
-//         label="اختر المرض البولي"
-//         placeholder="اختر مرضاً"
-//         data={['التهاب المسالك البولية', 'حصى الكلى', 'سلس البول', 'تضخم البروستات', 'أخرى']}
-//         value={selectedUrinaryDisease}
-//         onChange={setSelectedUrinaryDisease}
-//         searchable
-//         clearable
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' } }}
-//       />
-//     </Grid.Col>
-
-//     {selectedUrinaryDisease === 'أخرى' && (
-//       <Grid.Col span={{ base: 12, sm: 6 }}>
-//         <TextInput
-//           size="xl"
-//         // w={'70%'}
-//           radius={10}
-//           variant="unstyled"
-//           fw={600}
-//           withAsterisk
-//           label="أدخل اسم المرض البولي"
-//           placeholder="المرض البولي"
-//           styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//         />
-//       </Grid.Col>
-//     )}
-
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Radio.Group
-//         value={isUrinaryRelatedToDiabetes}
-//         onChange={setIsUrinaryRelatedToDiabetes}
-//         label="هل يوجد علاقة بين المرض البولي والسكري؟"
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       >
-//         <Radio mb={5} value="نعم" label="نعم" />
-//         <Radio value="لا" label="لا" />
-//       </Radio.Group>
-//     </Grid.Col>
-
-//     <Grid.Col span={{ base: 12 }}>
-//       <Textarea
-//         size="xl"
-//         // w={'70%'}
-//         radius={10}
-//         variant="filed"
-//         fw={600}
-//         label="ملاحظات"
-//         placeholder="أدخل أي ملاحظات متعلقة بالحالة البولية"
-//         autosize
-//         minRows={3}
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-//   </>
-// )}
-// <Grid.Col span={12} p={10} my={'lg'}>
-//   <Text ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{ borderRadius: 10 }}>
-//     العيادة العظمية
-//   </Text>
-// </Grid.Col>
-
-// <Grid.Col span={{ base: 12, sm: 12 }}>
-//   <Switch
-//     size="md"
-//     mb={10}
-//     mr={5}
-//     color="rgba(53, 180, 189, 1)"
-//     labelPosition="left"
-//     label="هل يوجد مرض عظمي؟"
-//     checked={hasBoneDisease}
-//     onChange={(event) => setHasBoneDisease(event.currentTarget.checked)}
-//     styles={{ label: { textAlign: 'right', width: '100%' , fontSize:'18px'} }}
-//   />
-// </Grid.Col>
-
-// {hasBoneDisease && (
-//   <>
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Select
-//         size="xl"
-//         w={'70%'}
-//         radius={10}
-//         variant="unstyled"
-//         fw={600}
-//         withAsterisk
-//         label="اختر المرض العظمي"
-//         placeholder="اختر مرضاً"
-//         data={['هشاشة العظام', 'التهاب المفاصل', 'الانزلاق الغضروفي', 'كسر أو إصابة سابقة', 'أخرى']}
-//         value={selectedBoneDisease}
-//         onChange={setSelectedBoneDisease}
-//         searchable
-//         clearable
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-
-//     {selectedBoneDisease === 'أخرى' && (
-//       <Grid.Col span={{ base: 12, sm: 6 }}>
-//         <TextInput
-//           size="xl"
-//         // w={'70%'}
-//           radius={10}
-//           variant="unstyled"
-//           fw={600}
-//           withAsterisk
-//           label="أدخل اسم المرض العظمي"
-//           placeholder="المرض العظمي"
-//           styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//         />
-//       </Grid.Col>
-//     )}
-
-//     <Grid.Col span={{ base: 12, sm: 6 }}>
-//       <Radio.Group
-//         value={isBoneRelatedToDiabetes}
-//         onChange={setIsBoneRelatedToDiabetes}
-//         label="هل يوجد علاقة بين المرض العظمي والسكري؟"
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       >
-//         <Radio mb={5} value="نعم" label="نعم" />
-//         <Radio value="لا" label="لا" />
-//       </Radio.Group>
-//     </Grid.Col>
-
-//     <Grid.Col span={{ base: 12 }}>
-//       <Textarea
-//         size="xl"
-//         // w={'70%'}
-//         radius={10}
-//         variant="filled"
-//         fw={600}
-//         label="ملاحظات"
-//         placeholder="أدخل أي ملاحظات متعلقة بالحالة العظمية"
-//         autosize
-//         minRows={3}
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//     </Grid.Col>
-//   </>
-// )}
-
-//           <Grid.Col span={12} p={10} my={'lg'}>
-//             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-//               عيادات أخرى
-//             </Text>
-//           </Grid.Col> 
-//           <Grid.Col span={{ base:12,sm:12 }}>
-//             <Textarea
-//               size="xl"
-//         // w={'70%'}
-//               radius={10}
-//               variant="filled"
-//               fw={600}
-//               withAsterisk
-//         label="ملاحظات"
-//         placeholder="أدخل أي ملاحظات متعلقة "
-//         autosize
-//         minRows={3}
-//         styles={{ label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'} }}
-//       />
-//           </Grid.Col>
-//           <Grid.Col my={20} mb={'5rem'} ta={'right'} span={{ base:12,sm:12 }}>
-//           <Button 
-//             radius={10} 
-//             miw={'12rem'}
-//             size="md" 
-//             type="submit" 
-//             variant="filled" 
-//             color="#37A9EF"
-//           >
-//           حفظ المراجعة
-//           </Button>
-//           </Grid.Col>
-//         </Grid>    
-//       </form>
-//         </>
-//     )
-// }
-// export default AddReview
-import { Container, Grid, Text, Flex, Title, Button,Stepper,  TextInput, MultiSelect, Select, Textarea,  Radio, Checkbox, NumberInput, Group, useStyles } from "@mantine/core";
-import { useForm, yupResolver } from "@mantine/form";
-import React from "react";
-import { DatePickerInput } from "@mantine/dates";
+import { Flex, Button,Stepper, Title ,Image, Group} from "@mantine/core";
+import downloadDataAsPDF from "../../components/AddReview/PdfDownloadReview";
+import { useMemo } from "react";
 import { useEffect, useState } from "react";
 import * as yup from 'yup';
 import '../../assets/css/addReview.css'
-import { Switch } from '@mantine/core';
 import { useSelector } from "react-redux";
-import backWards from '../../assets/vectors/forward.png'
-import { useParams } from "react-router";
+import {  useNavigate, useParams } from "react-router";
 import dayjs from "dayjs";
-import useAddReview from "../../useMutation/Admin/useAddReview";
 import UpScroll from "../../components/general/UpScroll";
-// import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
-// import useUpdatePatientInfo from "../../useMutation/Admin/useUpdatePatientInfo";
+import GeneralInfoStep from "../../components/AddReview/GeneralInfoStep";
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { FormProvider } from "react-hook-form";
+import MedicalInfoStep from "../../components/AddReview/MedicalInfoStep";
+import TreatmentStep from "../../components/AddReview/TreatmentStep";
+import { useDisclosure } from "@mantine/hooks";
+import PrevModel from "../../components/AddReview/PrevModel";
+import ClinicsStep from "../../components/AddReview/ClinicsStep";
+import VerifySubmitModal from "../../components/AddReview/VerifySubmitModal";
+import Progress from "../../components/general/Progress";
+import infoCard from '../../assets/vectors/infoCard.svg'
+import Clinics from '../../assets/vectors/Clinic.svg'
+import medicalCard from '../../assets/vectors/medicalCard.svg'
+import treatments from '../../assets/vectors/treatments.svg'
+// import loadFont from "../../components/general/LoadFont";
 
+
+const schema1 = yup.object().shape({
+  gender: yup.string().required('الرجاء اختيار الجنس'),
+  address: yup.string().required('الرجاء اختيار المدينة'),
+  weight: yup.number().typeError('الوزن يجب أن يكون رقمًا').required('مطلوب'),
+  length_patient: yup.number().typeError('الطول يجب أن يكون رقمًا').required('مطلوب'),
+  sugarType: yup.string().required('الرجاء اختيار نوع السكري'),
+  otherDisease: yup.string().required('يرجى إدخال الأمراض الأخرى'),
+  historyOfdiseaseDetection: yup.date().required('يرجى اختيار تاريخ'),
+  historyOfFamilyDisease: yup.array().min(1, 'اختر على الأقل خياراً واحداً')
+});
+
+const schema2 = yup.object().shape({
+    hemoglobin: yup.string().required('الهيموجلوبين مطلوب'),
+    bloodPressure: yup.string().required('ضغط الدم مطلوب'),
+    cholesterol: yup.string().required('الكوليسترول مطلوب'),
+    grease: yup.string().required('الدهون مطلوب'),
+    urineAcid: yup.string().required('حمض البوليك مطلوب'),
+    normal_glocose: yup.string().required('حقل مطلوب'),
+    Glocose_after_Meal: yup.string().required('حقل مطلوب'),
+    triple_grease: yup.string().required('حقل مطلوب'),
+    hba1c: yup.string().required('حقل مطلوب'),
+    ldl: yup.string().required('حقل مطلوب'),
+    hdl: yup.string().required('حقل مطلوب'),
+    creatine: yup.string().required('حقل مطلوب'),
+})
+
+const drugSchema = yup.object().shape({
+  treatments: yup.object().shape({
+    type: yup
+      .array()
+      .of(yup.string().oneOf(["أنسولين", "حبوب"]))
+      .min(1, "اختر نوع علاج واحد على الأقل")
+      .required("نوع العلاج مطلوب"),
+
+    speed: yup.lazy((_, context) => {
+      const type = context?.parent?.type || [];
+      return type.includes("أنسولين")
+        ? yup.string().required("نوع الإنسولين مطلوب")
+        : yup.string().nullable().notRequired();
+    }),
+
+    druges: yup.lazy((_, context) => {
+      // const type = context?.parent?.type || [];
+      return yup
+        .array()
+        .of(
+          yup.object().shape({
+            name: yup.string().required("اسم الدواء مطلوب"),
+            units: yup
+              .number()
+              .typeError("مطلوب * أدخل رقماً")
+              .min(1, " على الأقل 1")
+              .required("مطلوب * أدخل رقماً"),
+            dosage_per_day: yup
+              .number()
+              .typeError("مطلوب * أدخل رقماً")
+              .min(1, "على الأقل 1")
+              .required("مطلوب * أدخل رقماً")
+          })
+        )
+        .min(1, "أدخل دواء واحد على الأقل");
+    })
+  })
+});
+
+const diseaseWithValidation = (
+  hasKey,
+  nameKey,
+  relationKey,
+  commentsKey
+) => ({
+  [hasKey]: yup.boolean().required(),
+
+  [nameKey]: yup.string().when(hasKey, {
+    is: true,
+    then: (schema) => schema.required('يرجى تحديد المرض'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+
+  [relationKey]: yup.boolean().when(hasKey, {
+    is: true,
+    then: (schema) => schema.required('يرجى تحديد العلاقة بالسكري'),
+    otherwise: (schema) => schema.notRequired(),
+  }),
+
+  [commentsKey]: yup.string().notRequired(),
+  coments:yup.string().notRequired()
+});
+
+const clinicSchema = yup.object().shape({
+  ...diseaseWithValidation(
+    'has_a_eye_disease',
+    'in_kind_disease',
+    'relationship_eyes_with_diabetes',
+    'Comments_eyes_clinic'
+  ),
+  ...diseaseWithValidation(
+    'has_a_heart_disease',
+    'heart_disease',
+    'relationship_heart_with_diabetes',
+    'Comments_heart_clinic'
+  ),
+  ...diseaseWithValidation(
+    'has_a_nerve_disease',
+    'nerve_disease',
+    'relationship_nerve_with_diabetes',
+    'Comments_nerve_clinic'
+  ),
+  ...diseaseWithValidation(
+    'has_a_bone_disease',
+    'bone_disease',
+    'relationship_bone_with_diabetes',
+    'Comments_bone_clinic'
+  ),
+  ...diseaseWithValidation(
+    'has_a_urinary_disease',
+    'urinary_disease',
+    'relationship_urinary_with_diabetes',
+    'Comments_urinary_clinic'
+  ),
+});
+
+const schemas = [schema1, schema2,drugSchema,clinicSchema];
 const AddReview = () => {
+  UpScroll()
+
   const [activeStep, setActiveStep] = useState(0);
 
-   UpScroll()
+  const [opened, { open, close }] = useDisclosure(false);
+  const [openedVerify, { open:openVerify, close : closeVerify}] = useDisclosure(false);
+
+  const [progress, setProgress] = useState(false);
+
+  
   const patients = useSelector(store => store.patients.patients)
   const {id} = useParams()
-  const {addReview,isPending} = useAddReview(id);
+ 
   const [storedPatient,setStoredPatient] = useState(null)
 
-  const[history,setHistory] = useState([])
 
-  
-  const [diabetesDetection, setDiabetesDetection] = useState();
+  const[reviewData,setReviewData] = useState({})
 
-  const [types, setTypes] = useState([]);
-  const [insulinType, setInsulinType] = useState('');
-  const [insulinDrugs, setInsulinDrugs] = useState([]);
-  const [oralDrugs, setOralDrugs] = useState([]);
-  const [insulinInfo, setInsulinInfo] = useState({});
-  const [oralInfo, setOralInfo] = useState({});
-
-
-  const [hasEyeDisease, setHasEyeDisease] = useState(false);
-  const [selectedEyeDisease, setSelectedEyeDisease] = useState('');
-  const [isRelatedToDiabetes, setIsRelatedToDiabetes] = useState('');
-  
-  
-  const [hasHeartDisease, setHasHeartDisease] = useState(false);
-  const [heartDisease, setHeartDisease] = useState('');
-  const [heartRelatedToDiabetes, setHeartRelatedToDiabetes] = useState('');
-  
-  const [hasNeuroDisease, setHasNeuroDisease] = useState(false);
-  const [neuroDisease, setNeuroDisease] = useState('');
-  const [neuroRelatedToDiabetes, setNeuroRelatedToDiabetes] = useState('');
-  
-
-
-const [hasUrinaryDisease, setHasUrinaryDisease] = useState(false);
-const [selectedUrinaryDisease, setSelectedUrinaryDisease] = useState('');
-const [isUrinaryRelatedToDiabetes, setIsUrinaryRelatedToDiabetes] = useState('');
-
-
-const [hasBoneDisease, setHasBoneDisease] = useState(false);
-const [selectedBoneDisease, setSelectedBoneDisease] = useState('');
-const [isBoneRelatedToDiabetes, setIsBoneRelatedToDiabetes] = useState('');
-
-
-  const insulinDrugOptions = [
-  { value: "mixtard", label: "ميكستارد" },
-  { value: "lantus", label: "لانتوس" },
-  { value: "novorapid", label: "نوفورابيد" },
-];
-
-const oralDrugOptions = [
-  { value: "metformin", label: "ميتفورمين" },
-  { value: "glibenclamide", label: "غليبينكلاميد" },
-  { value: "gliclazide", label: "غليكلازيد" },
-];
-
+ 
 const calculateDuration = (unitsPerBox, dailyDose) => {
   if (!unitsPerBox || !dailyDose) return null;
   return Math.floor(unitsPerBox / dailyDose);
@@ -1479,843 +188,300 @@ useEffect(() => {
     }
   }, [id, patients]); 
 
+const handleNext = async () => {
+  const isValid = await methods.trigger(); 
+  if (isValid) {
+    const data = methods.getValues();
+    const updated = {
+      ...reviewData,
+      ...data,
+      historyOfdiseaseDetection: data.historyOfdiseaseDetection
+        ? dayjs(data.historyOfdiseaseDetection).format('DD-MM-YYYY')
+        : '',
+    };
 
- const schema = yup.object().shape({
-    gender: yup.string().required('الجنس مطلوب'),
-    // address_patient: yup.string().required('العنوان مطلوب'),
-    weight: yup.string().required('الوزن مطلوب'),
-    length_patient: yup.string().required('الطول مطلوب'),
-    sugarType: yup.string().required('نوع السكري مطلوب'),
-    hemoglobin: yup.string().required('الهيموجلوبين مطلوب'),
-    bloodPressure: yup.string().required('ضغط الدم مطلوب'),
-    cholesterol: yup.string().required('الكوليسترول مطلوب'),
-    grease: yup.string().required('الدهون مطلوب'),
-    urineAcid: yup.string().required('حمض البوليك مطلوب'),
-    otherDisease: yup.string().required('الأمراض الأخرى مطلوبة'),
-    historyOfdiseaseDetection: yup.string().required('تاريخ اكتشاف المرض مطلوب'),
-    historyOfFamilyDisease: yup.array().of(yup.string()).min(1, 'يرجى اختيار واحد على الأقل').required('تاريخ أمراض العائلة مطلوب'),
-    isCompleted: yup.boolean().required('حالة الإكمال مطلوبة'),
-    normal_glocose: yup.string(),
-    Glocose_after_Meal: yup.string(),
-    triple_grease: yup.string(),
-    hbaic: yup.string(),
-    idl: yup.string(),
-    hdl: yup.string(),
-    creatine: yup.string(),
-    
-    // Diseases fields
-    // has_a_eye_disease: yup.boolean(),
-    // in_kind_disease: yup.string(),
-    // relationship_eyes_with_diabetes: yup.boolean(),
-    // comments_eyes_clinic: yup.string(),
-    
-    // has_a_heart_disease: yup.boolean(),
-    // heart_disease: yup.string(),
-    // relationship_heart_with_diabetes: yup.boolean(),
-    // comments_heart_clinic: yup.string(),
-    
-    // has_a_nerve_disease: yup.boolean(),
-    // nerve_disease: yup.string(),
-    // relationship_nerve_with_diabetes: yup.boolean(),
-    // comments_nerve_clinic: yup.string(),
-    
-    // has_a_bone_disease: yup.boolean(),
-    // bone_disease: yup.string(),
-    // relationship_bone_with_diabetes: yup.boolean(),
-    // comments_bone_clinic: yup.string(),
-    
-    // has_a_urinary_disease: yup.boolean(),
-    // urinary_disease: yup.string(),
-    // relationship_urinary_with_diabetes: yup.boolean(),
-    // comments_urinary_clinic: yup.string(),
-  });
-  
-  // Form initialization
-  const form = useForm({
-    mode: "uncontrolled",
-    validateInputOnChange: true,
-    initialValues: {
-      id: parseInt(id) || '',
-      gender: '',
-      // address_patient: '',
-      weight: '',
-      length_patient: '',
-      sugarType: '',
+    setReviewData(updated);
+    setActiveStep((s) => s + 1);
+  }
+};
+
+useEffect(() => {
+  if (openedVerify) {
+    console.log("كل البيانات جاهزة للإرسال:", reviewData);
+
+  }
+}, [reviewData, openedVerify]);
+
+
+  const currentSchema = useMemo(() => {
+  return schemas[activeStep];
+}, [activeStep]);
+
+const methods = useForm({
+  mode: "onTouched",
+  shouldUnregister: false, // هام جداً
+  resolver: yupResolver(currentSchema),
+  defaultValues: {
+    patient_id: parseInt(id) ,
+    // isCompleted : true,
+    address: "",
+    weight: "",
+    length_patient: "",
+    sugarType: "",
+    gender: "",
+    historyOfFamilyDisease: [],
+    historyOfdiseaseDetection: null,
+    otherDisease: "",
+    // 
       hemoglobin: '',
       bloodPressure: '',
       cholesterol: '',
       grease: '',
       urineAcid: '',
-      otherDisease: '',
-      historyOfdiseaseDetection: '',
-      historyOfFamilyDisease: [],
-      isCompleted: false,
-      
-      // Additional fields
       normal_glocose: '',
       Glocose_after_Meal: '',
       triple_grease: '',
-      hbaic: '',
-      idl: '',
+      hba1c: '',
+      ldl: '',
       hdl: '',
       creatine: '',
-      // coments:'',
-      // Diseases fields
-      // has_a_eye_disease: false,
-      // in_kind_disease: '',
-      // relationship_eyes_with_diabetes: false,
-      // comments_eyes_clinic: '',
-      
-      // has_a_heart_disease: false,
-      // heart_disease: '',
-      // relationship_heart_with_diabetes: false,
-      // comments_heart_clinic: '',
-      
-      // has_a_nerve_disease: false,
-      // nerve_disease: '',
-      // relationship_nerve_with_diabetes: false,
-      // comments_nerve_clinic: '',
-      
-      // has_a_bone_disease: false,
-      // bone_disease: '',
-      // relationship_bone_with_diabetes: false,
-      // comments_bone_clinic: '',
-      
-      // has_a_urinary_disease: false,
-      // urinary_disease: '',
-      // relationship_urinary_with_diabetes: false,
-      // comments_urinary_clinic: '',
+      // 
+      treatments: {
+      type: [],
+      speed: '',
+      druges: [
+        {
+          name:'',
+          units:'',
+          dosage_per_day:'',
+        }
+      ]
     },
-    validate: yupResolver(schema),
-  });
+    // 
+      has_a_eye_disease: false,
+      in_kind_disease: '',
+      relationship_eyes_with_diabetes: false,
+      Comments_eyes_clinic: '',
+      
+      has_a_heart_disease: false,
+      heart_disease: '',
+      relationship_heart_with_diabetes: false,
+      Comments_heart_clinic: '',
+      
+      has_a_nerve_disease: false,
+      nerve_disease: '',
+      relationship_nerve_with_diabetes: false,
+      Comments_nerve_clinic: '',
+      
+      has_a_bone_disease: false,
+      bone_disease: '',
+      relationship_bone_with_diabetes: false,
+      Comments_bone_clinic: '',
+      
+      has_a_urinary_disease: false,
+      urinary_disease: '',
+      relationship_urinary_with_diabetes: false,
+      Comments_urinary_clinic: '',
 
-  const handleSubmit = (values) => {
-  const validated = form.validate();
-  if (validated.hasErrors) {
-    console.log('أخطاء في النموذج الأساسي:', validated.errors);
-    return;
-  }
+      coments:'',
+  },
+});
 
-  const allDrugsArray = [];
-  console.log("✅ نوع العلاجات:", types);
-  console.log("✅ معلومات الإنسولين:", insulinInfo);
-  console.log("✅ معلومات الأدوية الفموية:", oralInfo);
-  // فحص أنسولين
-  if (types.includes("insulin")) {
-    for (const drug of insulinDrugs) {
-      const info = insulinInfo[drug];
-      if (!info || !info.unitsPerBox || !info.dailyDose) {
-        alert(`يرجى إدخال جميع المعلومات الخاصة بـ ${drug} (أنسولين)`);
-        return;
-      }
-      allDrugsArray.push({
-        name: drug,
-        units: info.unitsPerBox,
-        dosage_per_day: info.dailyDose,
-      });
-    }
-  }
+ 
+const [finalData,setFinalData] = useState({})
+const onSubmit = () => {
+  const data = methods.getValues();
 
-  // فحص الأدوية الفموية
-  if (types.includes("oral")) {
-    for (const drug of oralDrugs) {
-      const info = oralInfo[drug];
-      if (!info || !info.unitsPerBox || !info.dailyDose) {
-        alert(`يرجى إدخال جميع المعلومات الخاصة بـ ${drug} (دواء فموي)`);
-        return;
-      }
-      allDrugsArray.push({
-        name: drug,
-        units: info.unitsPerBox,
-        dosage_per_day: info.dailyDose,
-      });
-    }
-  }
-
-  const patientData = {
-    ...values,
-    treatments: {
-      type: types,
-      speed: insulinType,
-      drugs: allDrugsArray,
-    },
+  const updated = {
+    ...reviewData,
+    ...data,
+    historyOfdiseaseDetection: data.historyOfdiseaseDetection
+      ? dayjs(data.historyOfdiseaseDetection).format('DD-MM-YYYY')
+      : '',
   };
-console.log(values)
-  console.log(patientData);
-  addReview(patientData);
 
-  setActiveStep(0)
-  form.reset();
+  setFinalData(updated);
+  setReviewData(updated)
+  console.log(finalData)
+  openVerify();
 };
 
 
+const [download,setDownload] = useState(false)
 
 
-  // useEffect(() => {
-  //   if (isSubmitted) {
-  //     console.log('loading :',isPending)
-  //     setProgress(isPending || isPendingFetch ); 
-  //   }
-  // }, [isPending,isPendingFetch]);
+
+  const prevStep = () => setActiveStep((current) => (current > 0 ? current - 1 : open()));
+  // const nextStep = () => setActiveStep((current) => (current < 2 ? current + 1 : current));
+
+  const sections = {
+    generalInfo: {
+      title: 'معلومات عامة',
+      fields: [
+      { label: 'المدينة', key: 'address' },
+      { label: 'الوزن', key: 'weight' },
+      { label: 'الطول', key: 'length_patient' },
+      { label: 'الجنس', key: 'gender' },
+      { label: 'نوع السكري', key: 'sugarType' },
+      { label: 'التاريخ العائلي للمرض', key: 'historyOfFamilyDisease' },
+      { label: 'تاريخ اكتشاف المرض', key: 'historyOfdiseaseDetection' },
+      { label: 'أمراض أخرى', key: 'otherDisease' },
+      ],
+    },
+    medicalInfo: {
+      title: 'المعلومات الطبية',
+      fields: [
+       { label: 'الهيموجلوبين (%)', key: 'hemoglobin' },
+      { label: 'الدهون (mg/dL)', key: 'grease' },
+      { label: 'حمض البوليك (mg/dL)', key: 'urineAcid' },
+      { label: 'ضغط الدم (mmHg)', key: 'bloodPressure' },
+      { label: 'الكوليسترول (mg/dL)', key: 'cholesterol' },
+      { label: 'الكوليسترول منخفض الكثافة (LDL)', key: 'ldl' },
+      { label: 'الكوليسترول مرتفع الكثافة (HDL)', key: 'hdl' },
+      { label: 'الكرياتينين (mg/dL)', key: 'creatine' },
+      { label: 'الغلوكوز في الحالة الطبيعية (mg/dL)', key: 'normal_glocose' },
+      { label: 'الغلوكوز بعد الوجبة (mg/dL)', key: 'Glocose_after_Meal' },
+      { label: 'الشحوم الثلاثية (mg/dL)', key: 'triple_grease' },
+      { label: 'الخضاب الغلوكوزي (HbA1c)', key: 'hba1c' },
+      ],
+    },
+    treatment: {
+      title: 'العلاج',
+      fields: [
+       { label: 'نوع العلاج', key: 'treatments.type' },
+      { label: 'نوع الإنسولين', key: 'treatments.speed' }, 
+      { label: 'مدة العلاج', key: 'treatment_duration' },
 
 
-  const nextStep = () => setActiveStep((current) => (current < 2 ? current + 1 : current));
-  const prevStep = () => setActiveStep((current) => (current > 0 ? current - 1 : current));
-
-  // const handleChange = (field, value) => {
-  //   setFormData({ ...formData, [field]: value });
-  // };
-
-  const generalInfoStep = (
-
-    <Grid mt={40} gutter="sm" justify="start" mb={20} align="end" dir="rtl" p={{base:25,sm:10}}>
-     {/* <Grid.Col span={12} p={10} my={'lg'}>
-            <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-              معلومات عامة
-            </Text>
-          </Grid.Col>             */}
-           <Grid.Col span={{ base:12,sm:6 }}>
-          <TextInput
-              size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label='الوزن'
-              placeholder="الوزن (kg)"
-              key={form.key("weight")}
-              {...form.getInputProps("weight")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                   fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-         <Grid.Col span={{ base:12,sm:6 }}>
-          <TextInput
-              size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="الطول"
-              placeholder="الطول (cm)"
-              key={form.key("length_patient")}
-              {...form.getInputProps("length_patient")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <Select
-              size='xl'
-              w={'60%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="نوع السكري"
-              placeholder="نوع السكري"
-              data={[
-                { value: 'النوع الأول', label: 'النوع الأول' },
-                { value: 'النوع الثاني', label: 'النوع الثاني' },
-                { value: 'سكري الحمل', label: 'سكري الحمل' },
-                { value: 'نوع أخر', label: 'أخرى' }
-              ]}
-              key={form.key("sugarType")}
-              {...form.getInputProps("sugarType")}
-             
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                },
-              }}
-            />
-          </Grid.Col>
-           <Grid.Col span={{ base:12,sm:6 }}>
-            <Select
-             size='xl'
-              w={'60%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="الجنس"
-              placeholder="الجنس"
-              data={[
-                { value: 'male', label: 'ذكر' },
-                { value: 'female', label: 'أنثى' }
-              ]}
-              key={form.key("gender")}
-              {...form.getInputProps("gender")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col> 
-          
-           <Grid.Col span={{ base: 12, sm: 6 }}>
-             <MultiSelect
-               size="xl"
-               w={'70%'}
-               radius={10}
-               variant="unstyled"
-               fw={600}
-               withAsterisk
-               label="التاريخ العائلي للمرض"
-               placeholder="اختر واحدًا أو أكثر"
-               data={[
-                 { value: 'father', label: 'الأب' },
-                 { value: 'mother', label: 'الأم' },
-                 { value: 'grandParents', label: 'الأجداد' },
-               ]} 
-               key={form.key("historyOfFamilyDisease")}
-               {...form.getInputProps("historyOfFamilyDisease")}
-               styles={{
-                 label: {
-                   textAlign: 'right',
-                   marginBottom: 5,
-                   width: '98%',
-                   fontSize: '18px'
-                 }
-               }}
-               searchable
-               clearable
-             />
-           </Grid.Col>
-
-          
-          <Grid.Col span={{ base: 12, sm: 6 }}>
-  <DatePickerInput
-    size="xl"
-    radius={10}
-    variant="unstyled"
-    fw={600}
-    withAsterisk
-    label="تاريخ اكتشاف المرض"
-    placeholder="اختر التاريخ"
-              key={form.key("historyOfdiseaseDetection")}
-               {...form.getInputProps("historyOfdiseaseDetection")}
-    styles={{
-      label: {
-        textAlign: 'right',
-        marginBottom: 5,
-        width: '98%',
-        fontSize: '18px'
-      }
-    }}
-  />
-</Grid.Col>
-<Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="امراض اخرى"
-              placeholder="أمراض أخرى"
-              key={form.key("otherDisease")}
-              {...form.getInputProps("otherDisease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          </Grid>
-  );
-
-  const medicalInfoStep = (
+      { label: 'اسم الدواء', key: 'treatments.druges[0].name' },
+      { label: 'عدد الوحدات', key: 'treatments.druges[0].units' },
+      { label: 'الجرعات اليومية', key: 'treatments.druges[0].dosage_per_day' },
+      ],
+    },
+    clinics: {
+      title: 'العيادات',
+      fields: [
+         // عيادة العيون
+      { label: 'هل يوجد مرض عيني', key: 'has_a_eye_disease' },
+      { label: 'المرض العيني', key: 'in_kind_disease' },
+      { label: 'علاقة المرض العيني بالسكري', key: 'relationship_eyes_with_diabetes' },
+      { label: 'ملاحظات العيادة العينية', key: 'Comments_eyes_clinic' },
     
-       <Grid mt={40}  gutter="sm" justify="start" mb={20} align="end" dir="rtl" p={{base:25,sm:10}}>
-      {/* <Grid.Col span={12} p={10} my={'lg'}>
-             <Text  ta={'right'} size="1.8rem" p={10} bg={'#8e8e8e30'} style={{borderRadius:10}}>
-               معلومات طبية
-             </Text>
-           </Grid.Col>    */}
-              
-            <Grid.Col span={{ base:12,sm:6 }}>
-             <TextInput
-               size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="الهيموجلوبين (%)"
-              placeholder="الهيموجلوبين (%)"
-              key={form.key("hemoglobin")}
-              {...form.getInputProps("hemoglobin")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                   fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-         <Grid.Col span={{ base:12,sm:6 }}>
-          <TextInput
-              size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="الدهون"
-              placeholder="الدهون (mg/dL)"
-              key={form.key("grease")}
-              {...form.getInputProps("grease")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                   fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          
-          <Grid.Col span={{ base:12,sm:6 }}>
-          <TextInput
-             size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="حمض البوليك"
-              placeholder="حمض البوليك (mg/dL)"
-              key={form.key("urineAcid")}
-              {...form.getInputProps("urineAcid")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                   fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base:12,sm:6 }}>
-            <TextInput
-              size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="ضغط الدم (mmHg)"
-              placeholder="ضغط الدم (mmHg)"
-              key={form.key("bloodPressure")}
-              {...form.getInputProps("bloodPressure")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                  fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base:12,sm:6 }}>
-          <TextInput
-              size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-              label="الكوليسترول"
-              placeholder="الكوليسترول (mg/dL)"
-              key={form.key("cholesterol")}
-              {...form.getInputProps("cholesterol")}
-              styles={{
-                label: {
-                  textAlign: 'right',
-                  marginBottom:5,
-                  width: '98%',
-                   fontSize:'18px'
-                }
-              }}
-            />
-          </Grid.Col>
-          <Grid.Col span={{ base: 12, sm: 6 }}>    
-  <TextInput
-    size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الكوليسترول منخفض الكثافة (LDL)"
-    placeholder="LDL (mg/dL)"
-    key={form.key("ldl")}
-    {...form.getInputProps("ldl")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
+      // العيادة القلبية
+      { label: 'هل يوجد مرض قلبي', key: 'has_a_heart_disease' },
+      { label: 'المرض القلبي', key: 'heart_disease' },
+      { label: 'علاقة المرض القلبي بالسكري', key: 'relationship_heart_with_diabetes' },
+      { label: 'ملاحظات العيادة القلبية', key: 'Comments_heart_clinic' },
+    
+      // العيادة البولية
+      { label: 'هل يوجد مرض بولي', key: 'has_a_urinary_disease' },
+      { label: 'المرض البولي', key: 'urinary_disease' },
+      { label: 'علاقة المرض البولي بالسكري', key: 'relationship_urinary_with_diabetes' },
+      { label: 'ملاحظات العيادة البولية', key: 'Comments_urinary_clinic' },
+    
+      // العيادة العظمية
+      { label: 'هل يوجد مرض عظمي', key: 'has_a_bone_disease' },
+      { label: 'المرض العظمي', key: 'bone_disease' },
+      { label: 'علاقة المرض العظمي بالسكري', key: 'relationship_bone_with_diabetes' },
+      { label: 'ملاحظات العيادة العظمية', key: 'Comments_bone_clinic' },
+    
+      // العيادة العصبية
+      { label: 'هل يوجد مرض عصبي', key: 'has_a_nerve_disease' },
+      { label: 'المرض العصبي', key: 'nerve_disease' },
+      { label: 'علاقة المرض العصبي بالسكري', key: 'relationship_nerve_with_diabetes' },
+      { label: 'ملاحظات العيادة العصبية', key: 'Comments_nerve_clinic' },
+    
+      // عيادات أخرى
+      { label: 'ملاحظات أخرى', key: 'coments' },
+      ],
+    },
+  };
 
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <TextInput
-     size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الكوليسترول مرتفع الكثافة (HDL)"
-    placeholder="HDL (mg/dL)"
-    key={form.key("hdl")}
-    {...form.getInputProps("hdl")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <TextInput
-    size='xl'
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الكرياتينين"
-    placeholder="الكرياتينين (mg/dL)"
-    key={form.key("creatine")}
-    {...form.getInputProps("creatine")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <TextInput
-    size='xl'
-              // w={'60%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الغلوكوز في الحالة الطبيعية"
-    placeholder="الغلوكوز صيامي (mg/dL)"
-    key={form.key("normal_glocose")}
-    {...form.getInputProps("normal_glocose")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
+  useEffect(()=>{
+  if(download){
+    downloadDataAsPDF(finalData,sections,storedPatient)
+  }
+},[download])
 
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <TextInput
-    size='xl'
-              // w={'60%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الغلوكوز بعد الوجبة"
-    placeholder="الغلوكوز بعد الأكل (mg/dL)"
-    key={form.key("Glocose_after_Meal")}
-    {...form.getInputProps("Glocose_after_Meal")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
+const handleStepClick = async (stepIndex) => {
+  if (stepIndex < activeStep) {
 
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <TextInput
-        size='xl'
-              // w={'60%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الشحوم الثلاثية"
-    placeholder="الشحوم الثلاثية (mg/dL)"
-    key={form.key("triple_grease")}
-    {...form.getInputProps("triple_grease")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
+    setActiveStep(stepIndex);
+  } else {
 
-<Grid.Col span={{ base: 12, sm: 6 }}>
-  <TextInput
-        size='xl'
-              // w={'60%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-    label="الخضاب الغلوكوزي (HbA1c)"
-    placeholder="HbA1c (%)"
-    key={form.key("hba1c")}
-    {...form.getInputProps("hba1c")}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%' , fontSize:'18px'}
-    }}
-  />
-</Grid.Col>
-    </Grid>
-  );
-
-  const drugInfoStep = (
-    <Grid mt={40}  gutter="sm" justify="start" mb={20} align="end" dir="rtl" p={{base:25,sm:10}}>
-       <Grid.Col span={{base:12,sm:6}}>
-   <MultiSelect
-      size='xl'
-              w={{base:'90%',sm:'70%'}}
-              radius={10}
-              variant="filled"
-              fw={600}
-              withAsterisk
-    label="نوع العلاج"
-    placeholder="اختر نوع العلاج"
-    data={[
-      { value: 'insulin', label: 'أنسولين' },
-      { value: 'oral', label: 'خافضات فموية' }
-    ]}
-    value={types}
-    onChange={setTypes}
-    styles={{
-      label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize:'18px' }
-    }}
-  />
-</Grid.Col>
-{/* أنسولين */}
-{types.includes('insulin') && (
-  <>
-    <Grid.Col span={{base:12,sm:6}}>
-      <Select
-          size='xl'
-              w={{base:'90%',sm:'70%'}}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-        label="نوع الإنسولين"
-        placeholder="اختر النوع"
-        data={[
-          { value: 'mixed', label: 'مختلط' },
-          { value: 'slow', label: 'بطيء' },
-          { value: 'fast', label: 'سريع' },
-        ]}
-        value={insulinType}
-        onChange={setInsulinType}
-        styles={{ label: { textAlign: 'right', marginBottom: 5,width:'100%', fontSize:'18px' } }}
-      />
-    </Grid.Col>
-
-    <Grid.Col span={{base:12,sm:6}}>
-      <MultiSelect
-          size='xl'
-              w={{base:'90%',sm:'70%'}}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-        label="اسماء الأدوية"
-        placeholder="اختر الأدوية"
-        data={insulinDrugOptions}
-        value={insulinDrugs}
-        onChange={setInsulinDrugs}
-        searchable
-        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  , fontSize:'18px'} }}
-      />
-    </Grid.Col>
-
-    {insulinDrugs.map((drug) => (
-      <React.Fragment key={drug}>
-        <Grid.Col span={{base:12,sm:6}}>
-          <TextInput
-              size='xl'
-              // w={'70%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-            label={`عدد الوحدات في ${drug}`}
-            type="number"
-            onChange={(e) =>
-              setInsulinInfo({
-                ...insulinInfo,
-                [drug]: {
-                  ...insulinInfo[drug],
-                  unitsPerBox: Number(e.target.value),
-                }
-              })
-            }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%'  , fontSize:'18px'} }}
-          />
-        </Grid.Col>
-        <Grid.Col span={{base:12,sm:6}}>
-          <TextInput
-              size='xl'
-              // w={'70%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-            label={`الكمية اليومية لـ ${drug}`}
-            type="number"
-            onChange={(e) =>
-              setInsulinInfo({
-                ...insulinInfo,
-                [drug]: {
-                  ...insulinInfo[drug],
-                  dailyDose: Number(e.target.value),
-                }
-              })
-            }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%', fontSize:'18px'  } }}
-          />
-          </Grid.Col>
-          <Grid.Col span={{base:12,sm:12}}>
-             <Text size="sm" mt={5} style={{ textAlign: 'center' ,opacity:1,transition:'opacity 1s'}}>
-            {insulinInfo[drug]?.unitsPerBox && insulinInfo[drug]?.dailyDose
-              ? `يكفي الدواء لمدة ${calculateDuration(insulinInfo[drug].unitsPerBox, insulinInfo[drug].dailyDose)} يوم`
-              : ''}
-          </Text>
-          </Grid.Col>
-
-      </React.Fragment>
-    ))}
-  </>
-)}
-{types.includes('oral') && (
-  <>
-    <Grid.Col span={{base:12,sm:6}}>
-      <MultiSelect
-              size='xl'
-              w={{base:'90%',sm:'70%'}}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-        label="اسماء الأدوية"
-        placeholder="اختر الأدوية"
-        data={oralDrugOptions}
-        value={oralDrugs}
-        onChange={setOralDrugs}
-        searchable
-        styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
-      />
-    </Grid.Col>
-
-    {oralDrugs.map((drug) => (
-      <React.Fragment key={drug}>
-        <Grid.Col span={{base:12,sm:6}}>
-          <TextInput
-         size='xl'
-              // w={'70%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-            label={`عدد الحبات في ${drug}`}
-            type="number"
-            onChange={(e) =>
-              setOralInfo({
-                ...oralInfo,
-                [drug]: {
-                  ...oralInfo[drug],
-                  unitsPerBox: Number(e.target.value),
-                }
-              })
-            }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
-          />
-        </Grid.Col>
-        <Grid.Col span={{base:12,sm:6}}>
-          <TextInput
-          size='xl'
-              // w={'70%'}
-              radius={10}
-              variant="unstyled"
-              fw={600}
-              withAsterisk
-            label={`الكمية اليومية لـ ${drug}`}
-            type="number"
-            onChange={(e) =>
-              setOralInfo({
-                ...oralInfo,
-                [drug]: {
-                  ...oralInfo[drug],
-                  dailyDose: Number(e.target.value),
-                }
-              })
-            }
-            styles={{ label: { textAlign: 'right', marginBottom: 5 ,width:'100%' , fontSize:'18px'} }}
-          />
-          </Grid.Col>
-          <Grid.Col span={{base:12,sm:12}}>
-          <Text size="sm" mt={5} style={{ textAlign: 'center' ,opacity:1,transition:'opacity 1s'}}>
-            {oralInfo[drug]?.unitsPerBox && oralInfo[drug]?.dailyDose
-              ? `يكفي لمدة ${calculateDuration(oralInfo[drug].unitsPerBox, oralInfo[drug].dailyDose)} يوم`
-              : ''}
-          </Text>
-        </Grid.Col>
-      </React.Fragment>
-    ))}
-  </>
-)}
-    </Grid>
-  );
+    const isValid = await methods.trigger(); 
+    if (isValid) {
+      setActiveStep(stepIndex);
+    }
+  }
+};
 
   return (
     <>
-    <form  style={{ width: "100%" }}  onSubmit={form.onSubmit(handleSubmit)}>
-      <Stepper   color="#37A9EF" size="lg"  active={activeStep} onStepClick={setActiveStep} breakpoint="sm" dir="rtl"  p={{base:'0',sm:'md'}} mx={{base:5,sm:40}}>
-        <Stepper.Step>
-          {generalInfoStep}
+    {progress &&<Progress /> }
+    
+    <VerifySubmitModal setDownload={setDownload} id={id} opened={openedVerify} close={closeVerify} setProgress={setProgress} reviewData={finalData}/>
+    <PrevModel id={id} opened={opened} close={close} />
+    <FormProvider {...methods}>
+    <form onSubmit={methods.handleSubmit(onSubmit)}  style={{ width: "100%" }} >
+      <Stepper iconSize={37} allowNextStepsSelect={false} pos={'sticky'} top={60} mb={'3rem'} mih={'100vh'} bg={'#f9f9f9'} color="#37A9EF" size="md"  active={activeStep} onStepClick={setActiveStep} breakpoint="sm" dir="rtl"  p={{base:'sm',sm:'sm'}} mx={{base:5,sm:40}}>       
+        <Stepper.Step icon={<Image src={infoCard} w={20} />} >
+
+         <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >
+            <Title  mt={10} ta={'center'} fz={'1.5rem'} mb={'1rem'}>
+               المعلومات العامة
+             </Title>
+             <Button radius={10} style={{zIndex:30}} pos={'absolute'} right={0} top={10} variant="outline" color="#8e8e8e" onClick={open}>
+              عودة
+             </Button></Group>
+          {/* </Flex> */}
+            
+         <GeneralInfoStep />
         </Stepper.Step>
-        <Stepper.Step >
-          {medicalInfoStep}
+        <Stepper.Step icon={<Image src={medicalCard} w={20} />}>
+                 <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >
+            <Title  mt={10} ta={'center'} fz={'1.5rem'} mb={'1rem'}>
+               التحاليل الطبية
+             </Title>
+             <Button radius={10} style={{zIndex:30}} pos={'absolute'} right={0} top={10} variant="outline" color="#8e8e8e" onClick={open}>
+              عودة
+             </Button></Group>
+          <MedicalInfoStep />
         </Stepper.Step>
-        <Stepper.Step >
-          {drugInfoStep}
+        <Stepper.Step icon={<Image src={treatments} w={20} />}>
+               <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >
+            <Title  mt={10} ta={'center'} fz={'1.5rem'} mb={'1rem'}>
+             العلاج
+             </Title>
+             <Button radius={10} style={{zIndex:30}} pos={'absolute'} right={0} top={10} variant="outline" color="#8e8e8e" onClick={open}>
+              عودة
+             </Button></Group>
+          <TreatmentStep />
+        </Stepper.Step>
+        <Stepper.Step icon={<Image src={Clinics} w={20} />} >
+             <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >
+            <Title  mt={10} ta={'center'} fz={'1.5rem'} mb={'1rem'}>
+              العيادات
+             </Title>
+             <Button radius={10} style={{zIndex:30}} pos={'absolute'} right={0} top={10} variant="outline" color="#8e8e8e" onClick={open}>
+              عودة
+             </Button></Group>
+           <ClinicsStep />
         </Stepper.Step>
       </Stepper>
-
-      <Flex dir="rtl" justify={'space-between'} align={'center'} mb="xl" p={{base:'0',sm:'md'}}  mx={{base:5,sm:40}}>
-        <Button radius={10} miw={'8rem'}  size="md" variant="default" onClick={prevStep} disabled={activeStep === 0}>
-          السابق
+        <Flex dir="rtl"  w={'90%'} justify={'space-between'} align={'center'} m={'auto'}  mb={'4rem'}  p={{base:'0',sm:'md'}}  mx={{base:5,sm:40}}>
+        <Button disabled={activeStep === 0 ? true :false} radius={10} miw={'8rem'}  size="md" variant="default" onClick={prevStep} >
+        السابق
         </Button>
-        {activeStep < 2 ? (
-          <Button radius={10} miw={'8rem'} size="md" variant='light' color={'blue'} onClick={nextStep}>التالي</Button>
+        {activeStep < schemas.length - 1 ? (
+          <Button radius={10} miw={'8rem'} size="md" variant='light' color={'blue'}  onClick={handleNext}>التالي</Button>
         ) : (
-          <Button radius={10} miw={'8rem'}  size="md" variant='filled' color={'blue'} onClick={() => handleSubmit()} type="submit">إرسال</Button>
+          <Button radius={10} miw={'8rem'}  size="md" variant='filled' color={'blue'}  onClick={methods.handleSubmit(onSubmit)}>إرسال</Button>
         )}
-      </Flex>
+        </Flex>
+        {/* </Box> */}
       </form>
+      </FormProvider>
     </>
   );
 };
