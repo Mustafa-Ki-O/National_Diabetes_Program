@@ -17,6 +17,8 @@ import drugs from '../../assets/vectors/Drugs.svg'
 import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
+
+
 const NavBar = () => {
     const [openedModal, { open, close }] = useDisclosure(false);
     const location = useLocation();
@@ -38,15 +40,6 @@ const NavBar = () => {
         
     };
 
-    // const handleBurger = () => {
-    //     setOpenBurger(!openBurger);
-    // }
-
-    // useEffect(() => {
-    //     if (openBurger) {
-    //         open();
-    //     }
-    // }, [openBurger]);
 
 
     return (
@@ -57,7 +50,7 @@ const NavBar = () => {
         && location.pathname !== '/National_Diabetes_Program/verifyEmail/') ?(
     <>
     <LogOutModal opened={openedModal} close={close} />
-        <AppShell header={{ height: 60 }}
+        <AppShell  header={{ height: 60 }}
            dir="rtl"
            navbar={{
              width: 300,
@@ -68,7 +61,7 @@ const NavBar = () => {
              padding="md"
              
             >
-            <AppShell.Header dir="ltr" bg={'#F9FAFC'}>
+            <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
             <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
                 <Group align="center" gap={30}>
                 <Image ml={3} mb={5}  src={logo} style={{cursor:'pointer'}} w='6.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>

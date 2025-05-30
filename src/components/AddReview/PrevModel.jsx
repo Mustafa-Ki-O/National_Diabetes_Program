@@ -14,6 +14,7 @@ const PrevModel = ({id,opened,close}) => {
     return(
         <>
         <Modal
+        // zIndex={100}
         w="100%"
         radius={20}
         opened={opened}
