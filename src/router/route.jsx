@@ -19,6 +19,9 @@ import useVerifyToken from "../useMutation/useVerifyToken";
 import { notifications } from "@mantine/notifications";
 import AddReview from "../app/Admin/AddReview";
 import PatientReview from "../app/Admin/PatientReview";
+import ResetPassword from "../app/Auth/ResetPassword";
+import VerifyPwd from "../app/Auth/VerifyPwd";
+import ChangePassword from "../app/Auth/ChangePassword";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -51,7 +54,10 @@ const MainLayout = () => {
     '/National_Diabetes_Program/',
     '/National_Diabetes_Program/register/',
     '/National_Diabetes_Program/registerAdmin/',
-    '/National_Diabetes_Program/verifyEmail/'
+    '/National_Diabetes_Program/verifyEmail/',
+    '/National_Diabetes_Program/resetPassword/',
+    '/National_Diabetes_Program/verify-otp/',
+     '/National_Diabetes_Program/changePassword/'
   ];
 
   const isNoContainer = noContainerRoutes.includes(location.pathname);
@@ -82,6 +88,18 @@ const route = createBrowserRouter([
             {
                 path:'register',
                 element:<Register/>
+            },
+            {
+                path:'resetPassword',
+                element:<ResetPassword/>
+            },
+           {
+                path:'verify-otp',
+                element:<VerifyPwd/>
+            },
+           {
+                path:'changePassword',
+                element:<ChangePassword/>
             },
             {
               path:'home',

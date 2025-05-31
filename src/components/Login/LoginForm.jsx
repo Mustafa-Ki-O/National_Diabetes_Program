@@ -79,6 +79,11 @@ const LoginForm = ({setProgress}) => {
                 {...form.getInputProps("password")}
               />
             </Grid.Col>
+            <Grid.Col span={12}>
+             <Text fw={600} td={'underline'} size="sm" ta={'right'} style={{cursor:'pointer'}} onClick={()=>navigate('/National_Diabetes_Program/resetPassword/')}>
+              نسيت كلمة المرور ؟
+             </Text>
+            </Grid.Col>
             <Grid.Col span={12} mt={10}>
               <Button
               fullWidth
@@ -87,7 +92,6 @@ const LoginForm = ({setProgress}) => {
               variant="filled"
               color="#37A9EF"
               type="submit"
-              mt="sm"
             >
                تسجيل الدخول
             </Button>

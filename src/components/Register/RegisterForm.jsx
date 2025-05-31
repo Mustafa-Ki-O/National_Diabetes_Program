@@ -12,6 +12,7 @@ import phone from "../../assets/vectors/Vector3.png";
 import calendar from "../../assets/vectors/calendar.png";
 import useFetchCities from "../../useMutation/Patient/useFetchCities";
 import dayjs from "dayjs";
+
 const RegisterForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { register, isPending } = useRegPatient();

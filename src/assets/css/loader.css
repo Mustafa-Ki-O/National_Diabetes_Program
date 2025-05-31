@@ -1,18 +1,17 @@
-body{
-    position: relative;
-  }
-  .overlay {
-      position: absolute;
+
+.overlay {
+      position: fixed;
       top: 0;
       left: 0;
-      width: 80%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.705);
-      /* filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.5)); */
-      z-index: 1000;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 80%;
+      height: 100%;
+      background-color: rgba(167, 167, 167, 0.705);
+      /* filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.5)); */
+      z-index: 1000;
+
     }
     
 .loader {

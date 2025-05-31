@@ -12,6 +12,7 @@
 }
 body{
   background-color: #F9FAFC !important;
+  /* position: relative !important; */
 }
 .mantine-Button-root:focus,
 .mantine-Button-root:focus-visible {

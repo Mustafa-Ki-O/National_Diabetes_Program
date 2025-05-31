@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 0rem ;
   text-align: center;
-  position: relative;
+  position: relative ;
   z-index: 3;
   background-color: #F9FAFC;
 }
@@ -30,6 +30,7 @@
 *:focus {
   outline: none !important;
 }
+
 .m_d4fb9cad, .m_d4fb9cad::before, .m_d4fb9cad::after {
   border-radius: 50px !important;
 }
@@ -46,6 +47,7 @@
 .mantine-Card-root{
   transition: all 0.4s;
 }
+
 .mantine-Card-root:hover{
   box-shadow: 0 6px 7px #8e8e8e;
   transition: all 0.4s;
@@ -66,6 +68,7 @@ input{
   /* color: #37a8ef; */
   /* color: #f9f9fa; */
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -95,6 +98,13 @@ input{
 .read-the-docs {
   color: #888;
 }
+
+
 .m_8fb7ebe7{
   height: auto !important;
+}
+
+.mantine-PinInput-input,.mantine-PinInput-input::placeholder{
+  /* margin: auto !important; */
+  text-align: center !important;
 }
