@@ -53,23 +53,8 @@ const form = useForm({
             centerName,
             centerNameReassignPatients
           };
-         if( id !== 2){
+
           deleteProfile(formData);
-         } else{
-          notifications.show({
-            title:'ممنوع يا غالي',
-            position: 'top-center',
-            message:'اعمل غير حساب وجرب فيه يا عيني 💋',
-            autoClose:10000,
-            color:'red'
-          })
-         }
-          
-          
-          // form.reset({
-          //   city: '',
-          //   centerNameReassignPatients: ''
-          // });
           setSubmited(true);
           close();
         }
