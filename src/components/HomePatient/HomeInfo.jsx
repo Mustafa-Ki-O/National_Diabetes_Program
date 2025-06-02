@@ -1,0 +1,180 @@
+import { Text,Button,Stack,Flex,Container, Title, Card, Grid, Paper , Accordion, Box, Group } from "@mantine/core"
+import { LineChart } from "@mantine/charts";
+
+import { Stethoscope ,ScanHeart ,CalendarDays ,CalendarCheck} from "lucide-react";
+import dayjs from "dayjs";
+const HomeInfo = () => {
+
+    const data = [
+  {
+    date: 'Mar 22',
+    hdl: 190,
+    ldl: 138,
+    FBG: 52,
+  },
+  {
+    date: 'April 22',
+    hdl: 70,
+    ldl: 138,
+    FBG: 109,
+  },
+  {
+    date: 'May 22',
+    hdl: 122,
+    ldl: 36,
+    FBG: 221,
+  },
+  {
+    date: 'June 22',
+    hdl: 122,
+    ldl: 36,
+    FBG: 221,
+  },
+  {
+    date: 'July 22',
+    hdl: 172,
+    ldl: 136,
+    FBG: 321,
+  },
+];
+
+const reviews = [  '2025-2-18' , '2025-4-18' ,'2025-8-18',   '2025-5-18',
+];
+  
+   
+  
+  
+
+
+const current = new Date();
+const currentDate = dayjs(current).format('YYYY-MM-DD');
+
+const dates = reviews.map((date) => {
+  const formattedDate = dayjs(date).format('YYYY-MM-DD');
+  const isPast = dayjs(formattedDate).isBefore(currentDate);
+  const isFuture = dayjs(formattedDate).isAfter(currentDate); 
+
+  return {
+    date: formattedDate,
+    status: isPast ? "Past" : isFuture ? "Future" : "Today"
+  };
+});
+
+const upcomingReviews = dates.filter(item => item.status !== 'Past');
+const pastReviews = dates.filter(item => item.status === 'Past');
+
+const upcomingItems = upcomingReviews.map((item) => (
+  <Flex
+    dir="ltr"
+    bd={'1px solid #fe101070'}
+    bg={'#FFF1F2'}
+    key={item.date}
+    p={15}
+    justify={'end'}
+    align={'center'}
+    gap={10}
+    style={{borderRadius: 10}}
+  >
+    <Text size={'1.1rem'}>{item.date}</Text>
+    <Text size={'1.1rem'} fw={700} >
+      المراجعة القادمة
+      
+      </Text>
+        <CalendarDays  size={25} color="#fe1010" />
+  </Flex>
+));
+
+const pastItems = pastReviews.length > 0 ? (
+  <Accordion dir="rtl" variant="filled" >
+  <Accordion.Item key="past-reviews" value="past-reviews">
+    <Accordion.Control  bg={'#8e8e8e20'}>
+     <Flex  justify={'start'} align={'center'} gap={10}>
+      <CalendarCheck size={25} color="#000" />
+            <Text size={'1rem'} >
+        المراجعات السابقة
+      </Text>
+     </Flex>
+      
+    </Accordion.Control>
+    <Accordion.Panel style={{borderRadius:10}} bg={'#8e8e8e20'}>
+      {pastReviews.map((item) => (
+        <Text 
+          key={item.date}
+          ta={'right'} 
+          style={{borderRadius: 10}}  
+          size={'1.1rem'} 
+          c={'#fff'} 
+          bg={'#14B8A6'} 
+          p={10}
+          my={5}
+        >
+          {item.date}
+        </Text>
+      ))}
+
+      <Text  px={10} mt={10} ta={'right'} size={'1rem'} td={'underline'} c={'#14B8A6'}>
+        سجل المراجعات
+        
+      </Text>
+    </Accordion.Panel>
+  </Accordion.Item>
+  </Accordion>
+) : null;
+
+    return(
+        <>
+        <Stack gap={{base:5,sm:20}}>
+        <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} radius={10}>
+          <Title mb={20} size={'1.8rem'} ta={'right'}>
+            عبد الغني المحمد
+          </Title>
+          <Grid gutter={20} >
+         <Grid.Col span={6}>
+               <Text ta={'right'} size={'md'} c={'#8e8e8e'}>تاريخ الميلاد</Text>
+               <Text ta={'right'} size={'md'} fw={'500'} c={'#000'}>12-4-1990</Text>
+            </Grid.Col>
+            <Grid.Col span={6}>
+               <Text ta={'right'} size={'md'} c={'#8e8e8e'}>الرقم الوطني</Text>
+               <Text ta={'right'} size={'md'} fw={'500'} c={'#000'}>100938832344</Text>
+            </Grid.Col>
+            <Grid.Col span={12}>
+                <Text ta={'right'} size={'md'} c={'#8e8e8e'}>الفحص السريري</Text>
+               <Text ta={'right'} size={'md'} fw={'500'} c={'#00ff00'}>مكتمل في 12-2-2022</Text>
+            </Grid.Col>
+          </Grid>
+          </Paper>
+          <Flex gap={10}>
+          <Button mih={'5rem'} fz={'1rem'}  fullWidth  variant="gradient" 
+            gradient={{ from: '#14B8A6', to: 'cyan', deg: 91 }} radius={10} size="xl" >
+               <Stethoscope  size={25} color="#fff" style={{marginRight:10}}/>
+             طبيبي
+            
+            </Button>
+              <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl" >
+            <ScanHeart  size={28} color="#fff" style={{marginRight:10}}/>
+             فحص AI
+            </Button>
+          </Flex>
+          <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} radius={10}>
+            <LineChart
+              h={250}
+              data={data}
+              dataKey="date"
+              withLegend
+              curveType="monotone"
+              legendProps={{ verticalAlign: 'bottom', height: 50 }}
+              series={[
+                { name: 'ldl', color: 'indigo.6' },
+                { name: 'hdl', color: 'red.6' },
+                { name: 'FBG', color: 'teal.6' },
+              ]}
+            />
+          </Paper>
+          <Title ta={'right'} size={'1.5rem'} >المراجعات </Title>       
+              {upcomingItems}
+              {pastItems}
+        </Stack>
+        </>
+    )
+} 
+export default HomeInfo

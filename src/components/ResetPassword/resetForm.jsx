@@ -29,7 +29,6 @@ const handleSubmit = () => {
       const email = form.getValues().email;
       postEmail({email:email})
       console.log(email)
-      localStorage.setItem('email',JSON.stringify(email))
       form.reset();
       };
      

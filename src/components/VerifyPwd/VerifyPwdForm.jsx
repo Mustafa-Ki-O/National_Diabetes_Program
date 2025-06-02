@@ -11,7 +11,7 @@ const schema = yup.object().shape({
 });
 
 const VerifyPwdForm = ({setProgress}) => {
-  const [patientEmail, setPatientEmail] = useState('');
+  const [email, setEmail] = useState('');
 
   const {postOtp,isPending} = usePostOtp()
 
@@ -26,8 +26,8 @@ const [clicked,setClicked] = useState(false)
   });
 
   useEffect(() => {
-    const storedEmail = JSON.parse(localStorage.getItem('email'));
-    if (storedEmail) setPatientEmail(storedEmail);
+    const storedEmail = JSON.parse(sessionStorage.getItem('email'));
+    if (storedEmail) setEmail(storedEmail.email);
   }, []);
 
 
@@ -42,8 +42,7 @@ const [clicked,setClicked] = useState(false)
 
   const handleResend =() => {
     if(!clicked){
-    postEmail({email:patientEmail})
-    console.log(patientEmail.email)
+    postEmail({email:email})
     setClicked(true)
     form.reset()
     }

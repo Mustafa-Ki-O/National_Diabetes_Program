@@ -6,7 +6,7 @@ import PostPassword from "../api/PostPassword";
 const usePostPassword= () => {
   const navigate = useNavigate();
   const { mutate: postPassword, isPending } = useMutation({
-    mutationFn: (otp) => PostPassword(otp),
+    mutationFn: (form) => PostPassword(form),
     onSuccess: () => {
         console.log("تم بنجاح");
       notifications.show({
@@ -14,7 +14,7 @@ const usePostPassword= () => {
       autoClose: 3000,
       color: 'blue',
     })
-      localStorage.clear();
+      sessionStorage.clear();
       navigate("/National_Diabetes_Program/");
     },
     onError: (err) => {

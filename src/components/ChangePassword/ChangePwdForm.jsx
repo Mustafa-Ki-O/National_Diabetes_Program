@@ -18,7 +18,7 @@ const schema = yup.object().shape({
 const ChangePwdForm = ({setProgress}) => {
 
 
-  const [patientEmail, setPatientEmail] = useState('');
+  const [email, setEmail] = useState('');
 
 
   const navigate = useNavigate();
@@ -30,15 +30,15 @@ const ChangePwdForm = ({setProgress}) => {
   });
 
   useEffect(() => {
-    const storedEmail = JSON.parse(localStorage.getItem('email'));
-    if (storedEmail) setPatientEmail(storedEmail);
+    const storedEmail = JSON.parse(sessionStorage.getItem('email'));
+    if (storedEmail) setEmail(storedEmail.email);
   }, []);
 
   const handleSubmit = () =>{
     if(form.isValid){
     const pwd = form.getValues().password
-    postPassword({newPassword:pwd})
-    console.log(pwd)
+    postPassword({newPassword:pwd,email:email})
+    console.log(pwd,email)
     // form.reset()
     }
   }

@@ -1,7 +1,8 @@
-import { Grid,Title,Text ,Container, Flex} from "@mantine/core"
+import { Grid,Title,Text ,Container, Flex, Button} from "@mantine/core"
 import { useState,useEffect } from "react";
 import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
 import Progress from "../../components/general/Progress";
+import { useNavigate } from "react-router";
 
 const Home = () => {
   const [patients, setPatients] = useState([]);
@@ -51,6 +52,7 @@ const mostCommonSugarType = getMostCommonSugarType();
 console.log(mostCommonSugarType)
 const num = patients.length ;
 
+const navigate= useNavigate()
     return(
         <>
         {progress && <Progress/>}
@@ -58,6 +60,7 @@ const num = patients.length ;
                  <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                      الرئيسية
                    </Title>
+                   <Button onClick={()=>navigate('/National_Diabetes_Program/patient-home')}>gg</Button>
                {patients.length !==0 ? (
                 
                   <Grid justify="end"  gutter={50}  px={'lg'}  >  

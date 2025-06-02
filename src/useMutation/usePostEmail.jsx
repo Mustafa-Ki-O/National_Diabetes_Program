@@ -7,7 +7,7 @@ const usePostEmail = () => {
   const navigate = useNavigate();
   const { mutate: postEmail, isPending } = useMutation({
     mutationFn: (email) => PostEmail(email),
-    onSuccess: () => {
+    onSuccess: (data, variables) => {
         console.log("تم بنجاح");
       notifications.show({
       title: "أدخل الكود الذي تلقيته",
@@ -15,6 +15,7 @@ const usePostEmail = () => {
       color: 'blue',
     })
     //   localStorage.clear();
+      sessionStorage.setItem('email',JSON.stringify(variables))
       navigate("/National_Diabetes_Program/verify-otp/");
     },
     onError: (err) => {

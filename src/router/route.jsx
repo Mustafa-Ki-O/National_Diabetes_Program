@@ -22,6 +22,7 @@ import PatientReview from "../app/Admin/PatientReview";
 import ResetPassword from "../app/Auth/ResetPassword";
 import VerifyPwd from "../app/Auth/VerifyPwd";
 import ChangePassword from "../app/Auth/ChangePassword";
+import HomePatient from "../app/Patient/HomePatient";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -145,7 +146,11 @@ const route = createBrowserRouter([
             {
               path:'medicinesMangemet',
               element:<MedicinesMangemet/>
-            }
+            },
+             {
+              path:'patient-home',
+              element:<HomePatient/>,
+            },
           ]
     }
 ])
