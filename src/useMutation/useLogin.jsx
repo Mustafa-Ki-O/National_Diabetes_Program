@@ -5,18 +5,20 @@ import { SignIn } from "../api/SignIn";
 import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
+
   const navigate = useNavigate();
   const { mutate: login,  isPending } = useMutation({
     mutationFn: (formData) => SignIn(formData),
-    onSuccess: () => {
+    onSuccess: (res) => {
         console.log("تم بنجاح");
+        console.log('res : ',res)
         notifications.show({
           title: 'تم تسجيل الدخول',
           autoClose: 4000,
           color: 'blue',
         })    
-    //   toast.success("تم انشاء الحساب بنجاح");
-      navigate("/National_Diabetes_Program/home/");
+      res.role === 'center' ? navigate("/National_Diabetes_Program/home/") : navigate("/National_Diabetes_Program/patient-home/")
+      
     },
     onError: (err) => {
       console.log("ERROR", err);

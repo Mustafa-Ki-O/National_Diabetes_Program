@@ -1,4 +1,4 @@
-import { AppShell, Box, Burger, Flex,Group, Image, Stack, Text } from "@mantine/core";
+import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text } from "@mantine/core";
 import { useEffect, useState } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
 import logo from '../../assets/images/NDBLogo.svg';
@@ -17,6 +17,7 @@ import drugs from '../../assets/vectors/Drugs.svg'
 import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
+import { Activity, BookPlus, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon  } from "lucide-react";
 
 
 const NavBar = () => {
@@ -24,10 +25,25 @@ const NavBar = () => {
     const location = useLocation();
     const theme= useMantineTheme();
     const [activeButton, setActiveButton] = useState('home');
+    const [clickedButton,setClickedButton] = useState('patient-home')
     // const [opened, { toggle }] = useDisclosure();
     // const [openBurger,setOpenBurger] = useState(false);
     const [opened, { toggle }] = useDisclosure();
     const navigate= useNavigate()
+
+
+    const handleButtonNavClick = (button) => {
+        setClickedButton(button);
+        if(button === 'care' || button === 'charts' || button ==='camera'){
+          window.alert('قيد التطوير')
+        }
+        else{
+          navigate(`/National_Diabetes_Program/${button}/`)
+        }
+
+    };
+
+
     const handleButtonClick = (button) => {
         setActiveButton(button);
         if(button == 'logOut'){
@@ -41,6 +57,40 @@ const NavBar = () => {
     };
 
 
+    
+
+    const [userRole,setUserRole] = useState()
+
+    useEffect(()=>{
+     const user = JSON.parse(localStorage.getItem('user'))
+     setUserRole(user?.role)
+    },[userRole])
+
+
+  const NavIcon = ({ icon: Icon, name, clickedButton, handleButtonNavClick ,label}) => {
+  const isActive = clickedButton === name;
+
+  return (
+    <div
+      // className={`${nav.botom} ${isActive ? nav.botomClick : ''}`}
+      style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}
+      onClick={() => handleButtonNavClick(name)}
+    >
+      <Icon
+        size={isActive ? 36 : 30}
+        strokeWidth={isActive ? 1.8 : 1.6}
+        color={isActive ? '#37a9ef' : '#707070'}
+        
+      />
+      <Text
+        size={isActive ? 'sm' : 'xs'}
+        
+        c={isActive ? '#37a9ef' : '#707070'}
+      >{label}</Text>
+    </div>
+  );
+};
+
 
     return (
         <>
@@ -50,7 +100,10 @@ const NavBar = () => {
         && location.pathname !== '/National_Diabetes_Program/verifyEmail/'
         && location.pathname !== '/National_Diabetes_Program/resetPassword/'
         && location.pathname !== '/National_Diabetes_Program/verify-otp/'
-        && location.pathname !== '/National_Diabetes_Program/changePassword/' ) ?(
+        && location.pathname !== '/National_Diabetes_Program/changePassword/' ) ?
+        
+        userRole == 'center' ? (
+          
     <>
     <LogOutModal opened={openedModal} close={close} />
         <AppShell  header={{ height: 60 }}
@@ -141,8 +194,75 @@ const NavBar = () => {
 </AppShell.Navbar>
     </AppShell>    
     </>
-        ):(
-            <></>
+        
+      ):
+      (
+       <>
+       <AppShell  mb={'4rem'} >
+        
+        <AppShell.Header p={10} w={'100%'}  bg={'#FFF'} >
+          <Flex justify={'space-between'} align={'center'}>
+             <Image src={logo} w={90} pb={5}/>
+             <Group gap={15} align="center">
+              <BellIcon strokeWidth={1.5} size={28} color="#37a9ef" />
+              <CircleUserRound strokeWidth={1.5} size={34} color="#37a9ef" />
+               
+             </Group>
+          </Flex>
+        </AppShell.Header >
+        <AppShell.Footer  p={10} w={'100%'} dir="ltr" bg={'#FFF'} bd={'none'}>
+        <Flex px={'1rem'} justify={'space-between'} align={'center'}>
+           <NavIcon 
+             icon={BookPlus} 
+             name="medical-communication" 
+             clickedButton={clickedButton} 
+             handleButtonNavClick={handleButtonNavClick}
+             label ='التواصل'
+           />
+            <NavIcon 
+              icon={BriefcaseMedical} 
+              name="health-care" 
+              clickedButton={clickedButton} 
+              handleButtonNavClick={handleButtonNavClick} 
+              label='الرعاية الصحية'
+            />
+            {/* <div
+              style={{padding:7,backgroundColor:`${clickedButton === 'camera' ? '#37a9ef': '#707070'}`,borderRadius:'50%'}}
+              onClick={() => handleButtonNavClick('camera')}
+            >
+              <CameraIcon
+                size={clickedButton==='camera' ? 48 : 42}
+                strokeWidth={clickedButton==='camera' ? 1.8 : 1.6}
+                color={clickedButton==='camera' ? '#fff' : '#fff' }
+                
+              />
+            </div> */}
+            <NavIcon 
+              icon={Activity} 
+              name="health-checkUps" 
+              clickedButton={clickedButton} 
+              handleButtonNavClick={handleButtonNavClick} 
+              label={'الحالة الصحية'}
+            /> 
+            
+            <NavIcon 
+              icon={House} 
+              name="patient-home" 
+              clickedButton={clickedButton} 
+              handleButtonNavClick={handleButtonNavClick} 
+              label={'الرئيسية'}
+            />
+          </Flex>
+        </AppShell.Footer>
+
+       </AppShell>
+      
+          
+    </>
+      ) 
+      :(
+            <>
+            </>
         )}
         </>
     );

@@ -2,9 +2,16 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { VerifyToken } from "../api/VerifyToken";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect,useState } from "react";
 const useVerifyToken = () => {
   const navigate = useNavigate();
+      const [userRole,setUserRole] = useState()
+  
+      useEffect(()=>{
+       const user = JSON.parse(localStorage.getItem('user'))
+       setUserRole(user?.role)
+      },[userRole])
+  
   const { mutate: verify, isPending } = useMutation({
     mutationFn: (token) => VerifyToken(token),
     onMutate: () => {
@@ -21,6 +28,7 @@ const useVerifyToken = () => {
       return { no }; 
     },
     onSuccess: (data, variables, context) => {
+      // console.log('data : ',data)
       // تحديث الإشعار عند النجاح
       notifications.update({
         id: context.no,
@@ -33,7 +41,8 @@ const useVerifyToken = () => {
       });
       
       setTimeout(() => {
-        navigate("/National_Diabetes_Program/home/");
+        console.log(userRole)
+        userRole === 'center' ? navigate("/National_Diabetes_Program/home/") : navigate("/National_Diabetes_Program/patient-home/")
       }, 2000);
     }, 
     onError: (err, variables, context) => {

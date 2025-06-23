@@ -23,6 +23,10 @@ import ResetPassword from "../app/Auth/ResetPassword";
 import VerifyPwd from "../app/Auth/VerifyPwd";
 import ChangePassword from "../app/Auth/ChangePassword";
 import HomePatient from "../app/Patient/HomePatient";
+import MedicalCommunication from "../app/Patient/MedicalCommunication";
+import HealthCare from "../app/Patient/HealthCare";
+import HealthChecksUps from "../app/Patient/HealthCheckUps";
+import AnalyzerAI from "../app/Patient/AnalyzerAI";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -58,7 +62,12 @@ const MainLayout = () => {
     '/National_Diabetes_Program/verifyEmail/',
     '/National_Diabetes_Program/resetPassword/',
     '/National_Diabetes_Program/verify-otp/',
-     '/National_Diabetes_Program/changePassword/'
+     '/National_Diabetes_Program/changePassword/',
+     '/National_Diabetes_Program/patient-home/',
+     '/National_Diabetes_Program/medical-communication/',
+     '/National_Diabetes_Program/health-care/',
+     '/National_Diabetes_Program/health-checkUps/',
+     '/National_Diabetes_Program/analyzer-AI/'
   ];
 
   const isNoContainer = noContainerRoutes.includes(location.pathname);
@@ -151,6 +160,23 @@ const route = createBrowserRouter([
               path:'patient-home',
               element:<HomePatient/>,
             },
+            {
+              path:'medical-communication',
+              element:<MedicalCommunication />
+            },
+            {
+              path:'health-care',
+              element:<HealthCare/>
+            },
+            {
+              path:'health-checkUps',
+              element:<HealthChecksUps/>
+            },
+            {
+              path:'analyzer-AI',
+              element:<AnalyzerAI/>
+            }
+
           ]
     }
 ])

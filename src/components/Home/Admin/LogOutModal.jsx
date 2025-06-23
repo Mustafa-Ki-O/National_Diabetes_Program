@@ -7,6 +7,7 @@ const{logOut,isPending} = useLogOut();
 
     const handleLogout =()=> {
         logOut()
+        close()
     }
     return(
         <>

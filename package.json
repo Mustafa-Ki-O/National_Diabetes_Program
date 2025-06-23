@@ -20,6 +20,7 @@
     "@mantine/form": "^7.17.2",
     "@mantine/hooks": "^7.17.2",
     "@mantine/notifications": "^7.17.2",
+    "@tabler/icons-react": "^3.34.0",
     "@tanstack/react-query": "^5.69.0",
     "axios": "^1.8.4",
     "dayjs": "^1.11.13",

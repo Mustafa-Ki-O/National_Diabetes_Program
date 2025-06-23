@@ -12,11 +12,13 @@ import '@mantine/charts/styles.layer.css';
 import { QueryClientProvider,QueryClient } from '@tanstack/react-query';
 import { Notifications } from '@mantine/notifications';
 // import { BrowserRouter } from 'react-router';
+
 const queryClient = new QueryClient();
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
   <QueryClientProvider client={queryClient}>
-  <MantineProvider>
+  <MantineProvider 
+ >
     <Notifications />
     {/* <BrowserRouter> */}
       <App />

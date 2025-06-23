@@ -60,7 +60,6 @@ const navigate= useNavigate()
                  <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                      الرئيسية
                    </Title>
-                   <Button onClick={()=>navigate('/National_Diabetes_Program/patient-home')}>gg</Button>
                {patients.length !==0 ? (
                 
                   <Grid justify="end"  gutter={50}  px={'lg'}  >  

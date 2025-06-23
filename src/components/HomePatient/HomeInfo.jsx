@@ -3,8 +3,10 @@ import { LineChart } from "@mantine/charts";
 
 import { Stethoscope ,ScanHeart ,CalendarDays ,CalendarCheck} from "lucide-react";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router";
 const HomeInfo = () => {
 
+  const navigate = useNavigate()
     const data = [
   {
     date: 'Mar 22',
@@ -150,7 +152,7 @@ const pastItems = pastReviews.length > 0 ? (
              طبيبي
             
             </Button>
-              <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl" >
+              <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl" onClick={()=>navigate('/National_Diabetes_Program/analyzer-AI/')} >
             <ScanHeart  size={28} color="#fff" style={{marginRight:10}}/>
              فحص AI
             </Button>

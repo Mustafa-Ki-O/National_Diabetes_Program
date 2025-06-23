@@ -70,7 +70,7 @@ input{
 }
 
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #2cdd7c);
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
