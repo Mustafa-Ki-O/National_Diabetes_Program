@@ -1,14 +1,45 @@
-import { Button, Flex, Modal,Stack,TextInput, Title ,FileInput, Text} from "@mantine/core"
+import { Button, Flex, Modal,Stack,TextInput, Title ,FileInput, Text ,Textarea, Grid, Divider} from "@mantine/core"
 import { useNavigate } from "react-router";
 import useAddReview from "../../useMutation/Admin/useAddReview";
 import { useEffect, useState } from "react";
 import { useForm } from "@mantine/form";
 import useAddArticle from "../../useMutation/Admin/useAddArticle";
+import dayjs from "dayjs";
+import { UploadIcon } from "lucide-react";
+import { supabase } from "../../supabaseClient";
+import useAddVideo from "../../useMutation/Admin/useAddVideo";
+
 
 const UploadModal = ({opened,close,subject,setProgress}) => {
 
+  const uploadFileToSupabase = async (file, pathPrefix = "uploads") => {
+  const fileExt = file.name.split('.').pop();
+  const fileName = `${Date.now()}.${fileExt}`;
+  const filePath = `${pathPrefix}/${fileName}`;
+
+  const { data, error } = await supabase.storage
+    .from('media') // اسم الـ bucket في supabase
+    .upload(filePath, file, {
+      cacheControl: '3600',
+      upsert: false,
+    });
+
+  if (error) {
+    console.error("رفع الملف فشل:", error.message);
+    throw error;
+  }
+
+  const { data: publicUrl } = supabase.storage
+    .from('media')
+    .getPublicUrl(filePath);
+  
+    console.log(publicUrl.publicUrl)
+  return publicUrl.publicUrl; // هذا هو الرابط النهائي
+};
+
    const [isSubmitted, setIsSubmitted] = useState(false);
    const {addArticle,isPending} = useAddArticle()
+   const {addVideo,isPending:isPendingVideo} = useAddVideo()
 
 
    const form = useForm({
@@ -18,44 +49,50 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
       title: "",
       shortText: "",
       desc: "",
-      imageUrl: null,
-      videoUrl: null,
+      imageURL: null,
+      videoURL: null,
     },
     validate: {
       title: (value) => (!value ? "العنوان مطلوب" : null),
       shortText: (value) => (!value ? "النبذة مطلوبة" : null),
       desc: (value) =>
         (subject === "المقالات" || subject === "النشاطات") && !value ? "الوصف مطلوب" : null,
-      imageUrl: (value) =>
+      imageURL: (value) =>
         (subject === "المقالات" || subject === "النشاطات") && !value ? "الصورة مطلوبة" : null,
-      videoUrl: (value) =>
+      videoURL: (value) =>
         subject === "الفيديوهات" && !value ? "الفيديو مطلوب" : null,
     },
   });
 
     
-     const handleSubmit = () => {
+     const handleSubmit = async () => {
   if (form.isValid()) {
     const values = form.getValues();
     console.log('القيم المدخلة:', values);
-
+    
     const newFormData = new FormData();
-
+    let imageURL = "";
+    let videoURL= "";
     newFormData.append("title", values.title);
     newFormData.append("shortText", values.shortText);
 
     if (subject === "المقالات" || subject === "النشاطات") {
       newFormData.append("desc", values.desc);
-      if (values.imageUrl instanceof File) {
-        newFormData.append("imageUrl", values.imageUrl);
+      if (values.imageURL instanceof File) {
+         imageURL = await uploadFileToSupabase(values.imageURL, 'images');
+
+         newFormData.append('imageUrl',imageURL)
+        
       } else {
         console.warn("الصورة غير صالحة أو لم تُرفع بشكل صحيح");
       }
     }
 
     if (subject === "الفيديوهات") {
-      if (values.videoUrl instanceof File) {
-        newFormData.append("videoUrl", values.videoUrl);
+      if (values.videoURL instanceof File) {
+         videoURL = await uploadFileToSupabase(values.videoURL, 'videos');
+         newFormData.append('videoUrl',videoURL)
+        
       } else {
         console.warn("الفيديو غير صالح أو لم يُرفع بشكل صحيح");
       }
@@ -63,9 +100,11 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
 
     setIsSubmitted(true);
     if (subject === "المقالات") {
-      addArticle(newFormData);
+     await addArticle(newFormData);
     }
-
+     if (subject === "الفيديوهات") {
+     await addVideo(newFormData);
+    }
     form.reset();
     close();
   }
@@ -77,18 +116,19 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
 
       useEffect(()=>{
         if(isSubmitted){
-          setProgress(isPending)
+          setProgress(isPending||isPendingVideo)
         }
-      },[isPending])
+      },[isPending||isPendingVideo])
     
     return(
         <>
            <Modal
-      w="100%"
+       w={'100%'}
+      size={'80%'}
       radius={20}
       opened={opened}
       onClose={close}
-      fullScreen
+      // fullScreen={{xs:'true',md:'false'}}
       overlayProps={{
         backgroundOpacity: 0.55,
         blur: 2,
@@ -96,83 +136,96 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
       style={{ position: "absolute", right: 0 }}
     >
       <Stack pb={50} dir="rtl" className="modal" w="70%" m="auto" gap={15}>
-        <Title size="lg" fw="bold">
-          رفع {subject}
-        </Title>
+        <Flex justify={'space-between'} align={'center'}>
+          <Title size="lg" fw="bold" mb={'lg'}>
+          رفع {subject.slice(0,-2)}
+          </Title>
+           <Text size="lg">
+            {dayjs(new Date).format('DD-MM-YYYY')}
+          </Text>
+
+        </Flex>
+        <Divider mb={15}/>
         <form onSubmit={form.onSubmit(handleSubmit)}>
-          <TextInput
-          my={20}
+          <Grid gutter={20}>
+            <Grid.Col span={{base:12,sm:6}}>
+               <TextInput
+
             size="lg"
             radius={10}
-            label={`أدخل عنوان الـ${subject}`}
-            placeholder={`أدخل عنوان الـ${subject}`}
+            label={`أدخل عنوان ${subject.slice(0, -2)}`}
+            placeholder={`أدخل عنوان ${subject.slice(0, -2)}`}
             key={form.key("title")}
             {...form.getInputProps("title")}
             required
           />
-          <TextInput
-          my={20}
+            </Grid.Col>
+            <Grid.Col span={{base:12,sm:6}}>
+              <TextInput
               size="lg"
             radius={10}
-            label={`نبذة عن الـ${subject}`}
-            placeholder={`نبذة عن الـ${subject}`}
+            label={`نبذة عن ${subject.slice(0, -2)}`}
+            placeholder={`نبذة عن  ${subject.slice(0, -2)}`}
             key={form.key("shortText")}
             {...form.getInputProps("shortText")}
             required
           />
 
-          {/* وصف المقال أو النشاط */}
-          {(subject === "المقالات" || subject === "النشاطات") && (
-            <TextInput
-            my={20}
-                size="lg"
+            </Grid.Col>
+             {(subject === "المقالات" || subject === "النشاطات") && (
+            <Grid.Col span={12}>
+              
+                 <Textarea
+                 size="xl"
+                autosize
+                 minRows={2}
+                 radius={10}
+                 label="الموضوع"
+                 placeholder="الموضوع"
+                 key={form.key("desc")}
+                 {...form.getInputProps("desc")}
+                 required
+             />
+            </Grid.Col>
+             )}
+              {(subject === "المقالات" || subject === "النشاطات") && (
+                <Grid.Col span={12}>
+                  <FileInput
               radius={10}
-              label="موضوع المقال"
-              placeholder="موضوع المقال"
-              key={form.key("desc")}
-              {...form.getInputProps("desc")}
-              required
-            />
-          )}
-
-          {/* رفع صورة */}
-          {(subject === "المقالات" || subject === "النشاطات") && (
-            <FileInput
-            my={20}
               size="lg"
+              leftSection={<UploadIcon size={20}/>}
               label="رفع صورة"
               placeholder="اختر صورة"
               accept="image/*"
-              key={form.key("imageUrl")}
-              {...form.getInputProps("imageUrl")}
+              key={form.key("imageURL")}
+              {...form.getInputProps("imageURL")}
               required
             />
-          )}
 
-          {/* رفع فيديو */}
-          {subject === "الفيديوهات" && (
-            <FileInput
-              my={20}
-              size="lg"
-              label="رفع صورة"
-              placeholder="اختر صورة"
-              accept="image/*"
-              value={form.values.imageUrl}
-              onChange={(file) => form.setFieldValue("imageUrl", file)}
-              error={form.errors.imageUrl}
-              required
-            />
-          )}
+                </Grid.Col>)}
+                 {subject === "الفيديوهات" && (
+                  <Grid.Col span={12}>
+                       <FileInput
+     
+                    size="lg"
+                    label="رفع فيديو"
+                    placeholder="اختر فيديو"
+                    accept="video/*"
+                    key={form.key("videoURL")}
+                    {...form.getInputProps("videoURL")}
+                    required
+                  />
+                  </Grid.Col> )}
+          </Grid>
+          
+          
 
-          <Text size="lg" my={20}>المركز المحرر</Text>
-          <Text size="lg"  my={20}>تاريخ اليوم</Text>
-
-          <Flex gap={30} mt={30} w="100%" justify="space-between">
-            <Button type="submit" size="lg" radius={10} 
+          <Flex gap={30} mt={'4rem'} w="100%" justify="space-between">
+            <Button miw={'8rem'} type="submit" size="lg" radius={10} 
              variant="filled" color="#37A9EF">
               تأكيد
             </Button>
-            <Button size="lg" radius={10} 
+            <Button miw={'8rem'}  size="lg" radius={10} 
              variant="outline" color="#37A9EF" onClick={handleClose}>
               رجوع
             </Button>

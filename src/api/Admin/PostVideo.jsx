@@ -5,7 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 const PostVideo = (formData) => {
   console.log(formData)
   return new Promise((resolve, reject) => {
-    axiosInstance.post(`${API_URL}/createArticle`,formData)
+    axiosInstance.post(`${API_URL}/addVideo`,formData)
       .then(response => {
         resolve(response.data); 
       })
