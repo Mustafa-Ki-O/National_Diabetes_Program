@@ -42,14 +42,7 @@ const Documents = () => {
   return (
     <>
     <Stack align="start" >
-        <Flex  w={'100%'} justify={'space-between'} align={'center'} >
-        <Button miw={'8rem'} radius="md" variant="filled" color="blue" size="md">
-        رفع مقال
-      </Button>
-         <Button miw={'8rem'}  radius="md" variant="light" color="blue" size="md">
-        فرز
-      </Button>
-        </Flex>
+
   
 
       {[1, 2, 3, 4].map((item) => (

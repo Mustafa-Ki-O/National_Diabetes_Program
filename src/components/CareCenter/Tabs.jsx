@@ -3,12 +3,16 @@ import Documents from './Documents';
 import Videos from './Videos';
 
 
-const MultiTabs =() => {
+const MultiTabs =({setClick}) => {
   return (
     <Tabs p={20} dir='rtl' defaultValue="doc">
-      <Tabs.List pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}} bg={'#f9f9f9'} >
+      <Tabs.List grow justify={'space-between'} pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
+      onClick={(e)=>setClick(e.target.innerText)}
+      bg={'#f9f9f9'} >
         <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="doc" >
+          
           المقالات
+        
         </Tabs.Tab>
         <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}}  value="activities" >
           النشاطات

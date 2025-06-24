@@ -1,6 +1,8 @@
-import { Container,Tabs } from "@mantine/core"
+import { Container,Flex,Tabs } from "@mantine/core"
 import { useState,useEffect } from "react";
 import DocumentsCare from "../../components/HealthCare/DocumentsCare";
+import VideosCare from "../../components/HealthCare/VideosCare";
+import Ordering from "../../components/general/Ordering";
 const HealthCare = () => {
 
         const [active,setActive] = useState(false);
@@ -11,7 +13,7 @@ const HealthCare = () => {
             setActive(true);
           },200);
         },[])
-
+      
         useEffect(() => {
           const handleScroll = () => setScrolled(window.scrollY > 20);
           window.addEventListener('scroll', handleScroll);
@@ -26,13 +28,22 @@ const HealthCare = () => {
                   <Tabs.List pt={6}  grow justify="space-between" pos={'sticky'} top={57} 
                   style={{zIndex:10,borderBottom:'2px solid #00000004',backgroundColor:scrolled ? '#fff':'#F9FAFC',transition:'all 0.4s'}}>
                     <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="doc" >
-                      المقالات
+                      <Flex gap={10}>
+                          المقالات
+                      <Ordering/>
+                      </Flex>
                     </Tabs.Tab>
                     <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}}  value="activities" >
+                      <Flex gap={10}>
                       النشاطات
+                      <Ordering/>
+                      </Flex>     
                     </Tabs.Tab>
                     <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="videos" >
-                      الفيديوهات
+                      <Flex gap={10}>
+                        الفيديوهات
+                       <Ordering/>
+                      </Flex>
                     </Tabs.Tab>
                   </Tabs.List>
 
@@ -45,7 +56,7 @@ const HealthCare = () => {
                   </Tabs.Panel>
             
                   <Tabs.Panel p={10} mt={'xl'} value="videos">
-                    الفيديوهات
+                    <VideosCare/>
                   </Tabs.Panel>
             </Tabs>
         </Container>

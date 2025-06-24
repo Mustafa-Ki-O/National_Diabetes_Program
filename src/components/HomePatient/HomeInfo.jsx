@@ -126,7 +126,7 @@ const pastItems = pastReviews.length > 0 ? (
     return(
         <>
         <Stack gap={{base:5,sm:20}}>
-        <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} radius={10}>
+        <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} w={{base:'100%',md:'50%'}}  radius={10}>
           <Title mb={20} size={'1.8rem'} ta={'right'}>
             عبد الغني المحمد
           </Title>
@@ -141,11 +141,15 @@ const pastItems = pastReviews.length > 0 ? (
             </Grid.Col>
             <Grid.Col span={12}>
                 <Text ta={'right'} size={'md'} c={'#8e8e8e'}>الفحص السريري</Text>
-               <Text ta={'right'} size={'md'} fw={'500'} c={'#00ff00'}>مكتمل في 12-2-2022</Text>
+               <Text ta={'right'} size={'md'} fw={'500'} c={'green'}>مكتمل في 12-2-2022</Text>
+            </Grid.Col>
+              <Grid.Col span={12}>
+                <Text ta={'right'} size={'md'} c={'#8e8e8e'}> المركز المشرف </Text>
+               <Text ta={'right'} size={'md'} fw={'500'}  c={'#000'}>مركز حمص الصحي</Text>
             </Grid.Col>
           </Grid>
           </Paper>
-          <Flex gap={10}>
+          <Flex gap={10} >
           <Button mih={'5rem'} fz={'1rem'}  fullWidth  variant="gradient" 
             gradient={{ from: '#14B8A6', to: 'cyan', deg: 91 }} radius={10} size="xl" >
                <Stethoscope  size={25} color="#fff" style={{marginRight:10}}/>
