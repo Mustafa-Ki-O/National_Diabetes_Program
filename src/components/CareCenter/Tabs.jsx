@@ -1,6 +1,7 @@
 import { Tabs } from '@mantine/core';
 import Documents from './Documents';
 import Videos from './Videos';
+import Activities from './Activities';
 
 
 const MultiTabs =({setClick}) => {
@@ -26,11 +27,11 @@ const MultiTabs =({setClick}) => {
         <Documents/>
       </Tabs.Panel>
 
-      <Tabs.Panel value="activities">
-        النشاطات
+      <Tabs.Panel mt={'xl'} value="activities">
+        <Activities/>
       </Tabs.Panel>
 
-      <Tabs.Panel value="videos">
+      <Tabs.Panel mt={'xl'} value="videos">
         <Videos/>
       </Tabs.Panel>
     </Tabs>

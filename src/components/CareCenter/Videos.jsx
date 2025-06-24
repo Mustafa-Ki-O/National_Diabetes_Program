@@ -1,4 +1,4 @@
-import { Grid, Flex, Title, AspectRatio, Box, Button } from '@mantine/core';
+import { Grid, Flex, Title, AspectRatio, Box, Button ,Text} from '@mantine/core';
 
 const Videos = () => {
   return (
@@ -41,6 +41,9 @@ const Videos = () => {
                 allowFullScreen
               />
             </AspectRatio>
+                     <Text px={10} size="lg" ta={'right'} >
+                       نبذة عن المقطع
+                      </Text>
 
             <Title my={10} ta="left" size="md" mx={20}>
               حرر في DD-MM-YYYY

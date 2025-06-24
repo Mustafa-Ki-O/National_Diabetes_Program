@@ -5,6 +5,7 @@ import MultiTabs from "../../components/CareCenter/Tabs"
 import Ordering from "../../components/general/Ordering"
 import { useDisclosure } from "@mantine/hooks"
 import UploadModal from "../../components/CareCenter/UploadModal"
+import Progress from "../../components/general/Progress"
 
 const CareCenter = () =>{
        const [progress,setProgress] = useState(false)
@@ -39,10 +40,12 @@ UpScroll()
         opened={opened}
         close={close}
         subject={click}
+        setProgress={setProgress}
         />
+        {progress && <Progress/>}
         <Container  fluid style={{opacity:active?'1':'0' ,transition:'all 0.7s'}} p={20}>
             <Title bg={'#f9f9f9'} size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
-                          برامج الرعاية الصحية
+                    برامج الرعاية الصحية
             </Title>
             <Flex px={'1rem'} justify={'space-between'} align={'center'}>
               
