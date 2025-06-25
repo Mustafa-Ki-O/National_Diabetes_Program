@@ -8,8 +8,9 @@ import UploadModal from "../../components/CareCenter/UploadModal"
 import Progress from "../../components/general/Progress"
 import { ListFilterPlus } from "lucide-react"
 
-const CareCenter = () =>{
-       const [progress,setProgress] = useState(false)
+const CareCenter = () => {
+  
+        const [progress,setProgress] = useState(false)
         const [active,setActive] = useState(false);
 
         const[click,setClick]=useState('المقالات')

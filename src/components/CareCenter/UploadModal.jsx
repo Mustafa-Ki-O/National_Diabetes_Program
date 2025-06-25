@@ -92,7 +92,7 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
     newFormData.append("title", values.title);
     newFormData.append("shortText", values.shortText);
 
-    if (subject === "المقالات" || subject === "النشاطات") {
+    if (mainSubject=== "المقالات" || mainSubject === "النشاطات") {
       newFormData.append("desc", values.desc);
       if (values.imageURL instanceof File) {
          imageURL = await uploadFileToSupabase(values.imageURL, 'images');
@@ -104,7 +104,7 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
       }
     }
 
-    if (subject === "الفيديوهات") {
+    if (mainSubject === "الفيديوهات") {
       if (values.videoURL instanceof File) {
          videoURL = await uploadFileToSupabase(values.videoURL, 'videos');
          newFormData.append('videoUrl',videoURL)
@@ -115,10 +115,10 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
     }
 
     setIsSubmitted(true);
-    if (subject === "المقالات") {
+    if (mainSubject === "المقالات") {
      await addArticle(newFormData);
     }
-     if (subject === "الفيديوهات") {
+     if (mainSubject === "الفيديوهات") {
      await addVideo(newFormData);
     }
     form.reset();
