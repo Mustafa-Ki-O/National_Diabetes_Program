@@ -1,17 +1,17 @@
 import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
-import PostVideo from "../../api/Admin/PostVideo";
+import PostActivity from "../../api/Admin/PostActivity";
 
-const useAddVideo = () => {
+const useAddActivity= () => {
 
   const navigate = useNavigate();
-  const { mutate: addVideo, isPending } = useMutation({
-    mutationFn: (formData) => PostVideo(formData),
+  const { mutate: addActivity, isPending } = useMutation({
+    mutationFn: (formData) => PostActivity(formData),
     onSuccess: () => {
         console.log("تم بنجاح");
         notifications.show({
-          title: 'تم رفع الفيديو بنجاح',
+          title: 'تم رفع النشاط بنجاح',
           autoClose: 3000,
         });
         //  navigate(`/National_Diabetes_Program/patientInfo/`)
@@ -27,6 +27,6 @@ const useAddVideo = () => {
       });
     },
   });
-  return { addVideo, isPending };
+  return { addActivity, isPending };
 };
-export default useAddVideo
+export default useAddActivity

@@ -2,10 +2,9 @@ import axiosInstance from "../axiosService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const PostActivity = (formData) => {
-  console.log(formData)
+const FetchArticles= () => {
   return new Promise((resolve, reject) => {
-    axiosInstance.post(`${API_URL}/createActivity`,formData)
+    axiosInstance.get(`${API_URL}/getAllArticles`)
       .then(response => {
         resolve(response.data); 
       })
@@ -15,4 +14,4 @@ const PostActivity = (formData) => {
   });
 };
 
-export default PostActivity;
+export default FetchArticles;

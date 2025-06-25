@@ -10,8 +10,10 @@ import { supabase } from "../../supabaseClient";
 import useAddVideo from "../../useMutation/Admin/useAddVideo";
 
 
-const UploadModal = ({opened,close,subject,setProgress}) => {
 
+const UploadModal = ({opened,close,mainSubject,setProgress}) => {
+
+  console.log(mainSubject)
   const uploadFileToSupabase = async (file, pathPrefix = "uploads") => {
   const fileExt = file.name.split('.').pop();
   const fileName = `${Date.now()}.${fileExt}`;
@@ -40,7 +42,20 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
    const [isSubmitted, setIsSubmitted] = useState(false);
    const {addArticle,isPending} = useAddArticle()
    const {addVideo,isPending:isPendingVideo} = useAddVideo()
+   const [subject,setSubject] = useState('')
 
+    useEffect(() => {
+      if (!mainSubject) {
+        setSubject('');
+        return;
+      }
+    
+      if (mainSubject === 'الفيديوهات') {
+        setSubject('الفيديو');
+      } else {
+        setSubject(mainSubject.slice(0, -2));
+      }
+    }, [mainSubject]);
 
    const form = useForm({
     mode: "uncontrolled",
@@ -64,9 +79,10 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
     },
   });
 
+  useEffect
     
      const handleSubmit = async () => {
-  if (form.isValid()) {
+    if (form.isValid()) {
     const values = form.getValues();
     console.log('القيم المدخلة:', values);
     
@@ -138,7 +154,7 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
       <Stack pb={50} dir="rtl" className="modal" w="70%" m="auto" gap={15}>
         <Flex justify={'space-between'} align={'center'}>
           <Title size="lg" fw="bold" mb={'lg'}>
-          رفع {subject.slice(0,-2)}
+          رفع {subject.slice(2)}
           </Title>
            <Text size="lg">
             {dayjs(new Date).format('DD-MM-YYYY')}
@@ -153,8 +169,8 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
 
             size="lg"
             radius={10}
-            label={`أدخل عنوان ${subject.slice(0, -2)}`}
-            placeholder={`أدخل عنوان ${subject.slice(0, -2)}`}
+            label={`أدخل عنوان ${subject}`}
+            placeholder={`أدخل عنوان ${subject}`}
             key={form.key("title")}
             {...form.getInputProps("title")}
             required
@@ -164,15 +180,15 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
               <TextInput
               size="lg"
             radius={10}
-            label={`نبذة عن ${subject.slice(0, -2)}`}
-            placeholder={`نبذة عن  ${subject.slice(0, -2)}`}
+            label={`نبذة عن ${subject}`}
+            placeholder={`نبذة عن  ${subject}`}
             key={form.key("shortText")}
             {...form.getInputProps("shortText")}
             required
           />
 
             </Grid.Col>
-             {(subject === "المقالات" || subject === "النشاطات") && (
+             {(mainSubject === "المقالات" || mainSubject === "النشاطات") && (
             <Grid.Col span={12}>
               
                  <Textarea
@@ -188,34 +204,52 @@ const UploadModal = ({opened,close,subject,setProgress}) => {
              />
             </Grid.Col>
              )}
-              {(subject === "المقالات" || subject === "النشاطات") && (
-                <Grid.Col span={12}>
-                  <FileInput
+              {(mainSubject === "المقالات" || mainSubject === "النشاطات") && (
+            <Grid.Col span={6}>
+            <FileInput
               radius={10}
               size="lg"
-              leftSection={<UploadIcon size={20}/>}
+              leftSection={<UploadIcon size={20} color={'#fff'} />}
               label="رفع صورة"
               placeholder="اختر صورة"
               accept="image/*"
               key={form.key("imageURL")}
               {...form.getInputProps("imageURL")}
               required
+               styles={{
+                input:{
+                  backgroundColor:'#16aabbcb',
+                },
+                placeholder:{
+                  color:'#fff'
+                },
+               }}
             />
 
-                </Grid.Col>)}
-                 {subject === "الفيديوهات" && (
-                  <Grid.Col span={12}>
-                       <FileInput
-     
-                    size="lg"
-                    label="رفع فيديو"
-                    placeholder="اختر فيديو"
-                    accept="video/*"
-                    key={form.key("videoURL")}
-                    {...form.getInputProps("videoURL")}
-                    required
-                  />
-                  </Grid.Col> )}
+           </Grid.Col>)}
+            {mainSubject === "الفيديوهات" && (
+             <Grid.Col span={6}>
+              <FileInput
+               radius={10}
+               size="lg"
+               
+               leftSection={<UploadIcon size={20} color="#fff"/>}
+               label="رفع فيديو"
+               placeholder="اختر فيديو"
+               accept="video/*"
+               key={form.key("videoURL")}
+               {...form.getInputProps("videoURL")}
+               required
+               styles={{
+                input:{
+                  backgroundColor:'#16aabbcb',
+                },
+                placeholder:{
+                  color:'#fff'
+                },
+               }}
+             />
+             </Grid.Col> )}
           </Grid>
           
           

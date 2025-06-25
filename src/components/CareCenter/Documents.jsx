@@ -1,12 +1,24 @@
 import { Flex, Grid, Stack, Text, Title, Spoiler, Button, Box ,Container,Image  } from "@mantine/core";
-import img from '../../assets/images/NDBlogo.svg'
+import img1 from '../../assets/images/NDBlogo.svg'
+import useFetchArticles from "../../useMutation/Admin/useFetchArticles";
+import { useEffect, useState } from "react";
+import { PenLine } from "lucide-react";
+
+
 const ArticleCard = ({ title, center, content, date ,short ,img}) => (
-  <Stack bg={'#fff'}  p={20} style={{ border: "1px solid #00000050", borderRadius: 20 }} mb={30}>
-    <Image src={img} w={'100%'} mah={'15rem'} />
+
+  <Stack bg={'#fff'}  p={20} style={{ border: "1px solid #00000050", borderRadius: 20,
+    width: "100%", 
+    overflowWrap: "break-word",
+   }} mb={30}>
+    <Image src={img ? img : img1} w={'100%'} mah={'15rem'} />
     <Grid gutter={20} align="center">
       <Grid.Col span={12}>
         <Flex dir="ltr" justify="space-between" align="center" px={10}>
-          <Title size="xl">{center}</Title>
+          <Title size="lg"  >
+            {center}
+             <PenLine size={18}  style={{marginLeft:10}}/>
+            </Title>
           <Title size="xl">{title}</Title>
         </Flex>
         <Box
@@ -39,25 +51,37 @@ const ArticleCard = ({ title, center, content, date ,short ,img}) => (
   </Stack>
 );
 
-const Documents = () => {
-  const dummyContent =
-    "هنا سيتم وضع المقال، هنا سيتم وضع المقال،هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال،هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال،هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال، هنا سيتم وضع المقال.";
+const Documents = ({setProgress}) => {
+ 
 
-  return (
+    const [allArticles,setAllArticles] = useState([])
+    const {fetchArticles,isPending} = useFetchArticles(setAllArticles)
+
+    useEffect(()=>{
+     fetchArticles()
+    },[])
+
+      useEffect(()=>{
+         setProgress(isPending)
+
+       },[isPending])
+
+  
+    return (
     <>
     <Stack align="start" >
 
   
 
-      {[1, 2, 3, 4].map((item) => (
+      {allArticles?.map((article,index) => (
         <ArticleCard
-          key={item}
-          short={'نبذة عن المقال'}
-          img={img}
-          title="عنوان المقال"
-          center="المركز المحرر"
-          content={dummyContent}
-          date="DD-MM-YYYY"
+          key={index}
+          short={article.shortText}
+          img={article.imageURL}
+          title={article.title}
+          center={article.centerName}
+          content={article.desc}
+          date={article.createAt}
         />
       ))}
    
