@@ -1,4 +1,4 @@
-import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text } from "@mantine/core";
+import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popover, Title} from "@mantine/core";
 import { useEffect, useState } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
 import logo from '../../assets/images/NDBLogo.svg';
@@ -18,6 +18,8 @@ import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
 import { Activity, BookPlus, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon  } from "lucide-react";
+import NotifyNav from "./NotifyNav";
+import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 
 
 const NavBar = () => {
@@ -56,14 +58,22 @@ const NavBar = () => {
         
     };
 
-
+    const [notifications,setNotifications] = useState([])
+    const {fetchNotification,isPending} = useFetchNotification(setNotifications)
     
+
 
     const [userRole,setUserRole] = useState()
 
     useEffect(()=>{
      const user = JSON.parse(localStorage.getItem('user'))
      setUserRole(user?.role)
+    },[userRole])
+
+      useEffect(()=>{
+      if(userRole==='patient'){
+        fetchNotification()
+      }
     },[userRole])
 
 
@@ -204,8 +214,8 @@ const NavBar = () => {
           <Flex justify={'space-between'} align={'center'}>
              <Image src={logo} w={90} pb={5}/>
              <Group gap={15} align="center">
-              <BellIcon strokeWidth={1.5} size={28} color="#37a9ef" />
-              <CircleUserRound strokeWidth={1.5} size={34} color="#37a9ef" />
+              <NotifyNav notifications={notifications}/>
+              <CircleUserRound strokeWidth={1.5} size={34} color="#37a9ef" style={{cursor:'pointer'}} />
                
              </Group>
           </Flex>
