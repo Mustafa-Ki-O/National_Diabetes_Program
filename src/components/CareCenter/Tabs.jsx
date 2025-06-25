@@ -4,7 +4,7 @@ import Videos from './Videos';
 import Activities from './Activities';
 
 
-const MultiTabs =({setClick,setProgress}) => {
+const MultiTabs =({setClick,setProgress,setAllVideos,setAllArticles,setAllActivities,allArticles,allVideos,allActivities}) => {
   return (
     <Tabs p={20} dir='rtl' defaultValue="doc">
       <Tabs.List grow justify={'space-between'} pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
@@ -24,15 +24,15 @@ const MultiTabs =({setClick,setProgress}) => {
       </Tabs.List>
 
       <Tabs.Panel mt={'xl'} value="doc" >
-        <Documents setProgress={setProgress}/>
+        <Documents setProgress={setProgress} setAllArticles={setAllArticles} allArticles={allArticles}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={'xl'} value="activities">
-        <Activities/>
+        <Activities setProgress={setProgress} setAllActivities={setAllActivities} allActivities={allActivities}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={'xl'} value="videos">
-        <Videos/>
+        <Videos setProgress={setProgress} setAllVideos={setAllVideos} allVideos={allVideos}/>
       </Tabs.Panel>
     </Tabs>
   );

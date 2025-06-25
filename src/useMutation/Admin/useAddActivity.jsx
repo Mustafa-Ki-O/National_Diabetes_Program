@@ -2,20 +2,24 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import PostActivity from "../../api/Admin/PostActivity";
+import useFetchActivities from "./useFetchActivities";
 
-const useAddActivity= () => {
+const useAddActivity= (setAllActivities) => {
 
+  const {fetchActivities,isPending:isPendingFetch} = useFetchActivities(setAllActivities)
+  
   const navigate = useNavigate();
   const { mutate: addActivity, isPending } = useMutation({
     mutationFn: (formData) => PostActivity(formData),
     onSuccess: () => {
+       fetchActivities()
         console.log("تم بنجاح");
         notifications.show({
+          loading:isPendingFetch,
           title: 'تم رفع النشاط بنجاح',
           autoClose: 3000,
         });
-        //  navigate(`/National_Diabetes_Program/patientInfo/`)
-        // localStorage.clear()
+        
     },
     onError: (err) => {
       console.log("ERROR", err);

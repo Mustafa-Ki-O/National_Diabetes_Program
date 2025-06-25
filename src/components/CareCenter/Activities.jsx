@@ -1,8 +1,9 @@
-import { Flex, Grid, Stack, Text, Title, Spoiler, Button, Box ,Container, Image  } from "@mantine/core";
+import { Flex, Grid, Stack, Text, Title, Spoiler,  Box , Image  } from "@mantine/core";
 import img from '../../assets/images/NDBlogo.svg'
-const Activities = () => {
+import useFetchActivities from "../../useMutation/Admin/useFetchActivities";
+import { useEffect, useState } from "react";
 
-    const Activity = ({ title, center, content, date ,img ,short }) => (
+const Activity = ({ title, center, content, date ,img ,short }) => (
       <Stack bg={'#fff'} p={20} style={{ border: "1px solid #00000050", borderRadius: 20 }} mb={30}>
         <Image src={img} w={'100%'} mah={'15rem'} />
         <Grid gutter={20} align="center">
@@ -39,22 +40,34 @@ const Activities = () => {
         </Grid>
       </Stack>
     );
-
-    const dummyContent = 'هنا سيتم وضع شرح عن النشاط ومعلومات عنه,هنا سيتم وضع شرح عن النشاط ومعلومات عنه,هنا سيتم وضع شرح عن النشاط ومعلومات عنه,هنا سيتم وضع شرح عن النشاط ومعلومات عنه,'
     
+const Activities = ({setProgress,allActivities,setAllActivities}) => {
+
+    const {fetchActivities,isPending} = useFetchActivities(setAllActivities)
+
+    useEffect(()=>{
+      fetchActivities()
+    },[])
+    
+    
+          useEffect(()=>{
+             setProgress(isPending)
+    
+           },[isPending])
+
       return (
         <>
         <Stack align="start" >
 
-          {[1, 2, 3, 4].map((item) => (
+          {allActivities.map((activity,index) => (
             <Activity
-              key={item}
-              img ={img}
-              short ={'نبذة عن النشاط'}
-              title="عنوان النشاط"
-              center="المركز المحرر"
-              content={dummyContent}
-              date="DD-MM-YYYY"
+              key={index}
+              short={activity.shortText}
+              img={activity.imageURL}
+              title={activity.title}
+              center={activity.centerName}
+              content={activity.desc}
+              date={activity.createAt}
             />
           ))}
 

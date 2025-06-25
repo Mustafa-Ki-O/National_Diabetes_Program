@@ -8,10 +8,11 @@ import dayjs from "dayjs";
 import { UploadIcon } from "lucide-react";
 import { supabase } from "../../supabaseClient";
 import useAddVideo from "../../useMutation/Admin/useAddVideo";
+import useAddActivity from "../../useMutation/Admin/useAddActivity";
 
 
 
-const UploadModal = ({opened,close,mainSubject,setProgress}) => {
+const UploadModal = ({opened,close,mainSubject,setProgress,setAllArticles,setAllVideos,setAllActivities}) => {
 
   console.log(mainSubject)
   const uploadFileToSupabase = async (file, pathPrefix = "uploads") => {
@@ -40,9 +41,11 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
 };
 
    const [isSubmitted, setIsSubmitted] = useState(false);
-   const {addArticle,isPending} = useAddArticle()
-   const {addVideo,isPending:isPendingVideo} = useAddVideo()
+   const {addArticle,isPending} = useAddArticle(setAllArticles)
+   const {addVideo,isPending:isPendingVideo} = useAddVideo(setAllVideos)
+   const {addActivity,isPending:isPendingActivity} = useAddActivity(setAllActivities)
    const [subject,setSubject] = useState('')
+   const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
       if (!mainSubject) {
@@ -79,52 +82,61 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
     },
   });
 
-  useEffect
     
-     const handleSubmit = async () => {
-    if (form.isValid()) {
-    const values = form.getValues();
-    console.log('القيم المدخلة:', values);
-    
-    const newFormData = new FormData();
-    let imageURL = "";
-    let videoURL= "";
-    newFormData.append("title", values.title);
-    newFormData.append("shortText", values.shortText);
+    const handleSubmit = async () => {
+     if (form.isValid()) {
+    setIsLoading(true);
+    try {
+      const values = form.getValues();
+      console.log('القيم المدخلة:', values);
 
-    if (mainSubject=== "المقالات" || mainSubject === "النشاطات") {
-      newFormData.append("desc", values.desc);
-      if (values.imageURL instanceof File) {
-         imageURL = await uploadFileToSupabase(values.imageURL, 'images');
+      const newFormData = new FormData();
+      let imageURL = "";
+      let videoURL = "";
+      newFormData.append("title", values.title);
+      newFormData.append("shortText", values.shortText);
 
-         newFormData.append('imageUrl',imageURL)
-        
-      } else {
-        console.warn("الصورة غير صالحة أو لم تُرفع بشكل صحيح");
+      if (mainSubject === "المقالات" || mainSubject === "النشاطات") {
+        newFormData.append("desc", values.desc);
+        if (values.imageURL instanceof File) {
+          imageURL = await uploadFileToSupabase(values.imageURL, 'images');
+          newFormData.append('imageUrl', imageURL);
+        } else {
+          console.warn("الصورة غير صالحة أو لم تُرفع بشكل صحيح");
+        }
       }
-    }
 
-    if (mainSubject === "الفيديوهات") {
-      if (values.videoURL instanceof File) {
-         videoURL = await uploadFileToSupabase(values.videoURL, 'videos');
-         newFormData.append('videoUrl',videoURL)
-        
-      } else {
-        console.warn("الفيديو غير صالح أو لم يُرفع بشكل صحيح");
+      if (mainSubject === "الفيديوهات") {
+        if (values.videoURL instanceof File) {
+          videoURL = await uploadFileToSupabase(values.videoURL, 'videos');
+          newFormData.append('videoUrl', videoURL);
+        } else {
+          console.warn("الفيديو غير صالح أو لم يُرفع بشكل صحيح");
+        }
       }
-    }
 
-    setIsSubmitted(true);
-    if (mainSubject === "المقالات") {
-     await addArticle(newFormData);
+      setIsSubmitted(true);
+
+      if (mainSubject === "المقالات") {
+        await addArticle(newFormData);
+      }
+      if (mainSubject === "الفيديوهات") {
+        await addVideo(newFormData);
+      }
+      if (mainSubject === "النشاطات") {
+        await addActivity(newFormData);
+      }
+
+      form.reset();
+      close();
+    } catch (err) {
+      console.error("حدث خطأ أثناء الإرسال:", err);
+    } finally {
+      setIsLoading(false); // ← إنهاء التحميل
     }
-     if (mainSubject === "الفيديوهات") {
-     await addVideo(newFormData);
-    }
-    form.reset();
-    close();
   }
 };
+
     
       const handleClose = () => {
         close()
@@ -132,9 +144,9 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
 
       useEffect(()=>{
         if(isSubmitted){
-          setProgress(isPending||isPendingVideo)
+          setProgress(isPending||isPendingVideo||isPendingActivity)
         }
-      },[isPending||isPendingVideo])
+      },[isPending||isPendingVideo||isPendingActivity])
     
     return(
         <>
@@ -255,8 +267,16 @@ const UploadModal = ({opened,close,mainSubject,setProgress}) => {
           
 
           <Flex gap={30} mt={'4rem'} w="100%" justify="space-between">
-            <Button miw={'8rem'} type="submit" size="lg" radius={10} 
-             variant="filled" color="#37A9EF">
+            <Button
+              miw="8rem"
+              type="submit"
+              size="lg"
+              radius={10}
+              variant="filled"
+              color="#37A9EF"
+              loading={isLoading} 
+              disabled={isLoading}
+            >
               تأكيد
             </Button>
             <Button miw={'8rem'}  size="lg" radius={10} 

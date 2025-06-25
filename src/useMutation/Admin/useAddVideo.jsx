@@ -2,20 +2,23 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import PostVideo from "../../api/Admin/PostVideo";
+import useFetchVideos from "./useFetchVideos";
 
-const useAddVideo = () => {
+const useAddVideo = (setAllVideos) => {
 
+   const {fetchVideos,isPending:isPendingFetch} = useFetchVideos(setAllVideos)
   const navigate = useNavigate();
   const { mutate: addVideo, isPending } = useMutation({
     mutationFn: (formData) => PostVideo(formData),
     onSuccess: () => {
+      fetchVideos()
         console.log("تم بنجاح");
         notifications.show({
+          loading:isPendingFetch,
           title: 'تم رفع الفيديو بنجاح',
           autoClose: 3000,
         });
-        //  navigate(`/National_Diabetes_Program/patientInfo/`)
-        // localStorage.clear()
+       
     },
     onError: (err) => {
       console.log("ERROR", err);

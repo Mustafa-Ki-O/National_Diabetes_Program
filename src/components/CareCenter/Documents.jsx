@@ -51,10 +51,10 @@ const ArticleCard = ({ title, center, content, date ,short ,img}) => (
   </Stack>
 );
 
-const Documents = ({setProgress}) => {
+const Documents = ({setProgress,allArticles,setAllArticles}) => {
  
 
-    const [allArticles,setAllArticles] = useState([])
+
     const {fetchArticles,isPending} = useFetchArticles(setAllArticles)
 
     useEffect(()=>{

@@ -2,20 +2,24 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import PostArticle from "../../api/Admin/PostArticle";
+import useFetchArticles from "./useFetchArticles";
 
-const useAddArticle = () => {
+const useAddArticle = (setAllArticles) => {
+
+ const {fetchArticles,isPending:isPendingFetch} = useFetchArticles(setAllArticles)
 
   const navigate = useNavigate();
   const { mutate: addArticle, isPending } = useMutation({
     mutationFn: (formData) => PostArticle(formData),
     onSuccess: () => {
+        fetchArticles()
         console.log("تم بنجاح");
         notifications.show({
+          loading:isPendingFetch,
           title: 'تم رفع المقال بنجاح',
           autoClose: 3000,
         });
-        //  navigate(`/National_Diabetes_Program/patientInfo/`)
-        // localStorage.clear()
+      
     },
     onError: (err) => {
       console.log("ERROR", err);

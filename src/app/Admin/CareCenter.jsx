@@ -9,7 +9,7 @@ import Progress from "../../components/general/Progress"
 import { ListFilterPlus } from "lucide-react"
 
 const CareCenter = () => {
-  
+
         const [progress,setProgress] = useState(false)
         const [active,setActive] = useState(false);
 
@@ -35,7 +35,13 @@ const CareCenter = () => {
       },600);
     },[])
 
+    const[allActivities,setAllActivities] = useState([])
+    const[allVideos,setAllVideos] = useState([])
+    const[allArticles,setAllArticles] = useState([])
+
 UpScroll()
+     
+
     return(
         <>
         <UploadModal
@@ -43,7 +49,11 @@ UpScroll()
         close={close}
         mainSubject={click}
         setProgress={setProgress}
+        setAllArticles={setAllArticles}
+        setAllActivities={setAllActivities}
+        setAllVideos={setAllVideos}
         />
+
         {progress && <Progress/>}
         <Container mih={'100vh'}  fluid style={{opacity:active?'1':'0' ,transition:'all 0.7s'}} p={20}>
             <Title bg={'#f9f9f9'} size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
@@ -57,7 +67,10 @@ UpScroll()
                  رفع {handleButtonName(click)} <ListFilterPlus style={{marginLeft:10}} size={22} color={'#fff'} />
                 </Button>
             </Flex>
-            <MultiTabs setClick={setClick} setProgress={setProgress}/>
+            <MultiTabs setClick={setClick} setProgress={setProgress} 
+            setAllActivities={setAllActivities} setAllArticles={setAllArticles} setAllVideos={setAllVideos}
+            allActivities={allActivities} allArticles={allArticles} allVideos={allVideos}
+            />
         </Container>
         </>
     )
