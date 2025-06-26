@@ -17,7 +17,7 @@ import drugs from '../../assets/vectors/Drugs.svg'
 import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
-import { Activity, BookPlus, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon  } from "lucide-react";
+import { Activity, BookPlus, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital  } from "lucide-react";
 import NotifyNav from "./NotifyNav";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 import CreateNotificationSocket from "../../api/CreateNotificationsSocket";
@@ -68,11 +68,13 @@ const NavBar = () => {
 
     const [userRole,setUserRole] = useState()
     const [userId,setUserId] = useState()
-   
+    const [userName,setUserName] = useState()
+
     useEffect(()=>{
      const user = JSON.parse(localStorage.getItem('user'))
      setUserRole(user?.role)
      setUserId(user?.id)
+     setUserName(user?.name)
     },[userRole])
 
       useEffect(()=>{
@@ -155,6 +157,14 @@ const NavBar = () => {
                 <Image ml={3} mb={5}  src={logo} style={{cursor:'pointer'}} w='6.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
+        <Group>
+          <Flex  gap={10} mx={'0.3rem'} justify={'end'} align={'center'}>
+            <Title size="xl"  >
+               {userName} 
+            </Title>
+            <Hospital  size={25} />
+          </Flex>
+        
         <Burger
         lineSize={2}
           opened={opened}
@@ -163,6 +173,7 @@ const NavBar = () => {
           size="md"
         //   className={nav.burger}
         />    
+        </Group>
        </Flex>
       </AppShell.Header>
       <AppShell.Navbar bg={'#F9FAFC'} py="md" pr='0px' w={{base:'60%',sm:'20%'}}>

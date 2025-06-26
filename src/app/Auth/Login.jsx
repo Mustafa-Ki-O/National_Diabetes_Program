@@ -3,6 +3,7 @@ import { Stack,Text,Title} from "@mantine/core";
 import { useEffect ,useState} from "react"
 import Logo from "../../components/general/Logo";
 import Progress from "../../components/general/Progress";
+import TestPatientUploader from "../../Testing/TestPatientUploader";
 const Login = () => {
 
 const [active,setActive] = useState(false);
@@ -17,6 +18,7 @@ useEffect(()=>{
 
     return(
     <>
+    {/* <TestPatientUploader/> */}
     {progress && <Progress />}
     <Stack style={{opacity:active?'1':'0' ,transition:'all 0.3s'}} my={50}>
     <Logo/>
