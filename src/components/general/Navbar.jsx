@@ -1,5 +1,5 @@
 import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popover, Title} from "@mantine/core";
-import { useEffect, useState } from "react"; // Import useState
+import { useEffect, useState,useRef } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
 import logo from '../../assets/images/NDBLogo.svg';
 import { useMantineTheme } from "@mantine/core";
@@ -20,7 +20,8 @@ import LogOutModal from "../Home/Admin/LogOutModal";
 import { Activity, BookPlus, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon  } from "lucide-react";
 import NotifyNav from "./NotifyNav";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
-
+import CreateNotificationSocket from "../../api/CreateNotificationsSocket";
+import ProfileNav from "./ProfileNav";
 
 const NavBar = () => {
     const [openedModal, { open, close }] = useDisclosure(false);
@@ -58,16 +59,20 @@ const NavBar = () => {
         
     };
 
+    const socketRef = useRef(null);
+
     const [notifications,setNotifications] = useState([])
     const {fetchNotification,isPending} = useFetchNotification(setNotifications)
     
 
 
     const [userRole,setUserRole] = useState()
-
+    const [userId,setUserId] = useState()
+   
     useEffect(()=>{
      const user = JSON.parse(localStorage.getItem('user'))
      setUserRole(user?.role)
+     setUserId(user?.id)
     },[userRole])
 
       useEffect(()=>{
@@ -75,6 +80,23 @@ const NavBar = () => {
         fetchNotification()
       }
     },[userRole])
+
+    useEffect(()=>{
+         if (userRole === 'patient' && userId){
+              socketRef.current = CreateNotificationSocket(
+           userId,
+           (data) => setNotifications(prev => [data, ...prev]),
+           (error) => console.error("WebSocket Error", error),
+           () => console.log("WebSocket Closed")
+         );
+      
+         return () => {
+           socketRef.current?.close();
+         };
+       }
+    },[userRole,userId])
+
+   
 
 
   const NavIcon = ({ icon: Icon, name, clickedButton, handleButtonNavClick ,label}) => {
@@ -215,7 +237,7 @@ const NavBar = () => {
              <Image src={logo} w={90} pb={5}/>
              <Group gap={15} align="center">
               <NotifyNav notifications={notifications}/>
-              <CircleUserRound strokeWidth={1.5} size={34} color="#37a9ef" style={{cursor:'pointer'}} />
+              <ProfileNav/>
                
              </Group>
           </Flex>

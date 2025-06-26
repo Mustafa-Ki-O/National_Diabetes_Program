@@ -7,7 +7,7 @@ const NotificationCard = ({notification = {}}) => {
 
     return(
         <>
-        <Card p={10} radius={10}  bg={!is_read ? '#fff' : '#fcfcfc'} style={{boxShadow:'0 2px 7px #37a9ef33'}} >
+        <Card p={10} radius={10}  bg={!is_read ? '#fff' : '#fcfcfc'} style={{boxShadow:'0 2px 7px #37a9ef23'}} >
             <Flex gap={10} justify={'end'} align={'start'}>
             <Text size={'md'} ta={'right'}>
                {message? message : ' ................المحتوى'}

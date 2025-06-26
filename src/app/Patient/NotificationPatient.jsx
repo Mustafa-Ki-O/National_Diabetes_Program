@@ -37,8 +37,8 @@ const NotificationPatient = () => {
                         الاشعارات
                     </Title>
                     <Stack gap={10}>
-            {notifications.map((notification)=>(
-                <NotificationCard notification={notification}/>
+            {notifications.map((notification,i)=>(
+                <NotificationCard key={i} notification={notification}/>
             ))}
             </Stack>
 

@@ -27,9 +27,6 @@ useEffect(()=>{
   },600);
 },[isPending])
 
-useEffect(() => {
-    setProgress(isPending);
-}, [isPending]);
 
     return(
         <>
