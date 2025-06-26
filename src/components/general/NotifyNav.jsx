@@ -20,7 +20,7 @@ const NotifyNav = ({ notifications }) => {
 
   return (
     <Popover
-      width={"70%"}
+      width={"auto"}
       position="bottom"
       withArrow
       shadow="md"
