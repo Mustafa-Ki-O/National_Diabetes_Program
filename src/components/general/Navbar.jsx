@@ -92,8 +92,8 @@ const NavBar = () => {
               socketRef.current = CreateNotificationSocket(
            userId,
            (data) => setNotifications(prev => [data, ...prev]),
-           (error) => console.error("WebSocket Error", error),
-           () => console.log("WebSocket Closed")
+           (error) => console.error("SSE Error", error),
+           () => console.log("SSE Closed")
          );
       
          return () => {

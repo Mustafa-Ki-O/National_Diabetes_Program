@@ -1,36 +1,48 @@
 
 
 const CreateNotificationSocket = (patientId, onMessage, onError, onClose) => {
-  console.log(patientId)
-  const socket = new WebSocket(`wss://diabetes-care-center-api.onrender.com/notifications/ws?patient_id=${patientId}`);
+  console.log(`Connecting to SSE for patient ID: ${patientId}`)
 
-//   postgresql://postgres:DBxoNrcjSiClzBpibeiHrlNhJstUYcyZ@mainline.proxy.rlwy.net:24662/railway
+  const eventSource = new EventSource(`https://diabetes-care-center-api.onrender.com/api/v1/sse/notifications?patient_id=${patientId}`)
+  //   postgresql://postgres:DBxoNrcjSiClzBpibeiHrlNhJstUYcyZ@mainline.proxy.rlwy.net:24662/railway
   // postgresql://postgres:DBxoNrcjSiClzBpibeiHrlNhJstUYcyZ@mainline.proxy.rlwy.net:24662/railway
-  socket.onopen = () => {
-    console.log('✅ WebSocket connected');
+  eventSource.onopen = () => {
+    console.log('✅ SSE connected');
   };
 
-  socket.onmessage = (event) => {
+ eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
       onMessage?.(data);
-      console.log('Connections success : data :',data)
+      console.log('SSE message received:', data);
     } catch (err) {
-      console.error('🛑 Failed to parse WebSocket message:', err);
+      console.error('🛑 Failed to parse SSE message:', err);
+      onError?.(err);
     }
   };
 
-  socket.onerror = (error) => {
-    console.error('❌ WebSocket error:', error);
+  eventSource.addEventListener('error', (error) => {
+    console.error('❌ SSE error:', error);
     onError?.(error);
-  };
+    
 
-  socket.onclose = () => {
-    console.log('🔌 WebSocket connection closed');
+    setTimeout(() => {
+      console.log('Attempting to reconnect SSE...');
+      CreateNotificationSocket(patientId, onMessage, onError, onClose);
+    }, 5000);
+  });
+
+
+  const closeConnection = () => {
+    console.log('🔌 Closing SSE connection');
+    eventSource.close();
     onClose?.();
   };
 
-  return socket;
+  return {
+    close: closeConnection
+  };
 };
+
 
 export default CreateNotificationSocket;
