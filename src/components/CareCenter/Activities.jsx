@@ -1,15 +1,18 @@
-import { Flex, Grid, Stack, Text, Title, Spoiler,  Box , Image  } from "@mantine/core";
+import { Flex, Grid, Stack, Text, Title, Spoiler,  Box,Group , Image  } from "@mantine/core";
 import img from '../../assets/images/NDBlogo.svg'
 import useFetchActivities from "../../useMutation/Admin/useFetchActivities";
 import { useEffect, useState } from "react";
-
+import { PenLine } from "lucide-react";
 const Activity = ({ title, center, content, date ,img ,short }) => (
       <Stack bg={'#fff'} p={20} style={{ border: "1px solid #00000050", borderRadius: 20 }} mb={30}>
         <Image src={img} w={'100%'} mah={'15rem'} />
         <Grid gutter={20} align="center">
           <Grid.Col span={12}>
             <Flex dir="ltr" justify="space-between" align="center" px={10}>
-              <Title size="xl">{center}</Title>
+               <Group display={'flex'} gap={10} justify='start' align='center'>
+                     <Title size="xl" >{center}</Title>
+                    <PenLine size={18}/>
+                </Group>
               <Title size="xl">{title}</Title>
             </Flex>
             <Box

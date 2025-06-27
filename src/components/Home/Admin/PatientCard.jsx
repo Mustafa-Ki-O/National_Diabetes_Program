@@ -7,10 +7,13 @@ import { useNavigate } from "react-router-dom";
 import DeletePatientModal from "./DeletePatientModal";
 import { useDisclosure } from "@mantine/hooks";
 import card from '../../../assets/css/Card.module.css'
+import MessageSendModal from "./MessageSendModal";
+import { MessageCircleIcon, Send } from "lucide-react";
 const PatientCard = ({verefication,id, id_number, name, email, birthDate, sugarType,setPatients,setProgress }) => {
 
 
 const [opened, { open, close }] = useDisclosure(false);
+const [openedMessage, { open:openMessage, close:closeMessage }] = useDisclosure(false);
 const inputDate = new Date(birthDate);  
 const inputYear = inputDate.getFullYear(); 
 const currentYear = new Date().getFullYear();  
@@ -22,6 +25,12 @@ const navigate = useNavigate();
   
   return (
     <>
+    <MessageSendModal
+    opened={openedMessage}
+    close={closeMessage}
+    patientId={id}
+    setProgress={setProgress}
+    />
     <DeletePatientModal 
     opened={opened} 
     close={close}
@@ -38,12 +47,16 @@ const navigate = useNavigate();
        style={{cursor:'pointer'}}
     >  
       <Stack  mih={200} justify="space-between" >  
-          <Flex pos={'relative'}  align='center' gap={10} justify='end'>
+        <Flex justify={'space-between'} align={'center'}>
+         <Send  className={card.message} size={22} onClick={openMessage}/>
+         <Flex pos={'relative'}  align='center' gap={10} justify='end'>
           <Title size="lg"  c='#000' className={card.line}>{name}</Title>
           {/* <Title size='md'>الاسم</Title> */}
           <Image src={accountIcon} w={'3rem'} />
           
         </Flex>  
+        </Flex>
+         
         <Flex mt={5} align='center' gap={10} justify='end'>
           <Text size="lg" c='#000'>{id_number}</Text>
           <Title size='lg'>الرقم الوطني</Title>
@@ -72,6 +85,7 @@ const navigate = useNavigate();
          سجل المراجعات
           <Image  src={updateIcon} mr={15} w={20}/>
         </Button>
+
         <Button
           w={80}
           color="#Ee3935"

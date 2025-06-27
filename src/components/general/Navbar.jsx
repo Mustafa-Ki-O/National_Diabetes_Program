@@ -1,4 +1,4 @@
-import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popover, Title} from "@mantine/core";
+import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popover, Title, useMantineColorScheme} from "@mantine/core";
 import { useEffect, useState,useRef } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
 import logo from '../../assets/images/NDBLogo.svg';
@@ -22,8 +22,11 @@ import NotifyNav from "./NotifyNav";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 import CreateNotificationSocket from "../../api/CreateNotificationsSocket";
 import ProfileNav from "./ProfileNav";
+import ModePicker from "./ModePicker";
+import usePostReadNote from "../../useMutation/Patient/usePostReadNote";
 
 const NavBar = () => {
+  // const {colorSchema} = useMantineColorScheme();
     const [openedModal, { open, close }] = useDisclosure(false);
     const location = useLocation();
     const theme= useMantineTheme();
@@ -63,7 +66,7 @@ const NavBar = () => {
 
     const [notifications,setNotifications] = useState([])
     const {fetchNotification,isPending} = useFetchNotification(setNotifications)
-    
+ 
 
 
     const [userRole,setUserRole] = useState()
@@ -82,6 +85,7 @@ const NavBar = () => {
         fetchNotification()
       }
     },[userRole])
+
 
     useEffect(()=>{
          if (userRole === 'patient' && userId){
@@ -158,11 +162,12 @@ const NavBar = () => {
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
         <Group>
-          <Flex  gap={10} mx={'0.3rem'} justify={'end'} align={'center'}>
-            <Title size="xl"  >
+          <Flex  gap={10} mx={'0.3rem'} justify={'end'} align={'end'}>
+            {/* <ModePicker/> */}
+            <Title c={'#37a9ef'} size="xl"  >
                {userName} 
             </Title>
-            <Hospital  size={25} />
+            <Hospital color={'#37a9ef'}  size={25} />
           </Flex>
         
         <Burger
@@ -171,7 +176,8 @@ const NavBar = () => {
           onClick={toggle}
           hiddenFrom="sm"
           size="md"
-        //   className={nav.burger}
+          color="#16aabb"
+          // className={nav.burger}
         />    
         </Group>
        </Flex>
@@ -249,7 +255,7 @@ const NavBar = () => {
              <Group gap={15} align="center">
               <NotifyNav notifications={notifications}/>
               <ProfileNav/>
-               
+                {/* <ModePicker/> */}
              </Group>
           </Flex>
         </AppShell.Header >

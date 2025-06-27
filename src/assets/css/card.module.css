@@ -8,3 +8,22 @@
   height: 1px;
   background-color: #00000036;
 }
+
+.message:hover{
+  animation: message 0.8s ease-in forwards;
+}
+
+@keyframes message {
+  0%{
+    transform: translate(0,0) scale(1);
+  }
+  25%{
+  transform: translate(8px,-8px)  scale(1.2);
+  }
+  75%{
+  transform: translate(-7px,7px)  scale(1.2);
+  }
+  100%{
+  transform: translate(6px,-6px)  scale(1.3);
+  }
+}

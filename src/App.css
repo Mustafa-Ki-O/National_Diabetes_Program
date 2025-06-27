@@ -5,7 +5,7 @@
   text-align: center;
   position: relative ;
   z-index: 3;
-  background-color: #F9FAFC;
+  background-color:  #F9FAFC;
 }
 
 .mantine-Button-root:focus,
@@ -25,8 +25,6 @@
   transition: all 0.6s;
 }
 
-
-
 *:focus {
   outline: none !important;
 }
@@ -34,9 +32,11 @@
 .m_d4fb9cad, .m_d4fb9cad::before, .m_d4fb9cad::after {
   border-radius: 50px !important;
 }
+
 .mantine-Select-wrapper , .mantine-ScrollArea-viewport{
    direction: rtl;
 }
+
 /* .mantine-Button-root:hover {
   border-color: #37A9EF !important;
   #E53935
@@ -56,6 +56,7 @@
 input::placeholder{
   text-align: start;
 }
+
 input{
   text-align: start !important;
 }
@@ -72,6 +73,7 @@ input{
 .logo:hover {
   filter: drop-shadow(0 0 2em #2cdd7c);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }

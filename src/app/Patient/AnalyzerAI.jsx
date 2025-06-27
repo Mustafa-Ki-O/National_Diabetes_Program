@@ -19,27 +19,20 @@ const AnalyzerAI= () => {
 
     return(
         <>
-         <Container  p={10} fluid mb={'4.5rem'}
+         <Container   p={10} fluid mb={'4.5rem'}
                 style={{opacity:active?'1':'0',transform:active?'translateY(0px)':'translateY(100px)' ,transition:'all 0.8s'}}>
               
               {!click && (
-               <Container p={10} fluid style={{opacity:click?0:1,transition:'all 0.5s'}}>
-                <FirstUse click={click} setClick={setClick}  />
+               <Container  p={10} fluid style={{opacity:click?0:1,transition:'all 0.5s'}}>
+                  <FirstUse click={click} setClick={setClick}  />
                </Container>
               )}
                
-               {click &&(
-                <Container p={10} fluid >
-                
-                   <MedicalAnalyses/>
-                
-               </Container>
-               )}
-
-   
-               
-               
-         
+            {click &&(
+              <Container  p={10} fluid >                
+                  <MedicalAnalyses/>
+              </Container>
+              )}     
           </Container>
         </>
     )

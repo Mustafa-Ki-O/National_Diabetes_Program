@@ -3,13 +3,18 @@ import { useState,useEffect } from "react";
 import NotificationCard from "../../components/NotificationPatient/NotificationCard";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 import Progress from "../../components/general/Progress";
+import usePostReadNote from "../../useMutation/Patient/usePostReadNote";
+
+
 const NotificationPatient = () => {
     
         const [notifications,setNotifications] = useState([])
         const {fetchNotification,isPending} = useFetchNotification(setNotifications)
+        const {postRead,_} = usePostReadNote()
+
 
         const [progress,setProgress] = useState(false)
-
+    
         const [active,setActive] = useState(false);
         
                 useEffect(()=>{
@@ -25,6 +30,12 @@ const NotificationPatient = () => {
                 useEffect(()=>{
                     setProgress(isPending)
                 },[isPending])
+
+                useEffect(()=>{
+                    setTimeout(()=>{
+                        postRead()
+                    },2000)
+                },[])
 
 
     return(

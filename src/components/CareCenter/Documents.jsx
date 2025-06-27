@@ -1,4 +1,4 @@
-import { Flex, Grid, Stack, Text, Title, Spoiler, Button, Box ,Container,Image  } from "@mantine/core";
+import { Flex, Grid, Stack, Text, Title, Spoiler,Group, Box ,Container,Image  } from "@mantine/core";
 import img1 from '../../assets/images/NDBlogo.svg'
 import useFetchArticles from "../../useMutation/Admin/useFetchArticles";
 import { useEffect, useState } from "react";
@@ -15,10 +15,10 @@ const ArticleCard = ({ title, center, content, date ,short ,img}) => (
     <Grid gutter={20} align="center">
       <Grid.Col span={12}>
         <Flex dir="ltr" justify="space-between" align="center" px={10}>
-          <Title size="lg"  >
-            {center}
-             <PenLine size={18}  style={{marginLeft:10}}/>
-            </Title>
+          <Group display={'flex'} gap={10} justify='start' align='center'>
+              <Title size="xl" >{center}</Title>
+                <PenLine size={18}/>
+          </Group>
           <Title size="xl">{title}</Title>
         </Flex>
         <Box

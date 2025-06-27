@@ -11,6 +11,7 @@ import { Grid, Skeleton, TextInput,Image, Select,Button, Title,Text, Flex } from
 import useUpdateProfile from "../../../useMutation/Admin/useUpdateProfile";
 import { useNavigate } from "react-router";
 import LogOutModal from "./LogOutModal";
+import { PenLine } from "lucide-react";
 
 const CenterProfile = ({profile,setProfile,setProgress}) => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const CenterProfile = ({profile,setProfile,setProgress}) => {
             centerCity:'',
             centerEmail:'',
             patientNumber:'',
-            // %Y4&F4@VAW&T2QLYD44M8Z1Y%
+      
           },
           validate: yupResolver(schema),
         });
@@ -143,7 +144,10 @@ return(
       <Grid.Col span={{base:12,sm:6}}   >
       <TextInput 
       dir="rtl"
-      label="ايميل المركز"
+      label={<Flex justify={'end'} align={'center'} gap={10}>
+        <PenLine size={18} />
+        ايميل المركز
+        </Flex>}
       variant="unstyled"
       placeholder="ايميل المركز"
       size="28px"
@@ -166,7 +170,10 @@ return(
     <Grid.Col span={{base:12,sm:6}} pr={{base:0,sm:30}} >
       <TextInput 
       dir="rtl"
-      label="اسم المركز"
+      label={<Flex justify={'end'} align={'center'} gap={10}>
+        <PenLine size={18} />
+        اسم المركز
+        </Flex>}
       variant="unstyled"
       placeholder="اسم المركز"
       size="28px"
@@ -180,7 +187,8 @@ return(
           marginBottom:5,
           width: '100%',
           fontSize:'18px'
-        }
+        },
+
       }}
       style={{minHeight:'2rem !important'}}
       />
@@ -189,7 +197,10 @@ return(
     <Grid.Col span={{base:6,sm:6}}   pr={{base:0,sm:30}} >
       <Select
       
-      label="موقع المركز"
+      label={<Flex justify={'end'} align={'center'} gap={10}>
+        <PenLine size={18} />
+      موقع المركز
+        </Flex>}
       variant="unstyled"
       placeholder="موقع المركز"
       size="28px"
@@ -226,7 +237,7 @@ return(
           </Button>
 </Flex>
 
-    <Grid.Col span={12} p={10}>
+    {/* <Grid.Col span={12} p={10}>
       <Text  ta={'right'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
         معلومات احصائية
       </Text>
@@ -296,8 +307,8 @@ return(
         },
       }}
       />
-    </Grid.Col>
-      <Grid.Col span={12} p={10}>
+    </Grid.Col>*/}
+      <Grid.Col span={12} p={10}> 
       <Text  ta={'right'} p={10} bg={'#8e8e8e50'} style={{borderRadius:10}}>
         ادارة الحساب
       </Text>

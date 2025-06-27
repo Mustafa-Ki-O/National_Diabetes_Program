@@ -1,6 +1,7 @@
-import { Grid, Flex, Title, AspectRatio, Box, Button ,Text} from '@mantine/core';
+import { Grid, Flex, Title, AspectRatio, Box, Button ,Text, Group} from '@mantine/core';
 import useFetchVideos from '../../useMutation/Admin/useFetchVideos';
 import { useState,useEffect } from 'react';
+import { PenLine } from 'lucide-react';
 
 const Videos = ({setProgress,allVideos,setAllVideos}) => {
 
@@ -33,7 +34,11 @@ const Videos = ({setProgress,allVideos,setAllVideos}) => {
             }}
           >
             <Flex dir="ltr" justify="space-between" align="center" px={10}>
-              <Title size="xl">{item.centerName}</Title>
+              <Group display={'flex'} gap={10} justify='start' align='center'>
+                <Title size="xl" >{item.centerName}</Title>
+               <PenLine size={18}/>
+              </Group>
+              
               <Title size="xl">{item.title}</Title>
             </Flex>
 
@@ -49,11 +54,10 @@ const Videos = ({setProgress,allVideos,setAllVideos}) => {
 
             <AspectRatio ratio={16 / 9} >
               <iframe
-                
-                src={item.videoURL}
+                src={item.videoURL.replace('autoplay=1', 'autoplay=0')}
                 title={item.title}
                 style={{ border: 0 }}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
               />
             </AspectRatio>
