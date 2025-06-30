@@ -1,3 +1,5 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
 
 import { Flex, Button,Stepper, Title ,Image, Group} from "@mantine/core";
 import downloadDataAsPDF from "../../components/AddReview/PdfDownloadReview";

@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Image,Container,Grid } from "@mantine/core"
 import CenterProfile from "../../components/Home/Admin/CenterProfile"
 import useFetchProfile from "../../useMutation/Admin/useFetchProfile"

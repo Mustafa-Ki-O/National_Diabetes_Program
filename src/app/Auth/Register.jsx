@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import RegisterForm from "../../components/Register/RegisterForm";
 import { Stack,Title } from "@mantine/core";
 import { useEffect ,useState} from "react"

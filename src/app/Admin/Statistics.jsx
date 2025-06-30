@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Container,Title } from "@mantine/core"
 import { useState,useEffect } from "react";
 import useFetchPatients from "../../useMutation/Admin/useFetchPatients";

@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Container ,Text,Grid, Stack, Title,Image, Flex,Button,Popover, Select, Group} from "@mantine/core";
 import PatientsCards from "../components/Home/Admin/PatientsCards";
 import { useState,useEffect } from "react";

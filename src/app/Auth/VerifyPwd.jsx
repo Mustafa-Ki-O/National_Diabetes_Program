@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Stack,Title,Text } from "@mantine/core";
 import { useState,useEffect } from "react";
 import Progress from "../../components/general/Progress";

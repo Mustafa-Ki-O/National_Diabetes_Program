@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Button, Container, Stack, Text, Title } from "@mantine/core"
 import { useState,useEffect } from "react"
 import StartChat from "../../components/MedicalCommunication/StartChat"

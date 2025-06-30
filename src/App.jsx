@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { RouterProvider } from "react-router-dom";
 import './App.css'
 import { useEffect} from 'react'

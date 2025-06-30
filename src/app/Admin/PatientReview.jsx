@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { useParams } from "react-router"
 import { Container,Tabs,Grid,Title ,Card,Divider,Text, Flex, Button} from "@mantine/core"
 import GeneralPatientReview from "../../components/PatientReview/GeneralPatientReview"

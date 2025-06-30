@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import Progress from "../../components/general/Progress";
 import VerficationForm from "../../components/Home/Patient/VerficationForm"
 import { Container,Text,Title,Stack } from "@mantine/core"

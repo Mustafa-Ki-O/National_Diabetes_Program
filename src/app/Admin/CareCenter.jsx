@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Container, Flex, Title ,Button, Group } from "@mantine/core"
 import UpScroll from "../../components/general/UpScroll"
 import { useState,useEffect } from "react"

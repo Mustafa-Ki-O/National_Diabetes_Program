@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router"
 // import useFetchPatientInfo from "../../useMutation/Admin/useFetchPatientInfo";
