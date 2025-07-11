@@ -12,6 +12,7 @@ const ProfileNav = () => {
     
       const handleLogOut = () => {
         setOpened(false); 
+
         localStorage.clear()
         navigate("/National_Diabetes_Program/");
        

@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 const useLogOut = () => {
   const navigate = useNavigate();
   const { mutate: logOut, isPending } = useMutation({
-    mutationFn: () => navigate("/National_Diabetes_Program/"),
+    mutationFn: () => localStorage.clear() ,
         onSuccess: () => {
-        localStorage.clear()
+        navigate("/National_Diabetes_Program/")
         console.log("تم بنجاح");
         notifications.show({
           title: 'تم تسجيل الخروج من الحساب',

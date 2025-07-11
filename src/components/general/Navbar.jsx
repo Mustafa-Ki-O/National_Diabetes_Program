@@ -64,6 +64,7 @@ const NavBar = () => {
 
     const socketRef = useRef(null);
 
+
     const [notifications,setNotifications] = useState([])
     const {fetchNotification,isPending} = useFetchNotification(setNotifications)
  
@@ -73,17 +74,20 @@ const NavBar = () => {
     const [userId,setUserId] = useState()
     const [userName,setUserName] = useState()
 
-    useEffect(()=>{
-     const user = JSON.parse(localStorage.getItem('user'))
-     setUserRole(user?.role)
-     setUserId(user?.id)
-     setUserName(user?.name)
-    },[userRole])
+// const location = useLocation();
+
+useEffect(() => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  setUserRole(user?.role);
+  setUserId(user?.id);
+  setUserName(user?.name);
+}, [location]);
 
       useEffect(()=>{
       if(userRole==='patient'){
         fetchNotification()
       }
+       console.log('userRole is (from p) : ',userRole)
     },[userRole])
 
 
@@ -140,7 +144,7 @@ const NavBar = () => {
         && location.pathname !== '/National_Diabetes_Program/verify-otp/'
         && location.pathname !== '/National_Diabetes_Program/changePassword/' ) ?
         
-        userRole == 'center' ? (
+        userRole === 'center' ? (
           
     <>
     <LogOutModal opened={openedModal} close={close} />

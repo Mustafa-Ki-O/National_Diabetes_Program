@@ -13,7 +13,8 @@ const Progress = () => {
         && location.pathname !== '/National_Diabetes_Program/resetPassword/' 
         && location.pathname !== '/National_Diabetes_Program/verify-otp/' 
         && location.pathname !== '/National_Diabetes_Program/changePassword/'
-        && location.pathname !== '/National_Diabetes_Program/notification/' ? '80%' :'100%' }} fluid className="overlay">
+        && location.pathname !== '/National_Diabetes_Program/notification/'
+        && location.pathname !== '/National_Diabetes_Program/patient-home/' ? '80%' :'100%' }} fluid className="overlay">
          <Container >
            {/* <div className="loader"></div> */}
             <Loader color="blue" size="lg" type="dots" />

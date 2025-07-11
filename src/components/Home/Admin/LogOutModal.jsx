@@ -2,12 +2,13 @@ import { Button, Flex, Grid, Modal,Stack,Text, Title,Select } from "@mantine/cor
 // import { notifications } from "@mantine/notifications";
 import useLogOut from "../../../useMutation/Admin/useLogOut";
 
-const LogOutModal = ({opened,close}) =>{
+const LogOutModal = ({opened,close,}) =>{
 const{logOut,isPending} = useLogOut();
 
-    const handleLogout =()=> {
+    const handleLogout =()=>{
         logOut()
         close()
+       
     }
     return(
         <>
