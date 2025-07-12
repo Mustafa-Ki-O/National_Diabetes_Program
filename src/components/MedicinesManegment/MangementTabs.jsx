@@ -1,6 +1,7 @@
 import { Tabs } from '@mantine/core';
 import { Archive, Tablets } from 'lucide-react';
 import MedicinesStore from './MedicinesStore';
+import Record from './Record';
 
 
 
@@ -25,7 +26,7 @@ const MangementTabs =() => {
       </Tabs.Panel>
 
       <Tabs.Panel mt={'xl'} value="history">
-           السجل 
+          <Record/>
       </Tabs.Panel>
 
     </Tabs>

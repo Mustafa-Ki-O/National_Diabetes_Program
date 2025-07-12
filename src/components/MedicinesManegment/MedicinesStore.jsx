@@ -1,101 +1,69 @@
-import { Button, Card, Container, Flex, Grid, Group, Stack, Text, Title } from "@mantine/core"
+import { Button, Card, Container, Flex, Grid, Group, Stack, Text, Title ,Progress } from "@mantine/core"
 import { Plus, PlusIcon } from "lucide-react"
-import { useState } from "react"
+import { useState,useEffect} from "react"
+import AddMedicinModal from "./AddMedicinModal"
+import { useDisclosure } from "@mantine/hooks"
+import { useLocation } from "react-router"
+import MedicineCard from "./MedicinCard"
+
 
 const MedicinesStore = () => {
     const[num,setNum] = useState(200)
+    const [centerName,setCenterName] = useState()
+    const [opened,{open,close}] = useDisclosure()
+    const location = useLocation()
+
+    useEffect(() => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      setCenterName(user?.name);
+    }, [location]);
 
     return(
         <>
+        <AddMedicinModal opened={opened} close={close} centerName={centerName}/>
         <Container p={5} fluid >
             <Stack>
                 <Flex justify={'space-between'} align={'center'} >
                     <Title ta={'right'} size={'xl'}>
                       محتوى المخزن
                    </Title> 
-                   <Button variant="filled" color={'#707070'}> 
+                   <Button variant="filled" color={'#707070'} radius={10} onClick={open}> 
                     طلب أدوية
-                   <Plus size={'20'} />
+                   <Plus size={'20'} style={{marginRight:5}}/>
                    </Button>
                 </Flex>
-            
-            <Flex dir="ltr" justify={'end'} gap={20}>
-                <Text  ta={'right'}>
-                    5 أصناف
-                </Text>
-            <Text size="lg" ta={'right'}>
-                   عدد الاصناف الكلية
-                </Text>
-            </Flex>
-
+         
           {/*  */}
-             <Flex dir="ltr" justify={'end'} gap={20}>
-                <Text ta={'right'}>
-                   1500 
+
+             <Grid mt={20}>
+                <Grid.Col span={{base:12,sm:6}}>
+                 <Text size="lg" fw={500} ta={'right'}>
+                   اجمالي الادوية  : 2500
                 </Text>
-              <Text size="lg" ta={'right'}>
-                 إجمالي أدوية الخافضات الفموية
+                </Grid.Col>
+                <Grid.Col span={{base:12,sm:6}}>
+                 <Text size="lg" fw={500} ta={'right'}>
+                  عدد الاصناف الكلية : 5
                 </Text>
-            </Flex>
+                </Grid.Col>
+             </Grid>
+
+
                {/*  */}
-             <Flex dir="ltr" justify={'end'} gap={20}>
-                <Text ta={'right'}>
-                   1000 
-                </Text>
-              <Text size="lg" ta={'right'}>
-                  إجمالي أدوية الانسولين
-                </Text>
-            </Flex>
-            {/*  */}
-             <Flex dir="ltr" justify={'end'} gap={20}>
-                <Text ta={'right'}>
-                   2500 
-                </Text>
-              <Text size="lg" ta={'right'}>
-                  اجمالي الادوية 
-                </Text>
-            </Flex>
+            
             <div style={{margin:10,height:1,backgroundColor:'#70707070',width:'100%'}} ></div>
             <Stack>
                 <Grid gutter={20}>
-                    {[1,2,3,4,5].map((item)=>(
-                        <Grid.Col key={item} span={4}>
-                              <Card radius={20} bd={'1px solid #70707050'} bg={'#fff'} style={{boxShadow:'none'}}>
-                    <Flex mb={10}  gap={20} direction={'rtl'} justify={'right'} align={'center'}>
-                        <Title ta={'right'} size={'lg'}>
-                        اسم الدواء عربي
-                    </Title>
-                    <Text ta={'right'} size="md">
-                        (اسم الدواء انجليزي)
-                    </Text>
-                    </Flex>
-                    <Flex my={5} dir="ltr"  justify={'space-between'} align={'center'}>
-                        <Text ta={'right'} >تاريخ انتهاء الصلاحية</Text>
-                        <Group>
-                            <Group gap={2} display={'flex'}>
-                                <Button p={3} size="xs"  variant="light" color={'#707070'} onClick={()=>setNum((prev)=>prev+20)}>
-                                    <PlusIcon size={15}/>
-                                </Button>
-                                <Text>
-                                   {num}
-                                </Text>
-                                
-                            </Group>
-                            <Title size={'lg'} ta={'right'}>الكمية</Title>
-                        </Group>
-                        
-                    </Flex>
-                    
-                </Card>
-                        </Grid.Col>
-                    ))}
+                   {[1, 2, 3, 4, 5].map((item) => (
+                    <Grid.Col key={item} span={4}>
+                      <MedicineCard quantity={100+ item*100} type={item <3 ? 'أنسولين' : 'خافضات فموية'}/>
+                    </Grid.Col>
+                  ))}
                 </Grid>
               
             </Stack>
             </Stack>
-            <Button size={'md'} mt={40} variant="filled" >
-                تأكيد الطلب
-            </Button>
+            
         </Container>
         </>
     )

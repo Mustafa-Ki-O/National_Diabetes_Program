@@ -1,4 +1,4 @@
-import { ADD_PATIENT,REMOVE_PATIENT } from "./actionType";
+import { ADD_PATIENT,REMOVE_PATIENT ,ADD_CENTER, ADD_MEDICIN } from "./actionType";
 
 export const addPatient=(patient) => ({
    type:ADD_PATIENT,
@@ -14,3 +14,12 @@ export const removePatient = (id) => ({
 //    type: UPDATE_BOOK,
 //    payload: book
 // });
+
+export const addCenter = (center) => ({
+     type: ADD_CENTER,
+     payload: center
+});
+export const addMedicin = (medicin) => ({
+     type: ADD_MEDICIN,
+     payload: medicin
+});

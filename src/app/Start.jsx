@@ -3,7 +3,7 @@
 
 import img from '../assets/images/ribbon.svg'
 import modules from '../assets/css/start.module.css'
-import { Image } from '@mantine/core'
+import { Image ,Stack} from '@mantine/core'
 import { Container,Flex,Box,Title } from '@mantine/core'
 
 const Start = () => {
@@ -11,7 +11,14 @@ const Start = () => {
     return(
         <>
         <Container fluid w='100%'>
-            <Flex  justify='center' align='center' gap={20}>
+          {/* <Stack  > */}
+             {/* <div className={modules.blue} />
+             <div className={modules.gray}  /> */}
+
+
+          {/* </Stack> */}
+         
+            <Flex justify='center' align='center' gap={20}>
                      <Box className={modules.p} > 
                        <Title c='black' fz={{base:32,md:44}} ta='center' fw={600}>
                          البرنامج
