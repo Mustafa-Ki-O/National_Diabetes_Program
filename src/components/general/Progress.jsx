@@ -14,6 +14,7 @@ const Progress = () => {
         && location.pathname !== '/National_Diabetes_Program/verify-otp/' 
         && location.pathname !== '/National_Diabetes_Program/changePassword/'
         && location.pathname !== '/National_Diabetes_Program/notification/'
+        && location.pathname !== '/National_Diabetes_Program/profile-settings/'
         && location.pathname !== '/National_Diabetes_Program/patient-home/' ? '80%' :'100%' }} fluid className="overlay">
          <Container >
            {/* <div className="loader"></div> */}

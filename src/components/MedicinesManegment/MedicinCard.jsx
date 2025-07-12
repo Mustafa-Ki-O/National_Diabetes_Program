@@ -10,7 +10,7 @@ const percentUsed = (quantity / maxStock) * 100;
 const color = percentUsed < 40 ? percentUsed <30 ? 'red' : 'orange' : '#16aabb' ;
 
   return (
-    <Card radius={20} style={{ border: '1px solid #ccc', background: '#f9f9f9', direction: 'rtl' }}>
+    <Card bg={'#fff'} radius={20} style={{ border: '1px solid #ccc', background: '#f9f9f9', direction: 'rtl' }}>
       <Stack gap={20}>
         <Group position="apart" align="center">
             <PillBottle size={25} />

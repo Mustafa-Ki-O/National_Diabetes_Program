@@ -28,6 +28,7 @@ import HealthCare from "../app/Patient/HealthCare";
 import HealthChecksUps from "../app/Patient/HealthCheckUps";
 import AnalyzerAI from "../app/Patient/AnalyzerAI";
 import NotificationPatient from "../app/Patient/NotificationPatient";
+import ProfileSettings from "../app/Patient/ProfileSettings";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -69,7 +70,8 @@ const MainLayout = () => {
      '/National_Diabetes_Program/health-care/',
      '/National_Diabetes_Program/health-checkUps/',
      '/National_Diabetes_Program/analyzer-AI/',
-     '/National_Diabetes_Program/notification/'
+     '/National_Diabetes_Program/notification/',
+      '/National_Diabetes_Program/profile-settings/'
   ];
 
   const isNoContainer = noContainerRoutes.includes(location.pathname);
@@ -181,6 +183,10 @@ const route = createBrowserRouter([
             {
               path:'notification',
               element:<NotificationPatient/>
+            },
+            {
+              path:'profile-settings',
+              element:<ProfileSettings />
             }
 
           ]
