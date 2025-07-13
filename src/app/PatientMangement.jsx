@@ -41,7 +41,7 @@ useEffect(()=>{
 const handleChangeType = (value) =>{
   if(value!==null && value !==undefined){
     setSugarType(value);
-    setSearchedPatients(patients.filter(patient => patient.sugarType === value));
+    setSearchedPatients(patients?.filter(patient => patient.sugarType === value));
   }
   else{
     setSearchedPatients(patients)
