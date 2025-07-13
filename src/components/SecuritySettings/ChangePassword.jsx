@@ -50,7 +50,8 @@ const ChangePassword = () => {
   };
 
   return (
-    <form onChange={()=>setChanged(true)}  onSubmit={form.onSubmit(handleSubmit)}>
+    <form onChange={()=>setChanged(true)}  onSubmit={form.onSubmit(handleSubmit)} 
+    style={{opacity:active?'1':'0',transform:active?'translateY(0px)':'translateY(100px)' ,transition:'all 0.8s'}}>
         <fieldset 
           style={{
          border: '2px solid #70707040', 
@@ -63,7 +64,7 @@ const ChangePassword = () => {
       </Title>
     </legend>
       <Grid dir={'rtl'} mt={20} gutter={20} p={5}
-      style={{opacity:active?'1':'0',transform:active?'translateY(0px)':'translateY(100px)' ,transition:'all 0.8s'}}>
+      >
         
        <Grid.Col span={12}>
         <PasswordInput
