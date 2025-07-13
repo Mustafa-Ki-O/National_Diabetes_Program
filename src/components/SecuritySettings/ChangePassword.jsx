@@ -58,8 +58,8 @@ const ChangePassword = () => {
          borderRadius: '15px',    
          
         }}>
-          <legend style={{ textAlign: 'right', width: '100%' }}>
-      <Title order={5} ta="right">
+          <legend style={{ textAlign: 'right',padding:10}}>
+      <Title order={5} ta="right" >
         تغيير كلمة المرور
       </Title>
     </legend>
