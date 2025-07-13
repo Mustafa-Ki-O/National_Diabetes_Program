@@ -18,7 +18,7 @@ const ProfileNav = () => {
        
       };
       const handleNavigate = () =>{
-        navigate('/National_Diabetes_Program/profile-settings/');
+        navigate('/National_Diabetes_Program/settings/');
         setOpened(false); 
       }
     

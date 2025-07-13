@@ -36,7 +36,7 @@ const AccountSettings = ({info}) => {
     return(
         <>
         <form  onChange={()=>setIsFormChanged(true)} onSubmit={form.onSubmit(handleSubmit)}>
-            <Grid py={10} gutter={20} justify="flex-end" align="center" w={{base:'95%',sm:'94%'}} m={'auto'} pos={'relative'} > 
+            <Grid dir="ltr" gutter={20} justify="flex-end" align="center" w={{base:'95%',sm:'94%'}} m={'auto'} pos={'relative'} > 
               <Grid.Col span={{base:12,sm:6}}   >
               <TextInput 
               dir="rtl"
@@ -44,12 +44,12 @@ const AccountSettings = ({info}) => {
                
                ' الاسم'
                 }
-              variant="unstyled"
+              variant="filled"
               placeholder="الاسم الكامل"
-              size="20px"
+              size="lg"
               fw={600}
               radius={10}
-              leftSection={ <PenLine size={18} />}
+              // leftSection={<PenLine size={25} />}
               key={form.key("fullname")}
               {...form.getInputProps("fullname")}
               styles={{
@@ -68,10 +68,10 @@ const AccountSettings = ({info}) => {
             <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
                dir="rtl"
-               variant="unstyled"
-              size="20px"
+               variant="filled"
+              size="lg"
               fw={600}
-              leftSection={ <PenLine size={18} />}
+              // leftSection={ <PenLine size={18} />}
               label={
                 // <Flex justify="end" align="center" gap={10}>
                 //   <PenLine size={15} />
@@ -98,10 +98,10 @@ const AccountSettings = ({info}) => {
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
               dir="rtl"
-              variant="unstyled"
-              size="20px"
+              variant="filled"
+              size="lg"
               fw={600}
-              leftSection={ <PenLine size={18} />}
+              // leftSection={ <PenLine size={18}/>}
               label={
                 // <Flex justify="end" align="center" gap={10}>
                 //   <PenLine size={15} />
@@ -128,10 +128,10 @@ const AccountSettings = ({info}) => {
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
               dir="rtl"
-              variant="unstyled"
-              size="20px"
+             variant="filled"
+            size="lg"
               fw={600}
-              leftSection={ <PenLine size={18} />}
+              // leftSection={ <PenLine size={18} />}
               label={
                 // <Flex justify="end" align="center" gap={10}>
                 //   <PenLine size={15} />
@@ -158,8 +158,8 @@ const AccountSettings = ({info}) => {
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
               dir="rtl"
-              variant="unstyled"
-              size="20px"
+             variant="filled"
+              size="lg"
               fw={600}
               label={
                 // <Flex justify="end" align="center" gap={10}>
@@ -167,7 +167,7 @@ const AccountSettings = ({info}) => {
                  ' رقم الهاتف'
                 // </Flex>
               }
-              leftSection={ <PenLine size={18} />}
+              // leftSection={ <PenLine size={18} />}
               placeholder="092xxxxxxx"
               radius={10}
               {...form.getInputProps("phone")}
@@ -183,15 +183,14 @@ const AccountSettings = ({info}) => {
               style={{height:'auto !important'}}
             />
           </Grid.Col>
-          <Grid.Col>
+          <Grid.Col mt={15}>
             {isFormChanged && (
                 <Button fullWidth variant="filled" color={'#37a9ef'} size="md" radius={10} >
                     حفظ
                 </Button>
-            )}
-                <Divider w={'90%'} m={'auto'} />
-                
-            </Grid.Col>
+            )}</Grid.Col>
+                              
+            
             </Grid>
             </form>
         </>

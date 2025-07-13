@@ -24,7 +24,7 @@ const NotificationCard = ({notification = {}}) => {
             <BellIcon  size={20} fill={!click?'#000':'transparent'} />
             </Flex>
             <Text size="sm" ta={'left'}>
-              {created_at ? created_at.split('T')[0] : '1-1-2022'}
+              {created_at ? created_at.split('T')[0] : ''}
             </Text>
         </Card>
         </>
