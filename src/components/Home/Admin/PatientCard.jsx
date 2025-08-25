@@ -9,6 +9,8 @@ import { useDisclosure } from "@mantine/hooks";
 import card from '../../../assets/css/Card.module.css'
 import MessageSendModal from "./MessageSendModal";
 import { MessageCircleIcon, Send } from "lucide-react";
+import { useLocation } from "react-router-dom";
+
 const PatientCard = ({verefication,id, id_number, name, email, birthDate, sugarType,setPatients,setProgress }) => {
 
 
@@ -18,6 +20,9 @@ const inputDate = new Date(birthDate);
 const inputYear = inputDate.getFullYear(); 
 const currentYear = new Date().getFullYear();  
 const age = currentYear - inputYear; 
+
+const location = useLocation();
+const inMang = location.pathname === '/National_Diabetes_Program/patientMangement'
 
 
 const navigate = useNavigate();
@@ -86,7 +91,9 @@ const navigate = useNavigate();
           <Image  src={updateIcon} mr={15} w={20}/>
         </Button>
 
+       {inMang && (
         <Button
+
           w={80}
           color="#Ee3935"
           variant="light"
@@ -97,6 +104,7 @@ const navigate = useNavigate();
         >
           <Image  src={deleteIcon}  w={20} />
         </Button>
+        )}
       </Flex>
       </Stack>
     </Card>

@@ -7,8 +7,9 @@ import App from './App.jsx'
 import store from './redux/store.jsx';
 import { MantineProvider } from '@mantine/core';
 import { Provider } from 'react-redux';
-import '@mantine/charts/styles.css';
 import '@mantine/core/styles.css';
+import '@mantine/charts/styles.css';
+import '@mantine/carousel/styles.css';
 import '@mantine/dates/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/charts/styles.layer.css';

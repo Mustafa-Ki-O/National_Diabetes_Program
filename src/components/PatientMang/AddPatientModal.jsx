@@ -143,7 +143,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
             <Flex justify={'center'} align={'center'} gap={10}>
              <UserRound />
               <Title ta={'center'} my={20} size={'xl'}  >
-                 إنشاء حساب مريض
+                إضافة مريض
               </Title>
             </Flex>
                <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
