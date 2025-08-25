@@ -155,13 +155,21 @@ const CardCa = () =>(
        <Title size='xl' mb={20} ta={'end'} m={'1.5rem'} mt={'3rem'}>
                     المرضى المسجلين حديثا
                   </Title>
-<Flex p={{base:0,md:'lg'}} justify={'end'}>
+<Flex visibleFrom="sm" p={{base:0,md:'lg'}} justify={'end'}>
   {
     
     [1, 2, 3].map((e) => (
       <CardCa key={e} />
     ))
   }</Flex>
+  <Flex hiddenFrom="sm" gap={5} p={{base:0,md:'lg'}} style={{flexDirection:'column'}} justify={'end'}>
+  {
+    
+    [1, 2, 3].map((e) => (
+      <CardCa key={e} />
+    ))
+  }</Flex>
+  
 
 
         </Container>
