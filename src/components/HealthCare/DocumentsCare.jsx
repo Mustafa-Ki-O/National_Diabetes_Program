@@ -3,13 +3,21 @@ import { useDisclosure } from "@mantine/hooks";
 import img from '../../assets/images/NDBlogo.svg'
 import { ChevronRight, PenLine } from "lucide-react";
 import ViewDocModal from "./ViewDocModal";
+import useFetchArticles from "../../useMutation/Admin/useFetchArticles";
+import { useEffect, useState } from "react";
 
 const DocumentsCare = () => {
 
-        
-        const ArticleCard = ({ title, center, content, date ,image}) => (
+        const[allArticles,setAllArticles] = useState([])
+        const {fetchArticles,isPending} = useFetchArticles(setAllArticles)
+
+        useEffect(()=>{
+          fetchArticles()
+        },[])
+
+        const ArticleCard = ({ title, center, content, shortText,date ,img}) => (
           <Card radius={10} bd={'1px solid #70707030'} bg={'#fcfcfc'} p={0}  mb={30}>
-            <Image mb={15} w={'100%'} h={'40px'} src={image? image:img} />
+            <Image mb={15} w={'100%'} h={'40px'} src={img} />
             <Grid gutter={30} p={10}>
               <Grid.Col span={12}>
                 <Flex dir="ltr" justify="space-between" align="center" px={10}>
@@ -24,9 +32,8 @@ const DocumentsCare = () => {
               </Grid.Col>
              <Grid.Col span={12}>
                 <Text px={10} size="md" ta={'right'} >
-                    {/* {content} */}
-                    مقطع صغير تعريفي بالمقال ,مقطع صغير تعريفي بالمقال ,مقطع صغير تعريفي بالمقال ,مقطع صغير تعريفي بالمقال
-                  </Text>
+                  {shortText}
+                      </Text>
              </Grid.Col>
               <Grid.Col span={6} style={{textAlign:'right'}}>
                     <Button radius={10} leftSection={<ChevronRight size={20} color="#37a9ef" />}
@@ -51,20 +58,28 @@ const DocumentsCare = () => {
 
       return (
         <>
-        <ViewDocModal 
-        opened={opened}
-        close={close} />
-
+      
         <Stack align="start" >
             
-          {[1,2,3,4].map((item) => (
+          {allArticles.map((item) => (  
+            <>
+            <ViewDocModal 
+        opened={opened}
+        close={close} 
+        item={item}
+         key={item.id}
+        />
+
             <ArticleCard
-              key={item}
-              title="عنوان المقال"
-              center="المركز المحرر"
-              content={dummyContent}
-              date="DD-MM-YYYY"
+              key={item.id}
+              title={item.title}
+              center={item.centerName}
+        
+              shortText={item.shortText}
+              img={item.imageURL}
+              date={item.createAt}
             />
+            </>
           ))}
        
     

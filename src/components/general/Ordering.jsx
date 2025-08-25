@@ -4,7 +4,7 @@ import { Flex ,Popover,Text ,Stack ,Select, Group , Button} from '@mantine/core'
 
 
 
-const Ordering = ({size,button}) => {
+const Ordering = ({size=15,button}) => {
 
     const [order,setOrder]=useState()
     const [centerPosting,setCenterPosting] = useState()

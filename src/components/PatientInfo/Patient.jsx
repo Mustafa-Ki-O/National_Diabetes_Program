@@ -16,6 +16,7 @@ import dayjs from "dayjs";
 
 import DeleteReviewModal from "./DeleteReviewModal";
 import AddReviewModal from "./AddReviewModal";
+import { LogOut } from "lucide-react";
 
 
 const Patient = ({ id , setProgress}) => {
@@ -69,9 +70,13 @@ const age = birthYear ? currentYear - birthYear : "غير معروف";
       <Grid gutter={40}  px={{base:0,sm:'lg'}} mb={'3rem'} >
         <Grid.Col span={12}>
 
-          <Flex align='center' gap={10} justify='end'>
-             <Title size="2rem" >{storedPatient?.fullname}</Title>
+          <Flex align='center'  justify='space-between'>
+            <LogOut size={25} color="#88888888" style={{cursor:'pointer'}} onClick={()=>navigate(-1)} />
+            <Group justify="end" gap={10} align='center'>
+              <Title size="2rem" >{storedPatient?.fullname}</Title>
             <Image src={accountIcon} w={'5rem'} /> 
+            </Group>
+           
          </Flex> 
         </Grid.Col>
          <Grid.Col  span={12} mt={'md'}>

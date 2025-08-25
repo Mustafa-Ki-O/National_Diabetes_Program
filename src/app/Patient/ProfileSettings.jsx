@@ -5,17 +5,17 @@ const ProfileSettings = () => {
 
 
         const [info,setInfo] = useState({
-            fullname:'روبي روبي',
+            fullname:"rami",
             birth:'18-7-1980',
             id_num:'10999202922',
-            email:'email.com',
-            phone:'0928222111',
+            email:'r1@gmail.com',
+            phone:'09282221',
 
             type:'نوع اول',
             medicins:['خافضات فموية','ميتفورمين'],
 
             location:'حمص',
-            centerName:'مركز حمص الخارق'
+            centerName:'مركز حمص '
 
         })
     

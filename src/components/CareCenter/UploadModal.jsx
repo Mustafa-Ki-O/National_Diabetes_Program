@@ -35,7 +35,7 @@ const UploadModal = ({opened,close,mainSubject,setProgress,setAllArticles,setAll
     .getPublicUrl(filePath);
   
     console.log(publicUrl.publicUrl)
-  return publicUrl.publicUrl; // هذا هو الرابط النهائي
+  return publicUrl.publicUrl; 
 };
 
    const [isSubmitted, setIsSubmitted] = useState(false);
