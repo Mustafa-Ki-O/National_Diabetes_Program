@@ -30,7 +30,7 @@ const Home = () => {
      const getMostCommonSugarType = () => {
   if (patients.length === 0) return null;
 
-  const completedPatients = patients.filter(patient => patient.isCompleted);
+  const completedPatients = patients?.filter(patient => patient.isCompleted);
 
   if (completedPatients.length === 0) return 'لم يتم التحقق من المرضى !';
 
@@ -56,6 +56,7 @@ console.log(mostCommonSugarType)
 const num = patients.length ;
 
 const navigate= useNavigate()
+
     return(
         <>
         {progress && <Progress/>}
@@ -66,7 +67,7 @@ const navigate= useNavigate()
                {patients.length !==0 ? (
                 
                   <Grid justify="end"  gutter={50}  px={'lg'}  >  
-                  <Grid.Col mx={10} span={12}   align='end'>
+                  <Grid.Col  span={{base:12,sm:6}}    align='end'>
                       <Title size='xl' mb={20}>
                         عدد المرضى
                       </Title>
@@ -81,7 +82,7 @@ const navigate= useNavigate()
  
                   </Grid.Col>
                   
-                  <Grid.Col mx={10}   span={12} align='end' >
+                  <Grid.Col   span={{base:12,sm:6}}  align='end' >
                   <Title size='xl' mb={20}>
                       السكري الأكثر شيوعا
                   </Title>
@@ -89,17 +90,20 @@ const navigate= useNavigate()
                       {mostCommonSugarType || 'لا توجد بيانات'}
                       </Text>
                   </Grid.Col>
-                  <Grid.Col  span={12} align='end' >
+                  <Grid.Col  span={{base:12,sm:6}} align='end' >
                      <Title size='xl' mb={20} >
                       عدد المسجلين لهذا الشهر
                   </Title>
                   </Grid.Col>
-                  <Grid.Col span={12} align='end' >
-
-                  
-                    <Title size='xl' mb={20} >
-                      عدد المسجلين لهذه السنة
-                  </Title>
+                  <Grid.Col span={{base:12,sm:6}} align='end' >
+                      <Title size='xl' mb={20} >
+                      عدد المسجلين لهذا الشهر
+                    </Title>
+                  </Grid.Col>
+                  <Grid.Col span={{base:12,sm:6}} align='end' >
+                      <Title size='xl' mb={20} >
+                      عدد المسجلين لهذا الشهر
+                    </Title>
                   </Grid.Col>
                   </Grid> 
                  

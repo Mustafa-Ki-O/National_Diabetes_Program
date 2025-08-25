@@ -48,13 +48,13 @@ const RegAdminForm = ({setProgress}) =>{
         centerPassword: yup
           .string()
           .min(8, "يجب ان تحوي كلمة المرور على 8 محارف كحد أدنى"),
-          centerKey: yup
-          .string()
-          .required('الرمز السري مطلوب')
-          .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d%&@!$*]{25}$/,
-            'يجب أن يحتوي الرمز السري على خليط من الأرقام والمحارف والرموز الخاصة ويجب أن يكون طوله 25'
-          )
+          // centerKey: yup
+          // .string()
+          // .required('الرمز السري مطلوب')
+          // .matches(
+          //   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d%&@!$*]{25}$/,
+          //   'يجب أن يحتوي الرمز السري على خليط من الأرقام والمحارف والرموز الخاصة ويجب أن يكون طوله 25'
+          // )
         });
     
       const form = useForm({
@@ -65,7 +65,7 @@ const RegAdminForm = ({setProgress}) =>{
           centerCity:'',
           centerPassword:'',
           centerEmail:'',
-          centerKey:'',
+          // centerKey:'',
           // %Y4&F4@VAW&T2QLYD44M8Z1Y%
         },
         validate: yupResolver(schema),
@@ -151,17 +151,18 @@ const RegAdminForm = ({setProgress}) =>{
                 {...form.getInputProps("centerPassword")}
               />
             </GridCol>
-            <GridCol span={12}>
+            {/* <GridCol span={12}>
               <TextInput
                 size="md"
                 radius={10}
-                // label='%Y4&F4@VAW&T2QLYD44M8Z1Y%'
+
                 placeholder="أدخل الرمز السري*"
                 rightSection={<img src={code} width="20px" />}
                 key={form.key("centerKey")}
                 {...form.getInputProps("centerKey")}
               />
-            </GridCol>
+            </GridCol> */}
+            
           </Grid>
            <Flex visibleFrom="md"  gap='1.25rem' justify='center' m="auto" my={15}>
            <Button fullWidth radius={10}  size="md"  variant="outline" color="#8E8E8E" onClick={handleLog}>

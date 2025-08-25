@@ -9,6 +9,7 @@ const Progress = () => {
       <Container  w={{base:'100%',sm:location.pathname !== '/National_Diabetes_Program/' 
         && location.pathname !== '/National_Diabetes_Program/register/'
         && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
+        && location.pathname !== '/National_Diabetes_Program/check-sr-code/'
         && location.pathname !== '/National_Diabetes_Program/verifyEmail/'
         && location.pathname !== '/National_Diabetes_Program/resetPassword/' 
         && location.pathname !== '/National_Diabetes_Program/verify-otp/' 
@@ -17,7 +18,8 @@ const Progress = () => {
         && location.pathname !== '/National_Diabetes_Program/settings/'
         && location.pathname !== '/National_Diabetes_Program/profile-settings/'
         && location.pathname !== '/National_Diabetes_Program/security-settings/'
-        && location.pathname !== '/National_Diabetes_Program/patient-home/' ? '80%' :'100%' }} fluid className="overlay">
+        && location.pathname !== '/National_Diabetes_Program/patient-home/'
+         ? '80%' :'100%' }} fluid className="overlay">
          <Container >
            {/* <div className="loader"></div> */}
             <Loader color="blue" size="lg" type="dots" />

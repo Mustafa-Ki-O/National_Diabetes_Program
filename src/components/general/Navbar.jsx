@@ -142,7 +142,8 @@ useEffect(() => {
         && location.pathname !== '/National_Diabetes_Program/verifyEmail/'
         && location.pathname !== '/National_Diabetes_Program/resetPassword/'
         && location.pathname !== '/National_Diabetes_Program/verify-otp/'
-        && location.pathname !== '/National_Diabetes_Program/changePassword/' ) ?
+        && location.pathname !== '/National_Diabetes_Program/changePassword/' 
+        && location.pathname !== '/National_Diabetes_Program/check-sr-code/') ?
         
         userRole === 'center' ? (
           

@@ -2,11 +2,11 @@ import axiosInstance from "../axiosService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-const FetchCities = () => {
+const PostSrCode = (secret_key) => {
   return new Promise((resolve, reject) => {
-    axiosInstance.get(`${API_URL}/getCities`,{timeout: 15000,})
+    axiosInstance.post(`${API_URL}/checkIsCenter`,secret_key)
       .then(response => {
-        resolve(response.data); // Ensure this matches the API response structure
+        resolve(response.data); 
       })
       .catch(error => {
         reject(error);
@@ -14,4 +14,4 @@ const FetchCities = () => {
   });
 };
 
-export default FetchCities;
+export default PostSrCode;

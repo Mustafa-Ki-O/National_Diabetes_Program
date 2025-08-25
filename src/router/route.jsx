@@ -31,6 +31,7 @@ import NotificationPatient from "../app/Patient/NotificationPatient";
 import ProfileSettings from "../app/Patient/ProfileSettings";
 import Settings from "../app/Patient/Settings";
 import SecuritySettings from "../app/Patient/SecuritySettings";
+import CheckSrCode from "../app/Auth/CheckSrCode";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -75,7 +76,8 @@ const MainLayout = () => {
      '/National_Diabetes_Program/notification/',
       '/National_Diabetes_Program/settings/',
       '/National_Diabetes_Program/profile-settings/',
-      '/National_Diabetes_Program/security-settings/'
+      '/National_Diabetes_Program/security-settings/',
+      '/National_Diabetes_Program/check-sr-code/'
   ];
 
   const isNoContainer = noContainerRoutes.includes(location.pathname);
@@ -122,6 +124,11 @@ const route = createBrowserRouter([
             {
               path:'home',
               element:<Home/>,
+            },
+            {
+              path:'check-sr-code',
+              element:<CheckSrCode/>
+
             },
             {
               path:'registerAdmin',

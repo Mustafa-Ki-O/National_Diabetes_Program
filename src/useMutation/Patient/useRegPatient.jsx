@@ -8,7 +8,7 @@ const useRegPatient = () => {
   const { mutate: register, isPending } = useMutation({
     mutationFn: (newFormData) => PostPatient(newFormData),
     onSuccess: () => {
-        console.log("تم بنجاح");
+    //     console.log("تم بنجاح");
         
     //   toast.success("تم انشاء الحساب بنجاح");
     //   notifications.show({

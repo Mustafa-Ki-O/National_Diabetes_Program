@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import {TextInput,Button,PasswordInput,rem,Container,Flex,Grid,GridCol,Anchor,Loader, Text} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
+import { Accordion, AccordionItem, AccordionControl, AccordionPanel } from '@mantine/core';
 // import { IconAt } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import * as yup from "yup";
 import useLogin from "../../useMutation/useLogin";
+import { Info } from "lucide-react";
 // import { useTranslation } from "react-i18next";
 // import useLogin from "../../components/useMutation/researcher/useLogin";
 
@@ -97,11 +99,38 @@ const LoginForm = ({setProgress}) => {
             </Button>
             </Grid.Col>
             <Grid.Col mt={20} span={12} >
-              <Text size="md" ta={'center'}> لاتملك حساب ؟ 
-                <Anchor  inherit fw={700} td='underline' mx={10} onClick={() => navigate(`/National_Diabetes_Program/register/`)}>
-                  إنشاء حساب جديد
-                </Anchor>
+
+     
+        
+        <Accordion chevronPosition="left" chevronIconSize={18}  variant="unstyled" pb={0}>
+          <AccordionItem value="1">
+            <AccordionControl>
+             <Text size="md">
+            لاتملك حساب ؟
+            <Anchor 
+              inherit 
+              fw={700} 
+              td='underline' 
+              mx={10} 
+              onClick={() => navigate(`/National_Diabetes_Program/check-sr-code/`)}
+            >
+            إنشاء حساب جديد (أدمن)
+            </Anchor>
+             </Text>
+            </AccordionControl>
+            <AccordionPanel>
+              <Flex  >
+                 <Info color="#37a9ef" />
+                   <Text size="sm" style={{paddingInline:0}} >
+              
+                لانشاء حساب مريض , يرجى مراجعة أقرب مركز صحي للسكري في منطقتك
               </Text>
+              </Flex>
+            
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+   
             </Grid.Col>
           </Grid>
  

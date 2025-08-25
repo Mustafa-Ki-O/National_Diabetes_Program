@@ -10,6 +10,9 @@ import useFetchPatients from "../useMutation/Admin/useFetchPatients";
 import Search from "../components/Home/Admin/search";
 import search from'../assets/vectors/search.png'
 import home from '../assets/css/home.module.css'
+import { PlusIcon, UserRoundPlus } from "lucide-react";
+import AddPatientModal from "../components/PatientMang/AddPatientModal";
+import { useDisclosure } from "@mantine/hooks";
 const PatientMangement = () => {
   
   const userData = localStorage.getItem('user');
@@ -23,6 +26,8 @@ const PatientMangement = () => {
   const [ sugarType,setSugarType] = useState()
   const [orderNames,setOrderNames] = useState()
  
+  const [opened ,{open, close}] = useDisclosure()
+
   useEffect(()=>{
     fetchPatients()
   },[]);
@@ -75,6 +80,10 @@ const handleChangeName = (value) =>{
 
         <>
         {progress && <Progress/>}
+        <AddPatientModal setProgress={setProgress} 
+        opened={opened} close={close} 
+        centerId={user?.role==='center' ? user.id : ''} />
+
         <Container pos={'relative'} p={{base:0,md:'lg'}} fluid  pb={60} mih='85vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
          {user?.role === 'center' ?(
             <>
@@ -89,16 +98,20 @@ const handleChangeName = (value) =>{
                   zIndex:10,
                   background: '#F9FAFC',
                   paddingBottom:20,
-                  borderBottom: '2px solid #00000010' // يعطي حد خفيف أنيق
+                  borderBottom: '2px solid #00000010' 
                 }}>  
-              <Grid.Col span={12}>
-              
-             </Grid.Col>
+
               <Grid.Col visibleFrom="sm" style={{alignSelf:'end',justifyItems:'end'}} span={{base:12,sm:5}}>
-              <Flex  gap={3} justify={'space-between'}>
+                <Flex  gap={20}  justify='space-between' align='center'>
+                  <Button radius={10} size="md" variant={'filled'} color={'#16aabb'} onClick={open}>
+                    <UserRoundPlus style={{marginRight:5}}/>
+                  إضافة مريض 
+                </Button>
+                <Flex  gap={3} justify={'space-between'}>
+                
               <Popover width={'fit-content'} position="bottom"  withArrow shadow="md">
               <Popover.Target>
-              <Button radius={10} size="md" fullWidth variant="light" c='#37A9EF' >فرز المرضى حسب</Button>
+              <Button radius={10} size="md" fullWidth variant="light" color='#37A9EF' >فرز المرضى حسب</Button>
               </Popover.Target>
                <Popover.Dropdown>
                  <Stack gap={20}  >
@@ -137,16 +150,22 @@ const handleChangeName = (value) =>{
              </Popover>
              
               </Flex>
+                </Flex>
+                
+
               
              
             </Grid.Col>
              <Grid.Col className={home.grid} align='end' span={{ base:12,sm:7 }}>
               <Stack px={'lg'} >
-               <Flex   justify='end' gap={30}>
+               <Flex  justify='space-between' mt={5} style={{alignSelf:'end'}}>
+                <Button hiddenFrom="sm" radius={10} size="md" variant={'filled'} color={'#16aabb'} onClick={open}>
+                  <UserRoundPlus />
+                </Button>
                 <Flex  hiddenFrom="sm" gap={3} justify={'space-between'}>
               <Popover width={'fit-content'} position="bottom"  withArrow shadow="md">
               <Popover.Target>
-              <Button radius={10} size="md" miw={'7rem'} variant="light" c='#37A9EF' >فرز</Button>
+              <Button radius={10} size="md" miw={'3rem'} variant="light" c='#37A9EF' >فرز</Button>
               </Popover.Target>
                <Popover.Dropdown>
                  <Stack gap={10}>
@@ -187,7 +206,7 @@ const handleChangeName = (value) =>{
               </Flex>
                 <Group m={0} >
 <Image src={search} w={30} className={home.search}/>
-                 <Text size="lg" fw={700}  >
+                 <Text size="lg" fw={700} ta={'right'} >
                     ابحث عن مريض 
                 </Text>  
                 </Group>
