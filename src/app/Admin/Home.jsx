@@ -7,7 +7,7 @@ import { useState,useEffect } from "react";
 import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
 import Progress from "../../components/general/Progress";
 import { useNavigate } from "react-router";
-import { CalendarDays, ChartLine } from "lucide-react";
+import { CalendarDays, ChartLine, UserRound } from "lucide-react";
 import PatientCard from "../../components/Home/Admin/PatientCard";
 const Home = () => {
   const [patients, setPatients] = useState([]);
@@ -71,9 +71,10 @@ const CardCa = () =>(
          style={{cursor:'pointer'}}
       >  
     <Stack gap={6} >
-      <Flex justify={'end'} align={'center'} gap={7}>
+      <Flex mb={5} justify={'end'} align={'center'} gap={7}>
         <Text size={'md'}  ta={'right'}> سامر سامر</Text>
-        <Title size={'md'} ta={'right'}> : الاسم </Title>
+        {/* <Title size={'md'} ta={'right'}> : الاسم </Title> */}
+        <UserRound size={25} />
       </Flex>
       <Flex justify={'end'} align={'center'} gap={7}>
         <Text size={'md'} ta={'right'}> 126368929392</Text>
@@ -154,7 +155,7 @@ const CardCa = () =>(
        <Title size='xl' mb={20} ta={'end'} m={'1.5rem'} mt={'3rem'}>
                     المرضى المسجلين حديثا
                   </Title>
-<Flex p={{base:0,md:'lg'}}>
+<Flex p={{base:0,md:'lg'}} justify={'end'}>
   {
     
     [1, 2, 3].map((e) => (
