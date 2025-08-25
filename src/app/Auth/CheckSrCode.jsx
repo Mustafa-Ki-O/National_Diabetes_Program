@@ -23,9 +23,9 @@ useEffect(()=>{
     <>
 
     {progress && <Progress />}
-        <Stack bg={'#fff'} p={{base:10,sm:35}}  m='auto'  w={{ base: "90%", sm: "30%" }}  style={{opacity:active?'1':'0' ,transition:'all 0.3s',borderRadius:20,border:'2px solid #16aabb',backdropFilter:'blur(5px)'}}>
+        <Stack bg={'#fff'} p={{base:25,sm:25}}  m='auto'  w={{ base: "90%", sm: "30%" }}  style={{opacity:active?'1':'0' ,transition:'all 0.3s',borderRadius:20,border:'2px solid #16aabb',backdropFilter:'blur(5px)'}}>
             <Title size='xl' c='#37A9EF'>
-                أنشاء حساب مركز جديد
+               إنشاء حساب مركز جديد
             </Title>
             <Text size='sm' c={'#8e8e8e96'} fw={'500'}>
                 أدخل الرمز السري للمتابعة

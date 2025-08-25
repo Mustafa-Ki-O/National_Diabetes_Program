@@ -56,7 +56,7 @@ const handleSubmit = () => {
                         key={form.key("code")}
                         {...form.getInputProps("code")}
                       />
-                      <Stack mt={30} gap={10}>
+                      <Stack my={20} gap={15}>
                       <Button radius={10} type="submit" variant="filled" color="#37A9EF" size="md" fullWidth >
                         ارسال
                       </Button>
@@ -67,6 +67,7 @@ const handleSubmit = () => {
                          size='md'
                          c={'#8e8e8e'}
                          onClick={handlePrev}
+                        
                        >
                          تراجع
                        </Text>
