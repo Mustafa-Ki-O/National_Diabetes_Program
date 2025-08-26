@@ -14,10 +14,12 @@ import Logo from "../general/Logo";
 import GeneratePassword from "./GeneratePassword";
 
 
-const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
+
+const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
+      
       const [isSubmitted, setIsSubmitted] = useState(false);
       const [pw,setPw] = useState()
-      const { register, isPending } = useRegPatient();
+      const { register, isPending } = useRegPatient(setPatients);
 
       console.log(centerId)
 

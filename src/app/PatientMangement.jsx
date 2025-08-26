@@ -80,7 +80,7 @@ const handleChangeName = (value) =>{
 
         <>
         {progress && <Progress/>}
-        <AddPatientModal setProgress={setProgress} 
+        <AddPatientModal setProgress={setProgress}  setPatients={setPatients}
         opened={opened} close={close} 
         centerId={user?.role==='center' ? user.id : ''} />
 

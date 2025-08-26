@@ -2,13 +2,16 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import PostPatient from '../../api/Patient/PostPatient'
 import { useNavigate } from "react-router-dom";
+import useFetchPatients from "../Admin/useFetchPatients";
 
-const useRegPatient = () => {
+const useRegPatient = (setPatients) => {
   const navigate = useNavigate();
+  const {fetchPatients,isPending:isPendingFetch} = useFetchPatients(setPatients);
+
   const { mutate: register, isPending } = useMutation({
     mutationFn: (newFormData) => PostPatient(newFormData),
     onSuccess: () => {
-      
+      fetchPatients()
       notifications.show({
       title: 'تمت اضافة المريض بنجاح',
       autoClose: 4000,
