@@ -1,7 +1,7 @@
 import useRegPatient from "../../useMutation/Patient/useRegPatient";
 import React, { useState, useEffect } from "react";
 import { DatePickerInput } from '@mantine/dates';
-import { TextInput, Button, Modal, Container, Flex, Grid, GridCol, Checkbox, Anchor, Select ,Loader, Title} from "@mantine/core";
+import { TextInput, Button, Modal, Container, Flex, Grid, GridCol, PasswordInput, Anchor, Select ,Loader, Title, Text} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import * as yup from "yup";
 import person from "../../assets/vectors/person.svg";
@@ -11,12 +11,22 @@ import calendar from "../../assets/vectors/calendar.png";
 import dayjs from "dayjs";
 import { UserRound } from "lucide-react";
 import Logo from "../general/Logo";
+import GeneratePassword from "./GeneratePassword";
+
 
 const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
       const [isSubmitted, setIsSubmitted] = useState(false);
+      const [pw,setPw] = useState()
       const { register, isPending } = useRegPatient();
 
       console.log(centerId)
+
+      
+      useEffect(() => {
+        const generated = GeneratePassword();
+        setPw(generated);
+        form.setFieldValue("password", generated);  
+      }, [opened]);
 
      const schema = yup.object().shape({
        fullname: yup
@@ -53,7 +63,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
          email: '',
          age:null,
          phone:'',
-        //  password:'',
+         password:'',
         //  center_name: '',
         //  city:'',
         //  termsOfService: true
@@ -61,21 +71,6 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
        validate: yupResolver(schema),
      });
    
-     
-    //  useEffect(()=>{
-    //    fetchCities(setCitiesNames)
-    //  },[])
-   
-    //  const handleChangeCity = (value) => {
-    //    form.getInputProps("city").onChange(value);
-   
-    //    setCenterNames([]);
-    //    form.setValues('center_name', null);
-   
-    //    setCity(value);
-       
-    //    fetchCenters(value);
-    //  }
 
 
      const handleSubmit = () => {
@@ -87,21 +82,18 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
          }
          console.log(values)
          const newFormData = new FormData();
-         newFormData.append('password','')
-              newFormData.append('center_name','')
-               newFormData.append('city','')
-                newFormData.append('termsOfService',true)
          Object.keys(values).forEach((key) => {
-        //    if (values.termsOfService === true) {
              newFormData.append(key,values[key]);
              
-             // console.log(newFormData)
-        //    }
+             console.log(newFormData)
+      
          });
          setIsSubmitted(true);
          // console.log(newFormData)
         //  localStorage.setItem('patientEmail',JSON.stringify(values.email));
          register(newFormData);
+         form.reset()
+         close()
        }
    
        const validated = form.validate();
@@ -146,7 +138,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
                 إضافة مريض
               </Title>
             </Flex>
-               <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
+               <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)} >
                  <Grid gutter="sm" justify="start" mt={20} mb={20} align="center" dir="rtl">
                  <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                      <TextInput
@@ -177,6 +169,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
                        {...form.getInputProps("email")}
                      />
                    </GridCol>
+                  
                    <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                       <TextInput
                         size="md"
@@ -187,15 +180,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
                         {...form.getInputProps("phone")}
                       />
                     </GridCol>
-                   {/* <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
-                     <PasswordInput
-                       size="md"
-                       radius={10}
-                       placeholder="أدخل كلمة المرور *"
-                       key={form.key("password")}
-                       {...form.getInputProps("password")}
-                     />
-                   </GridCol> */}
+
                    {/* <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                    <Select
                         size="md"
@@ -231,6 +216,32 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
                         {...form.getInputProps("age")} 
                      />
                </GridCol>
+                <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+                  <Flex w={'100%'} align={'center'} justify={'space-between'}>
+                    <Text>
+                       كلمة المرور الخاصة بالحساب   
+                    </Text>
+                    <PasswordInput
+                       w={'50%'}
+                       color={'#16aabb'}
+                      size="md"
+                      radius={10}
+                      readOnly
+                      value={pw}
+                      key={form.key("password")}
+                      // {...form.getInputProps("password")}
+                      styles={{
+                          input: {
+                            borderColor: '#16aabb',
+                            borderWidth:2,  
+                            fontSize:18
+                          },
+                        }}
+                    />
+               
+                  </Flex>
+                    
+                   </GridCol>
                    {/* <GridCol offset={{ lg: 6, md: 0, sm: 0, xs: 0 }} span={{ lg: 6, xs: 12, sm: 12, md: 12 }} style={{ direction: 'ltr' }}>
                      <Checkbox
                        key={form.key("termsOfService")}
@@ -252,13 +263,13 @@ const  AddPatientModal = ({centerId,opened,close,setProgress}) => {
                    <Button fullWidth radius={10} size="md" variant="outline" color="#8E8E8E" onClick={handleLog}>
                      تراجع
                    </Button>
-                   <Button fullWidth radius={10} disabled size="md" type="submit" variant="filled" color="#37A9EF">
+                   <Button fullWidth radius={10}  size="md" type="submit" variant="filled" color="#37A9EF">
                      تأكيد
                    </Button>
                  </Flex>
                  <Grid hiddenFrom="md" gutter={15} my={25}>
                    <GridCol span={12}>
-                     <Button fullWidth radius={10} size="md" disabled type="submit" variant="filled" color="#37A9EF">
+                     <Button fullWidth radius={10} size="md"  type="submit" variant="filled" color="#37A9EF">
                      {isPending ? (
            <Loader color="white" size="sm" type="dots" />
          ) : (

@@ -30,7 +30,7 @@ const Search = ({ patients, setSearchedPatients }) => {
       
       <TextInput
         // w={{base:'90%'}}
-        
+        disabled={patients.length ==0 }
         w={{base:'100%',sm:'100%'}}
         radius={10}
         size="md"

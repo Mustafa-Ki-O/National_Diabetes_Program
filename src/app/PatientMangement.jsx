@@ -92,7 +92,7 @@ const handleChangeName = (value) =>{
             <Title size={'2rem'} ta={'end'} px={'lg'} mb={'1rem'} >
               إدارة المرضى
             </Title>
-            {patients.length !==0 ? (
+           
             <Grid dir justify="end"  gutter={20} gap={20} pos={'sticky'} top={{base:-10,sm:0}}
                 style={{
                   zIndex:10,
@@ -111,7 +111,7 @@ const handleChangeName = (value) =>{
                 
               <Popover width={'fit-content'} position="bottom"  withArrow shadow="md">
               <Popover.Target>
-              <Button radius={10} size="md" fullWidth variant="light" color='#37A9EF' >فرز المرضى حسب</Button>
+              <Button disabled={patients.length ==0 } radius={10} size="md" fullWidth variant="light" color='#37A9EF' >فرز المرضى حسب</Button>
               </Popover.Target>
                <Popover.Dropdown>
                  <Stack gap={20}  >
@@ -205,7 +205,7 @@ const handleChangeName = (value) =>{
              
               </Flex>
                 <Group m={0} >
-<Image src={search} w={30} className={home.search}/>
+               <Image src={search} w={30} className={home.search}/>
                  <Text size="lg" fw={700} ta={'right'} >
                     ابحث عن مريض 
                 </Text>  
@@ -219,8 +219,8 @@ const handleChangeName = (value) =>{
             
             </Grid>
             
-            
-            ):(<></>)}
+             {/* {patients.length !==0 ? (
+            ):(<></>)} */}
 
             {/* <Container h={'24vh'} /> */}
             {/* </Group> */}
