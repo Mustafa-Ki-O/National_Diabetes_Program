@@ -3,6 +3,7 @@ import { notifications } from '@mantine/notifications';
 // import PostAdmin from "../../api/Admin/PostAdmin";
 import { SignIn } from "../api/SignIn";
 import { useNavigate } from "react-router-dom";
+import { User } from "lucide-react";
 
 const useLogin = () => {
 
@@ -17,7 +18,7 @@ const useLogin = () => {
           autoClose: 4000,
           color: 'blue',
         })    
-      res.role === 'center' ? navigate("/National_Diabetes_Program/home/") : navigate("/National_Diabetes_Program/patient-home/")
+      res.role === 'center' ? navigate("/National_Diabetes_Program/home/") : res.first_login ? navigate("/National_Diabetes_Program/resetPassword/") : navigate("/National_Diabetes_Program/patient-home/")
       
     },
     onError: (err) => {
