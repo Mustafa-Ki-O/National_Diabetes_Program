@@ -12,11 +12,11 @@ const NotifyNav = ({ notifications }) => {
   const [opened, setOpened] = useState(false);
 
   const handleClick = () => {
-    setOpened(false); // ⛔️ اغلاق الـ Popover
+    setOpened(false); 
     navigate("/National_Diabetes_Program/notification/");
   };
 
-  const isNotReadNotify = notifications.filter((n)=>n.is_read===false);
+  const isNotReadNotify = notifications?.filter((n)=>n.is_read===false);
 
   return (
     <Popover
@@ -29,7 +29,7 @@ const NotifyNav = ({ notifications }) => {
     >
       <Popover.Target>
         
-          <Indicator disabled={!isNotReadNotify || isNotReadNotify.length===0} inline color="red" label={isNotReadNotify.length} 
+          <Indicator disabled={!isNotReadNotify || isNotReadNotify?.length===0} inline color="red" label={isNotReadNotify?.length} 
           position="top-end" size={18} mt={11}
           radius="xl">
 
@@ -41,7 +41,7 @@ const NotifyNav = ({ notifications }) => {
 
       <Popover.Dropdown>
         <Stack gap={5}>
-          {notifications.slice(0, 3).map((notification, idx) => (
+          {notifications?.slice(0, 3).map((notification, idx) => (
             <NotificationCard key={idx} notification={notification} />
           ))}
           <Button radius={10} mt={10} variant="light" fullWidth onClick={handleClick}>

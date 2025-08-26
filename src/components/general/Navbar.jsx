@@ -264,7 +264,7 @@ useEffect(() => {
              </Group>
           </Flex>
         </AppShell.Header >
-        <AppShell.Footer  p={10} w={'100%'} dir="ltr" bg={'#FFF'} bd={'none'}>
+        <AppShell.Footer  p={9} w={'100%'} dir="ltr" bg={'#FFF'}  style={{borderTop:'1px solid #12121208'}}>
         <Flex px={'1rem'} justify={'space-between'} align={'center'}>
            <NavIcon 
              icon={ScanHeart} 

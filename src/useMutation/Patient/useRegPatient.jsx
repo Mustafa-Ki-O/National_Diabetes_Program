@@ -8,15 +8,13 @@ const useRegPatient = () => {
   const { mutate: register, isPending } = useMutation({
     mutationFn: (newFormData) => PostPatient(newFormData),
     onSuccess: () => {
-    //     console.log("تم بنجاح");
-        
-    //   toast.success("تم انشاء الحساب بنجاح");
-    //   notifications.show({
-    //   title: 'تم انشاء الحساب بنجاح',
-    //   autoClose: 4000,
-    //   color: 'blue',
-    // })
-      navigate("/National_Diabetes_Program/verifyEmail/");
+      
+      notifications.show({
+      title: 'تمت اضافة المريض بنجاح',
+      autoClose: 4000,
+      color: 'blue',
+    })
+      // navigate("/National_Diabetes_Program/verifyEmail/");
     },
     onError: (err) => {
       console.log("ERROR", err);
