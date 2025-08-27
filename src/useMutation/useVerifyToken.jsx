@@ -42,7 +42,7 @@ const useVerifyToken = () => {
       
       setTimeout(() => {
         console.log(userRole)
-        userRole === 'center' ? navigate("/National_Diabetes_Program/home/") : navigate("/National_Diabetes_Program/patient-home/")
+        userRole === 'center' ? navigate("/National_Diabetes_Program/home/") :userRole === 'supervisor' ? navigate("/National_Diabetes_Program/home-sv/") : navigate("/National_Diabetes_Program/patient-home/")
       }, 2000);
     }, 
     onError: (err, variables, context) => {
