@@ -7,6 +7,7 @@ const Progress = () => {
   const location = useLocation()
     return(
       <Container  w={{base:'100%',sm:location.pathname !== '/National_Diabetes_Program/' 
+        && location.pathname !== '/National_Diabetes_Program/superVisor/'
         && location.pathname !== '/National_Diabetes_Program/register/'
         && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
         && location.pathname !== '/National_Diabetes_Program/check-sr-code/'

@@ -2,12 +2,16 @@
 // Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
 
 import img from '../assets/images/ndblogo2.png'
+import imgSv from '../assets/images/logoSv.png'
 import modules from '../assets/css/start.module.css'
 import { Image ,Stack} from '@mantine/core'
 import { Container,Flex,Box,Title } from '@mantine/core'
+import { useLocation } from 'react-router'
 
 const Start = () => {
 
+    const loc = useLocation()
+    const inSv = loc.pathname === '/National_Diabetes_Program/superVisor/'
     return(
         <>
         <Container fluid w='100%'>
@@ -33,7 +37,7 @@ const Start = () => {
                         className={modules.img}
                         miw={{base:140 ,md:200}}
                         alt="diabetes-Logo" 
-                        src={img} 
+                        src={inSv? imgSv : img} 
                     />
                   </Flex>
         </Container>

@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import * as yup from "yup";
 import useLogin from "../../useMutation/useLogin";
 import { Info } from "lucide-react";
+import useLoginSv from "../../useMutation/SuperVisor/useLoginSv";
 // import { useTranslation } from "react-i18next";
 // import useLogin from "../../components/useMutation/researcher/useLogin";
 
@@ -20,7 +21,7 @@ const schema = yup.object().shape({
 const LoginForm = ({setProgress}) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const { login, isPending } = useLogin();
+  const { loginSv, isPending } = useLoginSv();
 //   const { t } = useTranslation();
   const navigate = useNavigate();
   // const icon = <IconAt style={{ width: rem(16), height: rem(16) }} />;
@@ -40,7 +41,7 @@ const LoginForm = ({setProgress}) => {
       });
       setIsSubmitted(true);
       // navigate('/National_Diabetes_Program/home/');
-      login(loginFormData);
+      loginSv(loginFormData);
 
       const validated = form.validate();
 
@@ -67,8 +68,13 @@ const LoginForm = ({setProgress}) => {
                 mt="sm"
                 placeholder="أدخل البريد الالكتروني"
                 key={form.key("email")}
+                label={'supervisor@example.com'}
                 {...form.getInputProps("email")}
-                // rightSection={icon}
+                styles={{
+                    input:{
+                        borderColor:'#e67e22',
+                    }
+                }}
                 
               />
             </Grid.Col>
@@ -77,62 +83,30 @@ const LoginForm = ({setProgress}) => {
                 size="md"
                 radius={10}
                 mt="sm"
+                label={'Pa$$W0rdSuper1$er'}
                 placeholder="أدخل كلمة المرور"
                 key={form.key("password")}
                 {...form.getInputProps("password")}
+                  styles={{
+                    input:{
+                        borderColor:'#e67e22',
+                    }
+                }}
               />
             </Grid.Col>
-            <Grid.Col span={12}>
-             <Text fw={600} td={'underline'} size="sm" ta={'right'} style={{cursor:'pointer'}} onClick={()=>navigate('/National_Diabetes_Program/resetPassword/')}>
-              نسيت كلمة المرور ؟
-             </Text>
-            </Grid.Col>
-            <Grid.Col span={12} mt={10}>
+            <Grid.Col span={12} mt={25}>
               <Button
               fullWidth
               size="md"
               radius={10}
               variant="filled"
-              color="#37A9EF"
+              color="#e67e22"
               type="submit"
             >
                تسجيل الدخول
             </Button>
             </Grid.Col>
-            <Grid.Col mt={20} span={12} >
 
-     
-        
-        <Accordion chevronPosition="left" chevronIconSize={18}  variant="unstyled" pb={0}>
-          <AccordionItem value="1">
-            <AccordionControl>
-             <Text size="md">
-            لاتملك حساب ؟
-            <Anchor 
-              inherit 
-              fw={700} 
-              td='underline' 
-              mx={10} 
-              onClick={() => navigate(`/National_Diabetes_Program/check-sr-code/`)}
-            >
-            إنشاء حساب جديد (أدمن)
-            </Anchor>
-             </Text>
-            </AccordionControl>
-            <AccordionPanel>
-              <Flex  >
-                 <Info color="#37a9ef" />
-                   <Text size="sm" style={{paddingInline:0}} >
-              
-                لانشاء حساب مريض , يرجى مراجعة أقرب مركز صحي للسكري في منطقتك
-              </Text>
-              </Flex>
-            
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
-   
-            </Grid.Col>
           </Grid>
  
         </form>

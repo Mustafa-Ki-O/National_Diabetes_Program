@@ -32,6 +32,8 @@ import ProfileSettings from "../app/Patient/ProfileSettings";
 import Settings from "../app/Patient/Settings";
 import SecuritySettings from "../app/Patient/SecuritySettings";
 import CheckSrCode from "../app/Auth/CheckSrCode";
+import LoginSv from "../app/SuperVisor/LoginSv";
+import HomeSv from "../app/SuperVisor/HomeSv";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -62,6 +64,7 @@ const MainLayout = () => {
 
   const noContainerRoutes = [
     '/National_Diabetes_Program/',
+    '/National_Diabetes_Program/superVisor/',
     '/National_Diabetes_Program/register/',
     '/National_Diabetes_Program/registerAdmin/',
     '/National_Diabetes_Program/verifyEmail/',
@@ -106,6 +109,10 @@ const route = createBrowserRouter([
               element:<Login/>
             },
             {
+              path:'superVisor',
+              element:<LoginSv/>
+            },
+            {
                 path:'register',
                 element:<Register/>
             },
@@ -124,6 +131,10 @@ const route = createBrowserRouter([
             {
               path:'home',
               element:<Home/>,
+            },
+            {
+             path:'home-sv',
+             element:<HomeSv/>
             },
             {
               path:'check-sr-code',

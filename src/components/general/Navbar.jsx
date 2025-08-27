@@ -2,6 +2,7 @@ import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popo
 import { useEffect, useState,useRef } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
 import logo from '../../assets/images/ndblogo2.png';
+import imgSv from '../../assets/images/logoSv.png';
 import { useMantineTheme } from "@mantine/core";
 import useLogOut from "../../useMutation/Admin/useLogOut";
 import { Drawer, Button } from '@mantine/core';
@@ -17,7 +18,7 @@ import drugs from '../../assets/vectors/Drugs.svg'
 import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
-import { Activity, ScanHeart, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital  } from "lucide-react";
+import { Activity, ScanHeart, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital, ShieldUser  } from "lucide-react";
 import NotifyNav from "./NotifyNav";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 import CreateNotificationSocket from "../../api/CreateNotificationsSocket";
@@ -137,6 +138,7 @@ useEffect(() => {
     return (
         <>
         {(location.pathname !== '/National_Diabetes_Program/' 
+        && location.pathname !== '/National_Diabetes_Program/superVisor/'
         && location.pathname !== '/National_Diabetes_Program/register/'
         && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
         && location.pathname !== '/National_Diabetes_Program/verifyEmail/'
@@ -145,10 +147,108 @@ useEffect(() => {
         && location.pathname !== '/National_Diabetes_Program/changePassword/' 
         && location.pathname !== '/National_Diabetes_Program/check-sr-code/') ?
         
-        userRole === 'center' ? (
+        userRole === 'supervisor' ? (
           
     <>
     <LogOutModal opened={openedModal} close={close} />
+        <AppShell  header={{ height: 60 }}
+           dir="rtl"
+           navbar={{
+             width: 300,
+             breakpoint: 'sm',
+             collapsed: { mobile: !opened },   
+             }}
+             mb={'5.1rem'}
+             padding="md"
+             
+            >
+            <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
+            <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
+                <Group align="center" gap={30}>
+                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='3.5rem' onClick={()=>navigate('/National_Diabetes_Program/home-sv/')}/>
+                {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
+        </Group>  
+        <Group>
+          <Flex  gap={10} mx={'0.3rem'} justify={'end'} align={'end'}>
+            {/* <ModePicker/> */}
+            <Title c={'#e67e22'} size="xl"  >
+               مشرف رئيسي
+            </Title>
+            <ShieldUser color={'#e67e22'}  size={25} />
+          </Flex>
+        
+        <Burger
+        lineSize={2}
+          opened={opened}
+          onClick={toggle}
+          hiddenFrom="sm"
+          size="md"
+          color="#e74c3c"
+          // className={nav.burger}
+        />    
+        </Group>
+       </Flex>
+      </AppShell.Header>
+      <AppShell.Navbar bg={'#F9FAFC'} py="md" pr='0px' w={{base:'60%',sm:'20%'}}>
+  <Stack gap={'sm'} px={5} h={'100%'} style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+    <Box mt={'1.5rem'} display={'flex'}  style={{flexDirection:'column',gap:10}}>
+      <Text p={10} dir="ltr" display={'flex'} c='#121212' fz={16} fw={600} ta='right'
+        onClick={() => handleButtonClick('home-sv')}
+        className={` ${nav.hovered}  ${activeButton === 'home-sv' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        الرئيسية
+        <Image className={nav.img} src={home} w={27} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('centersMangement')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'centersMangement' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        إدارة المراكز
+        <Image className={nav.img} src={patMang} w={25} h={25} ml={5} />
+      </Text>
+      <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
+        onClick={() => handleButtonClick('medicinRequest')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'medicinRequest' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        طلبات الأدوية
+        <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />
+      </Text>
+      
+      {/* <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('care')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'care' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        برامج الرعاية
+        <Image className={nav.img} src={heart} w={25} h={25} ml={5} />
+      </Text> */}
+    </Box>
+
+    <Box display={'flex'}  style={{flexDirection:'column',gap:10}}>
+      <div style={{width:'100%',height:2,backgroundColor:'#00000030'}}></div>
+      {/* <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('centerProfile')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'centerProfile' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        إعدادات الحساب
+        <Image className={nav.img} src={settings} w={25} h={25} ml={5} />
+      </Text> */}
+      <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
+        onClick={() => handleButtonClick('logOut')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'logOut' ? nav.activeDrawer : ''}`} 
+        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
+        تسجيل الخروج
+        <Image className={nav.img} src={logout} w={25} h={25} ml={5} />
+      </Text>
+    </Box>
+  </Stack>
+</AppShell.Navbar>
+    </AppShell>    
+    </>
+        
+      ): userRole === 'center' ? 
+      (
+      <>
+          <LogOutModal opened={openedModal} close={close} />
         <AppShell  header={{ height: 60 }}
            dir="rtl"
            navbar={{
@@ -247,9 +347,9 @@ useEffect(() => {
   </Stack>
 </AppShell.Navbar>
     </AppShell>    
-    </>
-        
-      ):
+      </>
+      )
+      :
       (
        <>
        <AppShell  mb={'4rem'} >
