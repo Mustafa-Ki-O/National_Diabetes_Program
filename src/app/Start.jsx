@@ -1,7 +1,7 @@
 // Part of National_Diabetes_Program
 // Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
 
-import img from '../assets/images/ndblogo2.png'
+import img from '../assets/images/ndblogo4.png'
 import imgSv from '../assets/images/logoSv.png'
 import modules from '../assets/css/start.module.css'
 import { Image ,Stack} from '@mantine/core'
@@ -35,7 +35,7 @@ const Start = () => {
                      <Image
                         bg='#F9FAFC'
                         className={modules.img}
-                        miw={{base:140 ,md:200}}
+                        miw={{base:140 ,md:160}}
                         alt="diabetes-Logo" 
                         src={inSv? imgSv : img} 
                     />

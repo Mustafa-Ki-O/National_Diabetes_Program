@@ -1,6 +1,6 @@
 import { Container, Flex, Paper, Stack, Text, Title } from "@mantine/core"
 
-const Record = () =>{
+const Record = ({setProgress}) =>{
 
     const HistoryPaper = ({name,id,status,type,date,qnt}) =>(
         <>

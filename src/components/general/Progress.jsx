@@ -5,6 +5,8 @@ import { Loader } from '@mantine/core';
 const Progress = () => {
 
   const location = useLocation()
+  const inSv = location.pathname.includes('superVisor') || location.pathname.includes('sv');
+
     return(
       <Container  w={{base:'100%',sm:location.pathname !== '/National_Diabetes_Program/' 
         && location.pathname !== '/National_Diabetes_Program/superVisor/'
@@ -23,7 +25,7 @@ const Progress = () => {
          ? '80%' :'100%' }} fluid className="overlay">
          <Container >
            {/* <div className="loader"></div> */}
-            <Loader color="blue" size="lg" type="dots" />
+            <Loader color={inSv ? 'orange' : 'blue'} size="lg" type="dots" />
          </Container>
       </Container>
     )

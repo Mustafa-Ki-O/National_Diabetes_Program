@@ -1,7 +1,7 @@
 import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popover, Title, useMantineColorScheme} from "@mantine/core";
 import { useEffect, useState,useRef } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
-import logo from '../../assets/images/ndblogo2.png';
+import logo from '../../assets/images/ndblogo4.png';
 import imgSv from '../../assets/images/logoSv.png';
 import { useMantineTheme } from "@mantine/core";
 import useLogOut from "../../useMutation/Admin/useLogOut";
@@ -165,7 +165,7 @@ useEffect(() => {
             <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
             <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
                 <Group align="center" gap={30}>
-                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='3.5rem' onClick={()=>navigate('/National_Diabetes_Program/home-sv/')}/>
+                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='2.8rem' onClick={()=>navigate('/National_Diabetes_Program/home-sv/')}/>
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
         <Group>
@@ -174,7 +174,7 @@ useEffect(() => {
             <Title c={'#e67e22'} size="xl"  >
                مشرف رئيسي
             </Title>
-            <ShieldUser color={'#e67e22'}  size={25} />
+            <ShieldUser color={'#e67e22'}  size={27} />
           </Flex>
         
         <Burger
@@ -200,17 +200,17 @@ useEffect(() => {
         <Image className={nav.img} src={home} w={27} h={25} ml={5} />
       </Text>
       <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
-        onClick={() => handleButtonClick('centersMangement')} ta='right' 
-        className={` ${nav.hovered} ${activeButton === 'centersMangement' ? nav.activeDrawer : ''}`} 
+        onClick={() => handleButtonClick('queryMangement')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'queryMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-        إدارة المراكز
+        إدارة الاستعلامات
         <Image className={nav.img} src={patMang} w={25} h={25} ml={5} />
       </Text>
       <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
-        onClick={() => handleButtonClick('medicinRequest')} ta='right' 
-        className={` ${nav.hovered} ${activeButton === 'medicinRequest' ? nav.activeDrawer : ''}`} 
+        onClick={() => handleButtonClick('dataMangement')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'dataMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-        طلبات الأدوية
+        إدارة البيانات
         <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />
       </Text>
       
@@ -263,7 +263,7 @@ useEffect(() => {
             <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
             <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
                 <Group align="center" gap={30}>
-                <Image ml={3} mb={5}  src={logo} style={{cursor:'pointer'}} w='3.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+                <Image ml={3} mb={5}  src={logo} style={{cursor:'pointer'}} w='2.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
         <Group>

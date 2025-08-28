@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useForm } from "@mantine/form";
 import dayjs from "dayjs";
+import useMedRequest from "../../useMutation/Admin/useMedRequest";
 
-const  AddMedicinModal = ({centerName,opened,close}) => {
+const  AddMedicinModal = ({setProgress,centerName,opened,close}) => {
     const [submitted,setSubmitted] = useState(false);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const {requestMed,isPending} = useMedRequest()
 
   const form = useForm({
     mode: "uncontrolled",
@@ -31,24 +33,27 @@ const  AddMedicinModal = ({centerName,opened,close}) => {
   });
 
     
-    const handleSubmit = async () => {
-     if (form.isValid()) {
+   const handleSubmit = async () => {
+  if (form.isValid()) {
     setIsLoading(true);
     try {
       const values = form.getValues();
       console.log('القيم المدخلة:', values);
 
-      const newFormData = new FormData();
-    
-      newFormData.append("nameAr", values.nameAr);
-      newFormData.append("nameEn", values.nameEn);
-      newFormData.append("type", values.type);
-      newFormData.append("num", values.num);
-      newFormData.append("dose", values.dose);
-      newFormData.append("unitsNum", values.unitsNum);
+      const dataToSend = {
+        name_arabic: values.nameAr,
+        name_english: values.nameEn,
+        medication_type: values.type,
+        quantity: parseInt(values.num, 10),
+        dosage: values.dose,
+        units_per_box: parseFloat(values.unitsNum),
+      };
 
+      console.log('البيانات المُعدة للإرسال:', dataToSend);
 
       setSubmitted(true);
+      // افترض أن requestMed تم تعديلها لتأخذ كائن JavaScript
+      requestMed(dataToSend);
 
       form.reset();
       close();
@@ -59,6 +64,11 @@ const  AddMedicinModal = ({centerName,opened,close}) => {
     }
   }
 };
+   useEffect(()=>{
+    setProgress(isPending)
+   },[isPending])
+
+
 
       const today = dayjs(new Date()).format('DD-MM-YYYY');
     return(

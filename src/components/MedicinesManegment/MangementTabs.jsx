@@ -5,7 +5,7 @@ import Record from './Record';
 
 
 
-const MangementTabs =() => {
+const MangementTabs =({setProgress}) => {
   return (
     <Tabs  p={20} dir='rtl' defaultValue="store">
       <Tabs.List bg={'#f9f9f9'} grow justify={'space-between'} pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
@@ -22,11 +22,11 @@ const MangementTabs =() => {
       </Tabs.List>
 
       <Tabs.Panel mt={'xl'} value="store" >
-       <MedicinesStore/>
+       <MedicinesStore setProgress={setProgress}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={'xl'} value="history">
-          <Record/>
+          <Record setProgress={setProgress}/>
       </Tabs.Panel>
 
     </Tabs>

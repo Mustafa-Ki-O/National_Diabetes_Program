@@ -7,7 +7,7 @@ import { useLocation } from "react-router"
 import MedicineCard from "./MedicinCard"
 
 
-const MedicinesStore = () => {
+const MedicinesStore = ({setProgress}) => {
     const[num,setNum] = useState(200)
     const [centerName,setCenterName] = useState()
     const [opened,{open,close}] = useDisclosure()
@@ -20,7 +20,7 @@ const MedicinesStore = () => {
 
     return(
         <>
-        <AddMedicinModal opened={opened} close={close} centerName={centerName}/>
+        <AddMedicinModal setProgress={setProgress} opened={opened} close={close} centerName={centerName}/>
         <Container p={5} fluid >
             <Stack>
                 <Flex justify={'space-between'} align={'center'} >
