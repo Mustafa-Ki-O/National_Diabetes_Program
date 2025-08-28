@@ -1,4 +1,5 @@
 import { Tabs } from "@mantine/core"
+import InProgress from "./InProgress"
 const QueryTabs = () => {
 
     return(
@@ -22,7 +23,7 @@ const QueryTabs = () => {
               </Tabs.List>
         
               <Tabs.Panel mt={'xl'} value="processing">
-                قيد المعالجة
+                <InProgress/>
               </Tabs.Panel>
         
               <Tabs.Panel mt={'xl'}  value="accepted" >

@@ -1,58 +1,47 @@
 import { Card, Text, Title, Button, Group, Progress, Stack,Tooltip, Flex } from "@mantine/core"
-import { CirclePlus, PillBottle, PlusIcon } from "lucide-react"
+import { CirclePlus, Hospital, PillBottle, PlusIcon, Ribbon } from "lucide-react"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 
 
-const RequsetCard = () => {
+const RequsetCard = ({reqId}) => {
 
+// #e74c3c second
+// #e67e22 primary
+
+const navigate = useNavigate()
 
     return(
         <>
         <Card bg={'#fff'} radius={20} style={{ border: '1px solid #ccc', background: '#f9f9f9', direction: 'rtl' }}>
               <Stack gap={20}>
                 <Group position="apart" align="center">
-                    <PillBottle size={25} />
+                    <Hospital size={25}/>
                   <Title size="md">
-                    ميتفورمين 
+                   مركز الرازي (حمص)
                     </Title>
                   
                 </Group>
-                <Flex justify={'space-between'} align={'center'}>
-                    <Text size="sm" c="dimmed">
-                       (Mitformine)
+                <Flex justify={'start'} align={'center'}>
+                  <PillBottle size={25} color="#121212ee" />
+                    <Text ta={'right'} fw={400}>
+                       ميتفورمين + (Mitformine)
                       </Text>
-                     <Text size="sm" c="dimmed">
-                      {حبوب}
-                      </Text>
+                  
+
                 </Flex>
-        
-                <Group position="apart">
-                    <Text>
-                     {dosage} 
-                    </Text>
-                  <Text>تاريخ الانتهاء: 2025/12/12</Text>
-                  
-                </Group>
-        
-                <Group position="apart" >
-                  
-                  <Text fw={600}>
-                    {quantity}
-                    </Text>
-                  <Group>
-                      
-                    <Text  miw={'1.6rem'}>{qty}</Text>
-                    <CirclePlus color="#37a9ef" size={22} onClick={() => setQty((prev) => prev + 20)} style={{cursor:'pointer'}}/>
-                  </Group>
-                </Group>
-                <Tooltip label={`الكمية المتبقية : ${quantity}`} >
-                    <Progress value={percentUsed} color={color} striped  size="lg"  />
-                </Tooltip>
-                {qty > 0 && (
-                  <Button radius={10} size="sm" color="#16aabb">
-                    تأكيد
-                  </Button>
-                )}
+
+               <Flex justify={'start'} align={'center'}>
+                 <Ribbon size={25} color="#121212ee" /> 
+                 <Text ta={'right'} fw={400}>
+                      الكمية المطلوبة : 500
+                  </Text>
+                       
+               </Flex>
+
+                   <Button onClick={() => navigate(`/National_Diabetes_Program/requestInfo/${reqId}`)} variant="filled" color="#e67e22" size="md" radius={10} fullWidth>
+                    عرض التفاصيل
+                   </Button>
               </Stack>
             </Card>
         </>

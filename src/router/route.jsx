@@ -35,6 +35,7 @@ import CheckSrCode from "../app/Auth/CheckSrCode";
 import LoginSv from "../app/SuperVisor/LoginSv";
 import HomeSv from "../app/SuperVisor/HomeSv";
 import QueryMangement from "../app/SuperVisor/QueryMangement";
+import RequestInfo from "../app/SuperVisor/RequestInfo";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -223,6 +224,10 @@ const route = createBrowserRouter([
             {
               path:'queryMangement',
               element:<QueryMangement/>
+            },
+            {          
+              path:'requestInfo/:reqId',
+              element:<RequestInfo/>
             }
 
             
