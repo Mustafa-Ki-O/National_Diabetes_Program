@@ -34,6 +34,7 @@ import SecuritySettings from "../app/Patient/SecuritySettings";
 import CheckSrCode from "../app/Auth/CheckSrCode";
 import LoginSv from "../app/SuperVisor/LoginSv";
 import HomeSv from "../app/SuperVisor/HomeSv";
+import QueryMangement from "../app/SuperVisor/QueryMangement";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -219,6 +220,10 @@ const route = createBrowserRouter([
               path:'profile-settings',
               element:<ProfileSettings />
             },
+            {
+              path:'queryMangement',
+              element:<QueryMangement/>
+            }
 
             
           
