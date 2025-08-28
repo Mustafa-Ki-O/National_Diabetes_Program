@@ -7,7 +7,7 @@ import { useLocation } from "react-router"
 import MedicineCard from "./MedicinCard"
 
 
-const MedicinesStore = ({setProgress}) => {
+const MedicinesStore = ({setProgress,medicines}) => {
     const[num,setNum] = useState(200)
     const [centerName,setCenterName] = useState()
     const [opened,{open,close}] = useDisclosure()
@@ -17,6 +17,11 @@ const MedicinesStore = ({setProgress}) => {
       const user = JSON.parse(localStorage.getItem('user'));
       setCenterName(user?.name);
     }, [location]);
+
+     const fullQu = medicines?.reduce((a, c) => a + c.quantity, 0);
+
+     const types=medicines?.map((m,i)=>m.name_english)
+     const typesM = types ? [...new Set(types)] : 0
 
     return(
         <>
@@ -38,12 +43,12 @@ const MedicinesStore = ({setProgress}) => {
              <Grid mt={20}>
                 <Grid.Col span={{base:12,sm:6}}>
                  <Text size="lg" fw={500} ta={'right'}>
-                   اجمالي الادوية  : 2500
+                 اجمالي الادوية  : {fullQu}
                 </Text>
                 </Grid.Col>
                 <Grid.Col span={{base:12,sm:6}}>
                  <Text size="lg" fw={500} ta={'right'}>
-                  عدد الاصناف الكلية : 5
+                  عدد الاصناف الكلية : {typesM?.length}
                 </Text>
                 </Grid.Col>
              </Grid>
@@ -54,9 +59,9 @@ const MedicinesStore = ({setProgress}) => {
             <div style={{margin:10,height:1,backgroundColor:'#70707070',width:'100%'}} ></div>
             <Stack>
                 <Grid gutter={20}>
-                   {[1, 2, 3, 4, 5].map((item) => (
-                    <Grid.Col key={item} span={4}>
-                      <MedicineCard quantity={100+ item*100} type={item <3 ? 'أنسولين' : 'خافضات فموية'}/>
+                   {medicines.map((item,index) => (
+                    <Grid.Col key={index} span={4}>
+                      <MedicineCard medicine={item} />
                     </Grid.Col>
                   ))}
                 </Grid>

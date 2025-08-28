@@ -3,9 +3,10 @@ import { CirclePlus, PillBottle, PlusIcon } from "lucide-react"
 import { useState } from "react"
 
 
-const MedicineCard = ({quantity,type}) => {
+const MedicineCard = ({medicine}) => {
+  const {id,name_arabic , name_english ,medication_type , dosage ,quantity ,units_per_box} = medicine
   const [qty, setQty] = useState(0)
-const maxStock = 1000;
+const maxStock = 500;
 const percentUsed = (quantity / maxStock) * 100;
 const color = percentUsed < 40 ? percentUsed <30 ? 'red' : 'orange' : '#16aabb' ;
 
@@ -14,23 +15,33 @@ const color = percentUsed < 40 ? percentUsed <30 ? 'red' : 'orange' : '#16aabb' 
       <Stack gap={20}>
         <Group position="apart" align="center">
             <PillBottle size={25} />
-          <Title size="md">اسم الدواء بالعربية</Title>
+          <Title size="md">
+            {name_arabic}
+            </Title>
           
         </Group>
         <Flex justify={'space-between'} align={'center'}>
-            <Text size="sm" c="dimmed">(اسم الدواء بالإنجليزية)</Text>
-             <Text size="sm" c="dimmed">{type}</Text>
+            <Text size="sm" c="dimmed">
+               ({name_english})
+              </Text>
+             <Text size="sm" c="dimmed">
+              {medication_type}
+              </Text>
         </Flex>
 
         <Group position="apart">
-            <Text>الجرعة: 500mg</Text>
+            <Text>
+             {dosage} 
+            </Text>
           <Text>تاريخ الانتهاء: 2025/12/12</Text>
           
         </Group>
 
         <Group position="apart" >
           
-          <Text fw={600}>الكمية</Text>
+          <Text fw={600}>
+            {quantity}
+            </Text>
           <Group>
               
             <Text  miw={'1.6rem'}>{qty}</Text>

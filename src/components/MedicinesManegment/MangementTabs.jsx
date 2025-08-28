@@ -2,10 +2,27 @@ import { Tabs } from '@mantine/core';
 import { Archive, Tablets } from 'lucide-react';
 import MedicinesStore from './MedicinesStore';
 import Record from './Record';
+import useFetchMedicines from '../../useMutation/Admin/useFetchMedicines';
+import { useEffect, useState } from 'react';
 
 
 
 const MangementTabs =({setProgress}) => {
+
+  const [medicines,setMedicines] = useState([])
+  const {fetchMedicines,isPending} = useFetchMedicines()
+
+
+  useEffect(()=>{
+    fetchMedicines(setMedicines)
+  },[]
+)
+
+   useEffect(()=>{
+     setProgress(isPending)
+   },[isPending])
+
+
   return (
     <Tabs  p={20} dir='rtl' defaultValue="store">
       <Tabs.List bg={'#f9f9f9'} grow justify={'space-between'} pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
@@ -22,7 +39,7 @@ const MangementTabs =({setProgress}) => {
       </Tabs.List>
 
       <Tabs.Panel mt={'xl'} value="store" >
-       <MedicinesStore setProgress={setProgress}/>
+       <MedicinesStore setProgress={setProgress} medicines={medicines}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={'xl'} value="history">
