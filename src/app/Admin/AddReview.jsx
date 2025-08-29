@@ -64,12 +64,6 @@ const drugSchema = yup.object().shape({
       .min(1, "اختر نوع علاج واحد على الأقل")
       .required("نوع العلاج مطلوب"),
 
-    speed: yup.lazy((_, context) => {
-      const type = context?.parent?.type || [];
-      return type.includes("أنسولين")
-        ? yup.string().required("نوع الإنسولين مطلوب")
-        : yup.string().nullable().notRequired();
-    }),
 
     druges: yup.lazy((_, context) => {
       // const type = context?.parent?.type || [];
@@ -77,12 +71,8 @@ const drugSchema = yup.object().shape({
         .array()
         .of(
           yup.object().shape({
-            name: yup.string().required("اسم الدواء مطلوب"),
-            units: yup
-              .number()
-              .typeError("مطلوب * أدخل رقماً")
-              .min(1, " على الأقل 1")
-              .required("مطلوب * أدخل رقماً"),
+            id: yup.string().required("اسم الدواء مطلوب"),
+            
             dosage_per_day: yup
               .number()
               .typeError("مطلوب * أدخل رقماً")
@@ -168,6 +158,7 @@ const AddReview = () => {
   const patients = useSelector(store => store.patients.patients)
   const medicinesStore = useSelector(store => store.medicins.medicins)
   console.log('store :' ,medicinesStore)
+
   const {id} = useParams()
  
   const [storedPatient,setStoredPatient] = useState(null)
@@ -256,11 +247,9 @@ const methods = useForm({
       // 
       treatments: {
       type: [],
-      speed: '',
       druges: [
         {
-          name:'',
-          units:'',
+          id:'',
           dosage_per_day:'',
         }
       ]
@@ -357,12 +346,10 @@ const [download,setDownload] = useState(false)
       title: 'العلاج',
       fields: [
        { label: 'نوع العلاج', key: 'treatments.type' },
-      { label: 'نوع الإنسولين', key: 'treatments.speed' }, 
       { label: 'مدة العلاج', key: 'treatment_duration' },
 
 
-      { label: 'اسم الدواء', key: 'treatments.druges[0].name' },
-      { label: 'عدد الوحدات', key: 'treatments.druges[0].units' },
+      { label: 'اسم الدواء', key: 'treatments.druges[0].id' },
       { label: 'الجرعات اليومية', key: 'treatments.druges[0].dosage_per_day' },
       ],
     },
@@ -464,7 +451,7 @@ const handleStepClick = async (stepIndex) => {
              <Button radius={10} style={{zIndex:30}} pos={'absolute'} right={0} top={10} variant="outline" color="#8e8e8e" onClick={open}>
               عودة
              </Button></Group>
-          <TreatmentStep />
+          <TreatmentStep medicinesStore={medicinesStore}/>
         </Stepper.Step>
         <Stepper.Step icon={<Image src={Clinics} w={20} />} >
              <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >
