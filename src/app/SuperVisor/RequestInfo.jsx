@@ -49,7 +49,7 @@ const RequestInfo = () =>{
 
                      </Title>
                      <LogOut size={25} color="#88888888" style={{cursor:'pointer',position:'absolute',top:13,left:20}} onClick={()=>navigate(-1)} />
-                     <InfoCard reqInfo={reqInfo}/>
+                     <InfoCard reqInfo={reqInfo} id={reqId} setProgress={setProgress}/>
                 </Container>
         
         </>

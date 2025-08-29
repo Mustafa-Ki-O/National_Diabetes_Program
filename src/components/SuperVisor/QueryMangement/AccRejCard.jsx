@@ -8,8 +8,8 @@ const AccRejCard= ({request}) => {
 
     return(
         <>
-        <Indicator color={isAccepted ? 'green' : 'red'} size={20}>
-                <Card bg={'#fff'} radius={10} style={{ border: '1px solid green', background: '#f9f9f9', direction: 'rtl' }}>
+        <Indicator color={isAccepted ? 'green' : 'red'} size={20} zIndex={2}>
+                <Card bg={'#fff'} radius={10} style={{ border: isAccepted ? '1px solid green' : '1px solid red', background: '#f9f9f9', direction: 'rtl' }}>
                       <Stack gap={20}>
                         <Group position="apart" align="center">
                             <Hospital size={25}/>
@@ -42,7 +42,7 @@ const AccRejCard= ({request}) => {
                          {isAccepted ? (
                             <Check size={25}  />
                          ):(
-                            <X size={25} color="green" />
+                            <X size={25} color="red" />
                          )} 
                          <Text ta={'right'} fw={700}>
                               الكمية المطلوبة :   {quantity}
@@ -60,7 +60,7 @@ const AccRejCard= ({request}) => {
                     <Flex justify={'start'} align={'center'} gap={8}>
                         <CalendarCheck size={25}  />
                       <Text ta={'right'} fw={400}>
-                         تاريخ ال{isAccepted?'موافقة':'الرفض'} : 2/2/2001
+                         تاريخ ال{isAccepted?'موافقة':'رفض'} : 2/2/2001
                        </Text>
                        
                        </Flex>

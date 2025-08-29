@@ -22,7 +22,7 @@ const RequsetCard = ({request}) => {
 
     return(
         <>
-        <Indicator color="#e67e22" size={15} processing>
+        <Indicator color="#e67e22" size={15} processing zIndex={2}>
         <Card bg={'#fff'} radius={10} style={{ border: '1px solid #ccc', background: '#f9f9f9', direction: 'rtl' }}>
               <Stack gap={20}>
                 <Group position="apart" align="center">

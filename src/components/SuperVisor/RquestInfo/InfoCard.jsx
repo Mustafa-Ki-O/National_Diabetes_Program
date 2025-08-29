@@ -1,12 +1,35 @@
 import { Button, Container ,Flex,Stack,Title} from "@mantine/core"
 import dayjs from "dayjs";
 import { Hospital, LocateFixed, LogOut, PillBottle } from "lucide-react";
+import useRejectReq from "../../../useMutation/SuperVisor/useRejectReq";
+import useAcceptReq from "../../../useMutation/SuperVisor/useAcceptReq";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
-const InfoCard = ({reqInfo}) =>{
+const InfoCard = ({reqInfo,id,setProgress}) =>{
 
+    const {rejReq,isPending:isPendingRej} = useRejectReq()
+    const {accReq,isPending:isPendingAcc} = useAcceptReq()
 
     console.log(reqInfo)
     const {name_arabic, name_english, c_quantity, r_quantity, center_name, center_city, nop ,request_date} = reqInfo
+
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        setProgress(isPendingAcc||isPendingRej)
+    },[isPendingAcc||isPendingRej])
+
+
+    const handleAccept = () => {
+        accReq({'query_id':parseInt(id)})
+        
+    }
+
+    const handleReject = () => {
+        rejReq({'query_id':parseInt(id)})
+       
+    }
 
     return(
         <>
@@ -60,10 +83,14 @@ const InfoCard = ({reqInfo}) =>{
                       </Title>
                     
                      <Flex p={20} dir="rtl"  justify={'space-between'} align={'center'}>
-                 <Button miw={'9rem'} variant="filled" color="#e74c3c" size="lg" radius={10} >
-                              قبول الطلب
+                 <Button 
+                 onClick={handleAccept}
+                 miw={'9rem'} variant="filled" color="#e74c3c" size="lg" radius={10} >
+                        قبول الطلب
                   </Button>
-                <Button miw={'9rem'} variant="outline" color="#e74c3c" size="lg" radius={10} >
+                <Button 
+                onClick={handleReject}
+                miw={'9rem'} variant="outline" color="#e74c3c" size="lg" radius={10} >
                         رفض
                 </Button>
             </Flex> 
