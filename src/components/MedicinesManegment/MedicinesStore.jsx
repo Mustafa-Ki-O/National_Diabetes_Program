@@ -61,7 +61,7 @@ const MedicinesStore = ({setProgress,medicines}) => {
                 <Grid gutter={20}>
                    {medicines?.map((item,index) => (
                     <Grid.Col key={index} span={4}>
-                      <MedicineCard medicine={item} />
+                      <MedicineCard medicine={item} setProgress={setProgress}/>
                     </Grid.Col>
                   ))}
                 </Grid>

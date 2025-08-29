@@ -3,4 +3,5 @@ export const REMOVE_PATIENT='REMOVE_PATIENT';
 export const UPDATE_PATIENT='UPDATE_PATIENT';
 export const ADD_CENTER = 'ADD_CENTER';
 export const ADD_MEDICIN = 'ADD_MEDICIN';
+export const REMOVE_MEDICIN = 'REMOVE_MEDICIN';
 export const ADD_REQUEST = 'ADD_REQUEST';

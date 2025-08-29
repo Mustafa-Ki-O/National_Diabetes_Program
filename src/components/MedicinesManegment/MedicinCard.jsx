@@ -1,16 +1,37 @@
 import { Card, Text, Title, Button, Group, Progress, Stack,Tooltip, Flex } from "@mantine/core"
 import { CirclePlus, PillBottle, PlusIcon } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import useUpdateQuantity from "../../useMutation/SuperVisor/useUpdateQuantity"
+import UpdateQModal from "./UpdateQModal"
+import { useDisclosure } from "@mantine/hooks"
 
 
-const MedicineCard = ({medicine}) => {
+const MedicineCard = ({medicine,setProgress}) => {
   const {id,name_arabic , name_english ,medication_type , dosage ,quantity ,units_per_box} = medicine
   const [qty, setQty] = useState(0)
-const maxStock = 500;
+const maxStock = 2000;
 const percentUsed = (quantity / maxStock) * 100;
 const color = percentUsed < 40 ? percentUsed <30 ? 'red' : 'orange' : '#16aabb' ;
 
+const [opened,{open,close}] = useDisclosure()
+const {updateReq,isPending} = useUpdateQuantity()
+
+    useEffect(()=>{
+      setProgress(isPending)
+    },[isPending])
+
+
   return (
+    <>
+    <UpdateQModal 
+    opened={opened}
+    close={close}
+    medicine={medicine}
+    newQ={qty}
+    setProgress={setProgress}
+    setQty={setQty}
+    />
+
     <Card bg={'#fff'} radius={20} style={{ border: '1px solid #ccc', background: '#f9f9f9', direction: 'rtl' }}>
       <Stack gap={20}>
         <Group position="apart" align="center">
@@ -51,13 +72,14 @@ const color = percentUsed < 40 ? percentUsed <30 ? 'red' : 'orange' : '#16aabb' 
         <Tooltip label={`الكمية المتبقية : ${quantity}`} >
             <Progress value={percentUsed} color={color} striped  size="lg"  />
         </Tooltip>
-        {qty > 0 && (
-          <Button radius={10} size="sm" color="#16aabb">
+        {qty > 0  && (
+          <Button onClick={open} radius={10} size="sm" color="#16aabb" >
             تأكيد
           </Button>
         )}
       </Stack>
     </Card>
+    </>
   )
 }
 

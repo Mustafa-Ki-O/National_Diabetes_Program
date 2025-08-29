@@ -26,6 +26,7 @@ import infoCard from '../../assets/vectors/infoCard.svg'
 import Clinics from '../../assets/vectors/Clinic.svg'
 import medicalCard from '../../assets/vectors/medicalCard.svg'
 import treatments from '../../assets/vectors/treatments.svg'
+
 // import loadFont from "../../components/general/LoadFont";
 
 
@@ -151,6 +152,7 @@ const clinicSchema = yup.object().shape({
   ),
 });
 
+
 const schemas = [schema1, schema2,drugSchema,clinicSchema];
 const AddReview = () => {
   UpScroll()
@@ -164,6 +166,8 @@ const AddReview = () => {
 
   
   const patients = useSelector(store => store.patients.patients)
+  const medicinesStore = useSelector(store => store.medicins.medicins)
+  console.log('store :' ,medicinesStore)
   const {id} = useParams()
  
   const [storedPatient,setStoredPatient] = useState(null)
@@ -176,6 +180,8 @@ const calculateDuration = (unitsPerBox, dailyDose) => {
   if (!unitsPerBox || !dailyDose) return null;
   return Math.floor(unitsPerBox / dailyDose);
 };
+
+
 
 useEffect(() => {
     // fetchInfo(id); 

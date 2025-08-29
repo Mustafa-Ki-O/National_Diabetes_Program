@@ -4,19 +4,46 @@ import MedicinesStore from './MedicinesStore';
 import Record from './Record';
 import useFetchMedicines from '../../useMutation/Admin/useFetchMedicines';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMedicin,removeMedicin } from '../../redux/action';
 
 
 
 const MangementTabs =({setProgress}) => {
 
+  const medicinesStore = useSelector(store => store.medicins.medicins)
+
   const [medicines,setMedicines] = useState([])
   const {fetchMedicines,isPending} = useFetchMedicines()
 
+  const dispatch = useDispatch()
 
-  useEffect(()=>{
-    fetchMedicines(setMedicines)
-  },[]
-)
+
+         useEffect(() => {
+         // جيب الأدوية من السيرفر وخزنها بالـ state
+         fetchMedicines((fetched) => {
+           setMedicines(fetched);
+           console.log('fitched : ',fetched)
+         });
+       }, [fetchMedicines]);
+       
+            useEffect(() => {
+        if (medicines.length > 0) {
+         // ✅ أدوية جديدة (مو بالستور → أضفها)
+         const newMed = medicines.filter(
+           (med) => !medicinesStore.some((medS) => medS.id === med.id)
+         );
+
+         newMed.forEach((med) => dispatch(addMedicin(med)));
+
+         // ❌ أدوية ناقصة (موجودة بالستور بس مو بالـ fetch → احذفها)
+           const removedMed = medicinesStore.filter(
+             (medS) => !medicines.some((med) => med.id === medS.id)
+           );
+       
+           removedMed.forEach((med) => dispatch(removeMedicin(med.id)));
+         }
+       }, [medicines, medicinesStore, dispatch]);
 
    useEffect(()=>{
      setProgress(isPending)
@@ -39,7 +66,7 @@ const MangementTabs =({setProgress}) => {
       </Tabs.List>
 
       <Tabs.Panel mt={'xl'} value="store" >
-       <MedicinesStore setProgress={setProgress} medicines={medicines}/>
+       <MedicinesStore setProgress={setProgress} medicines={medicinesStore}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={'xl'} value="history">
