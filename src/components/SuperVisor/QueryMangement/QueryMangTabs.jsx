@@ -1,15 +1,36 @@
 import { Tabs } from "@mantine/core"
 import InProgress from "./InProgress"
+import useFetchQueries from "../../../useMutation/SuperVisor/useFetchQueries"
+import { useEffect, useState } from "react"
+import Progress from "../../general/Progress"
 const QueryTabs = () => {
+
+  const [requests,setRequests] = useState([])
+  const {fetchQueries,isPending} = useFetchQueries()
+
+   const [progress,setProgress] = useState(false)
+
+  useEffect(()=>{
+    fetchQueries(setRequests)
+  },[])
+
+  useEffect(()=>{
+    setProgress(isPending)
+  },[isPending])
+
+  const inProgressR= requests?.filter((r,i) => r.status === 'inProgress')
+  const acceptedR= requests?.filter((r,i) => r.status === 'accepted')
+  const rejectedR= requests?.filter((r,i) => r.status === 'rejected')
 
     return(
         <>
-        <Tabs p={20} dir='rtl' defaultValue="processing">
+        {progress && <Progress/>}
+        <Tabs p={20} dir='rtl' defaultValue="inProgress">
               <Tabs.List grow justify={'space-between'} pos={'sticky'} 
               top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
               onClick={(e)=>setClick(e.target.innerText)}
               bg={'#f9f9f9'} >
-                <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}}  value="processing" >
+                <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}}  value="inProgress" >
                   
                  الطلبات الحالية
                 
@@ -21,9 +42,9 @@ const QueryTabs = () => {
                   الطلبات المرفوضة
                 </Tabs.Tab>
               </Tabs.List>
-        
-              <Tabs.Panel mt={'xl'} value="processing">
-                <InProgress/>
+              
+              <Tabs.Panel mt={'xl'} value="inProgress">
+                <InProgress inProgressR={inProgressR}/>
               </Tabs.Panel>
         
               <Tabs.Panel mt={'xl'}  value="accepted" >
