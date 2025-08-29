@@ -135,7 +135,7 @@ const route = createBrowserRouter([
               element:<Home/>,
             },
             {
-             path:'home-sv',
+             path:'superVisor/home-sv',
              element:<HomeSv/>
             },
             {
@@ -222,11 +222,12 @@ const route = createBrowserRouter([
               element:<ProfileSettings />
             },
             {
-              path:'queryMangement',
+              path:'superVisor/queryMangement',
               element:<QueryMangement/>
+              
             },
             {          
-              path:'requestInfo/:reqId',
+              path:'superVisor/queryMangement/requestInfo/:reqId',
               element:<RequestInfo/>
             }
 

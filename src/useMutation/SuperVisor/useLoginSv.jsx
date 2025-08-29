@@ -17,7 +17,7 @@ const useLoginSv = () => {
           autoClose: 4000,
           color: 'blue',
         })    
-      navigate("/National_Diabetes_Program/home-sv/")
+      navigate("/National_Diabetes_Program/superVisor/home-sv/")
     //   res.role === 'center' ? navigate("/National_Diabetes_Program/home/") : res.first_login ? navigate("/National_Diabetes_Program/resetPassword/") : navigate("/National_Diabetes_Program/patient-home/")
       
     },

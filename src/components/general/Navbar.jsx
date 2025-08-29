@@ -165,7 +165,7 @@ useEffect(() => {
             <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
             <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
                 <Group align="center" gap={30}>
-                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='2.8rem' onClick={()=>navigate('/National_Diabetes_Program/home-sv/')}/>
+                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='2.8rem' onClick={()=>navigate('/National_Diabetes_Program/superVisor/home-sv/')}/>
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
         <Group>
@@ -193,22 +193,22 @@ useEffect(() => {
   <Stack gap={'sm'} px={5} h={'100%'} style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
     <Box mt={'1.5rem'} display={'flex'}  style={{flexDirection:'column',gap:10}}>
       <Text p={10} dir="ltr" display={'flex'} c='#121212' fz={16} fw={600} ta='right'
-        onClick={() => handleButtonClick('home-sv')}
-        className={` ${nav.hovered}  ${activeButton === 'home-sv' ? nav.activeDrawer : ''}`} 
+        onClick={() => handleButtonClick('superVisor/home-sv')}
+        className={` ${nav.hovered}  ${activeButton === 'superVisor/home-sv' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
         الرئيسية
         <Image className={nav.img} src={home} w={27} h={25} ml={5} />
       </Text>
       <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
-        onClick={() => handleButtonClick('queryMangement')} ta='right' 
-        className={` ${nav.hovered} ${activeButton === 'queryMangement' ? nav.activeDrawer : ''}`} 
+        onClick={() => handleButtonClick('superVisor/queryMangement')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'superVisor/queryMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
         إدارة الاستعلامات
         <Image className={nav.img} src={patMang} w={25} h={25} ml={5} />
       </Text>
       <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
-        onClick={() => handleButtonClick('dataMangement')} ta='right' 
-        className={` ${nav.hovered} ${activeButton === 'dataMangement' ? nav.activeDrawer : ''}`} 
+        onClick={() => handleButtonClick('superVisor/dataMangement')} ta='right' 
+        className={` ${nav.hovered} ${activeButton === 'superVisor/dataMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
         إدارة البيانات
         <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />

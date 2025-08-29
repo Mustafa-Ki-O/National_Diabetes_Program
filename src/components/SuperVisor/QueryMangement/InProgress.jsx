@@ -1,12 +1,13 @@
 import { Grid } from "@mantine/core"
 import RequsetCard from "./RequestCard"
 
-const InProgress = ({InProgressR}) => {
+const InProgress = ({inProgressR}) => {
 
+    console.log('inPro : ',inProgressR)
     return(
         <>
         <Grid gutter={20}>
-             {InProgressR?.map((r,i)=>(
+             {inProgressR?.map((r,i)=>(
             <Grid.Col span={{base:12,sm:3,lg:4}}>
                 <RequsetCard key={i} request={r}/>
             </Grid.Col>

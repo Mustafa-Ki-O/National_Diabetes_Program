@@ -3,6 +3,8 @@ import InProgress from "./InProgress"
 import useFetchQueries from "../../../useMutation/SuperVisor/useFetchQueries"
 import { useEffect, useState } from "react"
 import Progress from "../../general/Progress"
+import Accepted from "./Accepted"
+import Rejected from "./Rejected"
 const QueryTabs = () => {
 
   const [requests,setRequests] = useState([])
@@ -48,11 +50,11 @@ const QueryTabs = () => {
               </Tabs.Panel>
         
               <Tabs.Panel mt={'xl'}  value="accepted" >
-               مقبول
+               <Accepted acceptedR={acceptedR}/>
               </Tabs.Panel>
         
               <Tabs.Panel mt={'xl'} value="rejected">
-               مرفوض
+                <Rejected rejectedR={rejectedR}/>
               </Tabs.Panel>
             </Tabs>
         </>
