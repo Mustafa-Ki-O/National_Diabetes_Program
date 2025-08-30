@@ -38,6 +38,7 @@ import QueryMangement from "../app/SuperVisor/QueryMangement";
 import RequestInfo from "../app/SuperVisor/RequestInfo";
 import DataMangement from "../app/SuperVisor/DataMangement";
 import CityInfo from "../app/SuperVisor/CityInfo";
+import CenterInfo from "../app/SuperVisor/CenterInfo";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -239,7 +240,12 @@ const route = createBrowserRouter([
             {
               path:'superVisor/dataMangement/cityInfo/:id',
               element:<CityInfo/>
+            },
+            {
+              path:'superVisor/dataMangement/cityInfo/:id/centerInfo/:cid',
+              element:<CenterInfo/>
             }
+           
 
             
           
