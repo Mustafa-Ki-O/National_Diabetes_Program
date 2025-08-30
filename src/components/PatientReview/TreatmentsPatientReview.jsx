@@ -35,7 +35,15 @@ const rows = review.treatments?.druges?.map((drug, index) => (
           <Flex p={20} className={info.hovered} align="center" gap="5rem">
             <Text fw={600} size="1.4rem">نوع العلاج:</Text>
             <Text size="1.4rem" fw={500}>
-              {review.treatments?.type?.join('، ') || ''}
+              {review.treatments?.type
+                ?.map((t) =>
+                  t === "insulin"
+                    ? "أنسولين"
+                    : t === "pills"
+                    ? "خافضات فموية"
+                    : t
+                )
+                .join("، ") || ""}
             </Text>
           </Flex>
         </Grid.Col>
