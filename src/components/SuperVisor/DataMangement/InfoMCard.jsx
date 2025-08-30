@@ -1,0 +1,77 @@
+import { Card ,Stack ,Flex ,Title ,Text, Grid, Group } from "@mantine/core"
+import { Hospital, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
+
+const InfoMCard = () =>{
+
+    return(
+        <>
+        <Grid gutter={20} p={{base:5,sm:20}} justify="end" >
+
+            <Grid.Col span={{base:12,sm:5}}>
+                <Card radius={10}  mih={'6rem'} bd={'1px solid #12121212'}>
+                    <Flex align='center' gap={10} justify='end'>
+                       <Title size="xl"  >
+                               5000
+                         </Title>
+                      <Title size="lg">
+                             عدد المسجلين خلال الشهر الأخير
+                     </Title>
+                        
+                    </Flex> 
+                </Card>
+            </Grid.Col>
+
+
+
+             <Grid.Col span={{base:12,sm:4}}>
+                <Card radius={10}  mih={'6rem'} bd={'1px solid #12121212'}>
+                    <Flex justify={'end'} align={'center'} gap={10}>
+  
+                       <UserRound size={30} />
+                  <Title size="xl"  c='#000' >
+                      123043 :
+                    </Title>     
+                     <Title size="lg"  c='#000' >
+                       عدد المرضى الكلي
+                    </Title>        
+  
+                      </Flex>
+                </Card>
+            </Grid.Col>
+
+             <Grid.Col span={{base:12,sm:6}} >
+                <Card radius={10}  mih={'8rem'} bd={'1px solid #12121212'}>
+                    <Flex align='center' gap={30} justify='end'>
+                        <Group gap={10}>
+                            <UserRound size={30} />
+                            <Title size={'xl'}>
+                                40322
+                            </Title>
+                           
+                        </Group>
+                       
+                         <div style={{height:'6rem',width:1 ,backgroundColor:'#12121290',padding:0}} />
+                      <Stack gap={10} align="end" >
+                          <Group>
+                                <Title size="lg">
+                                   المركز الاول : مركز القادر
+                                </Title>
+                                <Hospital size={25} />
+                            </Group>
+                            <Group>
+                                <Title size="lg">
+                                    المدينة : حمص
+                                </Title>
+                                <LocateFixed size={25} />
+                            </Group>
+                        </Stack>
+                       
+                    </Flex>
+                    
+                </Card>   
+            </Grid.Col>
+        </Grid>
+        </>
+    )
+}
+export default InfoMCard

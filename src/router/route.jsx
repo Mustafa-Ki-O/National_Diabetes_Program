@@ -36,6 +36,7 @@ import LoginSv from "../app/SuperVisor/LoginSv";
 import HomeSv from "../app/SuperVisor/HomeSv";
 import QueryMangement from "../app/SuperVisor/QueryMangement";
 import RequestInfo from "../app/SuperVisor/RequestInfo";
+import DataMangement from "../app/SuperVisor/DataMangement";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -229,6 +230,10 @@ const route = createBrowserRouter([
             {          
               path:'superVisor/queryMangement/requestInfo/:reqId',
               element:<RequestInfo/>
+            },
+            {
+              path:'superVisor/dataMangement',
+              element:<DataMangement/>
             }
 
             
