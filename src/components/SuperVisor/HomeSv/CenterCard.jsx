@@ -18,7 +18,6 @@ const CenterCard = ({centerInfo}) => {
                         <AccordionControl>
                         <Stack  justify="space-between" >  
                 <Flex justify={'end'} align={'center'}>
-                 {/* <Send  className={card.message} size={22} onClick={openMessage}/> */}
                  <Flex pos={'relative'}  align='center' gap={10} justify='end'>
                   <Title size="lg"  c='#000' >{centerName}</Title>
                   {/* <Title size='md'>الاسم</Title> */}
