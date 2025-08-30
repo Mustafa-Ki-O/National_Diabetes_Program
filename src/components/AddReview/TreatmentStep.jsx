@@ -62,7 +62,7 @@ function getDrugNames(type) {
 }
 
   return (
-    <Grid gutter="sm" my={30} dir="rtl"  p={{base:25,sm:10}} align="end">
+    <Grid gutter="sm" my={30} dir="rtl"  p={{base:10,sm:10}} align="end">
       {/* نوع العلاج */}
       <Grid.Col span={12}>
         <Controller
@@ -115,35 +115,35 @@ function getDrugNames(type) {
           <Grid.Col span={12} mt={5}>
               <Divider size="sm" label={`العلاج ${index+1}` } labelPosition="center" /> 
           </Grid.Col>
-          <Grid.Col span={{base:12,sm:8}}>
+          <Grid.Col span={{base:12,sm:5}}>
             <Controller
-  name={`treatments.druges[${index}].id`}
-  control={control}
-  render={({ field }) => (
-    <Select
-      {...field}
-      value={field.value ?? ""} // تأكد إنو سترينغ
-      onChange={(val) => field.onChange(val)} // خزّن السترينغ
-      data={getDrugNames(type)}
-      label="اسم الدواء"
-      placeholder="اختر اسم الدواء"
-      searchable
-      withAsterisk
-      size="xl"
-      disabled={type.length === 0}
-      radius={10}
-      error={errors?.treatments?.druges?.[index]?.id?.message}
-      styles={{
-        label: {
-          textAlign: "right",
-          marginBottom: 5,
-          width: "98%",
-          fontSize: "18px",
-        },
-      }}
-    />
-  )}
-/>
+              name={`treatments.druges[${index}].id`}
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  value={field.value ?? ""} // تأكد إنو سترينغ
+                  onChange={(val) => field.onChange(val)} // خزّن السترينغ
+                  data={getDrugNames(type)}
+                  label="اسم الدواء"
+                  placeholder="اختر اسم الدواء"
+                  searchable
+                  withAsterisk
+                  size="xl"
+                  disabled={type.length === 0}
+                  radius={10}
+                  error={errors?.treatments?.druges?.[index]?.id?.message}
+                  styles={{
+                    label: {
+                      textAlign: "right",
+                      marginBottom: 5,
+                      width: "98%",
+                      fontSize: "18px",
+                    },
+                  }}
+                />
+              )}
+            />
 
           </Grid.Col>
 
@@ -174,7 +174,7 @@ function getDrugNames(type) {
             />
           </Grid.Col> */}
 
-          <Grid.Col span={{base:10,sm:3}}>
+          <Grid.Col span={{base:5,sm:3}}>
             <Controller
               name={`treatments.druges[${index}].dosage_per_day`}
               control={control}
@@ -200,8 +200,34 @@ function getDrugNames(type) {
               )}
             />
           </Grid.Col>
+          <Grid.Col span={{base:5,sm:2}}>
+            <Controller
+              name={`treatments.druges[${index}].quantity`}
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  data={[
+                    { value: "1", label: "1" },
+                    { value: "2", label: "2" },
+                    { value: "3", label: "3" },
+                  ]}
+                  label="الكمية"
+                  placeholder="اختر الكمية"
+                  withAsterisk
+                  size="xl"
+                  radius={10}
+                  error={errors?.treatments?.druges?.[index]?.quantity?.message}
+                  disabled={type.length == 0 ? true : false}
+                  styles={{
+                    label: { textAlign: 'right', marginBottom: 5, width: '98%', fontSize: '18px' }
+                  }}
+                />
+              )}
+            />
+          </Grid.Col>
 
-          <Grid.Col span={{base:2,sm:1}} 
+          <Grid.Col span={{base:2,sm:2}} 
           // style={{placeSelf:'end'}}
           >
         {index === 0 ? (
@@ -217,7 +243,7 @@ function getDrugNames(type) {
               color="#37A9EF"
               onClick={() => {
                 setValue(`treatments.druges[${index}].id`,'');
-                // setValue(`treatments.druges[${index}].units`, "");
+                setValue(`treatments.druges[${index}].quantity`, "");
                 setValue(`treatments.druges[${index}].dosage_per_day`, "");
               }}
               //  disabled={
@@ -252,7 +278,8 @@ function getDrugNames(type) {
 
       <Grid.Col span={12} ta={'right'} mt={'2rem'}>
         <Tooltip label='اضافة دواء' >
-        <Button radius={10} p={0} w={'4rem'} style={{boxShadow:'0 12px 14px #8e8e8e20'}} variant="filled" size="xl" color="#37A9EF" onClick={() => append({ id: "",  dosage_per_day: "" })}>
+        <Button radius={10} p={0} w={'4rem'} style={{boxShadow:'0 12px 14px #8e8e8e20'}} 
+        variant="filled" size="xl" color="#37A9EF" onClick={() => append({ id: "",  dosage_per_day: "",quantity:"" })}>
          <Image src={add} w={25} />
         </Button>
         </Tooltip>

@@ -72,12 +72,12 @@ const drugSchema = yup.object().shape({
         .of(
           yup.object().shape({
             id: yup.string().required("اسم الدواء مطلوب"),
-            
             dosage_per_day: yup
               .number()
               .typeError("مطلوب * أدخل رقماً")
               .min(1, "على الأقل 1")
-              .required("مطلوب * أدخل رقماً")
+              .required("مطلوب * أدخل رقماً"),
+            quantity: yup.string().required('يجب تحديد')
           })
         )
         .min(1, "أدخل دواء واحد على الأقل");
@@ -252,6 +252,7 @@ const methods = useForm({
         {
           id:'',
           dosage_per_day:'',
+          quantity:'',
         }
       ]
     },

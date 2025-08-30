@@ -9,14 +9,17 @@ const rows = review.treatments?.druges?.map((drug, index) => (
     <Table.Td >
       {index + 1}
     </Table.Td>
-    <Table.Td >
-      {drug.name || ''}
+    <Table.Td>
+      {drug
+        ? `${drug.name_arabic} (${drug.dosage} mg) [${drug.units_per_box} وحدة]`
+        : ""}
     </Table.Td>
+
     <Table.Td >
-      {drug.units || ''} جرعة
+      {drug?.dosage_per_day || ''} جرعة يومياً
     </Table.Td>
-    <Table.Td >
-      {drug.dosage_per_day || ''} جرعة يومياً
+     <Table.Td >
+      {drug?.quantity || ''} علبة
     </Table.Td>
   </Table.Tr>
 ));
@@ -38,7 +41,7 @@ const rows = review.treatments?.druges?.map((drug, index) => (
         </Grid.Col>
 
         {/* نوع الإنسولين */}
-        {review.treatments?.type?.includes("أنسولين") && (
+        {/* {review.treatments?.type?.includes("أنسولين") && (
           <Grid.Col span={12}>
             <Flex p={20} className={info.hovered} align="center" gap="5rem">
               <Text fw={600} size="1.4rem">نوع الإنسولين:</Text>
@@ -47,7 +50,7 @@ const rows = review.treatments?.druges?.map((drug, index) => (
               </Text>
             </Flex>
           </Grid.Col>
-        )}
+        )} */}
 
         {/* جدول الأدوية */}
         {review.treatments?.druges?.length > 0 && (
@@ -55,26 +58,26 @@ const rows = review.treatments?.druges?.map((drug, index) => (
             <Divider size="sm" label="الأدوية" labelPosition="center" my={10} />
 
            <Table
-  withColumnBorders
-  highlightOnHover
-  striped
-  horizontalSpacing="sm" verticalSpacing="sm"
->
-  <Table.Thead  fz={'1.3rem'} >
-    <Table.Tr>
-      <Table.Th ></Table.Th>
-      <Table.Th >اسم الدواء</Table.Th>
-      <Table.Th >عدد الوحدات</Table.Th>
-      <Table.Th >الجرعات اليومية</Table.Th>
-    </Table.Tr>
-  </Table.Thead>
-  <Table.Tbody>{rows}</Table.Tbody>
-</Table>
+          withColumnBorders
+          highlightOnHover
+          striped
+          horizontalSpacing="sm" verticalSpacing="sm"
+        >
+          <Table.Thead  fz={'1.3rem'} >
+            <Table.Tr>
+              <Table.Th ></Table.Th>
+              <Table.Th >الدواء</Table.Th>
+              <Table.Th >الجرعات اليومية</Table.Th>
+              <Table.Th >الكمية المصروفة</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
 
-          </Grid.Col>
-        )}
-      </Grid>
-    </Paper>
+             </Grid.Col>
+           )}
+         </Grid>
+       </Paper>
      
         </>
     )
