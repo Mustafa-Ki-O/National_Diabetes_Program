@@ -60,7 +60,7 @@ const drugSchema = yup.object().shape({
   treatments: yup.object().shape({
     type: yup
       .array()
-      .of(yup.string().oneOf(["أنسولين", "حبوب"]))
+      .of(yup.string().oneOf(["insulin", "pills"]))
       .min(1, "اختر نوع علاج واحد على الأقل")
       .required("نوع العلاج مطلوب"),
 
@@ -156,8 +156,8 @@ const AddReview = () => {
 
   
   const patients = useSelector(store => store.patients.patients)
-  const medicinesStore = useSelector(store => store.medicins.medicins)
-  console.log('store :' ,medicinesStore)
+  // const medicinesStore = useSelector(store => store.medicins.medicins)
+
 
   const {id} = useParams()
  
@@ -198,6 +198,7 @@ const handleNext = async () => {
         ? dayjs(data.historyOfdiseaseDetection).format('DD-MM-YYYY')
         : '',
     };
+    console.log(updated)
 
     setReviewData(updated);
     setActiveStep((s) => s + 1);
@@ -398,18 +399,18 @@ const [download,setDownload] = useState(false)
   }
 },[download])
 
-const handleStepClick = async (stepIndex) => {
-  if (stepIndex < activeStep) {
+// const handleStepClick = async (stepIndex) => {
+//   if (stepIndex < activeStep) {
 
-    setActiveStep(stepIndex);
-  } else {
+//     setActiveStep(stepIndex);
+//   } else {
 
-    const isValid = await methods.trigger(); 
-    if (isValid) {
-      setActiveStep(stepIndex);
-    }
-  }
-};
+//     const isValid = await methods.trigger(); 
+//     if (isValid) {
+//       setActiveStep(stepIndex);
+//     }
+//   }
+// };
 
   return (
     <>
@@ -451,7 +452,7 @@ const handleStepClick = async (stepIndex) => {
              <Button radius={10} style={{zIndex:30}} pos={'absolute'} right={0} top={10} variant="outline" color="#8e8e8e" onClick={open}>
               عودة
              </Button></Group>
-          <TreatmentStep medicinesStore={medicinesStore}/>
+          <TreatmentStep />
         </Stepper.Step>
         <Stepper.Step icon={<Image src={Clinics} w={20} />} >
              <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >

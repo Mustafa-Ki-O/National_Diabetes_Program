@@ -3,20 +3,20 @@ import {Grid, Select, TextInput, MultiSelect,Button,Image, Group,Divider} from '
 import deleteIcon from '../../assets/vectors/Cancel.svg'
 import add from '../../assets/vectors/Add.svg'
 import reset from '../../assets/vectors/Reset.svg'
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Tooltip } from "@mantine/core";
 import UpScroll from "../general/UpScroll";
+import useCheckMedicineStore from "./useCheckMedicineStore";
 
+const  TreatmentStep = () => {
 
-
-
-
-export default function TreatmentStep({medicinesStore}) {
+  const medicinesStore = useCheckMedicineStore()
+  console.log('store :' ,medicinesStore)
   UpScroll()
 
 
   const DRUG_TYPES = Array.from(
-  new Set(medicinesStore.map((med) => med.medication_type))).map((type) => {
+  new Set(medicinesStore?.map((med) => med.medication_type))).map((type) => {
   return {
     value: type,
     label: type === "insulin" ? "أنسولين" : type === "pills" ? "حبوب" : type
@@ -44,8 +44,8 @@ export default function TreatmentStep({medicinesStore}) {
 
 function getDrugNames(type) {
   // تحديد الأنواع حسب النص
-  const includeInsulin = type?.includes("أنسولين");
-  const includePills   = type?.includes("حبوب");
+  const includeInsulin = type?.includes("insulin");
+  const includePills   = type?.includes("pills");
 
   // فلترة الأدوية حسب النوع المطلوب
   let filtered = medicinesStore.filter((med) => {
@@ -174,7 +174,7 @@ function getDrugNames(type) {
             />
           </Grid.Col> */}
 
-          <Grid.Col span={{base:5,sm:3}}>
+          <Grid.Col span={{base:10,sm:3}}>
             <Controller
               name={`treatments.druges[${index}].dosage_per_day`}
               control={control}
@@ -216,7 +216,7 @@ function getDrugNames(type) {
               size="xl"
               color="#37A9EF"
               onClick={() => {
-                setValue(`treatments.druges[${index}].id`, null);
+                setValue(`treatments.druges[${index}].id`,'');
                 // setValue(`treatments.druges[${index}].units`, "");
                 setValue(`treatments.druges[${index}].dosage_per_day`, "");
               }}
@@ -252,7 +252,7 @@ function getDrugNames(type) {
 
       <Grid.Col span={12} ta={'right'} mt={'2rem'}>
         <Tooltip label='اضافة دواء' >
-        <Button radius={10} p={0} w={'4rem'} style={{boxShadow:'0 12px 14px #8e8e8e20'}} variant="filled" size="xl" color="#37A9EF" onClick={() => append({ name: "", units: "", dosage_per_day: "" })}>
+        <Button radius={10} p={0} w={'4rem'} style={{boxShadow:'0 12px 14px #8e8e8e20'}} variant="filled" size="xl" color="#37A9EF" onClick={() => append({ id: "",  dosage_per_day: "" })}>
          <Image src={add} w={25} />
         </Button>
         </Tooltip>
@@ -260,3 +260,4 @@ function getDrugNames(type) {
     </Grid>
   );
 }
+export default TreatmentStep
