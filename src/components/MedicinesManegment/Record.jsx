@@ -1,4 +1,4 @@
-import { Container, Flex, Grid, Indicator, Paper, Stack, Text, Title } from "@mantine/core"
+import { Container, Flex, Grid, Indicator, Pagination, Paper, Stack, Text, Title } from "@mantine/core"
 import useFetchRecords from "../../useMutation/Admin/useFetchRecords"
 import { useEffect, useState } from "react"
 
@@ -22,9 +22,9 @@ const Record = ({setProgress}) =>{
         const typeTrans = MedicationType === 'pills' ? 'خافضات فموية' : 'أنسولين';
         return(
             <>
-        <Indicator size={15}  processing={RecordStatus=='inProgress'}
+        <Indicator zIndex={2} size={15}  processing={RecordStatus=='inProgress'}
         color={RecordStatus==='rejected'?'red':RecordStatus==='accepted'?'green': 'orange'}>
-        <Grid bg={'#fff'} pos={'relative'}  p={15} justify="end" bd={'1px solid #00000020'} style={{borderRadius:10}}>
+        <Grid  bg={'#fff'} pos={'relative'}  p={15} justify="end" bd={'1px solid #00000020'} style={{borderRadius:10}}>
           <Text c={'dimmed'} pos={'absolute'} left={8} top={5}>
                 {ID}
             </Text>
@@ -74,7 +74,7 @@ const Record = ({setProgress}) =>{
                ))}
  
             </Stack>
-           
+           <Pagination  mt={'3rem'}  total={10} radius="xl" />
          </Container>
         </>
     )

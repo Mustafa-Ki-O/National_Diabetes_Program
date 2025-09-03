@@ -1,5 +1,5 @@
-import { Tabs } from '@mantine/core';
-import { Archive, Tablets } from 'lucide-react';
+import { Button, Tabs } from '@mantine/core';
+import { Archive, SlidersHorizontal, Tablets } from 'lucide-react';
 import MedicinesStore from './MedicinesStore';
 import Record from './Record';
 import useFetchMedicines from '../../useMutation/Admin/useFetchMedicines';
@@ -59,8 +59,11 @@ const MangementTabs =({setProgress}) => {
            
         </Tabs.Tab>
         <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}}  value="history" >
+
             <Archive style={{marginLeft:5}} size={20} />
               السجل
+              <SlidersHorizontal size={15} style={{marginRight:15,cursor:'pointer'}} />
+           
         </Tabs.Tab>
       </Tabs.List>
 
@@ -68,7 +71,7 @@ const MangementTabs =({setProgress}) => {
        <MedicinesStore setProgress={setProgress} medicines={medicinesStore}/>
       </Tabs.Panel>
 
-      <Tabs.Panel mt={'xl'} value="history">
+      <Tabs.Panel mt={'xl'} value="history" p={10}>
           <Record setProgress={setProgress}/>
       </Tabs.Panel>
 
