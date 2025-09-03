@@ -39,6 +39,7 @@ import RequestInfo from "../app/SuperVisor/RequestInfo";
 import DataMangement from "../app/SuperVisor/DataMangement";
 import CityInfo from "../app/SuperVisor/CityInfo";
 import CenterInfo from "../app/SuperVisor/CenterInfo";
+import PatientsInCenter from "../app/SuperVisor/PatientsInCenter";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -244,6 +245,10 @@ const route = createBrowserRouter([
             {
               path:'superVisor/dataMangement/cityInfo/:id/centerInfo/:cid',
               element:<CenterInfo/>
+            },
+            {
+              path:'superVisor/dataMangement/cityInfo/:id/centerInfo/:cid/patients-center',
+              element:<PatientsInCenter/>
             }
            
 

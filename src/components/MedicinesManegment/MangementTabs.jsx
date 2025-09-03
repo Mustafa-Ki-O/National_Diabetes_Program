@@ -36,7 +36,6 @@ const MangementTabs =({setProgress}) => {
 
          newMed.forEach((med) => dispatch(addMedicin(med)));
 
-         // ❌ أدوية ناقصة (موجودة بالستور بس مو بالـ fetch → احذفها)
            const removedMed = medicinesStore.filter(
              (medS) => !medicines.some((med) => med.id === medS.id)
            );

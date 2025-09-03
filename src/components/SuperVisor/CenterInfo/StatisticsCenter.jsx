@@ -3,11 +3,6 @@ import { BarChart } from '@mantine/charts';
 import { Flex, Stack, Title } from '@mantine/core';
 const StatisticsCenter = () => {
 
-   const data = [
-     { name: 'ذكور', value: 400, color: '#37a9ef' },
-     { name: 'إناث', value: 300, color: 'pink' },
-
-    ];
 
 const data1 = [
   { month: 'January', أطفال: 150, شباب: 300, كبار: 500 },
@@ -19,20 +14,15 @@ const data1 = [
 ];
     return(
         <>
-        <Flex w={'100%'} mt={'3rem'} justify={'end'} gap={'8rem'} align={'end'} p={30}>
-             <Stack justify='end' >
-                <Title size={'md'}>
-                    توزع المرض بين الجنسين
-                </Title>
-                 <DonutChart startAngle={180} endAngle={0} data={data} />;
-             </Stack>
-             <Stack justify='end' w={'50%'}>
+        <Flex  w={'100%'} mt={'3rem'} justify={'end'} gap={{base:'5rem',sm:'8rem'}} align={'center'} p={30} 
+        direction={{ base: "column", md: "row" }}>
+             
+             <Stack justify='end' w={{base:'100%',sm:'50%'}}>
                 <Title size={'md'}>
                     أعمار المصابين 
                 </Title>
                   <BarChart
                       h={300}
-                      
                       data={data1}
                       dataKey="month"
                       series={[
@@ -42,6 +32,10 @@ const data1 = [
                       ]}
                       tickLine="y"
                     />
+             </Stack>
+
+             <Stack  justify='end' >
+               
              </Stack>
             
         </Flex>

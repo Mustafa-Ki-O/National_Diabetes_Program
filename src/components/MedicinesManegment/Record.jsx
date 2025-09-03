@@ -1,37 +1,77 @@
-import { Container, Flex, Paper, Stack, Text, Title } from "@mantine/core"
+import { Container, Flex, Grid, Indicator, Paper, Stack, Text, Title } from "@mantine/core"
+import useFetchRecords from "../../useMutation/Admin/useFetchRecords"
+import { useEffect, useState } from "react"
 
 const Record = ({setProgress}) =>{
 
-    const HistoryPaper = ({name,id,status,type,date,qnt}) =>(
-        <>
-        <Paper radius={20} p={20} bd={'1px solid #00000020'}>
-            <Flex justify={'space-between'}>
-            <Title size={'md'}>
-                {name}+ الجرعة
-            </Title>
-            <Text>الكمية المطلوبة : {qnt}</Text>
-            <Text>
-                {id}
+    const [records,setRecords] = useState([])
+    const {fetchRecords,isPending} = useFetchRecords(setRecords)
+
+
+    useEffect(()=>{
+      fetchRecords()
+    },[])
+
+    
+    useEffect(()=>{
+       setProgress(isPending)
+    },[isPending])
+    
+    const HistoryPaper = ({record}) =>{
+        const {ID,NameArabic,Dosage,MedicationType,RequestedQuantity,CenterID,CreatedAt,ApprovalDate,RecordStatus} = record
+        const typeTrans = MedicationType === 'pills' ? 'خافضات فموية' : 'أنسولين';
+        return(
+            <>
+        <Indicator size={15}  processing={RecordStatus=='inProgress'}
+        color={RecordStatus==='rejected'?'red':RecordStatus==='accepted'?'green': 'orange'}>
+        <Grid bg={'#fff'} pos={'relative'}  p={15} justify="end" bd={'1px solid #00000020'} style={{borderRadius:10}}>
+          <Text c={'dimmed'} pos={'absolute'} left={8} top={5}>
+                {ID}
             </Text>
-            </Flex>
-            <Flex justify={'space-between'} align={'center'}>
-                <Text>{type}</Text>
-                <Text>{date}</Text>
-                <div style={{width:20,height:20,backgroundColor:status ? '#27a9ef' : 'red',borderRadius:'50%'}}/>
-            </Flex>
+            <Grid.Col span={{base:12,sm:4}}>
+            <Title size={'lg'}>
+               ({NameArabic} {Dosage})
+            </Title>
+            </Grid.Col>
+           <Grid.Col span={{base:12,sm:4}}>
+                 <Text size="lg" fw={600}>{typeTrans}</Text>
+
+             </Grid.Col>
+             <Grid.Col span={{base:12,sm:4}}>
+                <Text size="lg" fw={600}>الكمية المطلوبة : {RequestedQuantity}</Text>
+             </Grid.Col>
 
 
-        </Paper>
+             <Grid.Col span={{base:12,sm:4}}>
+
+                <Text size="md">
+                    تاريخ الطلب : { CreatedAt}</Text>
+             </Grid.Col>
+             <Grid.Col span={{base:12,sm:4}}>
+                {RecordStatus==='inProgress'?(
+                    <Text size="md">
+                        جاري معالجة الطلب ...
+                    </Text>
+                ):(
+                     <Text size="md">
+                    تاريخ {RecordStatus==='rejected'?'الرفض':'القبول'} : {ApprovalDate}</Text>
+                )}
+                
+             </Grid.Col>
+        </Grid>
+        </Indicator>
         </>
-    )
+        )
+        
+    }
 
     return(
         <>
          <Container p={5} fluid >
-            <Stack gap={5}>
-                 <HistoryPaper name={'ميتفورمين'} qnt={250} id={21227} status={1} date={'18-4-2025'} type={'خافضات فموية'}/>
-                 <HistoryPaper name={'ميتفورمين'} qnt={250} id={21228} status={0} date={'1-3-2025'}  type={'أنسولين'}/>
-                 <HistoryPaper name={'ميتفورمين'} qnt={250} id={21229} status={1} date={'15-11-2024'} type={'أنسولين'}/>
+            <Stack gap={10}>
+               {records.map((r,i)=>(
+                <HistoryPaper key={i} record={r}/>
+               ))}
  
             </Stack>
            
