@@ -50,10 +50,7 @@ useEffect(() => {
   }
 }, [patients, id]);
   const [deleteId,setDeleteId] = useState()
-  // console.log(deleteId)
-  // useEffect(()=>{
-  //   setDeleteId(id)
-  // },[id])
+
 
   useEffect(()=>{
     setProgress(isPending)

@@ -49,7 +49,13 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
     //    password: yup
     //      .string()
     //      .min(8, "يجب ان تحوي كلمة المرور على 8 محارف كحد أدنى"),
+
          age: yup.date().required('تاريخ الميلاد مطلوب'),
+         sugarType: yup.string().required("اختر نوع السكري"),
+         gender : yup.string().required("حدد الجنس"),
+         historyOfFamilyDisease :  yup.array().of(yup.string()).required("حقل مطلوب"),
+         historyOfdiseaseDetection : yup.string().required("حدد تاريخ اكتشاف المرض"),
+         
     //      city:yup.string().required('اختر المحافظة'),
     //    center_name: yup.string().required('اختر المركز'),
     //    termsOfService: yup.bool()
@@ -89,8 +95,14 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
          console.log(values)
          const newFormData = new FormData();
          Object.keys(values).forEach((key) => {
-             newFormData.append(key,values[key]);
-             
+             if (key === "historyOfFamilyDisease" && Array.isArray(values[key])) {
+                values[key].forEach((item) => {
+                  newFormData.append(key, item);
+                });
+              } else {
+
+            newFormData.append(key, values[key]);
+            }
              console.log(newFormData)
       
          });
