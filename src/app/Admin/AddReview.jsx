@@ -31,14 +31,10 @@ import treatments from '../../assets/vectors/treatments.svg'
 
 
 const schema1 = yup.object().shape({
-  gender: yup.string().required('الرجاء اختيار الجنس'),
   address: yup.string().required('الرجاء اختيار المدينة'),
   weight: yup.number().typeError('الوزن يجب أن يكون رقمًا').required('مطلوب'),
   length_patient: yup.number().typeError('الطول يجب أن يكون رقمًا').required('مطلوب'),
-  sugarType: yup.string().required('الرجاء اختيار نوع السكري'),
   otherDisease: yup.string().required('يرجى إدخال الأمراض الأخرى'),
-  historyOfdiseaseDetection: yup.date().required('يرجى اختيار تاريخ'),
-  historyOfFamilyDisease: yup.array().min(1, 'اختر على الأقل خياراً واحداً')
 });
 
 const schema2 = yup.object().shape({
