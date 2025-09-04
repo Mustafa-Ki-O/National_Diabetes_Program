@@ -239,15 +239,15 @@ const route = createBrowserRouter([
               element:<DataMangement/>
             },
             {
-              path:'superVisor/dataMangement/cityInfo/:id',
+              path:'superVisor/dataMangement/cityInfo/:cityName',
               element:<CityInfo/>
             },
             {
-              path:'superVisor/dataMangement/cityInfo/:id/centerInfo/:cid',
+              path:'superVisor/dataMangement/cityInfo/:cityName/centerInfo/:cid',
               element:<CenterInfo/>
             },
             {
-              path:'superVisor/dataMangement/cityInfo/:id/centerInfo/:cid/patients-center',
+              path:'superVisor/dataMangement/cityInfo/:cityName/centerInfo/:cid/patients-center',
               element:<PatientsInCenter/>
             }
            

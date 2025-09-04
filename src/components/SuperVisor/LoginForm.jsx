@@ -68,7 +68,7 @@ const LoginForm = ({setProgress}) => {
                 mt="sm"
                 placeholder="أدخل البريد الالكتروني"
                 key={form.key("email")}
-                label={'supervisor@example.com'}
+                // label={'supervisor@example.com'}
                 {...form.getInputProps("email")}
                 styles={{
                     input:{
@@ -83,7 +83,7 @@ const LoginForm = ({setProgress}) => {
                 size="md"
                 radius={10}
                 mt="sm"
-                label={'Pa$$W0rdSuper1$er'}
+                // label={'Pa$$W0rdSuper1$er'}
                 placeholder="أدخل كلمة المرور"
                 key={form.key("password")}
                 {...form.getInputProps("password")}

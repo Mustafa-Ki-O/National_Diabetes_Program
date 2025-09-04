@@ -1,8 +1,9 @@
 import { Card ,Stack ,Flex ,Title ,Text, Grid, Group } from "@mantine/core"
 import { Hospital, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
 
-const InfoMCard = () =>{
+const InfoMCard = ({data}) =>{
 
+    const {nopis,nopis_lm,first_center} = data
     return(
         <>
         <Grid gutter={20} p={{base:5,sm:20}} justify="end" >
@@ -11,7 +12,7 @@ const InfoMCard = () =>{
                 <Card radius={10}  mih={'6rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex align='center' gap={10} justify='end'>
                        <Title size="xl"  >
-                               5000
+                               {nopis_lm}
                          </Title>
                       <Title size="lg">
                              عدد المسجلين خلال الشهر الأخير
@@ -29,7 +30,7 @@ const InfoMCard = () =>{
   
                        <UserRound size={30} />
                   <Title size="xl"  c='#000' >
-                      123043 :
+                       {nopis} :
                     </Title>     
                      <Title size="lg"  c='#000' >
                        عدد المرضى الكلي
@@ -45,7 +46,7 @@ const InfoMCard = () =>{
                         <Group gap={10}>
                             <UserRound size={30} />
                             <Title size={'xl'}>
-                                40322
+                                {first_center?.PatientsCount}
                             </Title>
                            
                         </Group>
@@ -54,20 +55,18 @@ const InfoMCard = () =>{
                       <Stack gap={10} align="end" >
                           <Group>
                                 <Title size="lg">
-                                   المركز الاول : مركز القادر
+                                   المركز الاول : {first_center?.CenterName}
                                 </Title>
                                 <Hospital size={25} />
                             </Group>
                             <Group>
                                 <Title size="lg">
-                                    المدينة : حمص
+                                    المدينة : {first_center?.CenterCity}
                                 </Title>
                                 <LocateFixed size={25} />
                             </Group>
                         </Stack>
-                       
                     </Flex>
-                    
                 </Card>   
             </Grid.Col>
         </Grid>

@@ -4,6 +4,8 @@ import { useEffect, useState ,useMemo} from "react"
 import InfoCityCard from "../../components/SuperVisor/CityInfo/InfoCityCard";
 import CenterCard from "../../components/SuperVisor/HomeSv/CenterCard";
 import CarouselCenter from "../../components/SuperVisor/CityInfo/CarouselCenter";
+import { useParams } from "react-router";
+import useFetchCityData from "../../useMutation/SuperVisor/useFetchCityData";
 
 
 
@@ -11,7 +13,13 @@ const CityInfo = () => {
 
             const [active,setActive] = useState(false);
             const [progress,setProgress] = useState(false)
-                
+            const [data,setData] = useState({})
+            const {fetchCityData,isPending} = useFetchCityData(setData)
+            const {cityName} = useParams()
+
+              useEffect(()=>{
+                   fetchCityData(cityName)
+              },[])
             useEffect(()=>{
               setTimeout(()=>{
                 setActive(true);
@@ -26,16 +34,16 @@ const CityInfo = () => {
                               </Title>
                               <Flex justify={'end'} align={'center'} px={'lg'} gap={10}>
                                   <Title size={'1.4rem'} ta={'end'}  my={'3rem'} >
-                                      مدينة حمص
+                                      مدينة {cityName}
                                   </Title>    
                                   <LocateFixed size={25} />
                               </Flex>
                              <Stack justify="end" gap={10}>
-                                <InfoCityCard />
+                                <InfoCityCard data={data}/>
                                 <Title size={'1.4rem'} ta={'end'} px={'lg'} mt={'3rem'} >
                                           المراكز النشطة
                                </Title>
-                               <CarouselCenter/>
+                               <CarouselCenter data={data}/>
                              </Stack>
              </Container>
         </>

@@ -1,8 +1,9 @@
 import { Card ,Stack ,Flex ,Title ,Text, Grid, Group } from "@mantine/core"
 import { Hospital, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
 
-const InfoCityCard = () =>{
+const InfoCityCard = ({data}) =>{
 
+     const {nopic,nopic_lm} = data
     return(
         <>
         <Grid gutter={20} p={{base:5,sm:20}} justify="end" >
@@ -10,7 +11,7 @@ const InfoCityCard = () =>{
                 <Card radius={10}  mih={'6rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex align='center' gap={10} justify='end'>
                        <Title size="xl"  >
-                               5000
+                              {nopic_lm}
                          </Title>
                       <Title size="lg">
                              عدد المسجلين خلال الشهر الأخير
@@ -28,7 +29,7 @@ const InfoCityCard = () =>{
   
                   <UserRound size={30} />
                   <Title size="xl"  c='#000' >
-                     23043 :
+                      {nopic}:
                     </Title>     
                      <Title size="lg"  c='#000' >
                        عدد المرضى الكلي
@@ -36,9 +37,7 @@ const InfoCityCard = () =>{
   
                       </Flex>
                 </Card>
-            </Grid.Col>
-
-             
+            </Grid.Col>     
         </Grid>
         </>
     )
