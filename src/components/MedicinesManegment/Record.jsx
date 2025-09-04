@@ -8,10 +8,18 @@ const Record = ({setProgress}) =>{
     const [recordsInfo,setRecordsInfo] = useState({})
      const [records,setRecords] = useState([])
      const [activePage,setActivePage] = useState(1)
-    const [total,setTotal] = useState()
+     const pageSize = 10
+     const [total, setTotal] = useState(0) 
+     const [totalPages, setTotalPages] = useState(0)
     const {fetchRecords,isPending} = useFetchRecords(setRecordsInfo)
 
     const [filteredRecords,setFilteredRecords] = useState([])
+
+    useEffect(() => {
+      if (total) {
+        setTotalPages(Math.ceil(total / pageSize))
+      }
+   }, [total])
 
     useEffect(()=>{
       fetchRecords(activePage)
@@ -93,7 +101,7 @@ const Record = ({setProgress}) =>{
                  <Text ta="center" c="dimmed">لا يوجد سجلات</Text>
                )}
              </Stack>
-           <Pagination mt={'3rem'} value={activePage} onChange={setActivePage} total={total} radius="xl" />
+           <Pagination mt={'3rem'} value={activePage} onChange={setActivePage} total={totalPages} radius="xl" />
          </Container>
         </>
     )

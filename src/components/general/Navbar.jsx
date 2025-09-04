@@ -1,8 +1,8 @@
 import { ActionIcon, AppShell, Box, Burger, Flex,Group, Image, Stack, Text ,Popover, Title, useMantineColorScheme} from "@mantine/core";
 import { useEffect, useState,useRef } from "react"; // Import useState
 import nav from '../../assets/css/nav.module.css';
-import logo from '../../assets/images/ndblogo4.png';
-import imgSv from '../../assets/images/logoSv.png';
+import logo from '../../assets/images/ndblogo2.png';
+import imgSv from '../../assets/images/ndblogo3.png';
 import { useMantineTheme } from "@mantine/core";
 import useLogOut from "../../useMutation/Admin/useLogOut";
 import { Drawer, Button } from '@mantine/core';
@@ -165,7 +165,7 @@ useEffect(() => {
             <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
             <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
                 <Group align="center" gap={30}>
-                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='2.8rem' onClick={()=>navigate('/National_Diabetes_Program/superVisor/home-sv/')}/>
+                <Image ml={3} mb={5}  src={imgSv} style={{cursor:'pointer'}} w='3.2rem' onClick={()=>navigate('/National_Diabetes_Program/superVisor/home-sv/')}/>
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
         <Group>
@@ -263,7 +263,7 @@ useEffect(() => {
             <AppShell.Header w={'100%'} dir="ltr" bg={'#F9FAFC'}>
             <Flex mx={'0.7rem'} h="100%" px="0.2rem" justify='space-between' align={'center'}>
                 <Group align="center" gap={30}>
-                <Image ml={3} mb={5}  src={logo} style={{cursor:'pointer'}} w='2.5rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
+                <Image ml={3} mb={5}  src={logo} style={{cursor:'pointer'}} w='3.2rem' onClick={()=>navigate('/National_Diabetes_Program/home')}/>
                 {/* <Image src={profile} w='1.7rem' style={{cursor:'pointer',border:'1px solid #000',borderRadius:'50%'}} onClick={()=>navigate('/National_Diabetes_Program/centerProfile')}/> */}
         </Group>  
         <Group>

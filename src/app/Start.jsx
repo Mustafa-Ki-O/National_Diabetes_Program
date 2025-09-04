@@ -1,8 +1,8 @@
 // Part of National_Diabetes_Program
 // Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
 
-import img from '../assets/images/ndblogo4.png'
-import imgSv from '../assets/images/logoSv.png'
+import img from '../assets/images/ndblogo2.png'
+import imgSv from '../assets/images/ndblogo3.png'
 import modules from '../assets/css/start.module.css'
 import { Image ,Stack} from '@mantine/core'
 import { Container,Flex,Box,Title } from '@mantine/core'
@@ -22,7 +22,7 @@ const Start = () => {
 
           {/* </Stack> */}
          
-            <Flex justify='center' align='center' gap={20}>
+            <Flex justify='center' align='center' gap={10} style={{transform:'translateX(10px)'}}>
                      <Box className={modules.p} > 
                        <Title c='black' fz={{base:32,md:44}} ta='center' fw={600}>
                          البرنامج
@@ -35,7 +35,7 @@ const Start = () => {
                      <Image
                         bg='#F9FAFC'
                         className={modules.img}
-                        miw={{base:140 ,md:160}}
+                        miw={{base:180 ,md:230}}
                         alt="diabetes-Logo" 
                         src={inSv? imgSv : img} 
                     />

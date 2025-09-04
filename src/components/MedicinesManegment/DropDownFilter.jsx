@@ -23,7 +23,7 @@ const DropDownFilter = ({ records, setFilteredRecords }) => {
         <Button
           radius={10}
           variant="filled"
-          color="orange"
+          color="#37a9ef"
           size="sm"
           style={{ alignSelf: "end" }}
           w={"fit-content"}

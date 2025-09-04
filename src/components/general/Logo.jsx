@@ -1,6 +1,6 @@
 import { Flex,Box,Image,Title } from "@mantine/core"
 import img from '../../assets/images/ndblogo2.png';
-import imgSv from '../../assets/images/logoSv.png';
+import imgSv from '../../assets/images/ndblogo3.png';
 import { useLocation } from "react-router";
 
 
@@ -19,7 +19,7 @@ const Logo = () => {
                          للسكري
                        </Title>
                      </Box>
-                     <Image bg='#F9FAFC' src={inSv ? imgSv : img} h='auto'  miw={100} alt="diabetes-Logo" />
+                     <Image bg='#F9FAFC' src={inSv ? imgSv : img} h='auto'  miw={105} alt="diabetes-Logo" />
                   </Flex>
         </>
     )
