@@ -4,7 +4,7 @@ import FetchRecords from "../../api/Admin/FetchRecords";
 
 const useFetchRecords = (setRecords) => {
   const { mutate: fetchRecords, isPending} = useMutation({
-    mutationFn: () => FetchRecords().then((res) => {
+    mutationFn: (activePage) => FetchRecords(activePage).then((res) => {
       setRecords(res);
     }),
     onSuccess: () => {

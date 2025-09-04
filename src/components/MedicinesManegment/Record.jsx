@@ -5,14 +5,24 @@ import DropDownFilter from "./DropDownFilter"
 
 const Record = ({setProgress}) =>{
 
-    const [records,setRecords] = useState([])
-    const {fetchRecords,isPending} = useFetchRecords(setRecords)
+    const [recordsInfo,setRecordsInfo] = useState({})
+     const [records,setRecords] = useState([])
+     const [activePage,setActivePage] = useState(1)
+    const [total,setTotal] = useState()
+    const {fetchRecords,isPending} = useFetchRecords(setRecordsInfo)
 
     const [filteredRecords,setFilteredRecords] = useState([])
 
     useEffect(()=>{
-      fetchRecords()
-    },[])
+      fetchRecords(activePage)
+    },[activePage])
+
+    useEffect(()=>{
+        if(recordsInfo){
+            setTotal(recordsInfo.nor)
+            setRecords(recordsInfo.norip)
+        }
+    },[recordsInfo])
 
     
     useEffect(()=>{
@@ -75,13 +85,15 @@ const Record = ({setProgress}) =>{
         <>
          <Container p={5} fluid>
           
-            <Stack gap={10} justify="end" >
-             <DropDownFilter records={records} setFilteredRecords={setFilteredRecords}/>
-               {filteredRecords.map((r,i)=>(
-                <HistoryPaper key={i} record={r}/>
-               ))}
-            </Stack>
-           <Pagination mt={'3rem'}  total={10} radius="xl" />
+            <Stack gap={10} justify="end">
+               <DropDownFilter records={records} setFilteredRecords={setFilteredRecords} /> 
+               {Array.isArray(filteredRecords) && filteredRecords.length > 0 ? (
+                 filteredRecords.map((r, i) => <HistoryPaper key={i} record={r} />)
+               ) : (
+                 <Text ta="center" c="dimmed">لا يوجد سجلات</Text>
+               )}
+             </Stack>
+           <Pagination mt={'3rem'} value={activePage} onChange={setActivePage} total={total} radius="xl" />
          </Container>
         </>
     )

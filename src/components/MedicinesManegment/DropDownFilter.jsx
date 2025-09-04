@@ -9,7 +9,7 @@ const DropDownFilter = ({ records, setFilteredRecords }) => {
   useEffect(() => {
     if (!records) return
     if (active && active !== 'all') {
-      setFilteredRecords(records.filter((r) => r.RecordStatus === active))
+      setFilteredRecords(records?.filter((r) => r.RecordStatus === active))
     } else {
       setFilteredRecords(records)
     }
@@ -34,7 +34,7 @@ const DropDownFilter = ({ records, setFilteredRecords }) => {
       </Menu.Target>
 
       <Menu.Dropdown>
-        
+
         <Menu.Item
           ta={"right"}
           onClick={() => setActive("all")}
