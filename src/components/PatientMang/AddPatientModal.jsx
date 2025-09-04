@@ -1,7 +1,7 @@
 import useRegPatient from "../../useMutation/Patient/useRegPatient";
 import React, { useState, useEffect } from "react";
 import { DatePickerInput } from '@mantine/dates';
-import { TextInput, Button, Modal, Container, Flex, Grid, GridCol, PasswordInput, Anchor, Select ,Loader, Title, Text} from "@mantine/core";
+import { TextInput, Button, Modal, Container, Flex, Grid, GridCol, PasswordInput, Anchor, Select ,Loader, Title, Text, MultiSelect} from "@mantine/core";
 import { useForm, yupResolver } from "@mantine/form";
 import * as yup from "yup";
 import person from "../../assets/vectors/person.svg";
@@ -66,6 +66,10 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
          age:null,
          phone:'',
          password:'',
+         sugarType: "",
+         gender: "",
+         historyOfFamilyDisease: [],
+         historyOfdiseaseDetection: null,
         //  center_name: '',
         //  city:'',
         //  termsOfService: true
@@ -78,9 +82,9 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
      const handleSubmit = () => {
        if (form.isValid) {
            const values = form.getValues();
-           if (values.age) {
+           if (values.age || values.historyOfdiseaseDetection) {
            values.age = dayjs(values.age).format('DD-MM-YYYY')
-           console.log(values.age)
+           values.historyOfdiseaseDetection = dayjs(values.historyOfdiseaseDetection).format('DD-MM-YYYY')
          }
          console.log(values)
          const newFormData = new FormData();
@@ -119,7 +123,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
         <>
          <Modal
         w="100%"
-        size={'100%'}
+        fullScreen
         radius={20}
         opened={opened}
         onClose={close}
@@ -130,7 +134,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
         }}
         style={{ position: "absolute", right: 0 }}
       >
-        <Logo/>
+        {/* <Logo/> */}
         
        
         <Container w={{sm:'80%',xs:'100%'}} fluid my={20} bd='2px solid #37A9EF' style={{borderRadius:20,backgroundColor:'#ffffff30',backdropFilter:'blur(5px)'}}>
@@ -141,10 +145,10 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
               </Title>
             </Flex>
                <form style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)} >
-                 <Grid gutter="sm" justify="start" mt={20} mb={20} align="center" dir="rtl">
+                 <Grid gutter={15}  justify="start" my={25} align="center" dir="rtl">
                  <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                      <TextInput
-                       size="md"
+                       size="lg"
                        radius={10}
                        placeholder="أدخل رقم الهوية الوطني *"  
                        key={form.key("id_number")}
@@ -153,7 +157,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
                    </GridCol>
                    <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                      <TextInput
-                       size="md"
+                       size="lg"
                        radius={10}
                        placeholder="أدخل الاسم الكامل *"
                        rightSection={<img src={person} width="20px" />}
@@ -161,9 +165,35 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
                        {...form.getInputProps("fullname")}
                      />
                    </GridCol>
+                   <GridCol  justify='flex-end' span={{ lg: 6, xs: 12, sm: 12, md: 12 }} >
+                     <DatePickerInput
+                        size="lg"
+                        radius={10}
+                        placeholder=" تاريخ الميلاد *"
+                        valueFormat="DD/MM/YYYY"
+                        rightSection={<img src={calendar} width="20px" />}
+                        key={form.key("age")} 
+                        {...form.getInputProps("age")} 
+                     />
+                  </GridCol>
+                  <Grid.Col span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+              <Select
+                size="lg"
+                radius={10}
+                fw={600}
+                withAsterisk
+                placeholder="الجنس"
+                data={[
+                  { value: 'male', label: 'ذكر' },
+                  { value: 'female', label: 'أنثى' }
+                ]}
+                key={form.key("gender")}
+                {...form.getInputProps("gender")}
+              />
+          </Grid.Col> 
                    <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                      <TextInput
-                       size="md"
+                       size="lg"
                        radius={10}
                        placeholder="أدخل البريد الإلكتروني *"
                        rightSection={<img src={message} width="20px" />}
@@ -174,7 +204,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
                   
                    <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                       <TextInput
-                        size="md"
+                        size="lg"
                         radius={10}
                         placeholder="أدخل رقم الهاتف *"
                         rightSection={<img src={phone} width="20px" />}
@@ -182,42 +212,60 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
                         {...form.getInputProps("phone")}
                       />
                     </GridCol>
+                   
+            <Grid.Col span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+              <Select
+                size="lg"
+                radius={10}
+                fw={600}
+                withAsterisk
+                placeholder="نوع السكري"
+                data={[
+                  { value: 'النوع الأول', label: 'النوع الأول' },
+                  { value: 'النوع الثاني', label: 'النوع الثاني' },
+                  { value: 'سكري الحمل', label: 'سكري الحمل' },
+                  { value: 'نوع أخر', label: 'أخرى' }
+                ]}
+                key={form.key("sugarType")}
+                {...form.getInputProps("sugarType")}
+              />
+          </Grid.Col> 
 
-                   {/* <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
-                   <Select
-                        size="md"
-                        radius={10}
-                        placeholder='اختر المحافظة *'
-                        data={citiesNames}   
-                        value={city} 
-                        onChange={handleChangeCity}
-                        key={form.key("city")}    
-                        disabled={isPendingCities}
-                       //  {...form.getInputProps("city")}
-                      />
-                   </GridCol> */}
-                   {/* <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
-                     <Select 
-                       size="md"
-                       radius={10}
-                       placeholder="اختر المركز *"
-                       data={centerNames?.map(center => ({ value: center, label: center })) || []}
-                       key={form.key("center_name")}
-                       {...form.getInputProps("center_name")}
-                       disabled={isPendingCenters}
-                     />
-                   </GridCol> */}
-                   <GridCol justify='flex-end' span={{ lg: 6, xs: 12, sm: 12, md: 12 }} >
-                     <DatePickerInput
-                        size="md"
-                        radius={10}
-                        placeholder=" تاريخ الميلاد *"
-                        valueFormat="DD/MM/YYYY"
-                        rightSection={<img src={calendar} width="20px" />}
-                        key={form.key("age")} 
-                        {...form.getInputProps("age")} 
-                     />
-               </GridCol>
+            
+           <Grid.Col span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
+               <MultiSelect
+                size="lg"
+                radius={10}
+                fw={600}
+                withAsterisk
+                placeholder="التاريخ العائلي للمرض"
+                data={[
+                  { value: 'father', label: 'الأب' },
+                  { value: 'mother', label: 'الأم' },
+                  { value: 'grandParents', label: 'الأجداد' }
+                ]}
+                key={form.key("historyOfFamilyDisease")}
+                {...form.getInputProps("historyOfFamilyDisease")}
+                searchable
+                clearable
+              />
+          </Grid.Col> 
+
+
+          <Grid.Col span={{ lg: 6, xs: 12, sm: 12, md: 12 }} >
+            <DatePickerInput
+                 valueFormat="DD/MM/YYYY"
+                size="lg"
+                radius={10}
+                fw={600}
+                withAsterisk
+                rightSection={<img src={calendar} width="20px" />}
+                placeholder="تاريخ اكتشاف المرض"
+                key={form.key("historyOfdiseaseDetection")}
+                {...form.getInputProps("historyOfdiseaseDetection")}
+              />
+          </Grid.Col>
+
                 <GridCol span={{ lg: 6, xs: 12, sm: 12, md: 12 }}>
                   <Flex w={'100%'} align={'center'} justify={'space-between'}>
                     <Text>
@@ -271,7 +319,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
                  </Flex>
                  <Grid hiddenFrom="md" gutter={15} my={25}>
                    <GridCol span={12}>
-                     <Button fullWidth radius={10} size="md"  type="submit" variant="filled" color="#37A9EF">
+                     <Button fullWidth radius={10} size="lg"  type="submit" variant="filled" color="#37A9EF">
                      {isPending ? (
            <Loader color="white" size="sm" type="dots" />
          ) : (
@@ -280,7 +328,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
                      </Button>
                    </GridCol>
                    <GridCol span={12}>
-                     <Button  fullWidth radius={10} size="md" variant="outline" color="#8E8E8E" onClick={handleLog}>
+                     <Button  fullWidth radius={10} size="lg" variant="outline" color="#8E8E8E" onClick={handleLog}>
                        تراجع
                      </Button>
                    </GridCol>
