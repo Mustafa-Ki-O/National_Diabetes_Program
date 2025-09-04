@@ -20,10 +20,6 @@ const PatientReview = () =>{
       { label: 'المدينة', key: 'address' },
       { label: 'الوزن', key: 'weight' },
       { label: 'الطول', key: 'length_patient' },
-      { label: 'الجنس', key: 'gender' },
-      { label: 'نوع السكري', key: 'sugarType' },
-      { label: 'التاريخ العائلي للمرض', key: 'historyOfFamilyDisease' },
-      { label: 'تاريخ اكتشاف المرض', key: 'historyOfdiseaseDetection' },
       { label: 'أمراض أخرى', key: 'otherDisease' },
       ],
     },
@@ -48,7 +44,6 @@ const PatientReview = () =>{
       title: 'العلاج',
       fields: [
       { label: "نوع العلاج", key: "treatments.type" },
-      { label: "نوع الإنسولين", key: "treatments.speed" },
       { label: "الأدوية", key: "treatments.druges" }
       ],
     },

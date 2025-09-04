@@ -6,6 +6,7 @@ import useFetchMedicines from '../../useMutation/Admin/useFetchMedicines';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMedicin,removeMedicin } from '../../redux/action';
+import DropDownFilter from './DropDownFilter';
 
 
 
@@ -62,8 +63,8 @@ const MangementTabs =({setProgress}) => {
 
             <Archive style={{marginLeft:5}} size={20} />
               السجل
-              <SlidersHorizontal size={15} style={{marginRight:15,cursor:'pointer'}} />
-           
+             
+              
         </Tabs.Tab>
       </Tabs.List>
 
@@ -71,7 +72,7 @@ const MangementTabs =({setProgress}) => {
        <MedicinesStore setProgress={setProgress} medicines={medicinesStore}/>
       </Tabs.Panel>
 
-      <Tabs.Panel mt={'xl'} value="history" p={10}>
+      <Tabs.Panel mt={0} value="history" p={10}>
           <Record setProgress={setProgress}/>
       </Tabs.Panel>
 

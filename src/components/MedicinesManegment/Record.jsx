@@ -1,12 +1,14 @@
 import { Container, Flex, Grid, Indicator, Pagination, Paper, Stack, Text, Title } from "@mantine/core"
 import useFetchRecords from "../../useMutation/Admin/useFetchRecords"
 import { useEffect, useState } from "react"
+import DropDownFilter from "./DropDownFilter"
 
 const Record = ({setProgress}) =>{
 
     const [records,setRecords] = useState([])
     const {fetchRecords,isPending} = useFetchRecords(setRecords)
 
+    const [filteredRecords,setFilteredRecords] = useState([])
 
     useEffect(()=>{
       fetchRecords()
@@ -16,6 +18,10 @@ const Record = ({setProgress}) =>{
     useEffect(()=>{
        setProgress(isPending)
     },[isPending])
+
+//   useEffect(() => {
+//     setFilteredRecords(records)
+//   }, [records])
     
     const HistoryPaper = ({record}) =>{
         const {ID,NameArabic,Dosage,MedicationType,RequestedQuantity,CenterID,CreatedAt,ApprovalDate,RecordStatus} = record
@@ -67,14 +73,15 @@ const Record = ({setProgress}) =>{
 
     return(
         <>
-         <Container p={5} fluid >
-            <Stack gap={10}>
-               {records.map((r,i)=>(
+         <Container p={5} fluid>
+          
+            <Stack gap={10} justify="end" >
+             <DropDownFilter records={records} setFilteredRecords={setFilteredRecords}/>
+               {filteredRecords.map((r,i)=>(
                 <HistoryPaper key={i} record={r}/>
                ))}
- 
             </Stack>
-           <Pagination  mt={'3rem'}  total={10} radius="xl" />
+           <Pagination mt={'3rem'}  total={10} radius="xl" />
          </Container>
         </>
     )

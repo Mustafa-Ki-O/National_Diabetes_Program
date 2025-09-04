@@ -16,14 +16,7 @@ const GeneralPatientReview = ({review}) =>{
       </Flex>
     </Grid.Col>
 
-    <Grid.Col style={{borderBottom:'1px solid #8e8e8e40'}} span={{ base: 12, sm: 6 }}>
-      <Flex p={20} className={info.hovered}  align={'center'} gap={'5rem'}>
-        <Text fw={600} size={'1.4rem'}>الجنس :</Text>
-        <Text size={'1.4rem'} fw={500}>
-          {review.gender === 'male' ? 'ذكر' : review.gender === 'female' ? 'أنثى' : ''}
-        </Text>
-      </Flex>
-    </Grid.Col>
+
 
     <Grid.Col style={{borderBottom:'1px solid #8e8e8e40'}} span={{ base: 12, sm: 6 }}>
       <Flex p={20} className={info.hovered}  align={'center'} gap={'5rem'}>
@@ -36,40 +29,6 @@ const GeneralPatientReview = ({review}) =>{
       <Flex p={20} className={info.hovered}  align={'center'} gap={'5rem'}>
         <Text fw={600} size={'1.4rem'}>الطول :</Text>
         <Text size={'1.4rem'} fw={500}>{review.length_patient || ''} cm</Text>
-      </Flex>
-    </Grid.Col>
-
-    <Grid.Col style={{borderBottom:'1px solid #8e8e8e40'}} span={{ base: 12, sm: 6 }}>
-      <Flex p={20} className={info.hovered}  align={'center'} gap={'5rem'}>
-        <Text fw={600} size={'1.4rem'}>نوع السكري :</Text>
-        <Text size={'1.4rem'} fw={500}>{review.sugarType || ''}</Text>
-      </Flex>
-    </Grid.Col>
-
-
-
-    <Grid.Col style={{borderBottom:'1px solid #8e8e8e40'}} span={{ base: 12, sm: 6 }}>
-      <Flex p={20} className={info.hovered}  align={'center'} gap={'5rem'}>
-        <Text fw={600} size={'1.4rem'}>التاريخ العائلي للمرض :</Text>
-        <Text size={'1.4rem'} fw={500}>
-          {review.historyOfFamilyDisease
-            ? review.historyOfFamilyDisease
-                .map(item => {
-                  if (item === 'father') return 'الأب';
-                  if (item === 'mother') return 'الأم';
-                  if (item === 'grandParents') return 'الأجداد';
-                  return item;
-                })
-                .join('، ')
-            : ''}
-        </Text>
-      </Flex>
-    </Grid.Col>
-
-    <Grid.Col style={{borderBottom:'1px solid #8e8e8e40'}} span={{ base: 12, sm: 6 }}>
-      <Flex p={20} className={info.hovered}  align={'center'} gap={'5rem'}>
-        <Text fw={600} size={'1.4rem'}>تاريخ اكتشاف المرض :</Text>
-        <Text size={'1.4rem'} fw={500}>{review.historyOfdiseaseDetection || ''}</Text>
       </Flex>
     </Grid.Col>
 
