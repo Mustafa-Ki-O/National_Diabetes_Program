@@ -8,45 +8,40 @@ const ProfileNav = () => {
      const navigate = useNavigate();
 
      const location = useLocation();
-      const [opened, setOpened] = useState(false);
+      // const [opened, setOpened] = useState(false);
     
-      const handleLogOut = () => {
-        setOpened(false); 
 
-        localStorage.clear()
-        navigate("/National_Diabetes_Program/");
-       
-      };
       const handleNavigate = () =>{
         navigate('/National_Diabetes_Program/settings/');
-        setOpened(false); 
+        // setOpened(false); 
       }
     
       const isActive = location.pathname.includes('settings')
 
     return(
         <>
-        <Popover
+        {/* <Popover
               width={"auto"}
               position="bottom"
               shadow="md"
               opened={opened}
               onChange={setOpened}
             >
-              <Popover.Target>
+              <Popover.Target> */}
                 
-                  <Indicator disabled={!opened} inline color="#16aabb" 
+                  <Indicator disabled={!isActive} inline color="#16aabb" 
                   position="top-end" size={12} mt={5}
                   radius="xl">
                     {/* <Stack gap={0}> */}
                    <CircleUserRound 
+                   onClick={handleNavigate} 
                    size={isActive ? 38 : 36}
                    strokeWidth={isActive ? 1.8 : 1.6}
                    color={isActive ? '#37a9ef' : '#707070'}
-                    style={{cursor:'pointer'}} onClick={() => setOpened((o) => !o)} />
+                    style={{cursor:'pointer'}}  />
                    {/* </Stack> */}
                 </Indicator>
-              </Popover.Target>
+              {/* </Popover.Target>
         
               <Popover.Dropdown>
                 <Stack gap={8} align="end">
@@ -59,7 +54,7 @@ const ProfileNav = () => {
                   </Button>
                 </Stack>
               </Popover.Dropdown>
-            </Popover>
+            </Popover> */}
         </>
     )
 }

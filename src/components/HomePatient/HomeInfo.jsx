@@ -1,6 +1,6 @@
 import { Text,Button,Stack,Flex,Container, Title, Card, Grid, Paper , Accordion, Box, Group } from "@mantine/core"
 import { LineChart } from "@mantine/charts";
-import { Stethoscope ,ScanHeart ,CalendarDays ,CalendarCheck} from "lucide-react";
+import { Stethoscope ,ScanHeart ,CalendarDays ,CalendarCheck, ChartBar, CalendarCheck2, IdCard, Hospital, Calendar1} from "lucide-react";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
@@ -87,26 +87,42 @@ const labelMap = {
 
     return(
         <>
-        <Stack gap={{base:5,sm:20}}>
+        <Stack gap={{base:10,sm:20}}>
         <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} w={{base:'100%',md:'50%'}}  radius={10}>
           <Title mb={20} size={'1.6rem'} ta={'right'}>
             {homeInfo.fullname}
           </Title>
           <Grid gutter={10} >
          <Grid.Col span={6}>
-               <Text ta={'right'} size={'md'} c={'#8e8e8e'}>تاريخ الميلاد</Text>
+              <Group justify="end" gap={4} align="center">
+                   <Text ta={'right'} size={'md'} c={'#8e8e8e'}>تاريخ الميلاد</Text>
+                    <Calendar1 size={15} c={'#8e8e8e'}/>
+               </Group>
                <Text ta={'right'} size={'md'} fw={'500'} c={'#000'}>{homeInfo.age}</Text>
             </Grid.Col>
             <Grid.Col span={6}>
+               <Group justify="end" gap={4} align="center">
                <Text ta={'right'} size={'md'} c={'#8e8e8e'}>الرقم الوطني</Text>
+               <IdCard size={15} c={'#8e8e8e'}/>
+               </Group>
                <Text ta={'right'} size={'md'} fw={'500'} c={'#000'}>{homeInfo.id_number}</Text>
             </Grid.Col>
             <Grid.Col span={12}>
+              <Group justify="end" gap={4} align="center">
                 <Text ta={'right'} size={'md'} c={'#8e8e8e'}>الفحص السريري</Text>
-               <Text ta={'right'} size={'md'} fw={'500'} c={'green'}>مكتمل في {homeInfo.firstReviewDate}</Text>
+                <CalendarCheck2 size={15} c={'#8e8e8e'}/>
+              </Group>
+                
+              <Text ta="right" size="md" fw={500} c="green">
+                  {homeInfo.firstReviewDate }
+
+                </Text>
             </Grid.Col>
               <Grid.Col span={12}>
+                <Group justify="end" gap={4} align="center">
                 <Text ta={'right'} size={'md'} c={'#8e8e8e'}> المركز المشرف </Text>
+                <Hospital size={15} c={'#8e8e8e'}/>
+                </Group>
                <Text ta={'right'} size={'md'} fw={'500'}  c={'#000'}>{homeInfo.center_name}</Text>
             </Grid.Col>
           </Grid>
@@ -118,13 +134,14 @@ const labelMap = {
              طبيبي
             
             </Button>
-              <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl" onClick={()=>navigate('/National_Diabetes_Program/analyzer-AI/')} >
+              <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl"
+               onClick={()=>navigate('/National_Diabetes_Program/analyzer-AI/')} >
             <ScanHeart  size={28} color="#fff" style={{marginRight:10}}/>
              فحص AI
             </Button>
           </Flex>
           <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} radius={10}>
-          <LineChart
+            {homeInfo?.chartData ? (<LineChart
              h={200}
              data={homeInfo.chartData}
              dataKey="date"
@@ -137,9 +154,18 @@ const labelMap = {
                { name: 'hdl', label: 'HDL ', color: 'red.6' },
                { name: 'normal_glocose', label: 'نسبة السكر', color: 'teal.6' },
              ]}
-           />
+           />):(
+            <Flex justify={'end'} align={'center'} gap={8} >
+           <Text size="md" ta={'right'}>
+              لا بتوفر بيانات تحاليل لعرضها
+            </Text>
+            <ChartBar size={20} />
+            </Flex>
+            
+           )}
+          
           </Paper>
-          <Title ta={'right'} size={'1.5rem'} >المراجعات </Title>       
+          <Title ta={'right'} size={'1.5rem'} mt={10}>المراجعات </Title>       
               <Flex
                 dir="ltr"
                 bd={'1px solid #fe101070'}

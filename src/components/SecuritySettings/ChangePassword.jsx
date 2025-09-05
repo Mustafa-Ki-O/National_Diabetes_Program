@@ -10,12 +10,19 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState,useEffect } from "react";
+import usePostPassword from "../../useMutation/Patient/usePostPassword";
+import { useNavigate } from "react-router";
 
 
-const ChangePassword = () => {
+const ChangePassword = ({setProgress}) => {
 
             const [active,setActive] = useState(false);
             const [changed,setChanged] = useState(false);
+            const {postPassword,isPending} = usePostPassword()
+
+            useEffect(()=>{
+              setProgress(isPending)
+            },[isPending])
 
                 useEffect(()=>{
                   setTimeout(()=>{
@@ -26,28 +33,48 @@ const ChangePassword = () => {
 
   const form = useForm({
     initialValues: {
-      oldPassword: "",
-      newPassword: "",
+      old_password: "",
+      new_password: "",
       confirmPassword: "",
     },
 
     validate: {
-      oldPassword: (value) => (value ? null : "يرجى إدخال كلمة المرور القديمة"),
-      newPassword: (value, values) => {
+      old_password: (value) => (value ? null : "يرجى إدخال كلمة المرور القديمة"),
+      new_password: (value, values) => {
         if (!value) return "يرجى إدخال كلمة المرور الجديدة";
-        if (value === values.oldPassword)
+        if (value === values.old_password)
           return "كلمة المرور الجديدة يجب أن تكون مختلفة عن القديمة";
         return null;
       },
       confirmPassword: (value, values) =>
-        value !== values.newPassword ? "كلمتا المرور غير متطابقتين" : null,
+        value !== values.new_password ? "كلمتا المرور غير متطابقتين" : null,
     },
   });
 
   const handleSubmit = (values) => {
     console.log("Form Submitted:", values);
-    // يمكنك إرسال البيانات إلى API هنا
+         if (form.isValid) {
+          const values = form.getValues();
+          console.log(values)
+          const newFormData = new FormData();
+          Object.keys(values).forEach((key) => {
+            if(key !== 'confirmPassword'){
+              newFormData.append(key,values[key]);
+            }
+          });
+          postPassword(newFormData);
+          setChanged(false);
+        }
+    
+        const validated = form.validate();
+        if (validated) {
+          validated.errors;
+        }
+        form.reset();
+    
+  
   };
+  const navigate = useNavigate()
 
   return (
     <form onChange={()=>setChanged(true)}  onSubmit={form.onSubmit(handleSubmit)} 
@@ -72,7 +99,7 @@ const ChangePassword = () => {
           placeholder="••••••••"
           size="md"
           radius="md"
-          {...form.getInputProps("oldPassword")}
+          {...form.getInputProps("old_password")}
           styles={{
                         label: {
                           textAlign: 'right',
@@ -90,7 +117,7 @@ const ChangePassword = () => {
           placeholder="••••••••"
           size="md"
           radius="md"
-          {...form.getInputProps("newPassword")}
+          {...form.getInputProps("new_password")}
           styles={{
                         label: {
                           textAlign: 'right',
@@ -127,10 +154,7 @@ const ChangePassword = () => {
             size="sm"
             c="blue"
             style={{ cursor: "pointer" }}
-            onClick={() => {
-              // إجراء في حال نسيان كلمة المرور
-              alert("سيتم تحويلك إلى استعادة كلمة المرور");
-            }}
+            onClick={() => navigate('/National_Diabetes_Program/resetPassword/')}
           >
             نسيت كلمة المرور؟
           </Text>

@@ -1,17 +1,18 @@
 import { Button, Divider, Stack, Text ,Accordion,Flex} from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { Globe, Info, ShieldCheck, UserRound } from "lucide-react"
+import { Globe, Info, LogOutIcon, ShieldCheck, UserRound } from "lucide-react"
 import { useNavigate } from "react-router"
 import ContactModal from "./ContactModal"
 import { useState,useEffect } from "react"
+import LogOutModal from "../Home/Admin/LogOutModal"
 const Tabs = () =>{
 
     const navigate=useNavigate()
     const [opened,{open,close}] = useDisclosure()
 
                 const [active,setActive] = useState(false);
-    
-            
+                const [openedL,{open:openL,close:closeL}] = useDisclosure()
+
                     useEffect(()=>{
                       setTimeout(()=>{
                         setActive(true);
@@ -22,11 +23,15 @@ const Tabs = () =>{
         if(value == 'contact-settings'  ){
             open()
         }
+        if(value == 'logOut'){
+                 openL()
+        }
         else{
             navigate(`/National_Diabetes_Program/${value}/`)
         }
         
     }
+
 
     const Element = ({icon:Icon,text,value})=>{
 
@@ -34,8 +39,8 @@ const Tabs = () =>{
             <>
             
             <Flex justify='end' align='center' p={5} onClick={()=> handleClick(value)}>
-                <Text size="md" >{text}</Text>
-                <Icon size={20} style={{marginLeft:8}} />
+                <Text size="md" c={value==='logOut'? '#E53935':'#000'} >{text}</Text>
+                <Icon size={20} style={{marginLeft:8}} color={value==='logOut'? '#E53935':'#000'}/>
             </Flex>
             <Divider w={'100%'} />
             </>
@@ -44,6 +49,7 @@ const Tabs = () =>{
 
     return(
         <>
+        <LogOutModal opened={openedL} close={closeL} />
         <ContactModal opened={opened} close={close}/>
         <Stack style={{opacity:active?'1':'0',transform:active?'translateY(0px)':'translateY(100px)' ,transition:'all 0.8s'}}>
             <Element icon={UserRound} text={'معلومات الحساب'} value={'profile-settings'} />
@@ -85,6 +91,7 @@ const Tabs = () =>{
           </Accordion>
             <Element icon={Info} text={'تواصل معنا'} value={'contact-settings'} />
             <Element icon={Info} text={'الشروط والاحكام'} value={'condition-settings'} />
+            <Element icon={LogOutIcon} text={'تسجيل الخروج'} value={'logOut'} />
         </Stack>
         </>
     )
