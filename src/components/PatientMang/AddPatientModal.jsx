@@ -94,18 +94,19 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
          }
          console.log(values)
          const newFormData = new FormData();
+
          Object.keys(values).forEach((key) => {
-             if (key === "historyOfFamilyDisease" && Array.isArray(values[key])) {
-                values[key].forEach((item) => {
-                  newFormData.append(key, item);
+              if (key === "historyOfFamilyDisease") {
+                const items = Array.isArray(values[key]) ? values[key] : [values[key]];
+                items.forEach((item) => {
+                  newFormData.append("historyOfFamilyDisease[]", item);
                 });
               } else {
-
-            newFormData.append(key, values[key]);
-            }
-             console.log(newFormData)
-      
-         });
+                newFormData.append(key, values[key]);
+              }
+            });
+        
+        console.log(newFormData);
          setIsSubmitted(true);
          // console.log(newFormData)
         //  localStorage.setItem('patientEmail',JSON.stringify(values.email));

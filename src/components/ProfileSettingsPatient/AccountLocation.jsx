@@ -6,56 +6,70 @@ import useFetchCities from "../../useMutation/Patient/useFetchCities";
 import useFetchCenters from "../../useMutation/Patient/useFetchCenters";
 
 
-const AccountLocation = ({info}) => {
+const AccountLocation = ({info,setProgress}) => {
     const [isFormChanged, setIsFormChanged] = useState(false);
-    const [progress,setProgress] = useState(false)
-   const [city,setCity] = useState(info.location);
-//    const [centerName,setCenterName] = useState(info.centerName)
+
+  //  const [city,setCity] = useState(info.city);
+   
   const [centerNames, setCenterNames] = useState([]);
   const [citiesNames,setCitiesNames] = useState([])
+
   const {fetchCities,isPendingCities} = useFetchCities(setCitiesNames)
   const { fetchCenters, isPendingCenters } = useFetchCenters(setCenterNames);
           
+
       const form = useForm({
         initialValues: {
-          location: info.location || '',
-          centerName: info.centerName || '',
+          city:  '',
+          centerName: '',
           
         },
     
         validate: {
-          location: (value) => (!value ? 'يجب تحديد مكان الاقامة' : null),
+          city: (value) => (!value ? 'يجب تحديد مكان الاقامة' : null),
           centerName: (value) => (!value ? "يجب تحديد المركز المشرف" : null),
     
         },
       });
+      useEffect(() => {
+          if (info) {
+            form.setValues({
+              city: info.city ,
+              centerName: info.centerName ,
+            });
+          }
+        }, [info]);
+      
 
    
-      useEffect(() => {
-          if (
-            info.centerName &&
-            !centerNames.includes(info.centerName)
-          ) {
-            setCenterNames(prev => [...prev, info.centerName]);
-          }
-        }, [centerNames, info.centerName]);
+      // useEffect(() => {
+        //   if (
+        //     info.centerName &&
+        //     !centerNames.includes(info.centerName)
+        //   ) {
+        //     setCenterNames(prev => [...prev, info.centerName]);
+        //   }
+        // }, [centerNames, info.centerName]);
 
         useEffect(()=>{
-        
+          
           fetchCities(setCitiesNames)
         },[])
       
-        const handleChangeCity = (value) => {
-          form.getInputProps("location").onChange(value);
-      
-          setCenterNames([]);
-          form.setValues('centerName', null);
-      
-          setCity(value);
-          
-          fetchCenters(value);
+      useEffect(() => {
+        if (info.city) {
+          setCenterNames([]); // إفراغ القائمة القديمة للمراكز عند تغيير المدينة
+          fetchCenters(info.city); // تحميل المراكز بناءً على المدينة الجديدة
         }
-
+      }, [info.city]); // متابعة تغييرات المدينة فقط
+      
+      const handleChangeCity = (value) => {
+        form.setFieldValue("city", value); // تحديث المدينة في الـ form
+        setCenterNames([]); // إفراغ المراكز القديمة
+        form.setFieldValue("centerName", null); // إعادة تعيين المركز إلى null
+        fetchCenters(value); // تحميل المراكز للمدينة الجديدة
+        setIsFormChanged(true); // تعيين التغيير عندما يتم تعديل المدينة
+      };
 
       const handleSubmit = (values) => {
         console.log('Submitted values:', values);
@@ -82,9 +96,9 @@ const AccountLocation = ({info}) => {
                       label='مكان الاقامة'
                       placeholder='حدد مكان الاقامة'
                       data={citiesNames}   
-                      value={city} 
+                      value={form.values.city} 
                       onChange={handleChangeCity}
-                      key={form.key("location")}    
+                      key={form.key("city")}    
                       disabled={isPendingCities}
                       styles={{
                         label: {
@@ -112,7 +126,7 @@ const AccountLocation = ({info}) => {
                       data={centerNames?.map(center => ({ value: center, label: center })) || []}
                       value={form.values.centerName}
                       key={form.key("centerName")} 
-                      onChange={(value) => form.setFieldValue("centerName", value)}
+                      onChange={(value) => {form.setFieldValue("centerName", value);setIsFormChanged(true); }}
                       disabled={isPendingCenters}
                       styles={{
                         label: {
@@ -127,8 +141,8 @@ const AccountLocation = ({info}) => {
 
                   </Grid.Col>
                    <Grid.Col mt={20}>
-                              {isFormChanged && (
-                    <Button fullWidth variant="filled" color={'#37a9ef'} size="md" radius={10} >
+                    {isFormChanged && (
+                    <Button type="submit" fullWidth variant="filled" color={'#37a9ef'} size="md" radius={10} >
                                       حفظ
                      </Button>
                  )}</Grid.Col>

@@ -4,29 +4,41 @@ import { PenLine } from "lucide-react";
 import { useForm } from "@mantine/form";
 
 
-const AccountSettings = ({info}) => {
+const AccountSettings = ({info,setProgress}) => {
       const [isFormChanged, setIsFormChanged] = useState(false);
 
-      
+      console.log(info)
   const form = useForm({
-    initialValues: {
-      fullname: info.fullname || '',
-      birth: info.birth || '',
-      id_num: info.id_num || '',
-      email: info.email || '',
-      phone: info.phone || '',
-      
-    },
-
+      initialValues: {
+           fullname: "",
+           date: "",
+           id_number: "",
+           email: "",
+           phone: "",
+         },
+  
     validate: {
       fullname: (value) => (value.trim().length < 2 ? 'الاسم غير صالح' : null),
-      birth: (value) => (!/^\d{1,2}-\d{1,2}-\d{4}$/.test(value) ? 'تاريخ الميلاد غير صالح (مثال: 18-7-1980)' : null),
-      id_num: (value) => (value.length < 5 ? 'رقم الهوية غير صالح' : null),
+      // birth: (value) => (!/^\d{1,2}-\d{1,2}-\d{4}$/.test(value) ? 'تاريخ الميلاد غير صالح (مثال: 18-7-1980)' : null),
+      // id_num: (value) => (value.length < 5 ? 'رقم الهوية غير صالح' : null),
       email: (value) => (!/^\S+@\S+\.\S+$/.test(value) ? 'البريد الإلكتروني غير صالح' : null),
       phone: (value) => (value.length < 8 ? 'رقم الهاتف غير صالح' : null),
 
     },
   });
+  console.log('form : ',form)
+
+  useEffect(() => {
+    if (info) {
+      form.setValues({
+        fullname: info.fullname || "",
+        date: info.date || "",
+        id_number: info.id_number || "",
+        email: info.email || "",
+        phone: info.phone || "",
+      });
+    }
+  }, [info]);
 
   const handleSubmit = (values) => {
     console.log('Submitted values:', values);
@@ -39,9 +51,9 @@ const AccountSettings = ({info}) => {
             <Grid dir="ltr" gutter={20} justify="flex-end" align="center" w={{base:'95%',sm:'94%'}} m={'auto'} pos={'relative'} > 
               <Grid.Col span={{base:12,sm:6}}   >
               <TextInput 
+              disabled
               dir="rtl"
-              label={
-               
+              label={ 
                ' الاسم'
                 }
               variant="filled"
@@ -49,7 +61,6 @@ const AccountSettings = ({info}) => {
               size="lg"
               fw={600}
               radius={10}
-              // leftSection={<PenLine size={25} />}
               key={form.key("fullname")}
               {...form.getInputProps("fullname")}
               styles={{
@@ -65,22 +76,18 @@ const AccountSettings = ({info}) => {
               />
             </Grid.Col>
             
-            <Grid.Col span={{ base: 12, sm: 6 }}>
+            {/* <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
                dir="rtl"
                variant="filled"
               size="lg"
               fw={600}
-              // leftSection={ <PenLine size={18} />}
               label={
-                // <Flex justify="end" align="center" gap={10}>
-                //   <PenLine size={15} />
                  ' تاريخ الميلاد'
-                
               }
               placeholder="18-7-1980"
               radius={10}
-              {...form.getInputProps("birth")}
+              {...form.getInputProps("date")}
               styles={{
                 label: {
                   textAlign: 'right',
@@ -92,10 +99,10 @@ const AccountSettings = ({info}) => {
               }}
               style={{height:'auto !important'}}
             />
-          </Grid.Col>
+          </Grid.Col> */}
 
           {/* رقم الهوية */}
-          <Grid.Col span={{ base: 12, sm: 6 }}>
+          {/* <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
               dir="rtl"
               variant="filled"
@@ -122,24 +129,22 @@ const AccountSettings = ({info}) => {
               }}
               style={{height:'auto !important'}}
             />
-          </Grid.Col>
+          </Grid.Col> */}
 
           {/* البريد الإلكتروني */}
           <Grid.Col span={{ base: 12, sm: 6 }}>
             <TextInput
               dir="rtl"
-             variant="filled"
-            size="lg"
+              variant="filled"
+              size="lg"
               fw={600}
               // leftSection={ <PenLine size={18} />}
               label={
-                // <Flex justify="end" align="center" gap={10}>
-                //   <PenLine size={15} />
                  ' البريد الإلكتروني'
-          
               }
               placeholder="example@email.com"
               radius={10}
+              key={form.key("email")}
               {...form.getInputProps("email")}
               styles={{
                 label: {
@@ -162,14 +167,12 @@ const AccountSettings = ({info}) => {
               size="lg"
               fw={600}
               label={
-                // <Flex justify="end" align="center" gap={10}>
-                //   <PenLine size={15} />
+
                  ' رقم الهاتف'
-                // </Flex>
               }
-              // leftSection={ <PenLine size={18} />}
               placeholder="092xxxxxxx"
               radius={10}
+              key={form.key("phone")}
               {...form.getInputProps("phone")}
              styles={{
                 label: {

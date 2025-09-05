@@ -1,35 +1,34 @@
 import { Container,Title } from "@mantine/core"
 import { useState , useEffect } from "react";
 import AccountTabs from "../../components/ProfileSettingsPatient/AccountTabs";
+import useFetchProfile from "../../useMutation/Patient/useFetchProfile";
+import Progress from "../../components/general/Progress";
 const ProfileSettings = () => {
 
 
-        const [info,setInfo] = useState({
-            fullname:"rami",
-            birth:'18-7-1980',
-            id_num:'10999202922',
-            email:'r1@gmail.com',
-            phone:'09282221',
+        const [info,setInfo] = useState({})
+        const {fetchProfile,isPending} = useFetchProfile(setInfo)
 
-            type:'نوع اول',
-            medicins:['خافضات فموية','ميتفورمين'],
+        const [progress,setProgress] = useState(false)
 
-            location:'حمص',
-            centerName:'مركز حمص '
+        useEffect(()=>{
+         fetchProfile()
+        },[])
 
-        })
-    
-
+        useEffect(()=>{
+            setProgress(isPending)
+        },[isPending])
 
     return(
         <>
+        {progress && <Progress/>}
         <Container 
         p={10} fluid mb={'4.5rem'} mih={'83vh'}
         >
             <Title my={20} size={'xl'} ta={'right'}>
                  معلومات الحساب
                </Title>
-            <AccountTabs info={info}/>
+            <AccountTabs info={info} setProgress={setProgress}/>
         </Container>
         </>
     )

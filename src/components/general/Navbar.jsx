@@ -111,7 +111,7 @@ useEffect(() => {
 
 
   const NavIcon = ({ icon: Icon, name, clickedButton, handleButtonNavClick ,label}) => {
-  const isActive = clickedButton === name;
+  const isActive = location.pathname.includes(name);
 
   return (
     <div
@@ -125,11 +125,11 @@ useEffect(() => {
         color={isActive ? '#37a9ef' : '#707070'}
         
       />
-      <Text
+      {/* <Text
         size={isActive ? 'sm' : 'xs'}
         
         c={isActive ? '#37a9ef' : '#707070'}
-      >{label}</Text>
+      >{label}</Text> */}
     </div>
   );
 };
@@ -355,24 +355,19 @@ useEffect(() => {
        <AppShell  mb={'4rem'} >
         
         <AppShell.Header p={10} w={'100%'}  bg={'#FFF'} >
-          <Flex justify={'space-between'} align={'center'}>
-             <Image src={logo} w={45} pb={5}/>
-             <Group gap={15} align="center">
+          <Flex justify={'space-between'} align={'center'} pr={10}>
+             <Image src={logo} w={45} pb={0}/>
+             {/* <Group gap={15} align="center"> */}
               <NotifyNav notifications={notifications}/>
-              <ProfileNav/>
+              
                 {/* <ModePicker/> */}
-             </Group>
+             {/* </Group> */}
           </Flex>
         </AppShell.Header >
         <AppShell.Footer  p={9} w={'100%'} dir="ltr" bg={'#FFF'}  style={{borderTop:'1px solid #12121208'}}>
         <Flex px={'1rem'} justify={'space-between'} align={'center'}>
-           <NavIcon 
-             icon={ScanHeart} 
-             name="analyzer-AI" 
-             clickedButton={clickedButton} 
-             handleButtonNavClick={handleButtonNavClick}
-             label ='AI فحص'
-           />
+          
+            <ProfileNav/>
             <NavIcon 
               icon={BriefcaseMedical} 
               name="health-care" 
@@ -391,14 +386,20 @@ useEffect(() => {
                 
               />
             </div> */}
-            <NavIcon 
+            {/* <NavIcon 
               icon={Activity} 
               name="health-checkUps" 
               clickedButton={clickedButton} 
               handleButtonNavClick={handleButtonNavClick} 
               label={'الحالة الصحية'}
-            /> 
-            
+            />  */}
+             <NavIcon 
+             icon={ScanHeart} 
+             name="analyzer-AI" 
+             clickedButton={clickedButton} 
+             handleButtonNavClick={handleButtonNavClick}
+             label ='AI فحص'
+           />
             <NavIcon 
               icon={House} 
               name="patient-home" 

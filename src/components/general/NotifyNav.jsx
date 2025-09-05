@@ -34,7 +34,7 @@ const NotifyNav = ({ notifications }) => {
           radius="xl">
 
 
-            <BellIcon  fill={isInNotify ? "#37a9ef" : "#fff"} size={22} color="#37a9ef" onClick={() => setOpened((o) => !o)}/>
+            <BellIcon  fill={isInNotify ? "#37a9ef" : "#fff"} size={26} color="#37a9ef" onClick={() => setOpened((o) => !o)}/>
           
         </Indicator>
       </Popover.Target>

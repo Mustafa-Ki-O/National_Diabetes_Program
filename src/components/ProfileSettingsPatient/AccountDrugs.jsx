@@ -1,11 +1,22 @@
 import { Grid,TextInput } from "@mantine/core"
 import NotificationCard from "../NotificationPatient/NotificationCard"
+import { useEffect, useState } from "react"
 
 const AccountDrugs = ({info}) => {
+  const [type,setType] = useState('')
+  const [treatment,setTreatment] = useState([])
+
+  useEffect(()=>{
+    if(info){
+        setType(info.sugar_type)
+        setTreatment(info.treatment_type)
+    }
+  },[info])
 
   const message = {
     message:`لتعديل معلومات هذا القسم يرجى التوجه الى المركز الصحي المسؤول ( ${info.centerName} ) `
   }
+
     return(
         <>
         <Grid  dir="ltr" gutter={20} justify="flex-end" align="center" w={{base:'95%',sm:'94%'}} m={'auto'} pos={'relative'}>
@@ -18,7 +29,7 @@ const AccountDrugs = ({info}) => {
               fw={600}
               label={ 'نوع السكري'}
               radius={10}
-              value={info.type}
+              value={type? type : 'غير محدد بعد'}
              styles={{
                 label: {
                   textAlign: 'right',
@@ -40,7 +51,7 @@ const AccountDrugs = ({info}) => {
               fw={600}
               label={'العلاج'}
               radius={10}
-              value={info.medicins}
+              value={treatment? treatment: 'غير محدد بعد'}
              styles={{
                 label: {
                   textAlign: 'right',

@@ -7,7 +7,7 @@ const ProfileNav = () => {
 
      const navigate = useNavigate();
 
-    
+     const location = useLocation();
       const [opened, setOpened] = useState(false);
     
       const handleLogOut = () => {
@@ -22,6 +22,7 @@ const ProfileNav = () => {
         setOpened(false); 
       }
     
+      const isActive = location.pathname.includes('settings')
 
     return(
         <>
@@ -37,9 +38,13 @@ const ProfileNav = () => {
                   <Indicator disabled={!opened} inline color="#16aabb" 
                   position="top-end" size={12} mt={5}
                   radius="xl">
-
-                   <CircleUserRound strokeWidth={1.5} size={34} color="#37a9ef" style={{cursor:'pointer'}} onClick={() => setOpened((o) => !o)} />
-                   
+                    {/* <Stack gap={0}> */}
+                   <CircleUserRound 
+                   size={isActive ? 38 : 36}
+                   strokeWidth={isActive ? 1.8 : 1.6}
+                   color={isActive ? '#37a9ef' : '#707070'}
+                    style={{cursor:'pointer'}} onClick={() => setOpened((o) => !o)} />
+                   {/* </Stack> */}
                 </Indicator>
               </Popover.Target>
         
