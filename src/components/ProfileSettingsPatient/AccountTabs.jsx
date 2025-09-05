@@ -6,7 +6,7 @@ import AccountLocation from './AccountLocation';
 import { useState,useEffect } from 'react';
 
 
-const AccountTabs =({info,setProgress}) => {
+const AccountTabs =({info,setProgress,setInfo}) => {
 
             const [active,setActive] = useState(false);
 
@@ -36,11 +36,11 @@ const AccountTabs =({info,setProgress}) => {
       </Tabs.List>
 
       <Tabs.Panel mt={'lg'} value="account" >
-       <AccountSettings info={info} setProgress={setProgress}/>
+       <AccountSettings info={info} setProgress={setProgress} setInfo={setInfo}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={'lg'} value="location">
-          <AccountLocation info={info} setProgress={setProgress}/>
+          <AccountLocation info={info} setProgress={setProgress} setInfo={setInfo}/>
       </Tabs.Panel>
       
       <Tabs.Panel mt={'lg'} value="drugs">

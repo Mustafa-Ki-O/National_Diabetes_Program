@@ -28,7 +28,7 @@ const ProfileSettings = () => {
             <Title my={20} size={'xl'} ta={'right'}>
                  معلومات الحساب
                </Title>
-            <AccountTabs info={info} setProgress={setProgress}/>
+            <AccountTabs info={info} setProgress={setProgress} setInfo={setInfo}/>
         </Container>
         </>
     )

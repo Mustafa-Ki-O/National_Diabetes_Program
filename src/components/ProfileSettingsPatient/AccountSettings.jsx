@@ -2,17 +2,23 @@ import { Title,Grid,Text ,TextInput, Button ,Flex, Divider} from "@mantine/core"
 import { useState,useEffect } from "react";
 import { PenLine } from "lucide-react";
 import { useForm } from "@mantine/form";
+import usePostProfile from "../../useMutation/Patient/usePostProfile";
 
 
-const AccountSettings = ({info,setProgress}) => {
+const AccountSettings = ({info,setProgress,setInfo}) => {
       const [isFormChanged, setIsFormChanged] = useState(false);
+      const {postProfile,isPending} = usePostProfile(setInfo)
+
+      useEffect(()=>{
+         setProgress(isPending)
+      },[isPending])
 
       console.log(info)
   const form = useForm({
       initialValues: {
            fullname: "",
-           date: "",
-           id_number: "",
+          //  date: "",
+          //  id_number: "",
            email: "",
            phone: "",
          },
@@ -32,17 +38,38 @@ const AccountSettings = ({info,setProgress}) => {
     if (info) {
       form.setValues({
         fullname: info.fullname || "",
-        date: info.date || "",
-        id_number: info.id_number || "",
+        // date: info.date || "",
+        // id_number: info.id_number || "",
         email: info.email || "",
         phone: info.phone || "",
       });
     }
   }, [info]);
 
+
+
   const handleSubmit = (values) => {
     console.log('Submitted values:', values);
-    setIsFormChanged(false);
+         if (form.isValid) {
+          const values = form.getValues();
+          console.log(values)
+          const newFormData = new FormData();
+          Object.keys(values).forEach((key) => {
+              newFormData.append(key,values[key]);
+              
+          });
+          newFormData.append('date',info.date)
+           newFormData.append('id_number',info.id_number)
+          postProfile(newFormData);
+          setIsFormChanged(false);
+        }
+    
+        const validated = form.validate();
+        if (validated) {
+          validated.errors;
+        }
+        form.reset();
+    
   };
 
     return(
@@ -188,7 +215,7 @@ const AccountSettings = ({info,setProgress}) => {
           </Grid.Col>
           <Grid.Col mt={15}>
             {isFormChanged && (
-                <Button fullWidth variant="filled" color={'#37a9ef'} size="md" radius={10} >
+                <Button type="submit" fullWidth variant="filled" color={'#37a9ef'} size="md" radius={10} >
                     حفظ
                 </Button>
             )}</Grid.Col>

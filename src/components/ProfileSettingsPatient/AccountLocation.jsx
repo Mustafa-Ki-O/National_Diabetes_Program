@@ -4,9 +4,10 @@ import { useForm } from "@mantine/form";
 import { useState,useEffect } from "react";
 import useFetchCities from "../../useMutation/Patient/useFetchCities";
 import useFetchCenters from "../../useMutation/Patient/useFetchCenters";
+import usePostLocation from "../../useMutation/Patient/usePostLocation";
 
 
-const AccountLocation = ({info,setProgress}) => {
+const AccountLocation = ({info,setProgress,setInfo}) => {
     const [isFormChanged, setIsFormChanged] = useState(false);
 
   //  const [city,setCity] = useState(info.city);
@@ -17,6 +18,10 @@ const AccountLocation = ({info,setProgress}) => {
   const {fetchCities,isPendingCities} = useFetchCities(setCitiesNames)
   const { fetchCenters, isPendingCenters } = useFetchCenters(setCenterNames);
           
+        const {postLocation,isPending} = usePostLocation(setInfo)
+          useEffect(()=>{
+             setProgress(isPending)
+          },[isPending])
 
       const form = useForm({
         initialValues: {
@@ -73,9 +78,26 @@ const AccountLocation = ({info,setProgress}) => {
 
       const handleSubmit = (values) => {
         console.log('Submitted values:', values);
-        setIsFormChanged(false);
-      };
+         if (form.isValid) {
+          const values = form.getValues();
+          console.log(values)
+          const newFormData = new FormData();
+          Object.keys(values).forEach((key) => {
+              newFormData.append(key,values[key]);
+              
+          });
+          postLocation(newFormData);
+          setIsFormChanged(false);
+        }
     
+        const validated = form.validate();
+        if (validated) {
+          validated.errors;
+        }
+        form.reset();
+    
+  };
+
 
 
         useEffect(() => {
