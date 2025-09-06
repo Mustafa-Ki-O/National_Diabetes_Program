@@ -28,18 +28,27 @@ const ProfileNav = () => {
               onChange={setOpened}
             >
               <Popover.Target> */}
-                
-                  <Indicator disabled={!isActive} inline color="#16aabb" 
-                  position="top-end" size={12} mt={5}
+               <Indicator disabled={!isActive} inline color="#16aabb" 
+                  position="top-end" size={12} 
                   radius="xl">
+                <div  style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',margin:0}}>
+                 
                     {/* <Stack gap={0}> */}
                    <CircleUserRound 
                    onClick={handleNavigate} 
-                   size={isActive ? 38 : 36}
+                   size={isActive ? 38 : 32}
                    strokeWidth={isActive ? 1.8 : 1.6}
                    color={isActive ? '#37a9ef' : '#707070'}
                     style={{cursor:'pointer'}}  />
+                    <Text
+                  size={isActive ? 'sm' : 'xs'}
+                 
+                 c={isActive ? '#37a9ef' : '#707070'}
+                 >
+                  الحساب
+                 </Text>
                    {/* </Stack> */}
+                </div>
                 </Indicator>
               {/* </Popover.Target>
         

@@ -113,8 +113,9 @@ const MedicalAnalyses = () => {
                     سجل النتائج السابقة
                 </Title>
                 <Stack gap={15}>
-                  {[1,2].map(()=>(
+                  {[1,2].map((e)=>(
                     <PrevAnalyzies 
+                    key={e}
                     date={'18-18-2002'}
                     status={true}
                     res={'هنا نتيجة مختصرة عن التحليل'}

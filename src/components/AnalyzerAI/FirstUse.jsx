@@ -4,8 +4,10 @@ import { Container,Text,Title,Button,Stack } from "@mantine/core"
 const FirstUse = ({setClick,click}) => {
 
         const handleActive = () =>{
-        setClick(true)
-        
+        setClick(false)
+        const user = JSON.parse(localStorage.getItem('user'))
+        user.first_use_seen = false
+        localStorage.setItem('user', JSON.stringify(user));
     }
     return(
         <>

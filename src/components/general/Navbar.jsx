@@ -125,11 +125,11 @@ useEffect(() => {
         color={isActive ? '#37a9ef' : '#707070'}
         
       />
-      {/* <Text
+      <Text
         size={isActive ? 'sm' : 'xs'}
         
         c={isActive ? '#37a9ef' : '#707070'}
-      >{label}</Text> */}
+      >{label}</Text>
     </div>
   );
 };

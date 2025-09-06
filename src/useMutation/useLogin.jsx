@@ -18,8 +18,19 @@ const useLogin = () => {
           autoClose: 4000,
           color: 'blue',
         })    
-      res.role === 'center' ? navigate("/National_Diabetes_Program/home/") : res.first_login ? navigate("/National_Diabetes_Program/resetPassword/") : navigate("/National_Diabetes_Program/patient-home/")
-      
+      // res.role === 'center' ? navigate("/National_Diabetes_Program/home/") : res.first_login ? navigate("/National_Diabetes_Program/resetPassword/") : navigate("/National_Diabetes_Program/patient-home/")
+       if (res.role === 'center') {
+         navigate("/National_Diabetes_Program/home/");
+       } else if (res.first_login) {
+
+           navigate("/National_Diabetes_Program/resetPassword/");
+       } else {
+            const user = JSON.parse(localStorage.getItem('user'));
+           user.first_use_seen = true;
+           localStorage.setItem('user', JSON.stringify(user));
+           navigate("/National_Diabetes_Program/patient-home/");
+       }
+
     },
     onError: (err) => {
       console.log("ERROR", err);
