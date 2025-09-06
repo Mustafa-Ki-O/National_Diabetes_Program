@@ -5,27 +5,40 @@ import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import usePostDate from "../../../useMutation/SuperVisor/usePostDate";
 
-const DownloadModal = ({ opened, close ,setProgress}) => {
+const DownloadModal = ({ opened, close, setProgress }) => {
 
-  const { postDate, isPending } = usePostDate();
+  const [url, setUrl] = useState(null);  // بدأنا بـ null
+  const { postDate, isPending } = usePostDate(setUrl);
 
-  const [value, setValue] = useState(dayjs().subtract(1, 'month')); 
+  const [value, setValue] = useState(null); // لا قيمة افتراضية
+
+  const handleChange = (newValue) => {
+    console.log(newValue)
+    if (newValue ) {
+      setUrl(null);  // إعادة تعيين URL عند تغيير الشهر
+      setValue(newValue);  // تحديث القيمة الجديدة
+      
+    }
+  };
 
   const handleClick = () => {
-    const formattedDate = value.format("MMMM YYYY"); // تحويل التاريخ إلى التنسيق المطلوب
-
-    postDate({date:formattedDate}); 
-
-    close();
+   if (url) {
+    window.open(url, '_blank');  // فتح الرابط في نافذة جديدة
+  }
+    close();  // إغلاق المودال بعد تحميل الملف
   };
 
   useEffect(() => {
-    setValue(dayjs().subtract(1, 'month'));
-  }, [opened]);
+    setProgress(isPending);
+  }, [isPending]);
 
-  useEffect(()=>{
-    setProgress(isPending)
-  },[isPending])
+  useEffect(() => {
+    if(value){
+      console.log(value)
+       const formattedDate = dayjs(value).format("MMMM YYYY");  // تنسيق التاريخ بالشكل المطلوب
+      postDate({ date: formattedDate });  // إرسال التاريخ إلى الخادم
+    }
+  }, [value, postDate]);
 
   return (
     <Modal
@@ -50,21 +63,21 @@ const DownloadModal = ({ opened, close ,setProgress}) => {
             w={'100%'}
             label='حدد الشهر'
             value={value}
-            onChange={(newValue) => setValue(newValue)} // تعديل القيمة عند اختيار شهر جديد
-            placeholder={`افتراضيا // ${value.format("MMMM YYYY")}`} // placeholder يظهر الشهر الحالي
+            onChange={(n)=>handleChange(n)} // تعديل القيمة عند اختيار شهر جديد
             valueFormat="MMMM YYYY"  // التأكد من تنسيق التاريخ بشكل صحيح
           />
         </Flex>
-
+        
         <Button
           leftSection={<CloudDownload size={20} />}
+          disabled={!url}  // تعطيل الزر إذا لم يكن الرابط موجودًا
           mt={'md'}
           size="md"
           radius={10}
           fullWidth
           variant="filled"
           color="#e74c3c"
-          onClick={handleClick} // عند الضغط على الزر
+          onClick={handleClick}  // عند الضغط على الزر لتحميل البيانات
         >
           تحميل البيانات
         </Button>
@@ -72,5 +85,6 @@ const DownloadModal = ({ opened, close ,setProgress}) => {
     </Modal>
   );
 };
+
 
 export default DownloadModal;

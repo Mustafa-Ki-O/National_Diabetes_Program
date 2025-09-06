@@ -19,7 +19,7 @@ const UploadModal = ({opened,close,mainSubject,setProgress,setAllArticles,setAll
   const filePath = `${pathPrefix}/${fileName}`;
 
   const { data, error } = await supabase.storage
-    .from('media') // اسم الـ bucket في supabase
+    .from('media')
     .upload(filePath, file, {
       cacheControl: '3600',
       upsert: false,
