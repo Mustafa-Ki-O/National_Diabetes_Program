@@ -6,10 +6,14 @@ import { useState,useEffect } from "react";
 import DocumentsCare from "../../components/HealthCare/DocumentsCare";
 import VideosCare from "../../components/HealthCare/VideosCare";
 import Ordering from "../../components/general/Ordering";
+import Progress from "../../components/general/Progress";
+import ActivitiesCare from "../../components/HealthCare/ActivitiesCare";
 const HealthCare = () => {
 
         const [active,setActive] = useState(false);
         const [scrolled,setScrolled] = useState(false)
+
+             const [progress,setProgress] = useState(false)
 
         useEffect(()=>{
           setTimeout(()=>{
@@ -25,6 +29,7 @@ const HealthCare = () => {
 
     return(
         <>
+        {progress && <Progress/> } 
         <Container px={0} py={10} mih={'90vh'}  fluid mb={'4.5rem'} 
         style={{opacity:active?'1':'0',transform:active?'translateY(0px)':'translateY(100px)' ,transition:'all 0.8s'}}>
              <Tabs dir='rtl' defaultValue="doc">
@@ -33,33 +38,33 @@ const HealthCare = () => {
                     <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="doc" >
                       <Flex gap={10}>
                           المقالات
-                      <Ordering/>
+                      {/* <Ordering/> */}
                       </Flex>
                     </Tabs.Tab>
                     <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}}  value="activities" >
                       <Flex gap={10}>
                       النشاطات
-                      <Ordering/>
+                      {/* <Ordering/> */}
                       </Flex>     
                     </Tabs.Tab>
                     <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="videos" >
                       <Flex gap={10}>
                         الفيديوهات
-                       <Ordering/>
+                       {/* <Ordering/> */}
                       </Flex>
                     </Tabs.Tab>
                   </Tabs.List>
 
                   <Tabs.Panel p={10} mt={'xl'} value="doc" >
-                    <DocumentsCare/>
+                    <DocumentsCare setProgress={setProgress}/>
                   </Tabs.Panel>
             
                   <Tabs.Panel p={10} mt={'xl'} value="activities">
-                    النشاطات
+                    <ActivitiesCare  setProgress={setProgress}/>
                   </Tabs.Panel>
             
                   <Tabs.Panel p={10} mt={'xl'} value="videos">
-                    <VideosCare/>
+                    <VideosCare setProgress={setProgress}/>
                   </Tabs.Panel>
             </Tabs>
         </Container>

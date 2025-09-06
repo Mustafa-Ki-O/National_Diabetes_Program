@@ -1,7 +1,18 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Grid, Flex, Title, AspectRatio, Box, Button ,Popover,Text ,Stack ,Select } from '@mantine/core';
+import useFetchVideos from "../../useMutation/Admin/useFetchVideos";
+const VideosCare = ({setProgress}) => {
 
-const VideosCare = () => {
+          const[allVideos,setAllVideos] = useState([])
+          const {fetchVideos,isPending} = useFetchVideos(setAllVideos)
+  
+          useEffect(()=>{
+            fetchVideos()
+          },[])
+            
+          useEffect(()=>{
+            setProgress(isPending)
+          },[isPending])
 
     const VideoCare = ({item})=>{
       return(
@@ -17,8 +28,12 @@ const VideosCare = () => {
                     }}
                   >
                     <Flex dir="ltr" justify="space-between" align="center" px={10}>
-                      <Title size="xl">المركز المحرر</Title>
-                      <Title size="xl">عنوان الفيديو</Title>
+                      <Title size="xl">
+                         {item?.centerName}
+                        </Title>
+                      <Title size="xl">
+                        {item?.title}
+                        </Title>
                     </Flex>
         
                     <div
@@ -33,9 +48,9 @@ const VideosCare = () => {
         
                     <AspectRatio ratio={16 / 9} >
                       <iframe
-                        
-                        src="https://www.youtube.com/embed/wZAjVQWbMlE?si=kvtgXIZBeB-t6Idb"
-                        title="YouTube video player"
+                        src={item.videoURL.replace('autoplay=1', 'autoplay=0')}
+                       
+                        title={item?.shortText}
                         style={{ border: 0 }}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
@@ -43,7 +58,7 @@ const VideosCare = () => {
                     </AspectRatio>
         
                     <Title my={10} ta="left" size="md" mx={20}>
-                      حرر في DD-MM-YYYY
+                      {item?.createAt}
                     </Title>
                   </Box>
                 </Grid.Col>
@@ -55,8 +70,8 @@ const VideosCare = () => {
         <>
         <Grid mt={30} gutter={20}>
 
-              {[1, 2, 3, 4].map((item) => (
-                <VideoCare item={item}/>
+              {allVideos.map((item,i) => (
+                <VideoCare item={item} key={i}/>
               ))}
             </Grid>        
         </>

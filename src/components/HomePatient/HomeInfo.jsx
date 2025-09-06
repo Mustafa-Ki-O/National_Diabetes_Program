@@ -5,6 +5,8 @@ import dayjs from "dayjs";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import useFetchHomePatient from "../../useMutation/Patient/useFetchHomePatient";
+import { useDisclosure } from "@mantine/hooks";
+import ContactModal from "./ContactModal";
 
 const HomeInfo = ({setProgress}) => {
 
@@ -13,67 +15,17 @@ const HomeInfo = ({setProgress}) => {
   const [homeInfo,setHomeInfo] = useState({})
   const {fetchHomeP,isPending} = useFetchHomePatient(setHomeInfo)
 
+  const [opened,{open,close}] = useDisclosure()
+  const [email,setEmail] = useState()
   useEffect(()=>{
     fetchHomeP()
   },[])
 
-//     const data = [
-//   {
-//     date: 'Mar 22',
-//     hdl: 190,
-//     ldl: 138,
-//     FBG: 52,
-//   },
-//   {
-//     date: 'April 22',
-//     hdl: 70,
-//     ldl: 138,
-//     FBG: 109,
-//   },
-//   {
-//     date: 'May 22',
-//     hdl: 122,
-//     ldl: 36,
-//     FBG: 221,
-//   },
-//   {
-//     date: 'June 22',
-//     hdl: 122,
-//     ldl: 36,
-//     FBG: 221,
-//   },
-//   {
-//     date: 'July 22',
-//     hdl: 172,
-//     ldl: 136,
-//     FBG: 321,
-//   },
-// ];
-
-// const reviews = [  '2025-2-18' , '2025-4-18' ,'2025-8-18',   '2025-5-18',
-// ];
-  
-   
-  
-  
-
-
-// const current = new Date();
-// const currentDate = dayjs(current).format('YYYY-MM-DD');
-
-// const dates = reviews.map((date) => {
-//   const formattedDate = dayjs(date).format('YYYY-MM-DD');
-//   const isPast = dayjs(formattedDate).isBefore(currentDate);
-//   const isFuture = dayjs(formattedDate).isAfter(currentDate); 
-
-//   return {
-//     date: formattedDate,
-//     status: isPast ? "Past" : isFuture ? "Future" : "Today"
-//   };
-// });
-
-// const upcomingReviews = dates.filter(item => item.status !== 'Past');
-// const pastReviews = dates.filter(item => item.status === 'Past');
+  useEffect(()=>{
+    if(homeInfo){
+      setEmail(homeInfo.centerEmail)
+    }
+  },[homeInfo])
 
     useEffect(()=>{
       setProgress(isPending)
@@ -87,6 +39,7 @@ const labelMap = {
 
     return(
         <>
+        <ContactModal opened={opened} close={close} centerEmail={email}/>
         <Stack gap={{base:10,sm:20}}>
         <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} w={{base:'100%',md:'50%'}}  radius={10}>
           <Title mb={20} size={'1.6rem'} ta={'right'}>
@@ -129,15 +82,15 @@ const labelMap = {
           </Paper>
           <Flex gap={10} >
           <Button mih={'5rem'} fz={'1rem'}  fullWidth  variant="gradient" 
-            gradient={{ from: '#14B8A6', to: 'cyan', deg: 91 }} radius={10} size="xl" >
-               <Stethoscope  size={25} color="#fff" style={{marginRight:10}}/>
-             طبيبي
+            gradient={{ from: '#14B8A6', to: 'cyan', deg: 91 }} radius={10} size="xl" onClick={open}>
+               <Stethoscope  size={25} color="#fff" style={{marginRight:10}} />
+             تواصل
             
             </Button>
               <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl"
                onClick={()=>navigate('/National_Diabetes_Program/analyzer-AI/')} >
             <ScanHeart  size={28} color="#fff" style={{marginRight:10}}/>
-             فحص AI
+             فحص تحليل
             </Button>
           </Flex>
           <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} radius={10}>

@@ -2,6 +2,7 @@ import { Flex, Group, Modal, Text, Title } from "@mantine/core"
 import { PenLine } from "lucide-react"
 const ViewDocModal = ({opened,close,item}) => {
 
+   if (!item) return null; 
     return(
         <>
         <Modal
