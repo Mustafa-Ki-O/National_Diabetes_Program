@@ -1,28 +1,26 @@
-import { Card ,Stack ,Flex ,Title ,Text, Grid, Group, Button } from "@mantine/core"
-import { ArrowUpLeft, Hospital, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
+import { Card ,Stack ,Flex ,Title ,Text, Grid, Group, Button, ActionIcon } from "@mantine/core"
+import { ArrowUpLeft, Circle, Hospital, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
 import { DonutChart } from "@mantine/charts";
 import { useNavigate, useParams } from "react-router";
-const InfoCenterCard = () => {
 
-       const data = [
-     { name: 'ذكور', value: 400, color: '#37a9ef' },
-     { name: 'إناث', value: 300, color: 'pink' },
+const InfoCenterCard = ({data,setProgress}) => {
+
+    const data1 = [
+     { name: 'ذكور', value: data.number_of_male, color: '#16aabb' },
+     { name: 'إناث', value: data.number_of_Female || 20, color: 'pink' },
 
     ];
-    const {id,cid} = useParams()
 
     const navigate = useNavigate()
     return(
         <>
-        <Grid gutter={20} p={{base:5,sm:20}} justify="space-between" >
-            <Grid.Col span={{base:12,sm:4}}>
-                 <DonutChart startAngle={180} endAngle={0} data={data} />;
-            </Grid.Col>
-            <Grid.Col span={{base:12,sm:4}}>
-                <Card radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+        <Stack align="end" gap={20} p={{base:5,sm:20}}>
+            <Flex justify={'end'} align={'center'} gap={20}>
+            
+                 <Card radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex align='center' gap={10} justify='end'>
                        <Title size="xl"  >
-                               800
+                               {data?.nop_in_center_lm}
                          </Title>
                       <Title size="lg">
                              عدد المسجلين خلال الشهر الأخير
@@ -30,37 +28,49 @@ const InfoCenterCard = () => {
                         
                     </Flex> 
                 </Card>
-            </Grid.Col>
-
-
-
-             <Grid.Col span={{base:12,sm:4}}>
-                <Card radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
-                    <Flex justify={'end'} align={'center'} gap={10}>
-
-   
-                       <UserRound size={30} />
-             
-                  
+                <Card  w={'fit-content'} radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+            <Flex  justify={'end'} align={'center'} gap={10} pl={20}>
+               <UserRound size={30} />
                   <Title size="xl"  c='#000' >
-                     7043 :
+                     {data?.nop_in_center} :
                     </Title>     
                      <Title size="lg"  c='#000' >
                        عدد المرضى الكلي
                     </Title>        
                       </Flex>
-                      <Button w={'fit-content'} size="sm" radius={10} mt={15} variant="outline" color={'#e67e22'} 
-                      style={{alignSelf:'end'}} onClick={()=>navigate(`/National_Diabetes_Program/superVisor/dataMangement/cityInfo/${id}/centerInfo/${cid}/patients-center`)}>
-                         <ArrowUpLeft size={25} color="#e67e22" />
-                        <Text size="md">
-                            المزيد من التفاصيل
-                        </Text>
-                      </Button>
                 </Card>
-            </Grid.Col>
-
+                </Flex>
+                
+                    <Card radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                        <Flex align='start' gap={25} justify='end'>
+                             <DonutChart data={data1} />
+                             <Stack gap={10}>
+                                 <Title size="lg" my={15}>
+                                  توزع المرض بين الجنسين
+                                 </Title>
+                                 <Group justify="end" align="center" gap={8}>
+                                    <Text size="md" >
+                                        ذكور
+                                    </Text>
+                                    <Circle size={15} fill="#16aabb" color="#16aabb" />
+                                 </Group>
+                                  <Group justify="end" align="center" gap={8}>
+                                    <Text size="md" >
+                                        إناث
+                                    </Text>
+                                    <Circle size={15} fill="#e64980" color="#e64980" />
+                                 </Group>
+                                
+                             </Stack>
+                            
+                        </Flex>
+                       
+                    </Card>
+                    
+                   
              
-        </Grid>
+        </Stack>
+      
         </>
     )
 }

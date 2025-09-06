@@ -18,10 +18,10 @@ const data1 = [
         direction={{ base: "column", md: "row" }}>
              
              <Stack justify='end' w={{base:'100%',sm:'50%'}}>
-                <Title size={'md'}>
+                {/* <Title size={'md'}>
                     أعمار المصابين 
-                </Title>
-                  <BarChart
+                </Title> */}
+                  {/* <BarChart
                       h={300}
                       data={data1}
                       dataKey="month"
@@ -31,7 +31,7 @@ const data1 = [
                         { name: 'كبار', color: 'teal.6' },
                       ]}
                       tickLine="y"
-                    />
+                    /> */}
              </Stack>
 
              <Stack  justify='end' >

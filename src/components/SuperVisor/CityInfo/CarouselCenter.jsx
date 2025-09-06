@@ -12,17 +12,17 @@ const CarouselCenter = ({data}) =>{
    const navigate=useNavigate()
     const {cityName} = useParams()
 
-   const handleClick = (center) => {
-     navigate(`/National_Diabetes_Program/superVisor/dataMangement/cityInfo/${cityName}/centerInfo/${2}`)
+   const handleClick = (centerId) => {
+     navigate(`/National_Diabetes_Program/superVisor/dataMangement/cityInfo/${cityName}/centerInfo/${centerId}`)
    }
 
     const CenterCard = ({center}) =>(
         <Card m={'auto'}  miw={'10rem'} w={'fit-content'} radius={20} bd={'1px solid #12121240'} 
-        onClick={()=>handleClick(center)}
+        onClick={()=>handleClick(center?.id)}
         style={{cursor:'pointer'}}>
             <Flex justify={'end'} align={'center'} gap={10}>
                 <Title size={'lg'}>
-                    {center}
+                    {center?.centerName}
                 </Title>
                 <Hospital size={25}/>
             </Flex>

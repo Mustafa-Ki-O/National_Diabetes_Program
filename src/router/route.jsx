@@ -246,10 +246,10 @@ const route = createBrowserRouter([
               path:'superVisor/dataMangement/cityInfo/:cityName/centerInfo/:cid',
               element:<CenterInfo/>
             },
-            {
-              path:'superVisor/dataMangement/cityInfo/:cityName/centerInfo/:cid/patients-center',
-              element:<PatientsInCenter/>
-            }
+            // {
+            //   path:'superVisor/dataMangement/cityInfo/:cityName/centerInfo/:cid/patients-center',
+            //   element:<PatientsInCenter/>
+            // }
            
 
             

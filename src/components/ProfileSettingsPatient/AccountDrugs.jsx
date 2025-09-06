@@ -8,7 +8,7 @@ const AccountDrugs = ({info}) => {
 
   useEffect(()=>{
     if(info){
-        setType(info.sugar_type)
+        setType(info.suger_type)
         setTreatment(info.treatment_type)
     }
   },[info])

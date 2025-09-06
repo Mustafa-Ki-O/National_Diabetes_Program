@@ -1,58 +1,76 @@
-import { Button, Flex, Grid, Modal,Stack,Text, Title,Select } from "@mantine/core"
-// import { notifications } from "@mantine/notifications";
-import useLogOut from "../../../useMutation/Admin/useLogOut";
-import { MonthPickerInput } from '@mantine/dates';
-import { useState } from "react";
-import dayjs from "dayjs";
+import { Button, Flex, Modal, Stack, Text, Title } from "@mantine/core";
+import { MonthPickerInput } from "@mantine/dates";
 import { CloudDownload } from "lucide-react";
+import { useState, useEffect } from "react";
+import dayjs from "dayjs";
+import usePostDate from "../../../useMutation/SuperVisor/usePostDate";
 
-const DownloadModal = ({opened,close}) =>{
+const DownloadModal = ({ opened, close ,setProgress}) => {
 
-    const [value,setValue] = useState(null)
-// #e74c3c second
-// #e67e22 primary
+  const { postDate, isPending } = usePostDate();
 
-const lastMonth = dayjs().subtract(1, 'month')
-console.log(lastMonth.format("YYYY-MM"))
+  const [value, setValue] = useState(dayjs().subtract(1, 'month')); 
 
-    return(
-        <>
-             <Modal
-                w="100%"
-                radius={20}
-                opened={opened}
-                onClose={close}
-                centered
-                overlayProps={{
-                  backgroundOpacity: 0.55,
-                  blur: 2,
-                }}
-                style={{ position: "absolute", right: 0 }}
-              >
-                <Stack pb={50} dir="rtl" className="modal" w="70%" m="auto" gap={20}>
-                  <Title order={3} fw={900} ta="center" c={'#e67e22'}>
-                    تحميل بيانات المرضى
-                  </Title>
-                  <Flex mt={10} justify={'center'} >
-                        <MonthPickerInput
-                          w={'100%'}
-                          label='حدد الشهر'
-                          placeholder={`افتراضيا // ${lastMonth.month()+1}`}
-                          value={value}
-                          onChange={setValue}
-                        />
+  const handleClick = () => {
+    const formattedDate = value.format("MMMM YYYY"); // تحويل التاريخ إلى التنسيق المطلوب
 
-                  </Flex>
-                  
-         
-                   <Button leftSection={<CloudDownload size={20}/>} mt={'md'} size="md" radius={10} fullWidth variant="filled" color="#e74c3c" >
-                     تحميل البيانات
-                   </Button>
+    postDate({date:formattedDate}); 
 
-             
-                </Stack>
-              </Modal>
-        </>
-    )
-}
-export default DownloadModal
+    close();
+  };
+
+  useEffect(() => {
+    setValue(dayjs().subtract(1, 'month'));
+  }, [opened]);
+
+  useEffect(()=>{
+    setProgress(isPending)
+  },[isPending])
+
+  return (
+    <Modal
+      w="100%"
+      radius={20}
+      opened={opened}
+      onClose={close}
+      centered
+      overlayProps={{
+        backgroundOpacity: 0.55,
+        blur: 2,
+      }}
+      style={{ position: "absolute", right: 0 }}
+    >
+      <Stack pb={50} dir="rtl" className="modal" w="70%" m="auto" gap={20}>
+        <Title order={3} fw={900} ta="center" c={'#e67e22'}>
+          تحميل بيانات المرضى
+        </Title>
+        
+        <Flex mt={10} justify={'center'}>
+          <MonthPickerInput
+            w={'100%'}
+            label='حدد الشهر'
+            value={value}
+            onChange={(newValue) => setValue(newValue)} // تعديل القيمة عند اختيار شهر جديد
+            placeholder={`افتراضيا // ${value.format("MMMM YYYY")}`} // placeholder يظهر الشهر الحالي
+            valueFormat="MMMM YYYY"  // التأكد من تنسيق التاريخ بشكل صحيح
+          />
+        </Flex>
+
+        <Button
+          leftSection={<CloudDownload size={20} />}
+          mt={'md'}
+          size="md"
+          radius={10}
+          fullWidth
+          variant="filled"
+          color="#e74c3c"
+          onClick={handleClick} // عند الضغط على الزر
+        >
+          تحميل البيانات
+        </Button>
+      </Stack>
+    </Modal>
+  );
+};
+
+export default DownloadModal;
