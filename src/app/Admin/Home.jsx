@@ -78,9 +78,9 @@ const CardCa = ({info}) =>(
         mx={5}
         bg="#fff"
         withBorder
-         style={{cursor:'pointer', transition: "background 0.3s ease"}}
-        onMouseEnter={(e) => (e.currentTarget.style.background = "#37a9ef05")} // الأزرق مع شفافية
-       onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+        style={{cursor:'pointer', transition: "background 0.3s ease"}}
+        onMouseEnter={(e) => (e.currentTarget.style.background = "#37a9ef05")} 
+        onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
       >  
     <Stack gap={6} >
       <Flex mb={5} justify={'end'} align={'center'} gap={7}>
