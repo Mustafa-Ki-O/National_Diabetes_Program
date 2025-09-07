@@ -4,12 +4,13 @@
 import { Grid,Title,Text ,Container, Flex, Button, Box,Card, Stack} from "@mantine/core"
 import { Carousel } from '@mantine/carousel';
 import { useState,useEffect } from "react";
-import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
+// import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
 import Progress from "../../components/general/Progress";
-import { useNavigate } from "react-router";
-import { CalendarDays, ChartLine, UserRound } from "lucide-react";
+// import { useNavigate } from "react-router";
+// import { CalendarDays, ChartLine, UserRound } from "lucide-react";
 import useFetchCentersSv from "../../useMutation/SuperVisor/useFetchCentersSv";
-import CenterCard from "../../components/SuperVisor/HomeSv/CenterCard";
+// import CenterCard from "../../components/SuperVisor/HomeSv/CenterCard";
+import CentersCards from "../../components/SuperVisor/HomeSv/CentersCards";
 
 
 const HomeSv = () => {
@@ -56,28 +57,7 @@ const HomeSv = () => {
                          <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                              الرئيسية
                         </Title>
-           
-                   {centers.length !== 0 ? (
-  result.map((r, index) => (
-    <div  key={index} style={{ marginBottom: "2rem" }}>
-      {/* عنوان المدينة */}
-      <Text ta={'right'} size="sm" mb="md">
-        {r.city}
-      </Text>
-
-      {/* المراكز الخاصة بالمدينة */}
-      <Grid justify="end" gutter={30} px="lg">
-        {r.centers.map((c, i) => (
-          <Grid.Col span={{ base: 12, sm: 6, md: 4 }} key={c.id}>
-            <CenterCard centerInfo={c} />
-          </Grid.Col>
-        ))}
-      </Grid>
-    </div>
-  ))
-) : (
-  <div>لا يوجد مراكز</div>
-)}
+                        <CentersCards data={centers} />
 
         
                 </Container>

@@ -203,24 +203,17 @@ useEffect(() => {
         onClick={() => handleButtonClick('superVisor/queryMangement')} ta='right' 
         className={` ${nav.hovered} ${activeButton === 'superVisor/queryMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-        إدارة الاستعلامات
+              إدارة الاستعلامات
         <Image className={nav.img} src={patMang} w={25} h={25} ml={5} />
       </Text>
       <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
         onClick={() => handleButtonClick('superVisor/dataMangement')} ta='right' 
         className={` ${nav.hovered} ${activeButton === 'superVisor/dataMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-        إدارة البيانات
+            إدارة البيانات 
         <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />
       </Text>
-      
-      {/* <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
-        onClick={() => handleButtonClick('care')} ta='right' 
-        className={` ${nav.hovered} ${activeButton === 'care' ? nav.activeDrawer : ''}`} 
-        style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
-        برامج الرعاية
-        <Image className={nav.img} src={heart} w={25} h={25} ml={5} />
-      </Text> */}
+    
     </Box>
 
     <Box display={'flex'}  style={{flexDirection:'column',gap:10}}>
@@ -311,13 +304,13 @@ useEffect(() => {
         إدارة الأدوية
         <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />
       </Text>
-      <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
+      {/* <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
         onClick={() => handleButtonClick('statistics')} ta='right' 
         className={` ${nav.hovered} ${activeButton === 'statistics' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
         الاحصائيات
         <Image className={nav.img} src={statistics} w={25} h={25} ml={5} />
-      </Text>
+      </Text> */}
       <Text p={10} c='#121212' fz={16} fw={600} dir="ltr" display={'flex'} 
         onClick={() => handleButtonClick('care')} ta='right' 
         className={` ${nav.hovered} ${activeButton === 'care' ? nav.activeDrawer : ''}`} 

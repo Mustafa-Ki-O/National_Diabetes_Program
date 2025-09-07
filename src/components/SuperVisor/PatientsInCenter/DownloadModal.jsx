@@ -1,6 +1,6 @@
-import { Button, Flex, Modal, Stack, Text, Title } from "@mantine/core";
+import { Button, Flex, Loader, Modal, Stack, Text, Title } from "@mantine/core";
 import { MonthPickerInput } from "@mantine/dates";
-import { CloudDownload } from "lucide-react";
+import { Calendar, CalendarCheck, CloudDownload } from "lucide-react";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import usePostDate from "../../../useMutation/SuperVisor/usePostDate";
@@ -52,26 +52,38 @@ const DownloadModal = ({ opened, close, setProgress }) => {
         blur: 2,
       }}
       style={{ position: "absolute", right: 0 }}
+      zIndex={100}
     >
-      <Stack pb={50} dir="rtl" className="modal" w="70%" m="auto" gap={20}>
-        <Title order={3} fw={900} ta="center" c={'#e67e22'}>
+      <Stack pb={50} dir="rtl" className="modal" w="70%" m="auto" gap={value && !url ? 10 :30} >
+        <Title order={3} fw={900} ta="center" c={'#e67e22'} my={10}>
           تحميل بيانات المرضى
         </Title>
         
-        <Flex mt={10} justify={'center'}>
+        <Flex mt={10} justify={'center'} my={0}>
           <MonthPickerInput
+          disabled={value && !url}
+          rightSection={<Calendar size={18} />}
+          clearable
+           radius={10}
             w={'100%'}
             label='حدد الشهر'
             value={value}
+            maxDate={new Date()}
+            placeholder="حدد شهر حالي او سابق"
             onChange={(n)=>handleChange(n)} // تعديل القيمة عند اختيار شهر جديد
             valueFormat="MMMM YYYY"  // التأكد من تنسيق التاريخ بشكل صحيح
           />
         </Flex>
+        {value && !url ? (
+          <Loader my={0} m={'auto'} color="#e74c3c" type="dots" />
+        ):(
+          <></>
+        )}
+        
         
         <Button
           leftSection={<CloudDownload size={20} />}
           disabled={!url}  // تعطيل الزر إذا لم يكن الرابط موجودًا
-          mt={'md'}
           size="md"
           radius={10}
           fullWidth

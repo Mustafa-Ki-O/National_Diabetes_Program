@@ -1,8 +1,11 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Container ,Flex,Stack,Title} from "@mantine/core"
 import { LocateFixed } from "lucide-react";
 import { useEffect, useState ,useMemo} from "react"
 import InfoCityCard from "../../components/SuperVisor/CityInfo/InfoCityCard";
-import CenterCard from "../../components/SuperVisor/HomeSv/CenterCard";
+// import CenterCard from "../../components/SuperVisor/HomeSv/CenterCard";
 import CarouselCenter from "../../components/SuperVisor/CityInfo/CarouselCenter";
 import { useParams } from "react-router";
 import useFetchCityData from "../../useMutation/SuperVisor/useFetchCityData";

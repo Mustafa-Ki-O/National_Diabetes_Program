@@ -8,7 +8,7 @@ const Progress = () => {
   const inSv = location.pathname.includes('superVisor') || location.pathname.includes('sv');
 
     return(
-      <Container  w={{base:'100%',sm:location.pathname !== '/National_Diabetes_Program/' 
+      <Container   w={{base:'100%',sm:location.pathname !== '/National_Diabetes_Program/' 
         && location.pathname !== '/National_Diabetes_Program/superVisor/'
         && location.pathname !== '/National_Diabetes_Program/register/'
         && location.pathname !== '/National_Diabetes_Program/registerAdmin/'
@@ -25,7 +25,7 @@ const Progress = () => {
          ? '80%' :'100%' }} fluid className="overlay">
          <Container >
            {/* <div className="loader"></div> */}
-            <Loader color={inSv ? 'orange' : 'blue'} size="lg" type="dots" />
+            <Loader  color={inSv ? 'orange' : 'blue'} size="lg" type="dots" />
          </Container>
       </Container>
     )

@@ -1,3 +1,6 @@
+// Part of National_Diabetes_Program
+// Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
+
 import { Button, Container ,Flex,Stack,Title} from "@mantine/core"
 import { Hospital, LocateFixed, LogOut } from "lucide-react";
 import { useEffect, useState ,useMemo} from "react"
