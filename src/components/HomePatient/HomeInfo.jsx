@@ -1,6 +1,6 @@
 import { Text,Button,Stack,Flex,Container, Title, Card, Grid, Paper , Accordion, Box, Group } from "@mantine/core"
 import { LineChart } from "@mantine/charts";
-import { Stethoscope ,ScanHeart ,CalendarDays ,CalendarCheck, ChartBar, CalendarCheck2, IdCard, Hospital, Calendar1} from "lucide-react";
+import { Stethoscope ,ScanHeart ,CalendarDays ,CalendarCheck, ChartBar, CalendarCheck2, IdCard, Hospital, Calendar1, BotMessageSquare} from "lucide-react";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
@@ -88,9 +88,9 @@ const labelMap = {
             
             </Button>
               <Button mih={'5rem'} fz={'1rem'} fullWidth color={'#37a9ef'} variant="filled" radius={10} size="xl"
-               onClick={()=>navigate('/National_Diabetes_Program/analyzer-AI/')} >
-            <ScanHeart  size={28} color="#fff" style={{marginRight:10}}/>
-             فحص تحليل
+               onClick={()=>navigate('/National_Diabetes_Program/medical-communication/')} >
+            <BotMessageSquare  size={28} color="#fff" style={{marginRight:10}}/>
+             دردشة ذكية
             </Button>
           </Flex>
           <Paper p={15} bg={'#fff'} bd={'1px solid #8e8e8e60'} radius={10}>
