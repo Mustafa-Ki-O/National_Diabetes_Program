@@ -1,5 +1,5 @@
 import { useFormContext, Controller, useFieldArray } from "react-hook-form";
-import {Grid, Select, TextInput, MultiSelect,Button,Image, Group,Divider} from '@mantine/core';
+import {Grid, Select, TextInput, MultiSelect,Button,Image, Divider} from '@mantine/core';
 import deleteIcon from '../../assets/vectors/Cancel.svg'
 import add from '../../assets/vectors/Add.svg'
 import reset from '../../assets/vectors/Reset.svg'
@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { Tooltip } from "@mantine/core";
 import UpScroll from "../general/UpScroll";
 import useCheckMedicineStore from "./useCheckMedicineStore";
+// import '../../assets/css/treatments.css'
 
 const  TreatmentStep = () => {
 
@@ -49,7 +50,7 @@ function getDrugNames(type) {
 
   // فلترة الأدوية حسب النوع المطلوب
   let filtered = medicinesStore.filter((med) => {
-    if (includeInsulin && med.medication_type === "insulin") return true;
+    if (includeInsulin && med.medication_type === "insulin" ) return true;
     if (includePills && med.medication_type === "pills") return true;
     return false;
   });
@@ -57,7 +58,9 @@ function getDrugNames(type) {
   // تحويلها لشكل options
   return filtered.map((med) => ({
     value: String(med.id),
-    label: `${med.name_arabic} (${med.dosage} mg) [${med.units_per_box} وحدة]`,
+    label: `${med.name_arabic} (${med.dosage} mg) [${med.units_per_box} وحدة] ${med.quantity < 10 ? [med.quantity] + " يجب دعم المخزون" : ""}`,
+    disabled: med?.quantity < 10,
+    // className: med.quantity < 10 ? "red-option" : "",
   }));
 }
 
@@ -121,6 +124,7 @@ function getDrugNames(type) {
               control={control}
               render={({ field }) => (
                 <Select
+                  
                   {...field}
                   value={field.value ?? ""} // تأكد إنو سترينغ
                   onChange={(val) => field.onChange(val)} // خزّن السترينغ

@@ -34,16 +34,16 @@ const GeneralInfoStep = () => {
             name="address"
             render={({ field }) => (
               <Select
+                disabled
+                value={'حمص'}
                 size="xl"
-                // w="60%"
                 radius={10}
-                // variant="filled"
                 fw={600}
                 withAsterisk
                 label="المدينة"
                 placeholder="مكان السكن"
-                data={cities} // عدل حسب `cities`
-                {...field}
+                data={cities}
+                // {...field}
                 error={errors.address?.message}
                  styles={{
                 label: {

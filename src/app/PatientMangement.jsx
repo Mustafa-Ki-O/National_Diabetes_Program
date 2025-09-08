@@ -104,8 +104,8 @@ const handleChangeName = (value) =>{
               <Grid.Col visibleFrom="sm" style={{alignSelf:'end',justifyItems:'end'}} span={{base:12,sm:5}}>
                 <Flex  gap={20}  justify='space-between' align='center'>
                   <Button radius={10} size="md" variant={'filled'} color={'#16aabb'} onClick={open}>
-                    <UserRoundPlus style={{marginRight:5}}/>
-                  إضافة مريض 
+                    <UserRoundPlus size={25}/>
+                  
                 </Button>
                 <Flex  gap={3} justify={'space-between'}>
                 
@@ -158,8 +158,9 @@ const handleChangeName = (value) =>{
             </Grid.Col>
              <Grid.Col className={home.grid} align='end' span={{ base:12,sm:7 }}>
               <Stack px={'lg'} >
-               <Flex  justify='space-between' mt={5} style={{alignSelf:'end'}}>
-                <Button hiddenFrom="sm" radius={10} size="md" variant={'filled'} color={'#16aabb'} onClick={open}>
+               <Flex  justify='space-between' mt={5} >
+                <Group justify="start" align="center" gap={20}>
+                  <Button  hiddenFrom="sm" radius={10} size="md" variant={'filled'} color={'#16aabb'} onClick={open}>
                   <UserRoundPlus />
                 </Button>
                 <Flex  hiddenFrom="sm" gap={3} justify={'space-between'}>
@@ -204,8 +205,10 @@ const handleChangeName = (value) =>{
              </Popover>
              
               </Flex>
-                <Group m={0} >
-               <Image src={search} w={30} className={home.search}/>
+                </Group>
+                
+                <Group ml={10} >
+               <Image visibleFrom="sm" src={search} w={30} className={home.search}/>
                  <Text size="lg" fw={700} ta={'right'} >
                     ابحث عن مريض 
                 </Text>  

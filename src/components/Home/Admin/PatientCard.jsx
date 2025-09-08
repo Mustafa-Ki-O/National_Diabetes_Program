@@ -43,13 +43,17 @@ const navigate = useNavigate();
     setProgress={setProgress}
     setPatients={setPatients}/>
    {/* <Tooltip zIndex={3}  label={verefication ? 'تم التحقق' : 'غير محقق'} > */}
-   <Indicator zIndex={8} size={18} withBorder processing={!verefication?true:false}>
+   {/* <Indicator zIndex={8} size={18} withBorder processing={!verefication?true:false}> */}
     <Card 
+      shadow="sm"
       padding="lg"
       radius="md"
       bg="#fff"
       withBorder
-       style={{cursor:'pointer'}}
+       style={{cursor:'pointer', transition: "background 0.3s ease"}}
+                // onMouseEnter={(e) => (e.currentTarget.style.background = "#eeefef21")} 
+                // onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+
     >  
       <Stack  mih={200} justify="space-between" >  
         <Flex justify={'space-between'} align={'center'}>
@@ -108,7 +112,7 @@ const navigate = useNavigate();
       </Flex>
       </Stack>
     </Card>
-    </Indicator>
+    {/* </Indicator> */}
     {/* </Tooltip> */}
     </>
   );

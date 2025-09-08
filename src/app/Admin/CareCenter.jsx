@@ -9,7 +9,7 @@ import Ordering from "../../components/general/Ordering"
 import { useDisclosure } from "@mantine/hooks"
 import UploadModal from "../../components/CareCenter/UploadModal"
 import Progress from "../../components/general/Progress"
-import { ListFilterPlus } from "lucide-react"
+import { ListFilterPlus, Upload, UploadCloud } from "lucide-react"
 
 const CareCenter = () => {
 
@@ -66,8 +66,8 @@ UpScroll()
               
                <Ordering size={22} button={true}/>
               
-                <Button miw={'8rem'} radius={'md'} variant='filled' color={'blue'} size='md' onClick={open}>
-                 رفع {handleButtonName(click)} <ListFilterPlus style={{marginLeft:10}} size={22} color={'#fff'} />
+                <Button miw={'8rem'} radius={10} variant='filled' color={'#37a9ef'} size='md' onClick={open}>
+                 رفع {handleButtonName(click)} <UploadCloud style={{marginLeft:10}} size={22} color={'#fff'} />
                 </Button>
             </Flex>
             <MultiTabs setClick={setClick} setProgress={setProgress} 

@@ -3,29 +3,57 @@
 
 import { Grid,Title,Text ,Container, Flex, Button, Box,Card, Stack} from "@mantine/core"
 import { useState,useEffect } from "react";
-import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
+
 import Progress from "../../components/general/Progress";
 import { useNavigate } from "react-router";
 import { CalendarDays, ChartLine, UserRound } from "lucide-react";
 import useFetchSomeInfoHome from "../../useMutation/Admin/useFetchSomeInfoHome";
+import useFetchMedicines from "../../useMutation/Admin/useFetchMedicines";
+import useFetchPatients from "../../useMutation/Admin/useFetchPatients";
+import WarningModal from "../../components/general/WarningModal";
+import { useDisclosure } from "@mantine/hooks";
 
 
 const Home = () => {
   const [patients, setPatients] = useState([]);
   const [homeInfo,setHomeInfo] = useState([]);
 
+  const [medicines,setMedicines] = useState([])
+  const {fetchMedicines,isPending:isPendingMed} = useFetchMedicines()
+  
+  const [opened,{open,close}] = useDisclosure()
+  
   const [active,setActive] = useState(false);
 
   const {fetchPatients,isPending} = useFetchPatients(setPatients);
    const {fetchHomeInfo,isPending:isPendingInfo} = useFetchSomeInfoHome(setHomeInfo)
 
       const [progress, setProgress] = useState(false);
+      const [lowQ,setLowQ] = useState([])
 
     useEffect(()=>{
       fetchHomeInfo()
       fetchPatients()
+      fetchMedicines((fetched) => {
+             setMedicines(fetched);
+             console.log('fitched : ',fetched)
+       });
     },[]);
-  
+
+    useEffect(()=>{
+      if(medicines){
+        setLowQ(medicines?.filter((med)=> med.quantity < 50))
+        
+      }
+    },[medicines])
+
+    useEffect(()=>{
+      if(lowQ.length >0){
+           console.log('lowwww : ',lowQ)
+          open()
+        }   
+    },[lowQ])
+    
     useEffect(() => {
       setProgress(isPending||isPendingInfo);
   }, [isPending||isPendingInfo]);
@@ -35,6 +63,7 @@ const Home = () => {
        setActive(!isPending);
     },600);
   },[isPending])
+
 
 
      const getMostCommonSugarType = () => {
@@ -103,6 +132,7 @@ const CardCa = ({info}) =>(
     return(
         <>
         {progress && <Progress/>}
+        <WarningModal opened={opened} close={close} medicines={lowQ}/>
                 <Container p={{base:0,md:'lg'}}  fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
                  <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                      الرئيسية

@@ -25,7 +25,7 @@ useEffect(()=>{
     {progress && <Progress />}
     <Stack style={{opacity:active?'1':'0' ,transition:'all 0.3s'}} mb={{base:'10rem',sm:'1rem'}} >
     <Logo />
-        <Stack p={{base:'10px' ,md:'30px'}} m='auto' mt={'4rem'}   w={{ base: "90%", md: "35%" }}  style={{borderRadius:20,border:'2px solid #16aabb',backdropFilter:'blur(5px)'}}>
+        <Stack p={{base:'10px' ,md:'30px'}} m='auto' mt={'1rem'}   w={{ base: "90%", md: "35%" }}  style={{borderRadius:20,border:'2px solid #16aabb',backdropFilter:'blur(5px)'}}>
             <Title size='xl' c='#37A9EF'>تسجيل الدخول</Title>
             <Text size='sm' c={'#8e8e8e96'} fw={'500'}>قم بتسجيل الدخول الى حسابك </Text>
             <LoginForm setProgress={setProgress}/>

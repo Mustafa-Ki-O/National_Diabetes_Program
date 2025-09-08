@@ -38,12 +38,14 @@ const Search = ({ patients, setSearchedPatients }) => {
         value={searchTerm}
         onChange={handleSearch}
         placeholder=" الاسم او الرقم الوطني"
-        style={{
-          input:{
-            width:'95%',
-            justifyContent:'flex-end'
-          },
-        }}
+        // bd={'2px solid #37a9ef'}
+        // style={{
+        //   input:{
+        //     width:'95%',
+        //     justifyContent:'flex-end',
+            
+        //   },
+        // }}
       />
   );
 };

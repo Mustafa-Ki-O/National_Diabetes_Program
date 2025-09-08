@@ -27,11 +27,9 @@ import Clinics from '../../assets/vectors/Clinic.svg'
 import medicalCard from '../../assets/vectors/medicalCard.svg'
 import treatments from '../../assets/vectors/treatments.svg'
 
-// import loadFont from "../../components/general/LoadFont";
-
 
 const schema1 = yup.object().shape({
-  address: yup.string().required('الرجاء اختيار المدينة'),
+  // address: yup.string().required('الرجاء اختيار المدينة'),
   weight: yup.number().typeError('الوزن يجب أن يكون رقمًا').required('مطلوب'),
   length_patient: yup.number().typeError('الطول يجب أن يكون رقمًا').required('مطلوب'),
   otherDisease: yup.string().required('يرجى إدخال الأمراض الأخرى'),
@@ -289,6 +287,7 @@ const onSubmit = () => {
     historyOfdiseaseDetection: data.historyOfdiseaseDetection
       ? dayjs(data.historyOfdiseaseDetection).format('DD-MM-YYYY')
       : '',
+    address:'حمص'
   };
 
   setFinalData(updated);

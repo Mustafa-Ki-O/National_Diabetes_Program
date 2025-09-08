@@ -32,7 +32,8 @@ const {updateReq,isPending} = useUpdateQuantity()
     setQty={setQty}
     />
 
-    <Card bg={'#fff'} radius={20} style={{ border: '1px solid #ccc', background: '#f9f9f9', direction: 'rtl' }}>
+    <Card radius={20} shadow={'sm'} 
+    style={{ border: '1px solid #ccc', direction: 'rtl' }} bg={quantity < 50 ? '#e74c3c20':'#fff'}>
       <Stack gap={20}>
         <Group position="apart" align="center">
             <PillBottle size={25} />
@@ -60,13 +61,14 @@ const {updateReq,isPending} = useUpdateQuantity()
 
         <Group position="apart" >
           
-          <Text fw={600}>
+          <Text size='lg' fw={600}>
             {quantity}
             </Text>
-          <Group>
+          <Group mr={10}>
               
-            <Text  miw={'1.6rem'}>{qty}</Text>
+            
             <CirclePlus color="#37a9ef" size={22} onClick={() => setQty((prev) => prev + 20)} style={{cursor:'pointer'}}/>
+         <Text  miw={'1.6rem'}>{qty}</Text>
           </Group>
         </Group>
         <Tooltip label={`الكمية المتبقية : ${quantity}`} >

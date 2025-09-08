@@ -36,9 +36,9 @@ const CentersCards = ({data}) => {
             <Flex justify={'end'} align={'center'} gap={20}>
             
                  <Card  shadow="sm" radius={10} miw={'20rem'}  mih={'8rem'} bd={'1px solid #12121212'} 
+                  style={{cursor:'pointer', transition: "background 0.3s ease"}}
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
-                 style={{cursor:'pointer'}}>
+                  onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}>
                     <Stack align='end' jus gap={20} justify='end'>
                      
                       <Title size="xl">
