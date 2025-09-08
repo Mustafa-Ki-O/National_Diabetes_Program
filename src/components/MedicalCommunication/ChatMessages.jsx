@@ -1,4 +1,4 @@
-import { Button, Flex, Stack, Text, TextInput,Group } from "@mantine/core"
+import { Button, Flex, Stack, Text, TextInput,Group, Card } from "@mantine/core"
 import { SendHorizonal, SendIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import usePostMsg from "../../useMutation/Patient/usePostMsg"
@@ -29,7 +29,7 @@ const ChatMessages = () =>{
     
     const handleSubmit = () => {
     if (message && userInfo.userId) { 
-        const fullMessage = `مرحبا أنا المستخدم رقمي الخاص هو ${userInfo.userId} واسمي هو ${userInfo.userName}, مضمون الرسالة هو: ${message}`;
+        const fullMessage = `${message}`;
         setSentMsg(fullMessage);
         postMsg(fullMessage);
         setMessage('');
@@ -52,11 +52,14 @@ const ChatMessages = () =>{
         <>
         <Stack pos={'relative'}>
         <Group  h={'80vh'}  p={5} display={'flex'} style={{flexDirection:'column',flexWrap:'none'}} align="right" justify="space-between" >
-            <Stack h={'100%'} pb={'4rem'} style={{overflow:'auto',borderRadius:20}} m={5}  bd={'2px solid #37a9ef'} >
+            <Stack h={'100%'} pb={'4rem'} style={{overflow:'auto',borderRadius:20}} m={5}  bd={'1px solid #37a9ef'} >
             {sendMsgs.length > 0 && sendMsgs.map((msg,index)=>(
-                <Text key={index} ta={'right'} p={5} size="lg" bg={'#16aabb60'} style={{borderRadius:8}}>
+                <Card p={5} radius="md" key={index}  shadow="sm" bg={'#16aabb20'}  >
+                     <Text  ta={'right'} p={5} size="xl" >
                    {msg} 
                </Text>
+                </Card>
+               
 
             ))  
             }

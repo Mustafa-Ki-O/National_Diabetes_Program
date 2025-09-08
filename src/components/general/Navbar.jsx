@@ -18,7 +18,7 @@ import drugs from '../../assets/vectors/Drugs.svg'
 import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
-import { Activity, ScanHeart, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital, ShieldUser  } from "lucide-react";
+import { Activity, ScanHeart, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital, ShieldUser, BotMessageSquare  } from "lucide-react";
 import NotifyNav from "./NotifyNav";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 import CreateNotificationSocket from "../../api/CreateNotificationsSocket";
@@ -379,20 +379,20 @@ useEffect(() => {
                 
               />
             </div> */}
-            {/* <NavIcon 
-              icon={Activity} 
-              name="health-checkUps" 
+            <NavIcon 
+              icon={BotMessageSquare} 
+              name="medical-communication" 
               clickedButton={clickedButton} 
               handleButtonNavClick={handleButtonNavClick} 
-              label={'الحالة الصحية'}
-            />  */}
-             <NavIcon 
+              label={"AI دردشة "}
+            /> 
+             {/* <NavIcon 
              icon={ScanHeart} 
              name="analyzer-AI" 
              clickedButton={clickedButton} 
              handleButtonNavClick={handleButtonNavClick}
              label ='AI فحص'
-           />
+           /> */}
             <NavIcon 
               icon={House} 
               name="patient-home" 

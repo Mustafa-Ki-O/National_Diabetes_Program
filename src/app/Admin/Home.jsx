@@ -53,7 +53,7 @@ const Home = () => {
           open()
         }   
     },[lowQ])
-    
+
     useEffect(() => {
       setProgress(isPending||isPendingInfo);
   }, [isPending||isPendingInfo]);
@@ -100,7 +100,7 @@ const navigate= useNavigate()
 const CardCa = ({info}) =>(
   <>
   <Card 
-  shadow="sm"
+       shadow="sm"
         miw={'14rem'}
         padding="lg"
         radius="lg"
