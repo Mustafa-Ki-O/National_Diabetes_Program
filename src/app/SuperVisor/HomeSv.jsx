@@ -16,9 +16,9 @@ import CentersCards from "../../components/SuperVisor/HomeSv/CentersCards";
 const HomeSv = () => {
 
         const [centers, setCenters] = useState([]);
-          const [active,setActive] = useState(false);
-          const {fetchCenters,isPending} = useFetchCentersSv();
-           const [progress, setProgress] = useState(false);
+        const [active,setActive] = useState(false);
+        const {fetchCenters,isPending} = useFetchCentersSv();
+        const [progress, setProgress] = useState(false);
 
             useEffect(()=>{
               fetchCenters(setCenters)

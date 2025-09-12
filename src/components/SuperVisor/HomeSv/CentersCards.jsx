@@ -3,7 +3,9 @@ import { ArrowUpLeft, Circle, Hospital, LocateFixed, User, UserCheck, UserCog, U
 import { DonutChart } from "@mantine/charts";
 import { useNavigate, useParams } from "react-router";
 import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
+dayjs.extend(customParseFormat)
 const CentersCards = ({data}) => {
 
     const randomColor = () =>

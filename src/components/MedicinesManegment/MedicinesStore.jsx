@@ -59,7 +59,7 @@ const MedicinesStore = ({setProgress,medicines}) => {
             <div style={{margin:10,height:1,backgroundColor:'#70707070',width:'100%'}} ></div>
             <Stack>
                 <Grid gutter={20}>
-                   {medicines?.map((item,index) => (
+                   {medicines?.reverse().map((item,index) => (
                     <Grid.Col key={index} span={4}>
                       <MedicineCard medicine={item} setProgress={setProgress}/>
                     </Grid.Col>

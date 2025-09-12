@@ -48,7 +48,8 @@ const handleSubmit = () => {
 
          <form dir="rtl" style={{ width: "100%" }} onSubmit={form.onSubmit(handleSubmit)}>
                       <TextInput
-                        my={10}
+                        mt={10}
+                        mb={25}
                         size="md"
                         rightSection={<img src={message} width="20px" />}
                         radius={10}
@@ -56,7 +57,7 @@ const handleSubmit = () => {
                         key={form.key("email")}
                         {...form.getInputProps("email")}
                       />
-                      <Stack mt={30} gap={10}>
+                      <Stack my={10} gap={10}>
                       <Button radius={10} type="submit" variant="filled" color="#37A9EF" size="md" fullWidth >
                         ارسال
                       </Button>

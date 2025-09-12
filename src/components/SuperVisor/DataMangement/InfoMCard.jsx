@@ -9,7 +9,7 @@ const InfoMCard = ({data}) =>{
         <Grid gutter={20} p={{base:5,sm:20}} justify="end" >
 
             <Grid.Col span={{base:12,sm:5}}>
-                <Card radius={10}  mih={'6rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                <Card shadow="sm" radius={10}  mih={'6rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex align='center' gap={10} justify='end'>
                        <Title size="xl"  >
                                {nopis_lm}
@@ -25,7 +25,7 @@ const InfoMCard = ({data}) =>{
 
 
              <Grid.Col span={{base:12,sm:4}}>
-                <Card radius={10}  mih={'6rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                <Card shadow="sm" radius={10}  mih={'6rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex justify={'end'} align={'center'} gap={10}>
   
                        <UserRound size={30} />
@@ -41,7 +41,7 @@ const InfoMCard = ({data}) =>{
             </Grid.Col>
 
              <Grid.Col span={{base:12,sm:6}} >
-                <Card radius={10}  mih={'8rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                <Card shadow="sm" radius={10}  mih={'8rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex align='center' gap={30} justify='end'>
                         <Group gap={10}>
                             <UserRound size={30} />

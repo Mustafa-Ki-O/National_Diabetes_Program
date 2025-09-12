@@ -42,7 +42,7 @@ const useVerifyToken = () => {
       
       setTimeout(() => {
         console.log(userRole)
-        userRole === 'center' ? navigate("/National_Diabetes_Program/home/") :userRole === 'supervisor' ? navigate("/National_Diabetes_Program/superVisor/home-sv/") : navigate("/National_Diabetes_Program/patient-home/")
+        userRole === 'center' ? navigate("/National_Diabetes_Program/home/") :userRole === 'supervisor' ? navigate("/National_Diabetes_Program/superVisor/home-sv/") :userRole === 'patient' ? navigate("/National_Diabetes_Program/patient-home/"): navigate("/National_Diabetes_Program/")
       }, 2000);
     }, 
     onError: (err, variables, context) => {
@@ -55,6 +55,7 @@ const useVerifyToken = () => {
         color: 'red',
         loading: false,
       });
+      navigate("/National_Diabetes_Program/")
     },
   });
   

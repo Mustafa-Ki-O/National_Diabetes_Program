@@ -12,9 +12,7 @@ import useLoginSv from "../../useMutation/SuperVisor/useLoginSv";
 // import useLogin from "../../components/useMutation/researcher/useLogin";
 
 const schema = yup.object().shape({
-  password: yup
-    .string()
-    .min(8, "يجب ادخال ما لايقل عن 8 محارف"),
+  password: yup.string().min(8, "يجب ادخال ما لايقل عن 8 محارف"),
   email: yup.string().required("ايميل غير صالح").email("ايميل غير صالح"),
 });
 

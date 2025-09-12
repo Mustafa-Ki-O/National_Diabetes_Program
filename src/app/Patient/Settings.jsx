@@ -15,7 +15,7 @@ const Settings = () => {
                     <Title my={20} size={'xl'} ta={'right'}>
                         إعدادات الحساب
                        </Title>
-                    <Image bg={'gray'} radius={'50%'} mb={20} src={<User size={20}/>} w={'6rem'} h={'6rem'} m={'auto'}/>
+                    {/* <Image bg={'gray'} radius={'50%'} mb={20} src={<User size={20}/>} w={'6rem'} h={'6rem'} m={'auto'}/> */}
                     <Tabs/>
                     <Outlet />
            </Container>

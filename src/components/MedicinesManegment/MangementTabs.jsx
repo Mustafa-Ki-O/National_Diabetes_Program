@@ -29,9 +29,9 @@ const MangementTabs =({setProgress}) => {
        }, [fetchMedicines]);
        
             useEffect(() => {
-        if (medicines.length > 0) {
+        if (medicines?.length > 0) {
          // ✅ أدوية جديدة (مو بالستور → أضفها)
-         const newMed = medicines.filter(
+         const newMed = medicines?.filter(
            (med) => !medicinesStore.some((medS) => medS.id === med.id)
          );
 

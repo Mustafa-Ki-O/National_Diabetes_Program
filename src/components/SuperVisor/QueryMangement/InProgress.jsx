@@ -7,7 +7,7 @@ const InProgress = ({inProgressR}) => {
     return(
         <>
         <Grid gutter={20}>
-             {inProgressR?.map((r,i)=>(
+             {inProgressR?.reverse().map((r,i)=>(
             <Grid.Col span={{base:12,sm:3,lg:4}}>
                 <RequsetCard key={i} request={r}/>
             </Grid.Col>

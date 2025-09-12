@@ -46,7 +46,7 @@ const VerifySubmitModal = ({id,opened,close,reviewData,setProgress,setDownload})
                           // indeterminate
                           // variant="filled"
                           fw={600}
-                          label="تحميل نسخة إالكترونية من المراجعة"
+                          label="تحميل نسخة إلكترونية من المراجعة"
                           checked={checkedc}
                           onChange={(e) => setCheckedc(e.currentTarget.checked)} 
                         />

@@ -164,7 +164,7 @@ const RegAdminForm = ({setProgress}) =>{
             </GridCol> */}
             
           </Grid>
-           <Flex visibleFrom="md"  gap='1.25rem' justify='center' m="auto" my={15}>
+           <Flex visibleFrom="md"  gap='1.25rem' justify='center' m="auto" mt={35} mb={15}>
            <Button fullWidth radius={10}  size="md"  variant="outline" color="#8E8E8E" onClick={handleLog}>
               تسجيل الدخول
             </Button>

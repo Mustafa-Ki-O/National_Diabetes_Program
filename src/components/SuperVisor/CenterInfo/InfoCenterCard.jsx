@@ -17,7 +17,7 @@ const InfoCenterCard = ({data,setProgress}) => {
         <Stack align="end" gap={20} p={{base:5,sm:20}}>
             <Flex justify={'end'} align={'center'} gap={20}>
             
-                 <Card radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                 <Card pl={'3rem'} radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
                     <Flex align='center' gap={10} justify='end'>
                        <Title size="xl"  >
                                {data?.nop_in_center_lm}
@@ -28,7 +28,7 @@ const InfoCenterCard = ({data,setProgress}) => {
                         
                     </Flex> 
                 </Card>
-                <Card  w={'fit-content'} radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                <Card pl={'3rem'}  w={'fit-content'} radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
             <Flex  justify={'end'} align={'center'} gap={10} pl={20}>
                <UserRound size={30} />
                   <Title size="xl"  c='#000' >
@@ -41,8 +41,8 @@ const InfoCenterCard = ({data,setProgress}) => {
                 </Card>
                 </Flex>
                 
-                    <Card radius={10}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
-                        <Flex align='start' gap={25} justify='end'>
+                    <Card radius={10} miw={'45rem'}  mih={'7rem'} bd={'1px solid #12121212'} style={{cursor:'pointer'}}>
+                        <Flex align='start' justify={'space-between'}>
                              <DonutChart data={data1} />
                              <Stack gap={10}>
                                  <Title size="lg" my={15}>

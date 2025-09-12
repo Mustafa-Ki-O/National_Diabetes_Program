@@ -76,7 +76,7 @@ const LoginForm = ({setProgress}) => {
               <PasswordInput
                 size="md"
                 radius={10}
-                mt="sm"
+                // mt="sm"
                 placeholder="أدخل كلمة المرور"
                 key={form.key("password")}
                 {...form.getInputProps("password")}
