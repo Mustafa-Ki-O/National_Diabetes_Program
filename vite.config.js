@@ -8,11 +8,12 @@ export default defineConfig({
     VitePWA({
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, 
+        globPatterns :['**/*.{js,css,html,png,ico,svg}']
       },
 
       manifest: {
-        name: 'National Diabetes Program',
-        short_name: 'Diabetes Program',
+        name: 'NDP',
+        short_name: 'National Diabetes Program',
         description: 'A Progressive Web App for Diabetes Management',
         theme_color: '#ffffff',
         background_color: '#ffffff',
