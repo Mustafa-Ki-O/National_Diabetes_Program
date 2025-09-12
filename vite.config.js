@@ -9,6 +9,7 @@ export default defineConfig({
       workbox: {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, 
       },
+
       manifest: {
         name: 'National Diabetes Program',
         short_name: 'Diabetes Program',
@@ -19,16 +20,21 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: '/icons/ndblogo2.png',
+            src: './icons/ndblogo2.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/icons/ndblogo2.png',
+            src: './icons/ndblogo2.png',
             sizes: '512x512',
             type: 'image/png',
           },
         ],
+      },
+      devOptions:{
+        enabled:true,
+        suppressWarnings:true,
+        // type:module
       },
     }),
   ],
