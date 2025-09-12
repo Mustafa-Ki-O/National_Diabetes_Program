@@ -12,8 +12,8 @@ export default defineConfig({
       },
 
       manifest: {
-        name: 'NDP',
-        short_name: 'National Diabetes Program',
+        name: 'National Diabetes Program',
+        short_name: 'NDP',
         description: 'A Progressive Web App for Diabetes Management',
         theme_color: '#ffffff',
         background_color: '#ffffff',

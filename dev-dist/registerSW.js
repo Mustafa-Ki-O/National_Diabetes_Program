@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/National_Diabetes_Program/dev-sw.js?dev-sw', { scope: '/National_Diabetes_Program/', type: 'classic' })
