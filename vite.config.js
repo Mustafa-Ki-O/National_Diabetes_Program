@@ -7,7 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       workbox: {
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5MB بدلاً من 2MB
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, 
       },
       manifest: {
         name: 'National Diabetes Program',
@@ -19,12 +19,12 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: '/public/icons/ndblogo2.png',
+            src: '/icons/ndblogo2.png',
             sizes: '192x192',
             type: 'image/png',
           },
           {
-            src: '/public/icons/ndblogo2.png',
+            src: '/icons/ndblogo2.png',
             sizes: '512x512',
             type: 'image/png',
           },
