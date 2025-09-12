@@ -15,7 +15,7 @@ export default defineConfig({
         description: 'A Progressive Web App for Diabetes Management',
         theme_color: '#ffffff',
         background_color: '#ffffff',
-        start_url: '/',
+        start_url: '/National_Diabetes_Program/',
         display: 'standalone',
         icons: [
           {
