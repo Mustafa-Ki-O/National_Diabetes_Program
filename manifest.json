@@ -2,7 +2,7 @@
   "name": "National Diabetes Program",
   "short_name": "Diabetes Program",
   "description": "A Progressive Web App for Diabetes Management",
-  "start_url": "/",
+  "start_url": "/National_Diabetes_Program/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
