@@ -1,6 +1,6 @@
 {
-  "name": "National Diabetes Program",
-  "short_name": "Diabetes Program",
+  "name": "NDP",
+  "short_name": "National Diabetes Program",
   "description": "A Progressive Web App for Diabetes Management",
   "start_url": "/National_Diabetes_Program/",
   "display": "standalone",
