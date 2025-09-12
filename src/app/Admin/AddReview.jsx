@@ -179,7 +179,7 @@ useEffect(() => {
       console.warn(`Patient with id ${id} not found`);
       setStoredPatient(null);
     }
-  }, [id, patients]); 
+  }, [id, patients,storedPatient]); 
 
 const handleNext = async () => {
   const isValid = await methods.trigger(); 
@@ -287,7 +287,7 @@ const onSubmit = () => {
     historyOfdiseaseDetection: data.historyOfdiseaseDetection
       ? dayjs(data.historyOfdiseaseDetection).format('DD-MM-YYYY')
       : '',
-    address:'حمص'
+    address:storedPatient?.centerName
   };
 
   setFinalData(updated);
@@ -420,7 +420,7 @@ const [download,setDownload] = useState(false)
              </Button></Group>
           {/* </Flex> */}
             
-         <GeneralInfoStep />
+         <GeneralInfoStep address={storedPatient?.centerName}/>
         </Stepper.Step>
         <Stepper.Step icon={<Image src={medicalCard} w={20} />}>
                  <Group  display={'flex'} justify="center" p={0} m={0} pos={'sticky'} top={60}  style={{zIndex:20,borderBottom:'1px solid #8e8e8e40'}} bg={'#f9f9f9'} >

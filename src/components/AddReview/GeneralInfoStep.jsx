@@ -5,7 +5,7 @@ import UpScroll from "../general/UpScroll";
 
 
 
-const GeneralInfoStep = () => {
+const GeneralInfoStep = ({address}) => {
   UpScroll()
   const { control, formState: { errors } } = useFormContext();
 
@@ -35,7 +35,7 @@ const GeneralInfoStep = () => {
             render={({ field }) => (
               <Select
                 disabled
-                value={'حمص'}
+                value={address}
                 size="xl"
                 radius={10}
                 fw={600}
