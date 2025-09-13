@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMedicin,removeMedicin } from '../../redux/action';
 
-// ✅ hook بدل component
+
 export default function useCheckMedicineStore() {
   const medicinesStore = useSelector(store => store.medicins.medicins)
   const [medicines,setMedicines] = useState([])

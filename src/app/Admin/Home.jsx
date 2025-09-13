@@ -30,6 +30,7 @@ const Home = () => {
 
       const [progress, setProgress] = useState(false);
       const [lowQ,setLowQ] = useState([])
+      // const [med,setMed] = useState()
 
     useEffect(()=>{
       fetchHomeInfo()
@@ -40,12 +41,13 @@ const Home = () => {
        });
     },[]);
 
-    useEffect(()=>{
-      if(medicines){
-        setLowQ(medicines?.filter((med)=> med.quantity < 50))
-        
-      }
-    },[medicines])
+     useEffect(() => {
+       if (medicines && Array.isArray(medicines)) {
+         // تصفية الأدوية التي الكمية أقل من 50
+         setLowQ(medicines.filter((med) => med.quantity < 50));
+        //  setMed(true);
+       } 
+     }, [medicines]);
 
     useEffect(()=>{
       if(lowQ.length >0){
@@ -132,7 +134,7 @@ const CardCa = ({info}) =>(
     return(
         <>
         {progress && <Progress/>}
-        <WarningModal opened={opened} close={close} medicines={lowQ}/>
+        <WarningModal opened={opened} close={close} medicines={lowQ} />
                 <Container p={{base:0,md:'md'}}  fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
                  <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                      الرئيسية

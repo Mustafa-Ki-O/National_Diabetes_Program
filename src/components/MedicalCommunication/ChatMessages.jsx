@@ -5,6 +5,7 @@ import usePostMsg from "../../useMutation/Patient/usePostMsg"
 
 const ChatMessages = () =>{
 
+    const [firstMsg,setFirstMsg] = useState(false)
     const [userInfo,setUserInfo] = useState({
         userId:'',
         userName:''
@@ -32,6 +33,7 @@ const ChatMessages = () =>{
         const fullMessage = `${message}`;
         setSentMsg(fullMessage);
         postMsg(fullMessage);
+        setFirstMsg(true)
         setMessage('');
     }
 };
@@ -72,7 +74,34 @@ const ChatMessages = () =>{
             </Stack>
                 </Group>
 
+            {!firstMsg ? (
+            
             <Flex pt={10}  px={5} w={'95%'} pos={'fixed'} bottom={'1%'} 
+            // style={{borderTop:'1px solid #70707040'}}
+             bg={'#F9FAFC'} gap={10} justify={'space-between'} align={'center'}>
+                <Button dir="ltr" onClick={handleSubmit} variant="filled" color="#E7EEF3"  miw={'2.6rem'} size="md" radius={10} style={{paddingInline:0}}>
+                    <SendHorizonal  size={25} color="#37a9ef" />
+                </Button>
+                <TextInput
+                  variant="filled"
+                  w={'100%'}
+                  dir="rtl"
+                  placeholder="سؤال /استشارة"
+                  size="md"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  radius={10}
+                  styles={{
+                    input: {
+                      backgroundColor: '#E7EEF3',
+                    },
+                  }}
+                />
+                
+            </Flex>
+    
+            ):(
+                <Flex pt={10}  px={5} w={'95%'} pos={'fixed'} bottom={'1%'} 
             style={{borderTop:'1px solid #70707040'}} bg={'#F9FAFC'} gap={10} justify={'space-between'} align={'center'}>
                 <Button dir="ltr" onClick={handleSubmit} variant="filled" color="#E7EEF3"  miw={'2.6rem'} size="md" radius={10} style={{paddingInline:0}}>
                     <SendHorizonal  size={25} color="#37a9ef" />
@@ -95,6 +124,8 @@ const ChatMessages = () =>{
                 
             </Flex>
     
+            )}
+            
         </Stack>
         </>
     )

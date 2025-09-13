@@ -37,35 +37,35 @@ const StyleTag = () => (
   </style>
 );
 
-const [firstVisible, setFirstVisible] = useState(true);
-  const [secondVisible, setSecondVisible] = useState(false);
-
-
-  useEffect(() => {
-    if (active) {
- 
-      setTimeout(() => setFirstVisible(false), 700);
-      setSecondVisible(true);
-    } else {
-      setFirstVisible(true);
-     setSecondVisible(false)
-    }
-  }, [active]);
+      // const [active, setActive] = useState(false);
+      const [click, setClick] = useState(false);
+      const user = JSON.parse(localStorage.getItem('user'));
+      console.log(user)
+      useEffect(() => {
+        
+        setClick(user.first_use_seen);  
+      }, [user]);
+  
+      useEffect(() => {
+          setTimeout(() => {
+              setActive(true);
+          }, 200);
+      }, []);
 
     return (
     <>
       <StyleTag />
-      {firstVisible && (
+      {!click && (
         <Container
           style={!active ? fadeIn : fadeOut}
           p={10}
           fluid
         >
-          <StartChat setActive={setActive} active={active} />
+          <StartChat  setClick={setClick} />
         </Container>
       )}
 
-      {secondVisible && (
+      {click  && (
         <Container
           style={active ? fadeIn : fadeOut}
           p={10}

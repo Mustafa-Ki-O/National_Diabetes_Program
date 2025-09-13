@@ -103,9 +103,9 @@ const LoginForm = ({setProgress}) => {
 
      
         
-        <Accordion chevronPosition="left" chevronIconSize={18}  variant="unstyled" pb={0}>
+        <Accordion  variant="unstyled" pb={0}>
           <AccordionItem value="1">
-            <AccordionControl>
+            <AccordionControl   >
              <Text size="md">
             لاتملك حساب ؟
             <Anchor 

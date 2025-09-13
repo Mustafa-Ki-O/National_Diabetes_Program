@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import PostReview from "../../api/Admin/PostReview";
+import useCheckMedicineStore from "../../components/AddReview/useCheckMedicineStore";
 
 const useAddReview = (patientId) => {
   // console.log(patientId)
@@ -14,8 +15,9 @@ const useAddReview = (patientId) => {
           title: 'تم رفع المراجعة بنجاح',
           autoClose: 3000,
         });
+         useCheckMedicineStore()
          navigate(`/National_Diabetes_Program/patientInfo/${patientId}/`)
-        // localStorage.clear()
+        
     },
     onError: (err) => {
       console.log("ERROR", err);
