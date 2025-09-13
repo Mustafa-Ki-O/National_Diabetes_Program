@@ -10,10 +10,10 @@ const MedicalCommunication = ()=>{
 
 
     const [active,setActive] = useState(false)
-
+    const [firstActive,setFirstActive] = useState(true)
 
 const fadeIn = {
-  animation: "fadeIn 0.7s forwards",
+  animation: "fadeIn 1s forwards",
 };
 
 const fadeOut = {
@@ -38,7 +38,7 @@ const StyleTag = () => (
 );
 
       // const [active, setActive] = useState(false);
-      const [click, setClick] = useState(false);
+      const [click, setClick] = useState();
       const user = JSON.parse(localStorage.getItem('user'));
       console.log(user)
       useEffect(() => {
@@ -47,27 +47,28 @@ const StyleTag = () => (
       }, [user]);
   
       useEffect(() => {
+        // setActive(false)
           setTimeout(() => {
-              setActive(true);
-          }, 200);
+              setFirstActive(false);
+          }, 700);
       }, []);
 
     return (
     <>
       <StyleTag />
-      {!click && (
+      {click && (
         <Container
-          style={!active ? fadeIn : fadeOut}
+          style={!firstActive ? fadeIn : fadeOut}
           p={10}
           fluid
         >
-          <StartChat  setClick={setClick} />
+          <StartChat  setClick={setClick} setActive={setActive} setFirstActive={setFirstActive}/>
         </Container>
       )}
 
-      {click  && (
+      {!click  && (
         <Container
-          style={active ? fadeIn : fadeOut}
+          style={!active ? fadeIn : fadeOut}
           p={10}
           fluid
           mb={'5rem'}

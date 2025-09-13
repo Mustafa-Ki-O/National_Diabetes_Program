@@ -1,10 +1,12 @@
 import { Container,Text,Title,Button,Stack, Group } from "@mantine/core"
 import { BotMessageSquare, HandHeart } from "lucide-react"
 
-const StartChat = ({setClick}) =>{
+const StartChat = ({setClick,setActive,setFirstActive}) =>{
     
 
     const handleActive = () =>{
+        setActive(false)
+        setFirstActive(false)
         setClick(false)
         const user = JSON.parse(localStorage.getItem('user'))
         user.first_use_seen = false
