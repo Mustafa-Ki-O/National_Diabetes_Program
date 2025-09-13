@@ -7,7 +7,7 @@ const useSendNote = () => {
   const { mutate: sendNote, isPending } = useMutation({
     mutationFn: (formData) => PostNote(formData),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title:"تم الارسال",
           autoClose: 3000,

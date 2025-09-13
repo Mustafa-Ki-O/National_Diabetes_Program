@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import PostReview from "../../api/Admin/PostReview";
 
 const useAddReview = (patientId) => {
-  console.log(patientId)
+  // console.log(patientId)
   const navigate = useNavigate();
   const { mutate: addReview, isPending } = useMutation({
     mutationFn: (formData) => PostReview(formData),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title: 'تم رفع المراجعة بنجاح',
           autoClose: 3000,

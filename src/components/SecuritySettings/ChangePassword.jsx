@@ -52,10 +52,10 @@ const ChangePassword = ({setProgress}) => {
   });
 
   const handleSubmit = (values) => {
-    console.log("Form Submitted:", values);
+    // console.log("Form Submitted:", values);
          if (form.isValid) {
           const values = form.getValues();
-          console.log(values)
+          // console.log(values)
           const newFormData = new FormData();
           Object.keys(values).forEach((key) => {
             if(key !== 'confirmPassword'){

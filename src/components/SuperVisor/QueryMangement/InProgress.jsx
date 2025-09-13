@@ -3,7 +3,7 @@ import RequsetCard from "./RequestCard"
 
 const InProgress = ({inProgressR}) => {
 
-    console.log('inPro : ',inProgressR)
+    // console.log('inPro : ',inProgressR)
     return(
         <>
         <Grid gutter={20}>

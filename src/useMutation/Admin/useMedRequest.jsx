@@ -8,7 +8,7 @@ const useMedRequest = () => {
   const { mutate: requestMed, isPending } = useMutation({
     mutationFn: (medicine) => PostMedRequest(medicine),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title: 'تم رفع الطلب ',
       autoClose: 3000,

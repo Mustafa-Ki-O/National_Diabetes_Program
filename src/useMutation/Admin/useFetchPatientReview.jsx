@@ -10,7 +10,7 @@ const useFetchPatientReview = (setReview) => {
       setReview(res);
     }),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
     },
     onError: (err) => {
       console.log("ERROR", err);

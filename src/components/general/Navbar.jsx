@@ -88,7 +88,7 @@ useEffect(() => {
       if(userRole==='patient'){
         fetchNotification()
       }
-       console.log('userRole is (from p) : ',userRole)
+      //  console.log('userRole is (from p) : ',userRole)
     },[userRole])
 
 

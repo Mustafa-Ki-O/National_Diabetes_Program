@@ -13,7 +13,7 @@ const CarouselCard = ({data}) =>{
    const navigate=useNavigate()
 
    const handleClick = (cityName) => {
-    console.log(cityName)
+    // console.log(cityName)
      navigate(`/National_Diabetes_Program/superVisor/dataMangement/cityInfo/${cityName}/`)
    }
 

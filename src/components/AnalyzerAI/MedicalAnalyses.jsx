@@ -33,7 +33,7 @@ const MedicalAnalyses = () => {
           
             const handleSendImage = () => {
               if (image) {
-                console.log('تم ارسال الصورة : ', image);
+                // console.log('تم ارسال الصورة : ', image);
                
               }
             };

@@ -87,9 +87,9 @@ const RegisterForm = ({setProgress}) => {
         const values = form.getValues();
         if (values.age) {
         values.age = dayjs(values.age).format('DD-MM-YYYY')
-        console.log(values.age)
+        // console.log(values.age)
       }
-      console.log(values)
+      // console.log(values)
       const newFormData = new FormData();
       Object.keys(values).forEach((key) => {
         if (values.termsOfService === true) {

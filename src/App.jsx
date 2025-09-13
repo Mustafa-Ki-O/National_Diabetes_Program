@@ -9,6 +9,21 @@ import Circle from "./components/general/Circle";
 
 function App() {
  
+    useEffect(() => {
+     if ("Notification" in window && "serviceWorker" in navigator) {
+       Notification.requestPermission().then((permission) => {
+         if (permission === "granted") {
+           console.log("الإشعارات مسموحة");
+           
+         }
+       });
+  }
+}, []);
+
+useEffect(()=>{
+    console.clear()
+},[])
+
 
   return (
     <>

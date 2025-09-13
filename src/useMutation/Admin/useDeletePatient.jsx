@@ -8,7 +8,7 @@ const useDeletePatient = () => {
   const { mutate: deletePatient, isPending } = useMutation({
     mutationFn: (id) => DeletePatient(id),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title: 'تم حذف الحساب',
           autoClose: 3000,

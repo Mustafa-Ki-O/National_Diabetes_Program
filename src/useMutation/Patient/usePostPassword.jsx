@@ -9,7 +9,7 @@ const usePostPassword = () => {
   const { mutate: postPassword, isPending } = useMutation({
     mutationFn: (passWord) => PostPassword(passWord),
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       notifications.show({
       title: 'تم التحقق بنجاح',
       autoClose: 3000,

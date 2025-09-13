@@ -10,7 +10,7 @@ const useFetchPatientInfo = (setPatient) => {
       setPatient(res)
     }),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title: 'تم جلب المعلومات',
           autoClose: 3000,

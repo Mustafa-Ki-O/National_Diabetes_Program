@@ -8,7 +8,7 @@ const useFetchMangData = () => {
         setData(res);
       }),
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       
     },
     onError: (err) => {

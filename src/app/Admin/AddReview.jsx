@@ -161,22 +161,22 @@ const AddReview = () => {
   const[reviewData,setReviewData] = useState({})
 
  
-const calculateDuration = (unitsPerBox, dailyDose) => {
-  if (!unitsPerBox || !dailyDose) return null;
-  return Math.floor(unitsPerBox / dailyDose);
-};
+// const calculateDuration = (unitsPerBox, dailyDose) => {
+//   if (!unitsPerBox || !dailyDose) return null;
+//   return Math.floor(unitsPerBox / dailyDose);
+// };
 
 
 
 useEffect(() => {
     // fetchInfo(id); 
     const foundPatient = patients.find(patient => patient.id.toString() === id.toString());
-    console.log(foundPatient)
+    // console.log(foundPatient)
     if (foundPatient) {
       setStoredPatient(foundPatient);
-      console.log(storedPatient)
+      // console.log(storedPatient)
     } else {
-      console.warn(`Patient with id ${id} not found`);
+      // console.warn(`Patient with id ${id} not found`);
       setStoredPatient(null);
     }
   }, [id, patients,storedPatient]); 
@@ -201,7 +201,7 @@ const handleNext = async () => {
 
 useEffect(() => {
   if (openedVerify) {
-    console.log("كل البيانات جاهزة للإرسال:", reviewData);
+    // console.log("كل البيانات جاهزة للإرسال:", reviewData);
 
   }
 }, [reviewData, openedVerify]);
@@ -292,7 +292,7 @@ const onSubmit = () => {
 
   setFinalData(updated);
   setReviewData(updated)
-  console.log(finalData)
+  // console.log(finalData)
   openVerify();
 };
 

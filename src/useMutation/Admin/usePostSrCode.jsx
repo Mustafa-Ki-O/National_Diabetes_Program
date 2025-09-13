@@ -8,7 +8,7 @@ const usePostSrCode = () => {
   const { mutate: postCode, isPending } = useMutation({
     mutationFn: (secret_key) => PostSrCode(secret_key),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title: 'تم التحقق بنجاح',
       autoClose: 3000,

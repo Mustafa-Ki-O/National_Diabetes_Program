@@ -35,7 +35,7 @@ const [clicked,setClicked] = useState(false)
     if(form.isValid){
      const  otp = form.getValues().code
       postOtp({otp:otp})
-      console.log(otp)
+      // console.log(otp)
     }
     // form.reset()
   }

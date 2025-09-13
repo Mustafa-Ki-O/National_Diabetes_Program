@@ -14,7 +14,7 @@ const RequsetCard = ({request}) => {
     const [reqId,setReqId] = useState(null)
     const navigate = useNavigate()
 
-    console.log(request)
+    // console.log(request)
 
     useEffect(()=>{
       setReqId(id)

@@ -7,7 +7,7 @@ const usePostReadNote = () => {
   const { mutate: postRead, isPending } = useMutation({
     mutationFn: () => PostReadNotification(),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
 
     },
     onError: (err) => {

@@ -28,7 +28,7 @@ const handleSubmit = () => {
     if (form.isValid) {
       const code = form.getValues().code;
       postCode({secret_key:code})
-      console.log(code)
+      // console.log(code)
       form.reset();
       };
      

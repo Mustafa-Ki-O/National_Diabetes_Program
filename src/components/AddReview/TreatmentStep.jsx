@@ -12,7 +12,7 @@ import useCheckMedicineStore from "./useCheckMedicineStore";
 const  TreatmentStep = () => {
 
   const medicinesStore = useCheckMedicineStore()
-  console.log('store :' ,medicinesStore)
+  // console.log('store :' ,medicinesStore)
   UpScroll()
 
 

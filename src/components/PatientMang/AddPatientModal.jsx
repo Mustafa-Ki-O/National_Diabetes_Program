@@ -21,7 +21,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
       const [pw,setPw] = useState()
       const { register, isPending } = useRegPatient(setPatients);
 
-      console.log(centerId)
+      // console.log(centerId)
 
       
       useEffect(() => {
@@ -92,7 +92,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
            values.age = dayjs(values.age).format('DD-MM-YYYY')
            values.historyOfdiseaseDetection = dayjs(values.historyOfdiseaseDetection).format('DD-MM-YYYY')
          }
-         console.log(values)
+        //  console.log(values)
          const newFormData = new FormData();
 
          Object.keys(values).forEach((key) => {
@@ -106,7 +106,7 @@ const  AddPatientModal = ({centerId,opened,close,setProgress,setPatients}) => {
               }
             });
         
-        console.log(newFormData);
+        // console.log(newFormData);
          setIsSubmitted(true);
          // console.log(newFormData)
         //  localStorage.setItem('patientEmail',JSON.stringify(values.email));

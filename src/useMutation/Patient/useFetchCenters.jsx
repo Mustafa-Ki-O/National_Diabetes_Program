@@ -9,7 +9,7 @@ const useFetchCenters = (setCenterNames) => {
         setCenterNames(centerNames);
       }),
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       // setCenterNames(data.centerName);
     },
     onError: (err) => {

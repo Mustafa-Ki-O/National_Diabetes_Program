@@ -28,7 +28,7 @@ const handleSubmit = () => {
     if (form.isValid) {
       const email = form.getValues().email;
       postEmail({email:email})
-      console.log(email)
+      // console.log(email)
       form.reset();
       };
      

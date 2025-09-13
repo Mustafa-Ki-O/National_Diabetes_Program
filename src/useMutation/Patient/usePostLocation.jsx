@@ -10,7 +10,7 @@ const usePostLocation = (setInfo) => {
   const { mutate: postLocation, isPending } = useMutation({
     mutationFn: (patientInfo) => PostLocation(patientInfo),
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       notifications.show({
       title:  'تم التحديث بنجاح',
       autoClose: 3000,

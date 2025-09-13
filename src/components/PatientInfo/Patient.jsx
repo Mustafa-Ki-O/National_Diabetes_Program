@@ -25,7 +25,7 @@ const Patient = ({ id , setProgress}) => {
   const patients1 = useSelector(state => state.patients.patients);
   const [patients,setPatients] = useState([])
   const [reviews,setReviews] = useState([])
-  console.log(patients1)
+  // console.log(patients1)
   const [storedPatient,setStoredPatient] = useState(null)
   const navigate=useNavigate();
   // const [patient, setPatient] = useState({});
@@ -35,7 +35,7 @@ const Patient = ({ id , setProgress}) => {
  useEffect(() => {
   const patient = patients1?.find((p) => p.id === parseInt(id));
   setStoredPatient(patient);
-  console.log(storedPatient)
+  // console.log(storedPatient)
 }, [patients1, id]);
 
 useEffect(()=>{
@@ -45,7 +45,7 @@ useEffect(()=>{
 useEffect(() => {
   if (patients) {
     const findPatient = patients.find((p) => p.id === parseInt(id));
-    console.log(findPatient);
+    // console.log(findPatient);
     setReviews(findPatient?.reviews || []);
   }
 }, [patients, id]);

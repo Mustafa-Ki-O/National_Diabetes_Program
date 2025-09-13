@@ -36,7 +36,7 @@ const Home = () => {
       fetchPatients()
       fetchMedicines((fetched) => {
              setMedicines(fetched);
-             console.log('fitched : ',fetched)
+            //  console.log('fitched : ',fetched)
        });
     },[]);
 
@@ -49,7 +49,7 @@ const Home = () => {
 
     useEffect(()=>{
       if(lowQ.length >0){
-           console.log('lowwww : ',lowQ)
+          //  console.log('lowwww : ',lowQ)
           open()
         }   
     },[lowQ])
@@ -133,7 +133,7 @@ const CardCa = ({info}) =>(
         <>
         {progress && <Progress/>}
         <WarningModal opened={opened} close={close} medicines={lowQ}/>
-                <Container p={{base:0,md:'lg'}}  fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
+                <Container p={{base:0,md:'md'}}  fluid  pb={60} mih='100vh' style={{opacity:active?'1':'0' ,transition:'all 0.7s'}}>
                  <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                      الرئيسية
                    </Title>
@@ -192,14 +192,14 @@ const CardCa = ({info}) =>(
                   <Title size='xl' mb={20} ta={'end'} m={'1.5rem'} mt={'3rem'}>
                     المرضى المسجلين حديثا
            </Title>
-             <Flex visibleFrom="sm" p={{base:0,md:'lg'}} justify={'end'} wrap={'wrap'} gap={10}>
+             <Flex visibleFrom="sm" p={{base:0,md:'md'}} justify={'end'} wrap={'wrap'} gap={10}>
                {
                  
                  homeInfo?.last_five_patient?.map((e,i) => (
                  <CardCa info={e} key={i} />
                  ))
                }</Flex>
-               <Flex hiddenFrom="sm" gap={5} p={{base:0,md:'lg'}} style={{flexDirection:'column'}} justify={'end'}>
+               <Flex hiddenFrom="sm" gap={15} p={'md'} style={{flexDirection:'column'}} justify={'end'}>
                {
            
                homeInfo?.last_five_patient?.map((e,i) => (

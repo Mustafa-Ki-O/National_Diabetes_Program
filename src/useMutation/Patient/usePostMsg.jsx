@@ -8,7 +8,7 @@ const usePostMsg = () => {
   const { mutate: postMsg, isPending } = useMutation({
     mutationFn: (patientMsg) => PostMsg(patientMsg),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title: 'تم التحقق بنجاح',
       autoClose: 3000,

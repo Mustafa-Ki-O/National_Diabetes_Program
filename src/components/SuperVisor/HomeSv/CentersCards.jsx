@@ -27,7 +27,7 @@ const CentersCards = ({data}) => {
       const centerOrder = data
       ?.filter(c => c.nop)
       .sort((a, b) => b.nop - a.nop);
-      console.log(centerOrder)
+      // console.log(centerOrder)
     const navigate = useNavigate()
 
     // #e74c3c second

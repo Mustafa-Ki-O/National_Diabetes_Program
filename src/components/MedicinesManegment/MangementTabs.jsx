@@ -24,7 +24,7 @@ const MangementTabs =({setProgress}) => {
          // جيب الأدوية من السيرفر وخزنها بالـ state
          fetchMedicines((fetched) => {
            setMedicines(fetched);
-           console.log('fitched : ',fetched)
+          //  console.log('fitched : ',fetched)
          });
        }, [fetchMedicines]);
        
@@ -51,7 +51,7 @@ const MangementTabs =({setProgress}) => {
 
 
   return (
-    <Tabs  p={20} dir='rtl' defaultValue="store">
+    <Tabs  p={{base:0,sm:20}} dir='rtl' defaultValue="store">
       <Tabs.List bg={'#f9f9f9'} grow justify={'space-between'} pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
       >
         <Tabs.Tab fz={{base:'1rem',sm:'1.5rem'}} value="store" >

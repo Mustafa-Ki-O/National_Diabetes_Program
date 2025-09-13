@@ -46,7 +46,7 @@ const ChatMessages = () =>{
     }
     },[sentMsg])
 
-    console.log(sendMsgs)
+    // console.log(sendMsgs)
     
     return(
         <>

@@ -77,10 +77,10 @@ const AccountLocation = ({info,setProgress,setInfo}) => {
       };
 
       const handleSubmit = (values) => {
-        console.log('Submitted values:', values);
+        // console.log('Submitted values:', values);
          if (form.isValid) {
           const values = form.getValues();
-          console.log(values)
+          // console.log(values)
           const newFormData = new FormData();
           Object.keys(values).forEach((key) => {
               newFormData.append(key,values[key]);

@@ -16,7 +16,7 @@ const getNestedValue = (obj, path) => {
 
 const downloadDataAsPDF = (reviewData, sections, storedPatient) => {
   loadFont();
-  console.log(reviewData)
+  // console.log(reviewData)
   const pdf = new jsPDF();
   pdf.setFont('NotoSansArabic');
 

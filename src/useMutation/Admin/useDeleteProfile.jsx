@@ -9,7 +9,7 @@ const useDeleteProfile = () => {
   const { mutate: deleteProfile, isPending } = useMutation({
     mutationFn: (formData) => DeleteProfile(formData),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title: 'تم حذف الحساب',
           autoClose: 3000,

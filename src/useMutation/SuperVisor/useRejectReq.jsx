@@ -11,7 +11,7 @@ const useRejectReq = () => {
     mutationFn: (id) =>  RejectReq(id),
      
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       notifications.show({
             title: 'تم رفض الطلب',
             autoClose: 4000,

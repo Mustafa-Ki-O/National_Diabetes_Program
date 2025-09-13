@@ -8,7 +8,7 @@ const useRegAdmin = () => {
   const { mutate: register, isPending: isPending } = useMutation({
     mutationFn: (formData) => PostAdmin(formData),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
     //   toast.success("تم انشاء الحساب بنجاح");
     notifications.show({
           title: 'تم انشاء الحساب بنجاح',

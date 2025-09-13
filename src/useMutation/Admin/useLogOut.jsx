@@ -8,7 +8,7 @@ const useLogOut = () => {
     mutationFn: () => localStorage.clear() ,
         onSuccess: () => {
         navigate("/National_Diabetes_Program/")
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title: 'تم تسجيل الخروج من الحساب',
           autoClose: 3000,

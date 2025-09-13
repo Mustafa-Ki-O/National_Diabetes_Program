@@ -38,7 +38,7 @@ const ChangePwdForm = ({setProgress}) => {
     if(form.isValid){
     const pwd = form.getValues().password
     postPassword({newPassword:pwd,email:email})
-    console.log(pwd,email)
+    // console.log(pwd,email)
     // form.reset()
     }
   }

@@ -81,7 +81,7 @@ const CenterProfile = ({profile,setProfile,setProgress}) => {
         }, [profile]); 
 
         const handleSubmit = (values) => {
-          console.log(values)
+          // console.log(values)
           if (form.isValid) {  
             const profileData = {
               centerId: parseInt(values.centerId),
@@ -94,7 +94,7 @@ const CenterProfile = ({profile,setProfile,setProgress}) => {
             // setIsSubmitted(true);
 
             updateProfile(profileData)
-            console.log('loading :',isPending) 
+            // console.log('loading :',isPending) 
           };
           const validated = form.validate();
       
@@ -106,7 +106,7 @@ const CenterProfile = ({profile,setProfile,setProgress}) => {
       
         useEffect(() => {
         
-            console.log('loading :',isPending)
+            // console.log('loading :',isPending)
             setProgress(isPending ); 
             
         }, [isPending]);

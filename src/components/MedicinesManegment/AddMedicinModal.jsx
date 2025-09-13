@@ -38,7 +38,7 @@ const  AddMedicinModal = ({setProgress,centerName,opened,close}) => {
     setIsLoading(true);
     try {
       const values = form.getValues();
-      console.log('القيم المدخلة:', values);
+      // console.log('القيم المدخلة:', values);
 
       const dataToSend = {
         name_arabic: values.nameAr,
@@ -49,7 +49,7 @@ const  AddMedicinModal = ({setProgress,centerName,opened,close}) => {
         units_per_box: parseFloat(values.unitsNum),
       };
 
-      console.log('البيانات المُعدة للإرسال:', dataToSend);
+      // console.log('البيانات المُعدة للإرسال:', dataToSend);
 
       setSubmitted(true);
       // افترض أن requestMed تم تعديلها لتأخذ كائن JavaScript

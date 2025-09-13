@@ -23,7 +23,7 @@ const HomeSv = () => {
             useEffect(()=>{
               fetchCenters(setCenters)
             },[]);
-            console.log('centers aer : ',centers)
+            // console.log('centers aer : ',centers)
           
             useEffect(() => {
               setProgress(isPending);
@@ -46,7 +46,7 @@ const HomeSv = () => {
           };
         });
         
-        console.log(result);
+        // console.log(result);
 
         
             return(

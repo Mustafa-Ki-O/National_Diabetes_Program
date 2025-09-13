@@ -11,7 +11,7 @@ const InfoCard = ({reqInfo,id,setProgress}) =>{
     const {rejReq,isPending:isPendingRej} = useRejectReq()
     const {accReq,isPending:isPendingAcc} = useAcceptReq()
 
-    console.log(reqInfo)
+    // console.log(reqInfo)
     const {name_arabic, name_english, c_quantity, r_quantity, center_name, center_city, nop ,request_date} = reqInfo
 
     const navigate = useNavigate()

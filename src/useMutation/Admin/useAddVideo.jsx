@@ -12,7 +12,7 @@ const useAddVideo = (setAllVideos) => {
     mutationFn: (formData) => PostVideo(formData),
     onSuccess: () => {
       fetchVideos()
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           loading:isPendingFetch,
           title: 'تم رفع الفيديو بنجاح',

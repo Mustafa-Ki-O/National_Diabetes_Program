@@ -13,7 +13,7 @@ const useAddActivity= (setAllActivities) => {
     mutationFn: (formData) => PostActivity(formData),
     onSuccess: () => {
        fetchActivities()
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           loading:isPendingFetch,
           title: 'تم رفع النشاط بنجاح',

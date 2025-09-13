@@ -96,12 +96,12 @@ const PatientReview = () =>{
  useEffect(() => {
      // fetchInfo(id); 
      const foundPatient = patients.find(patient => patient.id.toString() === id.toString());
-     console.log(foundPatient)
+    //  console.log(foundPatient)
      if (foundPatient) {
        setStoredPatient(foundPatient);
-       console.log(storedPatient)
+      //  console.log(storedPatient)
      } else {
-       console.warn(`Patient with id ${id} not found`);
+      //  console.warn(`Patient with id ${id} not found`);
        setStoredPatient(null);
      }
    }, [id, patients]); 

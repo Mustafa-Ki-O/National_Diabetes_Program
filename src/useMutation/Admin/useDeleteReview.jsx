@@ -8,7 +8,7 @@ const useDeleteReview = () => {
   const { mutate: deleteReview, isPending } = useMutation({
     mutationFn: (id) => DeleteReview(id),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         notifications.show({
           title: 'تم حذف المراجعة من السجل',
           autoClose: 3000,

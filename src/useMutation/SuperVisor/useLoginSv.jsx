@@ -10,8 +10,8 @@ const useLoginSv = () => {
   const { mutate: loginSv,  isPending } = useMutation({
     mutationFn: (formData) => SignInSv(formData),
     onSuccess: (res) => {
-        console.log("تم بنجاح");
-        console.log('res : ',res)
+        // console.log("تم بنجاح");
+        // console.log('res : ',res)
         notifications.show({
           title: 'تم تسجيل الدخول',
           autoClose: 4000,

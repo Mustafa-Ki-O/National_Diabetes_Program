@@ -10,7 +10,7 @@ const useFetchArticles = (setAllArticles) => {
       setAllArticles(res);
     }),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         
     },
     onError: (err) => {

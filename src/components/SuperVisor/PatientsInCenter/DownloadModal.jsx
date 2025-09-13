@@ -13,7 +13,7 @@ const DownloadModal = ({ opened, close, setProgress }) => {
   const [value, setValue] = useState(null); // لا قيمة افتراضية
 
   const handleChange = (newValue) => {
-    console.log(newValue)
+    // console.log(newValue)
     if (newValue ) {
       setUrl(null);  // إعادة تعيين URL عند تغيير الشهر
       setValue(newValue);  // تحديث القيمة الجديدة
@@ -34,9 +34,9 @@ const DownloadModal = ({ opened, close, setProgress }) => {
 
   useEffect(() => {
     if(value){
-      console.log(value)
-       const formattedDate = dayjs(value).format("MMMM YYYY");  // تنسيق التاريخ بالشكل المطلوب
-      postDate({ date: formattedDate });  // إرسال التاريخ إلى الخادم
+      // console.log(value)
+       const formattedDate = dayjs(value).format("MMMM YYYY");  
+      postDate({ date: formattedDate });  
     }
   }, [value, postDate]);
 

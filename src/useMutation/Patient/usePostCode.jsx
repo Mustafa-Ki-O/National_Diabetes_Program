@@ -8,7 +8,7 @@ const usePostCode = () => {
   const { mutate: postCode, isPending } = useMutation({
     mutationFn: (patientInfo) => PostCode(patientInfo),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title: 'تم التحقق بنجاح',
       autoClose: 3000,

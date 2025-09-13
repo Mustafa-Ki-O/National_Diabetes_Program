@@ -9,7 +9,7 @@ const useFetchActivities = (setAllActivities) => {
       setAllActivities(res);
     }),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
         
     },
     onError: (err) => {

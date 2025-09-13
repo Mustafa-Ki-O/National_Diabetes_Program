@@ -13,7 +13,7 @@ const AccountSettings = ({info,setProgress,setInfo}) => {
          setProgress(isPending)
       },[isPending])
 
-      console.log(info)
+      // console.log(info)
   const form = useForm({
       initialValues: {
            fullname: "",
@@ -32,7 +32,7 @@ const AccountSettings = ({info,setProgress,setInfo}) => {
 
     },
   });
-  console.log('form : ',form)
+  // console.log('form : ',form)
 
   useEffect(() => {
     if (info) {
@@ -49,10 +49,10 @@ const AccountSettings = ({info,setProgress,setInfo}) => {
 
 
   const handleSubmit = (values) => {
-    console.log('Submitted values:', values);
+    // console.log('Submitted values:', values);
          if (form.isValid) {
           const values = form.getValues();
-          console.log(values)
+          // console.log(values)
           const newFormData = new FormData();
           Object.keys(values).forEach((key) => {
               newFormData.append(key,values[key]);

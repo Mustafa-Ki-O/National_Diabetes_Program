@@ -10,7 +10,7 @@ const usePostProfile = (setInfo) => {
   const { mutate: postProfile, isPending } = useMutation({
     mutationFn: (patientInfo) => PostProfile(patientInfo),
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       notifications.show({
       title: 'تم التحديث بنجاح',
       autoClose: 3000,

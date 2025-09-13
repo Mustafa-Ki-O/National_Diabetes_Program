@@ -75,7 +75,7 @@ const RegAdminForm = ({setProgress}) =>{
       const handleSubmit = () => {
         if (form.isValid) {
           const values = form.getValues();
-          console.log('القيم المدخلة:', values);
+          // console.log('القيم المدخلة:', values);
           const newFormData = new FormData();
           Object.keys(values).forEach((key) => {
             // if(key !== 'termsOfService'){

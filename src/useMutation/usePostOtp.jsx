@@ -8,7 +8,7 @@ const usePostOtp= () => {
   const { mutate: postOtp, isPending } = useMutation({
     mutationFn: (otp) => PostOtp(otp),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title: 'تم التحقق بنجاح',
       autoClose: 3000,

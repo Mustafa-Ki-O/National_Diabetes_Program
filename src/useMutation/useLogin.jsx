@@ -11,8 +11,8 @@ const useLogin = () => {
   const { mutate: login,  isPending } = useMutation({
     mutationFn: (formData) => SignIn(formData),
     onSuccess: (res) => {
-        console.log("تم بنجاح");
-        console.log('res : ',res)
+        // console.log("تم بنجاح");
+        // console.log('res : ',res)
         notifications.show({
           title: 'تم تسجيل الدخول',
           autoClose: 4000,
@@ -33,7 +33,7 @@ const useLogin = () => {
 
     },
     onError: (err) => {
-      console.log("ERROR", err);
+      // console.log("ERROR", err);
       notifications.show({
         title: 'هناك خطأ ما ,اعد المحاولة',
         message: err.message || "An unknown error occurred", // Ensure `err.message` exists

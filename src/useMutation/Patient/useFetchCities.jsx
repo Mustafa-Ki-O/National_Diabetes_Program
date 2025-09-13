@@ -8,7 +8,7 @@ const useFetchCities = () => {
         setCitiesNames(res);
       }),
     onSuccess: () => {
-      console.log("تم بنجاح");
+      // console.log("تم بنجاح");
       // setCenterNames(data.centerName);
     },
     onError: (err) => {

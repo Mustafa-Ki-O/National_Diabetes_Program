@@ -8,7 +8,7 @@ const usePostEmail = () => {
   const { mutate: postEmail, isPending } = useMutation({
     mutationFn: (email) => PostEmail(email),
     onSuccess: (data, variables) => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title: "أدخل الكود الذي تلقيته",
       autoClose: 3000,

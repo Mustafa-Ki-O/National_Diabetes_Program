@@ -12,7 +12,7 @@ import useAddActivity from "../../useMutation/Admin/useAddActivity";
 
 const UploadModal = ({opened,close,mainSubject,setProgress,setAllArticles,setAllVideos,setAllActivities}) => {
 
-  console.log(mainSubject)
+  // console.log(mainSubject)
   const uploadFileToSupabase = async (file, pathPrefix = "uploads") => {
   const fileExt = file.name.split('.').pop();
   const fileName = `${Date.now()}.${fileExt}`;
@@ -34,7 +34,7 @@ const UploadModal = ({opened,close,mainSubject,setProgress,setAllArticles,setAll
     .from('media')
     .getPublicUrl(filePath);
   
-    console.log(publicUrl.publicUrl)
+    // console.log(publicUrl.publicUrl)
   return publicUrl.publicUrl; 
 };
 
@@ -86,7 +86,7 @@ const UploadModal = ({opened,close,mainSubject,setProgress,setAllArticles,setAll
     setIsLoading(true);
     try {
       const values = form.getValues();
-      console.log('القيم المدخلة:', values);
+      // console.log('القيم المدخلة:', values);
 
       const newFormData = new FormData();
       let imageURL = "";

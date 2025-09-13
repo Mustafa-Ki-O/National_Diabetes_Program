@@ -8,7 +8,7 @@ const usePostPassword= () => {
   const { mutate: postPassword, isPending } = useMutation({
     mutationFn: (form) => PostPassword(form),
     onSuccess: () => {
-        console.log("تم بنجاح");
+        // console.log("تم بنجاح");
       notifications.show({
       title:'تم تعيين كلمة المرور بنجاح',
       autoClose: 3000,
