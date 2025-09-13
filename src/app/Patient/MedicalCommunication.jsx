@@ -69,7 +69,6 @@ const StyleTag = () => (
         <Container
           style={active ? fadeIn : fadeOut}
           p={10}
-          // h={'80vh'}
           fluid
           mb={'5rem'}
         >

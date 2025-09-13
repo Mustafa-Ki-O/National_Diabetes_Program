@@ -1,5 +1,5 @@
-import { Button, Flex, Stack, Text, TextInput,Group, Card } from "@mantine/core"
-import { SendHorizonal, SendIcon } from "lucide-react"
+import { Button, Flex, Stack, Text, TextInput,Group, Card, Title, Center } from "@mantine/core"
+import { Bot, HandIcon, SendHorizonal, SendIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import usePostMsg from "../../useMutation/Patient/usePostMsg"
 
@@ -54,7 +54,9 @@ const ChatMessages = () =>{
         <>
         <Stack pos={'relative'}>
         <Group  h={'80vh'}  p={5} display={'flex'} style={{flexDirection:'column',flexWrap:'none'}} align="right" justify="space-between" >
-            <Stack h={'100%'} pb={'4rem'} style={{overflow:'auto',borderRadius:20}} m={5}  bd={'1px solid #37a9ef'} >
+            <Stack h={'100%'} pb={'4rem'} style={{overflow:'auto',borderRadius:20}} m={5}
+            //   bd={'1px solid #37a9ef'} 
+              >
             {sendMsgs.length > 0 && sendMsgs.map((msg,index)=>(
                 <Card p={5} radius="md" key={index}  shadow="sm" bg={'#16aabb20'}  >
                      <Text  ta={'right'} p={5} size="xl" >
@@ -65,7 +67,25 @@ const ChatMessages = () =>{
 
             ))  
             }
-            
+            {!firstMsg && (
+                <>
+                <Center mt={'10rem'}>
+                    <Stack>
+
+                    <Flex justify={'center'} align={'center'} gap={'sm'}>
+                        <Bot size={35} color={'#16aabb'} />
+                       <Title ta={'right'} p={5} size="xl" c={'#16aabb'}>
+                          أهلا بك ! ما سؤالُك ؟
+                    </Title>
+                    </Flex>
+                 <Text ta={'center'} p={5} size="lg" >
+                      قم بطرح السؤال او الاستشارة التي تريدها
+                 </Text>
+                 </Stack>
+                </Center>
+               
+                </>
+            )}
             {response && (
             <Text ta={'right'} p={5} size="lg" bg={'#E7EEF3'} style={{borderRadius:8}}>
                 {sentMsg} 
@@ -73,58 +93,38 @@ const ChatMessages = () =>{
             )}
             </Stack>
                 </Group>
-
-            {!firstMsg ? (
-            
-            <Flex pt={10}  px={5} w={'95%'} pos={'fixed'} bottom={'1%'} 
-            // style={{borderTop:'1px solid #70707040'}}
-             bg={'#F9FAFC'} gap={10} justify={'space-between'} align={'center'}>
-                <Button dir="ltr" onClick={handleSubmit} variant="filled" color="#E7EEF3"  miw={'2.6rem'} size="md" radius={10} style={{paddingInline:0}}>
-                    <SendHorizonal  size={25} color="#37a9ef" />
-                </Button>
-                <TextInput
-                  variant="filled"
+          
+                {/* <Flex > */}
+                <Stack
+                
+                pt={10}  px={5} w={'95%'} pos={'fixed'} bottom={'1%'} 
+                
+                style={{borderTop:'1px solid #12121240',borderRadius:15,boxShadow:'0px -10px 14px #12121206'}}
+                bg={'#F9FAFC'} gap={10} justify={'space-between'} align={'flex-start'}>
+                 <TextInput
+                  variant="unstyled"
                   w={'100%'}
                   dir="rtl"
                   placeholder="سؤال /استشارة"
-                  size="md"
+                  size="lg"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   radius={10}
                   styles={{
                     input: {
-                      backgroundColor: '#E7EEF3',
+                      backgroundColor: '#F9FAFC',
                     },
                   }}
                 />
+                 <Button leftSection={<SendHorizonal  size={30} color="#37a9ef" />} dir="ltr" onClick={handleSubmit} variant="subtle" color="#E7EEF3" 
+                   size="md" radius={10} style={{paddingInline:0}} />
+                    
+               
+                </Stack>
+               
                 
-            </Flex>
-    
-            ):(
-                <Flex pt={10}  px={5} w={'95%'} pos={'fixed'} bottom={'1%'} 
-            style={{borderTop:'1px solid #70707040'}} bg={'#F9FAFC'} gap={10} justify={'space-between'} align={'center'}>
-                <Button dir="ltr" onClick={handleSubmit} variant="filled" color="#E7EEF3"  miw={'2.6rem'} size="md" radius={10} style={{paddingInline:0}}>
-                    <SendHorizonal  size={25} color="#37a9ef" />
-                </Button>
-                <TextInput
-                  variant="filled"
-                  w={'100%'}
-                  dir="rtl"
-                  placeholder="سؤال /استشارة"
-                  size="md"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  radius={10}
-                  styles={{
-                    input: {
-                      backgroundColor: '#E7EEF3',
-                    },
-                  }}
-                />
                 
-            </Flex>
-    
-            )}
+            {/* </Flex> */}
             
         </Stack>
         </>
