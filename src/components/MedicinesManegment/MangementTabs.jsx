@@ -1,5 +1,5 @@
-import { Button, Tabs } from '@mantine/core';
-import { Archive, SlidersHorizontal, Tablets } from 'lucide-react';
+import { Button, Flex, Tabs, Text } from '@mantine/core';
+import { Archive, RefreshCcw, SlidersHorizontal, Tablets } from 'lucide-react';
 import MedicinesStore from './MedicinesStore';
 import Record from './Record';
 import useFetchMedicines from '../../useMutation/Admin/useFetchMedicines';
@@ -7,50 +7,35 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMedicin,removeMedicin } from '../../redux/action';
 import DropDownFilter from './DropDownFilter';
+import useFetchRecords from '../../useMutation/Admin/useFetchRecords';
 
 
 
-const MangementTabs =({setProgress}) => {
-
-  const medicinesStore = useSelector(store => store.medicins.medicins)
+const MangementTabs =({setProgress,medicinesStore}) => {
 
   const [medicines,setMedicines] = useState([])
   const {fetchMedicines,isPending} = useFetchMedicines()
-
-  const dispatch = useDispatch()
-
-
-         useEffect(() => {
-         // جيب الأدوية من السيرفر وخزنها بالـ state
-         fetchMedicines((fetched) => {
+   const updateRequest = () => {
+           fetchMedicines((fetched) => {
            setMedicines(fetched);
-          //  console.log('fitched : ',fetched)
-         });
-       }, [fetchMedicines]);
-       
-            useEffect(() => {
-        if (medicines?.length > 0) {
-         // ✅ أدوية جديدة (مو بالستور → أضفها)
-         const newMed = medicines?.filter(
-           (med) => !medicinesStore.some((medS) => medS.id === med.id)
-         );
-
-         newMed.forEach((med) => dispatch(addMedicin(med)));
-
-           const removedMed = medicinesStore.filter(
-             (medS) => !medicines.some((med) => med.id === medS.id)
-           );
-       
-           removedMed.forEach((med) => dispatch(removeMedicin(med.id)));
-         }
-       }, [medicines, medicinesStore, dispatch]);
-
-   useEffect(()=>{
+          
+         });}
+    useEffect(()=>{
      setProgress(isPending)
    },[isPending])
 
 
   return (
+    <>
+    <Flex px={{base:5,sm:20}} justify={'end'} align={'center'} gap={10}>
+              <Button variant="filled" size="xs" radius={15} color="#16aabb" onClick={updateRequest} >
+              <RefreshCcw size={15}  />
+            </Button>
+            <Text size="lg">
+              تحديث المخزن
+            </Text>
+      </Flex>
+    
     <Tabs  p={{base:0,sm:20}} dir='rtl' defaultValue="store">
       <Tabs.List bg={'#f9f9f9'} grow justify={'space-between'} pos={'sticky'} top={60} style={{zIndex:10,borderBottom:'2px solid #00000004'}}
       >
@@ -77,6 +62,7 @@ const MangementTabs =({setProgress}) => {
       </Tabs.Panel>
 
     </Tabs>
+    </>
   );
 }
 export default MangementTabs

@@ -5,13 +5,16 @@ import { Container ,Title} from "@mantine/core"
 import { useEffect, useState ,useMemo} from "react"
 import Progress from "../../components/general/Progress"
 import MangementTabs from "../../components/MedicinesManegment/MangementTabs";
+import useCheckMedicineStore from "../../components/AddReview/useCheckMedicineStore";
 
 
 const MedicinesMangemet = () => {
 
     const [active,setActive] = useState(false);
     const [progress,setProgress] = useState(false)
-    
+    const { medicinesStore, isPending } = useCheckMedicineStore();
+
+
 
         
     useEffect(()=>{
@@ -20,9 +23,9 @@ const MedicinesMangemet = () => {
       },600);
     },[])
     
-    // useEffect(() => {
-    //     setProgress(isPending);
-    // }, [isPending]);
+    useEffect(() => {
+        setProgress(isPending);
+    }, [isPending]);
     
 
     return(
@@ -32,7 +35,7 @@ const MedicinesMangemet = () => {
             <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                     إدارة مخزون الأدوية
               </Title>
-              <MangementTabs setProgress={setProgress}/>
+              <MangementTabs setProgress={setProgress} medicinesStore={medicinesStore}/>
         </Container>
         </>
     )

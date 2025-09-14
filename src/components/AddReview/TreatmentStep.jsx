@@ -11,7 +11,7 @@ import useCheckMedicineStore from "./useCheckMedicineStore";
 
 const  TreatmentStep = () => {
 
-  const medicinesStore = useCheckMedicineStore()
+  const { medicinesStore, isPending } = useCheckMedicineStore();
   // console.log('store :' ,medicinesStore)
   UpScroll()
 

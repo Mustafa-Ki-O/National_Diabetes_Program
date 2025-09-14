@@ -8,8 +8,10 @@ import Patient from "../../components/PatientInfo/Patient";
 import { Container } from "@mantine/core";
 import Progress from "../../components/general/Progress";
 import UpScroll from "../../components/general/UpScroll";
+import useCheckMedicineStore from "../../components/AddReview/useCheckMedicineStore";
 
 const PatientInfo = () => {
+  useCheckMedicineStore();
     UpScroll()
     
     const {id} = useParams();

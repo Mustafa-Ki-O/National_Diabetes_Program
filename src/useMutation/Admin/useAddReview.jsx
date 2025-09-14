@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import PostReview from "../../api/Admin/PostReview";
-import useCheckMedicineStore from "../../components/AddReview/useCheckMedicineStore";
+// import useCheckMedicineStore from "../../components/AddReview/useCheckMedicineStore";
 
 const useAddReview = (patientId) => {
   // console.log(patientId)
