@@ -16,52 +16,63 @@ import usePostMsg from "../../useMutation/Patient/usePostMsg";
 
 const ChatMessages = () => {
   const [firstMsg, setFirstMsg] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    userId: "",
-    userName: "",
-  });
+  // const [userInfo, setUserInfo] = useState({
+  //   userId: "",
+  //   userName: "",
+  // });
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]); // كل الرسائل
   const [timer, setTimer] = useState(false);
+  // const [response,setResponse] = useState('')
+  const { postMsg ,isPending} = usePostMsg();
 
-  const { postMsg } = usePostMsg();
+  // useEffect(() => {
+  //   const user = JSON.parse(localStorage.getItem("user"));
+  //   if (user) {
+  //     setUserInfo({
+  //       userId: user.id,
+  //       userName: user.name,
+  //     });
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user) {
-      setUserInfo({
-        userId: user.id,
-        userName: user.name,
-      });
-    }
-  }, []);
+         const handleSubmit = async () => {
+  if (message) {
+    const userMsg = { role: "user", text: message };
+    setMessages((prev) => [...prev, userMsg]);
+    setMessage("");
+    setFirstMsg(true);
 
-  const handleSubmit = () => {
-    if (message && userInfo.userId) {
-      const userMsg = { role: "user", text: message };
-
-      // أضف رسالة المستخدم
-      setMessages((prev) => [...prev, userMsg]);
-
-      // أرسل الرسالة للسيرفر
-      postMsg(message);
-
-      // شغل اللودينغ
+    try {
+      // شغل اللودر
       setTimer(true);
+      console.log('timer1 : ',timer)
 
-      setTimeout(() => {
-        const botMsg = {
-          role: "bot",
-          text: "النموذج قيد التطوير حاليا... حاول لاحقا",
-        };
+      const response = await postMsg({"question":message});
+
+      // طفي اللودر
+      setTimer(false);
+
+       console.log('timer2 : ',timer)
+      if (response) {
+        const botMsg = { role: "bot", text: response.answer };
         setMessages((prev) => [...prev, botMsg]);
-        setTimer(false);
-      }, 3000);
-
-      setFirstMsg(true);
-      setMessage("");
+      }
+    } catch (error) {
+         const errorMsg = { role: "error", text: "هناك خطأ ما عاود لاحقا" };
+         setMessages((prev) => [...prev, errorMsg]);
+      console.error("Error fetching bot response:", error);
+     setTimer(false);
     }
-  };
+     
+  }
+};
+         
+        //  useEffect(() => {
+        //    setTimer(isPending);
+        //  }, [isPending]);
+
+
 
   return (
     <>
@@ -88,7 +99,7 @@ const ChatMessages = () => {
                 radius="md"
                 shadow="sm"
                 w={"70%"}
-                bg={msg.role === "user" ? "#16aabb20" : "#E7EEF3"}
+                bg={msg.role === "user" ? "#16aabb20" :msg.role === 'bot'? "#E7EEF3" : '#ee101010'}
                 style={{
                   borderRadius:
                     msg.role === "user"
@@ -98,7 +109,7 @@ const ChatMessages = () => {
                     msg.role === "user" ? "flex-end" : "flex-start",
                 }}
               >
-                <Text ta="right" p={5} size="lg">
+                <Text ta="right" p={5} size="lg" c={msg.role === "error"?'red':'black'}>
                   {msg.text}
                 </Text>
               </Card>

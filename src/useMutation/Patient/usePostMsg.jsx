@@ -5,15 +5,10 @@ import PostMsg from "../../api/Patient/PostMsg";
 
 const usePostMsg = () => {
   const navigate = useNavigate();
-  const { mutate: postMsg, isPending } = useMutation({
-    mutationFn: (patientMsg) => PostMsg(patientMsg),
+  const { mutateAsync: postMsg, isPending } = useMutation({
+    mutationFn: (msg) => PostMsg(msg),
     onSuccess: () => {
-        // console.log("تم بنجاح");
-      notifications.show({
-      title: 'تم التحقق بنجاح',
-      autoClose: 3000,
-      color: 'blue',
-    })
+    // console.log("تم بنجاح");
     //   localStorage.clear();
     //   navigate("/National_Diabetes_Program/");
     },

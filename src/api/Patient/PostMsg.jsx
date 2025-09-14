@@ -1,26 +1,17 @@
-import axiosInstanceDS from "../axiosServiceDS";
+import axiosInstance from "../axiosService";
 
-const PostMsg = (userMessage) => {
-  const msgData = {
-    model: "openai/gpt-4o",  // تحقق من اسم النموذج الصحيح في وثائق API
-    messages: [
-      {
-        role: "user", 
-        content: userMessage  // السؤال الطبي من المريض
-      }
-    ],
+// const API_URL = import.meta.env.VITE_API_URL;
 
-  };
-
+const PostMsg = (msg) => {
   return new Promise((resolve, reject) => {
-     axiosInstanceDS.post('/chat/completions', msgData)
+    axiosInstance.post('https://mini-chat-api-ns0c.onrender.com/ask',msg)
       .then(response => {
-        resolve(response.data.choices[0].message.content);  // إرجاع نص الإجابة فقط
+        resolve(response.data);
+        
       })
       .catch(error => {
-        reject(error.response?.data || error.message);
+        reject(error);
       });
   });
 };
-
-export default PostMsg;
+export default PostMsg
