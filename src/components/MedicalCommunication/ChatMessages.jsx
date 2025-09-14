@@ -79,7 +79,7 @@ const ChatMessages = () => {
 
   return (
     <>
-         <Stack h="auto" style={{ flexDirection: "column" }} pos={'relative'}>
+         <Stack h="auto" mih={'80vh'}  pos={'relative'}>
       {/* الرسائل */}
       <Stack
       
@@ -157,14 +157,14 @@ const ChatMessages = () => {
       <Stack
       align="start"
       pos={'sticky'}
-      bottom={'2.2rem'}
+      bottom={'3rem'}
         pt={10}
         px={5}
         style={{
           borderTop: "1px solid #12121240",
           borderRadius: 15,
           boxShadow: "0px -10px 14px #16aabb10",
-          transform:'translateY(-30px)'
+          transform:'translateY(10px)'
         }}
         bg="#F9FAFC"
         gap={10}
