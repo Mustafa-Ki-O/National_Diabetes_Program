@@ -5,8 +5,9 @@ import { useForm } from "@mantine/form";
 import dayjs from "dayjs";
 import useMedRequest from "../../useMutation/Admin/useMedRequest";
 import useUpdateQuantity from "../../useMutation/SuperVisor/useUpdateQuantity";
+import useFetchRecords from "../../useMutation/Admin/useFetchRecords";
 
-const  UpdateQModal = ({setProgress,medicine,newQ,close,opened,centerName,setQty}) => {
+const  UpdateQModal = ({setProgress,medicine,newQ,close,opened,centerName,setQty,activePage,setRecordsInfo}) => {
 
    const {id,name_arabic , name_english ,medication_type , dosage ,quantity ,units_per_box} = medicine
 
@@ -14,22 +15,27 @@ const  UpdateQModal = ({setProgress,medicine,newQ,close,opened,centerName,setQty
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
-    const {updateReq,isPending} = useUpdateQuantity()
-    
+    const {updateReq,isPending,isPendingRecords} = useUpdateQuantity(activePage,setRecordsInfo)
+  
+
         useEffect(()=>{
-          setProgress(isPending)
-        },[isPending])
+          setProgress(isPending||isPendingRecords)
+        },[isPending||isPendingRecords])
 
   
 
     
    const handleSubmit = async () => {
-
-      await updateReq({'id':id,'new_quantity':newQ})
-      setQty(0)
-      close()
-      
+     try {
+       await updateReq({ id, new_quantity: newQ });
+     } catch (err) {
+     } finally {
+        
+       setQty(0);
+       close();
+     }
 };
+
 
 
 

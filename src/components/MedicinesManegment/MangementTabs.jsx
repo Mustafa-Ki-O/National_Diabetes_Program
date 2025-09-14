@@ -8,21 +8,63 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addMedicin,removeMedicin } from '../../redux/action';
 import DropDownFilter from './DropDownFilter';
 import useFetchRecords from '../../useMutation/Admin/useFetchRecords';
+import useCheckMedicineStore from '../AddReview/useCheckMedicineStore';
 
 
 
-const MangementTabs =({setProgress,medicinesStore}) => {
+const MangementTabs =({setProgress}) => {
 
+  const { medicinesStore, isPending, refetch } = useCheckMedicineStore();
   const [medicines,setMedicines] = useState([])
-  const {fetchMedicines,isPending} = useFetchMedicines()
-   const updateRequest = () => {
-           fetchMedicines((fetched) => {
-           setMedicines(fetched);
-          
-         });}
+
+  useEffect(()=>{
+    setMedicines(medicinesStore)
+  },[medicinesStore])
+
+
+    
+
+    // records
+     const [recordsInfo,setRecordsInfo] = useState({})
+     const [records,setRecords] = useState([])
+     const [activePage,setActivePage] = useState(1)
+     const pageSize = 10
+     const [total, setTotal] = useState(0) 
+     const [totalPages, setTotalPages] = useState(0)
+    const {fetchRecords,isPending:isPendingRecords} = useFetchRecords(setRecordsInfo)
+
+    
+
+    useEffect(() => {
+      if (total) {
+        setTotalPages(Math.ceil(total / pageSize))
+      }
+   }, [total])
+
     useEffect(()=>{
-     setProgress(isPending)
-   },[isPending])
+      fetchRecords(activePage)
+    },[activePage])
+
+    useEffect(()=>{
+        if(recordsInfo){
+            setTotal(recordsInfo.nor)
+            setRecords(recordsInfo.norip)
+        }
+    },[recordsInfo])
+    
+
+    // ***********
+
+
+    useEffect(()=>{
+     setProgress(isPending||isPendingRecords)
+   },[isPending||isPendingRecords])
+
+
+   const updateRequest = () => {
+      refetch(); 
+       fetchRecords(activePage)
+    };
 
 
   return (
@@ -54,11 +96,12 @@ const MangementTabs =({setProgress,medicinesStore}) => {
       </Tabs.List>
 
       <Tabs.Panel mt={'xl'} value="store" >
-       <MedicinesStore setProgress={setProgress} medicines={medicinesStore}/>
+       <MedicinesStore setProgress={setProgress} medicines={medicines} activePage={activePage} setRecordsInfo={setRecordsInfo}/>
       </Tabs.Panel>
 
       <Tabs.Panel mt={0} value="history" p={10}>
-          <Record setProgress={setProgress}/>
+          <Record setProgress={setProgress} records={records}
+           activePage={activePage} setActivePage={setActivePage} totalPages={totalPages}/>
       </Tabs.Panel>
 
     </Tabs>

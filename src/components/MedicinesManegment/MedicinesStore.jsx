@@ -7,7 +7,7 @@ import { useLocation } from "react-router"
 import MedicineCard from "./MedicinCard"
 
 
-const MedicinesStore = ({setProgress,medicines}) => {
+const MedicinesStore = ({setProgress,medicines,activePage, setRecordsInfo}) => {
     const[num,setNum] = useState(200)
     const [centerName,setCenterName] = useState()
     const [opened,{open,close}] = useDisclosure()
@@ -25,7 +25,8 @@ const MedicinesStore = ({setProgress,medicines}) => {
 
     return(
         <>
-        <AddMedicinModal setProgress={setProgress} opened={opened} close={close} centerName={centerName}/>
+        <AddMedicinModal setProgress={setProgress} opened={opened} close={close} 
+        centerName={centerName} activePage={activePage} setRecordsInfo={setRecordsInfo}/>
         <Container p={5} fluid >
             <Stack>
                 <Flex justify={'space-between'} align={'center'} >
@@ -61,7 +62,8 @@ const MedicinesStore = ({setProgress,medicines}) => {
                 <Grid gutter={20}>
                    {medicines?.reverse().map((item,index) => (
                     <Grid.Col key={index} span={{base:12,sm:4}}>
-                      <MedicineCard medicine={item} setProgress={setProgress}/>
+                      <MedicineCard medicine={item} setProgress={setProgress} 
+                      activePage={activePage} setRecordsInfo={setRecordsInfo}/>
                     </Grid.Col>
                   ))}
                 </Grid>

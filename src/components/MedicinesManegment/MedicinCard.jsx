@@ -1,12 +1,13 @@
 import { Card, Text, Title, Button, Group, Progress, Stack,Tooltip, Flex } from "@mantine/core"
-import { CirclePlus, PillBottle, PlusIcon } from "lucide-react"
+import { CircleMinus, CirclePlus, PillBottle, PlusIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import useUpdateQuantity from "../../useMutation/SuperVisor/useUpdateQuantity"
 import UpdateQModal from "./UpdateQModal"
 import { useDisclosure } from "@mantine/hooks"
+import { notifications } from "@mantine/notifications"
 
 
-const MedicineCard = ({medicine,setProgress}) => {
+const MedicineCard = ({medicine,setProgress,activePage, setRecordsInfo}) => {
   const {id,name_arabic , name_english ,medication_type , dosage ,quantity ,units_per_box} = medicine
   const [qty, setQty] = useState(0)
 const maxStock = 2000;
@@ -16,10 +17,23 @@ const color = percentUsed < 40 ? percentUsed <30 ? 'red' : 'orange' : '#16aabb' 
 const [opened,{open,close}] = useDisclosure()
 const {updateReq,isPending} = useUpdateQuantity()
 
+const [error,setError] = useState(false)
+
     useEffect(()=>{
       setProgress(isPending)
     },[isPending])
 
+    useEffect(()=>{
+      if(error){
+       notifications.show({
+            title: "خطأ  عملية خاطئة لا يمكن انقاص االمخزون",
+            message: "عملية خاطئة لا يمكن انقاص االمخزون", 
+            autoClose: 4000,
+            color: 'red',
+        });
+      }
+      setError(false)
+    },[error])
 
   return (
     <>
@@ -30,6 +44,8 @@ const {updateReq,isPending} = useUpdateQuantity()
     newQ={qty}
     setProgress={setProgress}
     setQty={setQty}
+    activePage={activePage}
+    setRecordsInfo={setRecordsInfo}
     />
 
     <Card radius={20} shadow={'sm'} 
@@ -67,8 +83,19 @@ const {updateReq,isPending} = useUpdateQuantity()
           <Group mr={10}>
               
             
-            <CirclePlus color="#37a9ef" size={22} onClick={() => setQty((prev) => prev + 20)} style={{cursor:'pointer'}}/>
+            <CirclePlus color="#37a9ef" size={22} onClick={() => setQty((prev) => prev + 20)}  style={{cursor:'pointer'}}/>
          <Text  miw={'1.6rem'}>{qty}</Text>
+         <CircleMinus color="#8e8e8e" size={22} 
+         onClick={() => {
+            setQty((prev) => {
+              if (prev <= 0) {
+                setError(true);
+                return 0; 
+              }
+              return prev - 20;
+            });
+          }}
+             style={{cursor:'pointer'}}/>
           </Group>
         </Group>
         <Tooltip label={`الكمية المتبقية : ${quantity}`} >

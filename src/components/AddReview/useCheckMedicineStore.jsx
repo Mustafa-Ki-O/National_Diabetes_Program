@@ -11,11 +11,15 @@ export default function useCheckMedicineStore() {
   const {fetchMedicines,isPending} = useFetchMedicines()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    fetchMedicines((fetched) => {
-      setMedicines(fetched);
-    });
-  }, [fetchMedicines]);
+         const refetch = () => {
+           fetchMedicines((fetched) => {
+             setMedicines(fetched);
+           });
+         };
+       
+         useEffect(() => {
+           refetch();
+         }, []);
 
         useEffect(() => {
              if (medicines.length > 0) {
@@ -46,5 +50,5 @@ export default function useCheckMedicineStore() {
 
   console.log(medicinesStore)
 
-  return { medicinesStore, isPending }
+  return { medicinesStore, isPending ,refetch }
 }

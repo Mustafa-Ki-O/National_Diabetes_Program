@@ -2,9 +2,12 @@ import { useMutation } from "@tanstack/react-query";
 import { notifications } from '@mantine/notifications';
 import { useNavigate } from "react-router-dom";
 import PostMedRequest from "../../api/Admin/PostMedRequest";
+import useFetchRecords from "./useFetchRecords";
 
-const useMedRequest = () => {
+const useMedRequest = (activePage,setRecordsInfo) => {
   const navigate = useNavigate();
+      const {fetchRecords,isPending:isPendingRecords} = useFetchRecords(setRecordsInfo)
+      
   const { mutate: requestMed, isPending } = useMutation({
     mutationFn: (medicine) => PostMedRequest(medicine),
     onSuccess: () => {
@@ -13,7 +16,8 @@ const useMedRequest = () => {
       title: 'تم رفع الطلب ',
       autoClose: 3000,
       color: 'blue',
-    })
+    }),
+    fetchRecords(activePage);
 
     },
     onError: (err) => {
@@ -26,6 +30,6 @@ const useMedRequest = () => {
       });
     },
   });
-  return {  requestMed, isPending };
+  return {  requestMed, isPending,isPendingRecords };
 };
 export default useMedRequest;

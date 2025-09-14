@@ -4,12 +4,14 @@ import { useNavigate } from "react-router";
 import { useForm } from "@mantine/form";
 import dayjs from "dayjs";
 import useMedRequest from "../../useMutation/Admin/useMedRequest";
+import useFetchRecords from "../../useMutation/Admin/useFetchRecords";
 
-const  AddMedicinModal = ({setProgress,centerName,opened,close}) => {
+const  AddMedicinModal = ({setProgress,centerName,opened,close,activePage, setRecordsInfo}) => {
     const [submitted,setSubmitted] = useState(false);
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
-    const {requestMed,isPending} = useMedRequest()
+    const {requestMed,isPending,isPendingRecords} = useMedRequest(activePage,setRecordsInfo)
+
 
   const form = useForm({
     mode: "uncontrolled",
@@ -34,39 +36,40 @@ const  AddMedicinModal = ({setProgress,centerName,opened,close}) => {
 
     
    const handleSubmit = async () => {
-  if (form.isValid()) {
-    setIsLoading(true);
-    try {
-      const values = form.getValues();
-      // console.log('القيم المدخلة:', values);
+      if (form.isValid()) {
+        setIsLoading(true);
+        try {
+          const values = form.getValues();
 
-      const dataToSend = {
-        name_arabic: values.nameAr,
-        name_english: values.nameEn,
-        medication_type: values.type,
-        quantity: parseInt(values.num, 10),
-        dosage: values.dose,
-        units_per_box: parseFloat(values.unitsNum),
-      };
+          const dataToSend = {
+            name_arabic: values.nameAr,
+            name_english: values.nameEn,
+            medication_type: values.type,
+            quantity: parseInt(values.num, 10),
+            dosage: values.dose,
+            units_per_box: parseFloat(values.unitsNum),
+          };
 
-      // console.log('البيانات المُعدة للإرسال:', dataToSend);
+          setSubmitted(true);
 
-      setSubmitted(true);
-      // افترض أن requestMed تم تعديلها لتأخذ كائن JavaScript
-      requestMed(dataToSend);
+        
+          await requestMed(dataToSend);
 
-      form.reset();
-      close();
-    } catch (err) {
-      console.error("حدث خطأ أثناء الإرسال:", err);
-    } finally {
-      setIsLoading(false);
-    }
-  }
+          form.reset();
+          close();
+        } catch (err) {
+          console.error("حدث خطأ أثناء الإرسال:", err);
+        } finally {
+        
+           
+          setIsLoading(false);
+        }
+      }
 };
+
    useEffect(()=>{
-    setProgress(isPending)
-   },[isPending])
+    setProgress(isPending||isPendingRecords)
+   },[isPending||isPendingRecords])
 
 
 

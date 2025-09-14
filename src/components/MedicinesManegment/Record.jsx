@@ -3,39 +3,39 @@ import useFetchRecords from "../../useMutation/Admin/useFetchRecords"
 import { useEffect, useState } from "react"
 import DropDownFilter from "./DropDownFilter"
 
-const Record = ({setProgress}) =>{
+const Record = ({records,activePage,setActivePage,totalPages}) =>{
 
-    const [recordsInfo,setRecordsInfo] = useState({})
-     const [records,setRecords] = useState([])
-     const [activePage,setActivePage] = useState(1)
-     const pageSize = 10
-     const [total, setTotal] = useState(0) 
-     const [totalPages, setTotalPages] = useState(0)
-    const {fetchRecords,isPending} = useFetchRecords(setRecordsInfo)
+  //    const [recordsInfo,setRecordsInfo] = useState({})
+  //   //  const [records,setRecords] = useState([])
+  //    const [activePage,setActivePage] = useState(1)
+  //    const pageSize = 10
+  //    const [total, setTotal] = useState(0) 
+  //    const [totalPages, setTotalPages] = useState(0)
+  //   const {fetchRecords,isPending} = useFetchRecords(setRecordsInfo)
 
     const [filteredRecords,setFilteredRecords] = useState([])
 
-    useEffect(() => {
-      if (total) {
-        setTotalPages(Math.ceil(total / pageSize))
-      }
-   }, [total])
+  //   useEffect(() => {
+  //     if (total) {
+  //       setTotalPages(Math.ceil(total / pageSize))
+  //     }
+  //  }, [total])
 
-    useEffect(()=>{
-      fetchRecords(activePage)
-    },[activePage])
+  //   useEffect(()=>{
+  //     fetchRecords(activePage)
+  //   },[activePage])
 
-    useEffect(()=>{
-        if(recordsInfo){
-            setTotal(recordsInfo.nor)
-            setRecords(recordsInfo.norip)
-        }
-    },[recordsInfo])
+  //   useEffect(()=>{
+  //       if(recordsInfo){
+  //           setTotal(recordsInfo.nor)
+  //           setRecords(recordsInfo.norip)
+  //       }
+  //   },[recordsInfo])
 
     
-    useEffect(()=>{
-       setProgress(isPending)
-    },[isPending])
+  //   useEffect(()=>{
+  //      setProgress(isPending)
+  //   },[isPending])
 
 //   useEffect(() => {
 //     setFilteredRecords(records)
