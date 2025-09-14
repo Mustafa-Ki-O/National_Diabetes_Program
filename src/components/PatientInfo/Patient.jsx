@@ -17,9 +17,11 @@ import dayjs from "dayjs";
 import DeleteReviewModal from "./DeleteReviewModal";
 import AddReviewModal from "./AddReviewModal";
 import { LogOut } from "lucide-react";
+import useCheckMedicineStore from "../AddReview/useCheckMedicineStore";
 
 
 const Patient = ({ id , setProgress}) => {
+  const medicinesStore = useCheckMedicineStore();
   const [opened, { open, close }] = useDisclosure(false);
   const [openedAdd, { open:openAdd, close:closeAdd }] = useDisclosure(false);
   const patients1 = useSelector(state => state.patients.patients);

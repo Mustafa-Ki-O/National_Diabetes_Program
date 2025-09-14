@@ -15,8 +15,9 @@ const useAddReview = (patientId) => {
           title: 'تم رفع المراجعة بنجاح',
           autoClose: 3000,
         });
-         useCheckMedicineStore()
+         
          navigate(`/National_Diabetes_Program/patientInfo/${patientId}/`)
+
         
     },
     onError: (err) => {
