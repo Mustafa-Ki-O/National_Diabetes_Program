@@ -1,12 +1,44 @@
-import { Card ,Stack ,Flex ,Title ,Text, Grid, Group, Button, ActionIcon, List } from "@mantine/core"
-import { ArrowUpLeft, Circle, Hospital, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
+import { Card ,Stack ,Flex ,Title ,Text, Grid, Group, Button,Tooltip, List, TextInput } from "@mantine/core"
+import { ArrowUpLeft, Circle, CopyIcon, Hospital, KeyRound, LocateFixed, User, UserCheck, UserCog, UserRound, UserSquare } from "lucide-react"
 import { DonutChart } from "@mantine/charts";
 import { useNavigate, useParams } from "react-router";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
+import { useEffect, useState } from "react";
+import { notifications } from "@mantine/notifications";
+import { useClipboard } from "@mantine/hooks";
+import useGetToken from "../../../useMutation/SuperVisor/useGetToken";
 
 dayjs.extend(customParseFormat)
-const CentersCards = ({data}) => {
+const CentersCards = ({data,setProgress}) => {
+
+  const { copy } = useClipboard();
+
+   
+  
+     const [code,setCode] = useState(null)
+
+      const textToCopy  = code?.token;
+
+    const handleCopy = () => {
+      copy(textToCopy);
+      notifications.show({
+        title: "تم النسخ!",
+        position:"bottom-center",
+        message: "تم نسخ الرمز إلى الحافظة.",
+        color: "blue",
+        icon: <CopyIcon size={18} />,
+        autoClose: 2500, 
+        radius:20,
+        dir:'rtl'
+      });
+    };
+ 
+    const {getToken,isPending} = useGetToken(setCode)
+  const handleClick = () => {
+    getToken()
+
+  }
 
     const randomColor = () =>
       `hsl(${Math.floor(Math.random() * 360)}, 70%, 50%)`;
@@ -30,6 +62,9 @@ const CentersCards = ({data}) => {
       // console.log(centerOrder)
     const navigate = useNavigate()
 
+                useEffect(() => {
+                  setProgress(isPending);
+              }, [isPending]);
     // #e74c3c second
 // #e67e22 primary
     return(
@@ -41,7 +76,7 @@ const CentersCards = ({data}) => {
                   style={{cursor:'pointer', transition: "background 0.3s ease"}}
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}>
-                    <Stack align='end' jus gap={20} justify='end'>
+                    <Stack align='end' gap={20} justify='end'>
                      
                       <Title size="xl">
                              آخر المراكز المضافة
@@ -106,6 +141,41 @@ const CentersCards = ({data}) => {
                         </Flex>
                        
                     </Card>
+
+               <Card  shadow="sm" radius={10} miw={'30rem'}  mih={'8rem'} bd={'1px solid #12121212'} 
+                  style={{cursor:'pointer', transition: "background 0.3s ease"}}
+                  // onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
+                  // onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
+                  >
+                    <Stack align='end' gap={20} justify='end' >
+                     
+                      <Title size="xl">
+                             توليد رمز سري جديد
+                     </Title>
+                     <Group justify="end" align="center" gap={15} w={'100%'}>
+                      <Tooltip label={'نسخ الرمز'}> 
+                                <CopyIcon size={15} color="#000" onClick={handleCopy} />
+                                </Tooltip>
+                               <TextInput
+                               readOnly
+                                  w={'60%'}
+                                  size="md"
+                                 radius={10}
+                                 value={code?.token}
+                                  fw={600}
+                                  
+                              />
+                              <Button radius={15} leftSection={<KeyRound size={20} />}
+                              variant="filled" color="#e74c3c " size="md" onClick={handleClick} >
+                                إنشاء
+                              </Button>
+                     
+                     </Group>
+                       
+                        
+                    </Stack> 
+                </Card>
+                    
                     
                    
              

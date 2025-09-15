@@ -57,7 +57,7 @@ const HomeSv = () => {
                          <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                              الرئيسية
                         </Title>
-                        <CentersCards data={centers} />
+                        <CentersCards data={centers} setProgress={setProgress}/>
 
         
                 </Container>
