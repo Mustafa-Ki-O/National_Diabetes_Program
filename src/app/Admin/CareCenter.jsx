@@ -62,7 +62,7 @@ UpScroll()
             <Title bg={'#f9f9f9'} size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                     برامج الرعاية الصحية
             </Title>
-            <Flex px={'1rem'} justify={'start'} align={'center'}>
+            <Flex px={'1.2rem'} justify={'end'} align={'center'}>
               
                {/* <Ordering size={22} button={true}/> */}
               
