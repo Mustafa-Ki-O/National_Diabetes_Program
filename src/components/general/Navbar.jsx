@@ -18,7 +18,7 @@ import drugs from '../../assets/vectors/Drugs.svg'
 import settings from '../../assets/vectors/Settings.svg'
 import { useDisclosure } from "@mantine/hooks";
 import LogOutModal from "../Home/Admin/LogOutModal";
-import { Activity, ScanHeart, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital, ShieldUser, BotMessageSquare  } from "lucide-react";
+import { Activity, ScanHeart, CircleUserRound, House,BriefcaseMedical, BellIcon, CameraIcon, Hospital, ShieldUser, BotMessageSquare, Copyright  } from "lucide-react";
 import NotifyNav from "./NotifyNav";
 import useFetchNotification from "../../useMutation/Patient/useFetchNotification";
 import CreateNotificationSocket from "../../api/CreateNotificationsSocket";
@@ -204,14 +204,14 @@ useEffect(() => {
         className={` ${nav.hovered} ${activeButton === 'superVisor/queryMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
               إدارة الاستعلامات
-        <Image className={nav.img} src={patMang} w={25} h={25} ml={5} />
+        <Image className={nav.img}src={drugs} w={25} h={25} ml={5} />
       </Text>
       <Text p={10} c='#121212' dir="ltr" fz={16} fw={600} display={'flex'} 
         onClick={() => handleButtonClick('superVisor/dataMangement')} ta='right' 
         className={` ${nav.hovered} ${activeButton === 'superVisor/dataMangement' ? nav.activeDrawer : ''}`} 
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
             إدارة البيانات 
-        <Image className={nav.img} src={drugs} w={25} h={25} ml={5} />
+        <Image className={nav.img}  src={patMang} w={25} h={25} ml={5} />
       </Text>
     
     </Box>
@@ -231,6 +231,13 @@ useEffect(() => {
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
         تسجيل الخروج
         <Image className={nav.img} src={logout} w={25} h={25} ml={5} />
+      </Text>
+       <Text mr={10} p={5} c='#12121252' size="lg" fw={800} dir="ltr" display={'flex'} 
+        ta='right' 
+         
+        style={{justifyContent:'end',alignItems:'center'}}>
+        Virsion 1.0
+        <Copyright size={20} style={{marginLeft:5}} />
       </Text>
     </Box>
   </Stack>
@@ -335,6 +342,13 @@ useEffect(() => {
         style={{cursor:'pointer',justifyContent:'end',alignItems:'center'}}>
         تسجيل الخروج
         <Image className={nav.img} src={logout} w={25} h={25} ml={5} />
+      </Text>
+       <Text mr={10} p={5} c='#12121252' size="lg" fw={800} dir="ltr" display={'flex'} 
+        ta='right' 
+         
+        style={{justifyContent:'end',alignItems:'center'}}>
+        Virsion 1.0
+        <Copyright size={20} style={{marginLeft:5}} />
       </Text>
     </Box>
   </Stack>

@@ -69,10 +69,10 @@ const CentersCards = ({data,setProgress}) => {
 // #e67e22 primary
     return(
         <>
-        <Stack align="end" gap={20} p={{base:5,sm:20}}>
-            <Flex justify={'end'} align={'center'} gap={20}>
+        <Stack align="end" gap={30} p={{base:5,sm:20}}>
+            <Flex justify={'end'} align={'center'} gap={20} w={'100%'} direction={{base:'column',sm:'row'}}>
             
-                 <Card  shadow="sm" radius={10} miw={'20rem'}  mih={'8rem'} bd={'1px solid #12121212'} 
+                 <Card  shadow="sm" w={'95%'} radius={10} mih={'8rem'} bd={'1px solid #12121212'} 
                   style={{cursor:'pointer', transition: "background 0.3s ease"}}
                   onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
                   onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}>
@@ -91,7 +91,7 @@ const CentersCards = ({data,setProgress}) => {
                         
                     </Stack> 
                 </Card>
-                <Card  shadow="sm" miw={'20rem'} radius={10}  mih={'8rem'} bd={'1px solid #12121212'} 
+                <Card  shadow="sm" w={'95%'}  radius={10}  mih={'8rem'} bd={'1px solid #12121212'} 
                 style={{cursor:'pointer', transition: "background 0.3s ease"}}
                 onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
                 onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}>
@@ -112,12 +112,12 @@ const CentersCards = ({data,setProgress}) => {
                 </Card>
                 </Flex>
                 
-                    <Card shadow="sm" radius={10} miw={'75%'}
+                    <Card shadow="sm" radius={10} miw={'100%'}
                     pl={'3rem'}  mih={'15rem'} bd={'1px solid #12121212'} 
                     style={{cursor:'pointer', transition: "background 0.3s ease"}}
                     onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
                     onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}>
-                        <Flex align='start' gap={45} justify='space-between'>
+                        <Flex align='end' gap={45} justify='space-between' direction={{base:'column',sm:'row'}}>
                              <DonutChart size={190} data={data1} strokeWidth={2.6} />
                              <Stack gap={10}>
                                  <Title size="xl" my={10}>
@@ -142,7 +142,7 @@ const CentersCards = ({data,setProgress}) => {
                        
                     </Card>
 
-               <Card  shadow="sm" radius={10} miw={'30rem'}  mih={'8rem'} bd={'1px solid #12121212'} 
+               <Card  shadow="sm" radius={10} miw={'100%'}  mih={'8rem'} bd={'1px solid #12121212'} 
                   style={{cursor:'pointer', transition: "background 0.3s ease"}}
                   // onMouseEnter={(e) => (e.currentTarget.style.background = "#e67e2210")} 
                   // onMouseLeave={(e) => (e.currentTarget.style.background = "#fff")}
@@ -158,15 +158,15 @@ const CentersCards = ({data,setProgress}) => {
                                 </Tooltip>
                                <TextInput
                                readOnly
-                                  w={'60%'}
-                                  size="md"
+                                  w={'75%'}
+                                  size="lg"
                                  radius={10}
                                  value={code?.token}
                                   fw={600}
                                   
                               />
                               <Button radius={15} leftSection={<KeyRound size={20} />}
-                              variant="filled" color="#e74c3c " size="md" onClick={handleClick} >
+                              variant="filled" color="#e74c3c " size="lg" onClick={handleClick} >
                                 إنشاء
                               </Button>
                      

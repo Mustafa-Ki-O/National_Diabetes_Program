@@ -2,11 +2,11 @@
 // Copyright (c) 2025 Mustafa-Ki-O - All rights reserved.
 
 import { Button, Container ,Flex,Group,Stack,Title} from "@mantine/core"
-import { Download, Hospital, LocateFixed } from "lucide-react";
+import { Download, Hospital, LocateFixed, LogOut } from "lucide-react";
 import { useEffect, useState ,useMemo} from "react"
 import InfoCenterCard from "../../components/SuperVisor/CenterInfo/InfoCenterCard";
 import StatisticsCenter from "../../components/SuperVisor/CenterInfo/StatisticsCenter";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useFetchCenterData from "../../useMutation/SuperVisor/useFetchCenterData";
 import Progress from "../../components/general/Progress";
 import DownloadModal from "../../components/SuperVisor/PatientsInCenter/DownloadModal";
@@ -38,13 +38,15 @@ const CenterInfo = () => {
                useEffect(()=>{
                 setProgress(isPending)
                },[isPending])
-            
+               
+             const navigate= useNavigate()
     
     return(
         <>
          {progress && <Progress/>}
-         <DownloadModal opened={opened} close={close} setProgress={setProgress} />
+         <DownloadModal opened={opened} close={close} setProgress={setProgress} cid={cid}/>
         <Container mih={'85vh'} mb={'2rem'} fluid pos={'relative'} p={{base:0,md:'lg'}} style={{opacity:active ? 1:0 ,transition:'all 0.5s'}}>
+                              <LogOut size={25} color="#88888888" style={{cursor:'pointer',position:'absolute',top:13,left:20}} onClick={()=>navigate(-1)} />
                              <Title size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                                  حول المركز
                                </Title>
@@ -56,7 +58,7 @@ const CenterInfo = () => {
                                    </Button>
                                  </Group>
                                    <Title size={'1.4rem'} ta={'end'}  my={'2rem'} >
-                                      مركز النادي 
+                                     {data?.centerName}
                                    </Title>    
                                    <Hospital size={25} />
                                </Flex>

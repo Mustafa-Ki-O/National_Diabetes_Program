@@ -18,7 +18,7 @@ const CarouselCard = ({data}) =>{
    }
 
     const CityCard = ({city}) =>(
-        <Card m={'auto'}  miw={'10rem'} w={'fit-content'} radius={20} bd={'1px solid #12121240'} 
+        <Card m={'auto'}  miw={'12rem'} w={'fit-content'} radius={20} bd={'1px solid #12121240'} 
         onClick={()=>handleClick(city)}
         style={{cursor:'pointer'}}>
             <Flex justify={'end'} align={'center'} gap={10}>
@@ -43,7 +43,7 @@ const CarouselCard = ({data}) =>{
         emblaOptions={{ loop: true, align: 'end' }}
       >
         {active_cities?.map((city,i)=>(
-            <Carousel.Slide display={'flex'} style={{justifyContent:'center',alignItems:'center'}}>
+            <Carousel.Slide  display={'flex'} style={{justifyContent:'center',alignItems:'center'}}>
              <CityCard city={city} key={i} />
         </Carousel.Slide>
         ))}

@@ -17,7 +17,7 @@ const CarouselCenter = ({data}) =>{
    }
 
     const CenterCard = ({center}) =>(
-        <Card m={'auto'}  miw={'10rem'} w={'fit-content'} radius={20} bd={'1px solid #12121240'} 
+        <Card m={'auto'}  miw={'12rem'} w={'fit-content'} radius={20} bd={'1px solid #12121240'} 
         onClick={()=>handleClick(center?.id)}
         style={{cursor:'pointer'}}>
             <Flex justify={'end'} align={'center'} gap={10}>

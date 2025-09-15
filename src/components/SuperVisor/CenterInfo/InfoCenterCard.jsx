@@ -7,7 +7,7 @@ const InfoCenterCard = ({data,setProgress}) => {
 
     const data1 = [
      { name: 'ذكور', value: data.number_of_male, color: '#16aabb' },
-     { name: 'إناث', value: data.number_of_Female || 20, color: 'pink' },
+     { name: 'إناث', value: data.number_of_Female , color: 'pink' },
 
     ];
 

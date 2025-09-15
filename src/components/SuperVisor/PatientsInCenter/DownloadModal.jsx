@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import usePostDate from "../../../useMutation/SuperVisor/usePostDate";
 
-const DownloadModal = ({ opened, close, setProgress }) => {
+const DownloadModal = ({ opened, close, setProgress,cid }) => {
 
   const [url, setUrl] = useState(null);  // بدأنا بـ null
   const { postDate, isPending } = usePostDate(setUrl);
@@ -36,7 +36,7 @@ const DownloadModal = ({ opened, close, setProgress }) => {
     if(value){
       // console.log(value)
        const formattedDate = dayjs(value).format("MMMM YYYY");  
-      postDate({ date: formattedDate });  
+      postDate({ id:parseInt(cid) , date: formattedDate });  
     }
   }, [value, postDate]);
 

@@ -1,6 +1,6 @@
 import { Button, Divider, Stack, Text ,Accordion,Flex} from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { Globe, Info, LogOutIcon, ShieldCheck, UserRound } from "lucide-react"
+import { Copyright, Globe, Info, LogOutIcon, ShieldCheck, UserRound } from "lucide-react"
 import { useNavigate } from "react-router"
 import ContactModal from "./ContactModal"
 import { useState,useEffect } from "react"
@@ -92,6 +92,11 @@ const Tabs = () =>{
             <Element icon={Info} text={'تواصل معنا'} value={'contact-settings'} />
             <Element icon={Info} text={'الشروط والاحكام'} value={'condition-settings'} />
             <Element icon={LogOutIcon} text={'تسجيل الخروج'} value={'logOut'} />
+            <Text mt={20} p={5} c='#12121252' size="lg" fw={800} dir="ltr" display={'flex'} 
+               ta='center' style={{justifyContent:'center',alignItems:'center'}}>
+               Virsion 1.0
+               <Copyright size={20} style={{marginLeft:5}} />
+            </Text>
         </Stack>
         </>
     )
