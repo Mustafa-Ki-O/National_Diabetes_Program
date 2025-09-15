@@ -62,9 +62,9 @@ UpScroll()
             <Title bg={'#f9f9f9'} size={'2rem'} ta={'end'} px={'lg'} mb={'3rem'} >
                     برامج الرعاية الصحية
             </Title>
-            <Flex px={'1rem'} justify={'space-between'} align={'center'}>
+            <Flex px={'1rem'} justify={'start'} align={'center'}>
               
-               <Ordering size={22} button={true}/>
+               {/* <Ordering size={22} button={true}/> */}
               
                 <Button miw={'8rem'} radius={10} variant='filled' color={'#37a9ef'} size='md' onClick={open}>
                  رفع {handleButtonName(click)} <UploadCloud style={{marginLeft:10}} size={22} color={'#fff'} />

@@ -50,8 +50,8 @@ const DocumentsCare = ({ setProgress }) => {
             size="sm"
             c={'#37a9ef'}
             onClick={() => {
-              setSelectedArticle(article);  // تحديد العنصر الذي تم النقر عليه
-              open();  // فتح المودال
+              setSelectedArticle(article);  
+              open(); 
             }}
           >
             عرض المزيد
