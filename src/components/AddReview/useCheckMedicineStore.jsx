@@ -22,14 +22,14 @@ export default function useCheckMedicineStore() {
          }, []);
 
         useEffect(() => {
-             if (medicines.length > 0) {
-               const newMed = medicines.filter(
-                 (med) => !medicinesStore.some((medS) => medS.id === med.id)
+             if (medicines?.length > 0) {
+               const newMed = medicines?.filter(
+                 (med) => !medicinesStore?.some((medS) => medS.id === med.id)
                );
               newMed.forEach((med) => dispatch(addMedicin(med)));
           
-              medicines.forEach((med) => {
-                const stored = medicinesStore.find((medS) => medS.id === med.id);
+              medicines?.forEach((med) => {
+                const stored = medicinesStore?.find((medS) => medS.id === med.id);
                 if (stored) {
                   if (med.quantity === 0) {
                     dispatch(removeMedicin(med.id));
@@ -39,8 +39,8 @@ export default function useCheckMedicineStore() {
                 }
               });
           
-              const removedMed = medicinesStore.filter(
-                (medS) => !medicines.some((med) => med.id === medS.id)
+              const removedMed = medicinesStore?.filter(
+                (medS) => !medicines?.some((med) => med.id === medS.id)
               );
               removedMed.forEach((med) => dispatch(removeMedicin(med.id)));
             }
