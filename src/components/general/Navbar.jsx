@@ -236,7 +236,7 @@ useEffect(() => {
         ta='right' 
          
         style={{justifyContent:'end',alignItems:'center'}}>
-        Virsion 1.0
+         Version 1.0
         <Copyright size={20} style={{marginLeft:5}} />
       </Text>
     </Box>
@@ -347,7 +347,7 @@ useEffect(() => {
         ta='right' 
          
         style={{justifyContent:'end',alignItems:'center'}}>
-        Virsion 1.0
+         Version 1.0
         <Copyright size={20} style={{marginLeft:5}} />
       </Text>
     </Box>
