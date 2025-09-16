@@ -6,7 +6,7 @@ const Rejected = ({rejectedR}) => {
     return(
         <>
         <Grid gutter={20}>
-        {rejectedR?.map((r,i)=>(
+        {rejectedR?.reverse().map((r,i)=>(
             <Grid.Col span={{base:12,sm:3,lg:4}}>
                  <AccRejCard request={r} key={i}/>
             </Grid.Col>

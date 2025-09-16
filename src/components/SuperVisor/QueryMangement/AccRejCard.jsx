@@ -3,9 +3,19 @@ import { CirclePlus, Hospital, PillBottle, PlusIcon, Ribbon } from "lucide-react
 import { Card, Text, Title, Button, Group, Progress, Stack,Tooltip, Flex, Indicator } from "@mantine/core"
 const AccRejCard= ({request}) => {
 
-    const {id ,name_arabic, name_english, quantity, center_name, center_city, status} = request
+    const {id ,name_arabic, name_english, quantity, center_name, center_city, status,request_date,due_date} = request
     const isAccepted = status === 'accepted'
 
+
+      const formatDate = (dateString) => {
+         if (!dateString) return "--";
+         const date = new Date(dateString);
+         return date.toLocaleDateString("EG", {
+           day: "2-digit",
+           month: "2-digit",
+           year: "numeric",
+         });
+  };
     return(
         <>
         <Indicator color={isAccepted ? 'green' : 'red'} size={20} zIndex={2}>
@@ -20,9 +30,7 @@ const AccRejCard= ({request}) => {
                             <Title size="md">
                               ({center_city})
                             </Title>
-                            </Flex>
-                          
-                          
+                            </Flex>  
                         </Group>
                         <Flex justify={'start'} align={'center'} gap={8}>
                           <PillBottle size={25} />
@@ -53,14 +61,14 @@ const AccRejCard= ({request}) => {
                        <Flex justify={'start'} align={'center'} gap={8}>
                         <Calendar size={25} />
                         <Text ta={'right'} fw={400}>
-                          تاريخ الطلب : 16/2/2000
+                          تاريخ الطلب : {formatDate(request_date)}
                        </Text>
                        
                        </Flex>
                     <Flex justify={'start'} align={'center'} gap={8}>
                         <CalendarCheck size={25}  />
                       <Text ta={'right'} fw={400}>
-                         تاريخ ال{isAccepted?'موافقة':'رفض'} : 2/2/2001
+                         تاريخ ال{isAccepted?'موافقة':'رفض'} : {formatDate(due_date)}
                        </Text>
                        
                        </Flex>

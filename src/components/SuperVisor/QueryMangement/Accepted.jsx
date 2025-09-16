@@ -7,7 +7,7 @@ const Accepted = ({acceptedR}) => {
     return(
         <>
         <Grid gutter={20}>
-             {acceptedR?.map((r,i)=>(
+             {acceptedR?.reverse().map((r,i)=>(
             <Grid.Col span={{base:12,sm:3,lg:4}}>
                 {/* <RequsetCard key={i} request={r}/> */}
                 <AccRejCard request={r} key={i}/>
